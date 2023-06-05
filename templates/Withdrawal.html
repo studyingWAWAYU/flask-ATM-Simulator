@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Withdrawal</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='beautify.css')}}">
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FinancialManagement</title>
+</head>
+<body>
+    <h1>取款服务</h1>
+    <h4>尊敬的用户：</h4>
+    <div>{{username}}</div>
+    <h4>欢迎使用取款服务！请选择您需要的取款方式:</h4>
+    <form method="post">
+      <input type="button" value="特约取款" class="btn" onclick="location.href='http://127.0.0.1:5001/specialWithdrawal'">
+      <input type="button" value="存折取款" class="btn" onclick="location.href='http://127.0.0.1:5001/passbookWithdrawal'">
+      <input type="button" value="返回主菜单" class="btn" onclick="if(confirm('确定返回主菜单吗')) location.href='http://127.0.0.1:5001/menu'">
+    </form>
+</body>
+</html>
+</body>
+</html>

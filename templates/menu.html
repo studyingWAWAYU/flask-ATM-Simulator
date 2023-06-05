@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>主页</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='beautify.css')}}">
+</head>
+<body>
+<h2>尊敬的用户: {{username}} </h2>
+<h2>欢迎使用ATM系统，我们提供的功能如下:</h2>
+    <form method="post">
+      <input type="button" value="查询业务" class="btn" onclick="location.href='http://127.0.0.1:5001/InquiryService'"/>
+      <input type="button" value="转账业务" class="btn" onclick="location.href='http://127.0.0.1:5001/TransferAccounts'"/>
+      <input type="button" value="理财频道" class="btn" onclick="location.href='http://127.0.0.1:5001/FinancialManagement'"/>
+      <input type="button" value="充值缴费" class="btn" onclick="location.href='http://127.0.0.1:5001/Recharge'"/>
+      <input type="button" value="取款" class="btn" onclick="location.href='http://127.0.0.1:5001/Withdrawal'"/>
+      <input type="button" value="修改密码" class="btn" onclick="location.href='http://127.0.0.1:5001/ModifyPassword'"/>
+      <input type="button" value="退出" class="btn" onclick="if(confirm('确定退出吗')) location.href='http://127.0.0.1:5001/'"/>
+    </form>
+</body>
+</html>

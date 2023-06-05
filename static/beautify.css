@@ -1,0 +1,53 @@
+body{
+    background-color: #F8F8FF;
+    text-align: center;
+    white-space: pre-line;/*设置文字换行*/
+}
+h1 {
+    color:#0B1746;
+}
+p {
+    font-family:'SimSun', sans-serif;
+    font-size:20px;
+    color:#0B1746;
+
+}
+
+/*设置按钮样式*/
+.btn {
+    background-color: #F0F8FF;
+    color: #0B1746;
+    padding: 10px 20px;
+    margin-top: 10px;
+    cursor: pointer;
+    border: solid #E6E6FA;
+    border-radius: 5px;
+    white-space: nowrap;/*设置文字换行*/
+}
+
+input[type="text"] {
+  width: 150%;
+  height: 30px;
+  max-width: 400px; /* 如果屏幕宽度小于400像素，则输入框的最大宽度为400像素 */
+  margin-bottom: 5px;
+  font-size:15px;
+  text-align: center;
+}
+
+input[type="number"] {
+  width: 150%;
+  height: 30px;
+  max-width: 400px; /* 如果屏幕宽度小于400像素，则输入框的最大宽度为400像素 */
+  margin-bottom: 5px;
+  font-size:15px;
+  text-align: center;
+}
+
+input[type="password"] {
+  width: 150%;
+  height: 30px;
+  max-width: 400px; /* 如果屏幕宽度小于400像素，则输入框的最大宽度为400像素 */
+  margin-bottom: 5px;
+  font-size:15px;
+  text-align: center;
+}

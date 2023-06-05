@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>specialWithdrawal</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='beautify.css')}}">
+</head>
+<body>
+    <h1>特约取款</h1>
+    <form method="post">
+        <h4>特约取款ID号：</h4>
+        <input type='number' name="specialWithdrawal_id" min="0">
+        <h4>特约取款密码：</h4>
+        <input type="password" name="pwd">
+        <h4>取款金额：</h4>
+        <input type="number" name="amount" min="0">
+        <input type="submit" value="确认">
+    </form>
+    <br>
+    <input type="button" value="取消" class="btn" onclick="location.href='http://127.0.0.1:5001/Withdrawal'">
+<h4>{{ get_flashed_messages()[0] }}</h4>
+</body>
+</html>

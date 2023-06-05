@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TransferAccounts</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='beautify.css')}}">
+</head>
+<body>
+    <h1>转账业务</h1>
+    <h4>尊敬的用户：</h4>
+    <div>{{username}}</div>
+    <h4>请选择所需业务：</h4>
+    <form method="post">
+         <input type="button" value="转账" class="btn" onclick="location.href='http://127.0.0.1:5001/BankTransfer'">
+         <input type="button" value="信用卡还款" class="btn" onclick="location.href='http://127.0.0.1:5001/CreditCardRepayment'">
+         <input type="button" value="转账撤销" class="btn" onclick="location.href='http://127.0.0.1:5001/TransferCancellation'">
+         <input type="button" value="返回主菜单" class="btn" onclick="if(confirm('确定返回主菜单吗')) location.href='http://127.0.0.1:5001/menu'">
+    </form>
+</body>
+</html>
