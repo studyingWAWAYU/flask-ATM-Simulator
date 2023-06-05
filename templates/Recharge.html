@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Recharge</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='beautify.css')}}">
+</head>
+<body>
+<h1>充值缴费</h1>
+    <h4>选择缴费方式</h4>
+    <input type="button" value="社保缴费" class="btn" onclick="location.href='http://127.0.0.1:5001/SocialSecurityPayment'">
+    <input type="button" value="体彩缴费" class="btn" onclick="location.href='http://127.0.0.1:5001/lotteryPayment'">
+    <input type="button" value="IC卡充值" class="btn" onclick="location.href='http://127.0.0.1:5001/ICPayment'">
+    <input type="button" value="返回主菜单" class="btn" onclick="if(confirm('确定返回主菜单吗')) location.href='http://127.0.0.1:5001/menu'">
+</body>
+</html>

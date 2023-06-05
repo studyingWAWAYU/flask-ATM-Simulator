@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>IC_USER</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='beautify.css')}}">
+</head>
+<body>
+<h1>绑定账户充值</h1>
+    <h4>输入将充值的账号id：</h4>
+    <form method="post">
+        <input type='number' name="id" min="1">
+        <h4>请输入充值金额：</h4>
+        <input type="number" name="number" min="0">
+        <h4>密码：</h4>
+        <input type="password" name="pwd">
+        <input type="submit" value="确定">
+    </form>
+    <input type="button" value="返回" class="btn" onclick="location.href='http://127.0.0.1:5001/ICPayment'">
+<h4>{{ get_flashed_messages()[0] }}</h4>
+</body>
+</html>

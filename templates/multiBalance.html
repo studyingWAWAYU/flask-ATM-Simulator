@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>multiBalance</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='beautify.css')}}">
+</head>
+<body>
+    <h1>查看余额</h1>
+    <h4>尊敬的用户：</h4>
+    <div>{{username}}</div>
+    <h4>您的多币种余额为：</h4>
+    <div>{{multiBalance}}</div>
+    <h1></h1>
+<input type="button" value="返回" class="btn" onclick="location.href='http://127.0.0.1:5001/InquiryService'">
+</body>
+</html>
