@@ -55,8 +55,8 @@ You can check out the small project we have created using Flask framework, and w
 
 
 ### Maintainers
-@studyingWAWAYU
-@ZIE
+@studyingWAWAYU  
+@ZIE  
 @mm-ss-dd
 
 
