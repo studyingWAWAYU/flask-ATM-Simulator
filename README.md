@@ -29,9 +29,9 @@ In the project main folder, there are three subfolders:
 3. The "views" folder stores all the .py files. (Each .py file corresponds to a .html file.)
 
 ### Install
-1. Install Dependencies
-Flask==2.3.2
-Flask-Migrate==4.0.4
+1. Install Dependencies  
+Flask==2.3.2  
+Flask-Migrate==4.0.4  
 Flask-SQLAlchemy==3.0.3
 
 2. Database
