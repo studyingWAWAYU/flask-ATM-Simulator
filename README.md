@@ -19,7 +19,7 @@ This project is a homework assignment for three freshmen students in China.
 ### Introduction
 Our project is a system that mimics an automatic teller machine (ATM), developed using the Flask framework in PythonWeb, with data stored in MySQL and accessed via a web interface.  
 The system can be broadly divided into seven parts: login function, homepage menu, balance inquiry, transfer business, financial management channel, recharge and payment, and cash withdrawal service.  
-**NOTICE: We have only simulated the functions of the ATM machine, and there is no real money involved. This is purely a virtual feature.**
+NOTICE: We have only simulated the functions of the ATM machine, and there is no real money transition involved. This is purely a virtual feature.
 
 
 ### Directory
