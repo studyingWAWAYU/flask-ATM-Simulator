@@ -11,11 +11,6 @@ flask-ATM-Simulator
 * Contributing
 * License
 
-
-### Background
-This project is a homework assignment for three freshmen students in China.
-
-
 ### Introduction
 Our project is a system that mimics an automatic teller machine (ATM), developed using the Flask framework in PythonWeb, with data stored in MySQL and accessed via a web interface.  
 The system can be broadly divided into seven parts: login function, homepage menu, balance inquiry, transfer business, financial management channel, recharge and payment, and cash withdrawal service.  
