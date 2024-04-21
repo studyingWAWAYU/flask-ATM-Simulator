@@ -2,7 +2,6 @@ flask-ATM-Simulator
 ====
 
 ## Table of Contents
-* Background
 * Introduction
 * Directory
 * Install
