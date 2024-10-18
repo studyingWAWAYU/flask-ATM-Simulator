@@ -1,44 +1,68 @@
-flask-ATM-Simulator
+Campus Club Activity Management System
 ====
-Develop a system that imitates an ATM using the Flask framework in Python, save data to a MySQL database, and write the frontend interface using HTML files
-----
-### Project Introduction 项目简介
-我们的项目是基于PythonWeb中Flask框架开发的一个模仿自动取款机（ATM）的系统，以网页形式使用。
-大致可分为：登录功能、主页菜单、查询余额、转账业务、理财频道、充值缴费、取款服务共7个部分。
 
-### Directory Description 目录说明
-在项目总文件夹中总共是三个文件夹：
-1. static文件夹放静态文件
-2. templates文件夹放所有的.html文件
-3. views文件夹放所有的.py文件。
-每个.py文件都对应了一个.html文件
+### Table of Contents
+* Background
+* Introduction
+* Directory
+* Install
+* Usage
+* Maintainers
+* Contributing
+* License
 
 
--__init__.py  蓝图导入，实例化全局的flask对象和数据库对象
-manager.py  启动文件（运行此文件）
-settings.py  配置文件
-sql.py  连接数据库和ORM映射建表
+### Background
+This project is a homework assignment for three freshmen students in China.
 
 
-3.1 安装依赖项
-
-下载源码后，安装相关依赖库
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
-from flask import Flask,render_template,request,redirect,session,flash
-from flask import Blueprint
-import time
+### Introduction
+Our project is a system that mimics an automatic teller machine (ATM), developed using the Flask framework in PythonWeb, with data stored in MySQL and accessed via a web interface.  
+The system can be broadly divided into seven parts: login function, homepage menu, balance inquiry, transfer business, financial management channel, recharge and payment, and cash withdrawal service.  
+**NOTICE: We have only simulated the functions of the ATM machine, and there is no real money involved. This is purely a virtual feature.**
 
 
-3.2 自建MySQL数据库
+### Directory
+In the project main folder, there are three subfolders:
+1. The "static" folder stores static files.
+2. The "templates" folder stores all the .html files.
+3. The "views" folder stores all the .py files. (Each .py file corresponds to a .html file.)
 
-自建一个本地MySQL数据库，根据本地数据库更改项目 ATMflask/ATMflask/sql.py 文件下连接MySQL的数据库账号名，密码等信息。
+### Install
+1. Install Dependencies  
+Flask==2.3.2  
+Flask-Migrate==4.0.4  
+Flask-SQLAlchemy==3.0.3
 
-3.3 运行主文件
+2. Database
+Create a local MySQL database first.  
+In the "sql.py" file and "setting.py" file, there are related settings for connecting to the database. You can modify them according to your own local database name and account password.  
+Before using the system, you need to run the code for creating tables and writing initial data in "sql.py" (currently commented out). You need to delete the triple quotes and run it once, and then comment it out again.  
+The login module in the system does not have the registration function.  
+Users can only log in with existing data in the database. You can modify the content of creating tables in "sql.py" to add users.  
 
-连接上后，运行 ATMflask/ATMflask/manager.py 文件即可得到网址
+3. Run the Main File
+Start the MySQL service and run the "manager.py" file to get the website URL
 
-3.4 打开网址使用
+4. Open the Website to Use
+Click the URL to enter and use the system. 
+If you have installed successfully, you will see a login page.
 
-点击网址进入即可使用
+
+### Usage
+You can check out the small project we have created using Flask framework, and we will appriciated if you could give us some practical suggestions.
+
+
+
+### Maintainers
+@studyingWAWAYU  
+@ZIE  
+@mm-ss-dd  
+
+
+### Contributing
+Feel free to dive in Open an issue or submit PRs.  
+flask-ATM-Simulator follows the Contributor Covenant Code of Conduct.
+### License
+ MIT License
+
