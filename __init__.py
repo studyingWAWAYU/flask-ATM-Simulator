@@ -7,6 +7,10 @@ app = Flask(__name__)#实例化flask对象
 app.config.from_object(settings)#配置文件
 db = SQLAlchemy(app)#实例化数据库对象，它提供访问Flask-SQLAlchemy的所有功能
 
+# xyq
+from ATMflask.views import index
+app.register_blueprint(index.idx)
+
 from ATMflask.views import login
 app.register_blueprint(login.lin)
 
@@ -37,7 +41,7 @@ app.register_blueprint(FinancialDetail.FD)
 from ATMflask.views import CreditDetail
 app.register_blueprint(CreditDetail.CD)
 
-#吴佳璇
+# wjx
 from ATMflask.views import FinancialManagement
 app.register_blueprint(FinancialManagement.FM)
 
@@ -57,7 +61,7 @@ app.register_blueprint(specialWithdrawal.sW)
 from ATMflask.views import passbookWithdrawal
 app.register_blueprint(passbookWithdrawal.pW)
 
-#曾玉鸾
+# zyl
 from ATMflask.views import TransferAccounts
 app.register_blueprint(TransferAccounts.TA)
 

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>index</title>
+    <link rel="stylesheet" href="../static/css/index.css">
+    <script src="../static/js/index.js"></script>
+</head>
+<body>
+<div id="nav">
+    <ul style="list-style: none">
+        <li><div id="logotop"><a href="index.html"><img src="../img/logotop.jpg" width="110" height="60"></a></div></li>
+        <a href="index.html"><li class="navli">Index</li></a>
+        <a href="Clubs.html"><li class="navli">Club Lobby</li></a>
+        <a href="MyClub.html"><li class="navli">My Club</li></a>
+        <a href="Activities.html"><li class="navli">Activity Lobby</li></a>
+        <a href="MyActivity.html"><li class="navli">My Activity</li></a>
+        <a href="Login.html"><li class="navli" id="login">Login</li></a>
+        <a href="Register.html"><li class="navli" id="register">Register</li></a>
+    </ul>
+</div>
+
+
+<!--图片轮播区域-->
+<div id="FunctionContainer">
+<div id="box">
+<img src="../static/img/index/club1.png" id="alternatePlay" onclick="stopAndContinue()">
+<img src="../static/img/index/left.png" id="leftbtn" onclick="preimg()">
+<img src="../static/img/index/right.png" id="rightbtn" onclick="nextimg()">
+</div>
+
+<!--Introduction-->
+<p style="color:#348684; font-size:40px;" align="center">Welcome to the Club Activity Management System</p><br>
+<p style="color:#5eb2b0; font-size:20px;" align="center">help you stay updated with the upcoming activities and manage your club</p>
+<br><br>
+
+<!--functions provided for managers and members-->
+<div class="tands" style="background-image: url('../img/greenbg.png')">
+    <div class="left">
+        <div class="leftimg">
+            <img src="../img/teacher.jpg" width="500px" height="360px">
+        </div>
+        <div class="righttext">
+            <img src="../img/teachericon.gif" width="50px" height="50px">
+            <div style="margin-top: -45px; margin-left:55px">教师：</div>
+            <p style="padding-top:10px">教师可以在智汇中创建站点，作为在线讨论板，快速了解学生学习情况 </p>
+        </div>
+    </div>
+
+    <div class="right">
+        <div class="leftimg"><img src="../img/students.jpg" width="500px" height="360px"></div>
+        <div class="righttext">
+            <ul>
+                <img src="../img/studenticon.gif" width="50px" height="50px">
+                <div style="margin-top: -45px; margin-left:55px">学生：</div>
+                <p style="padding-top:10px">学生可以通过智汇了解课程动态，向教师提问。或用于学习小组的合作</p>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<!--Bottom-->
+<div id="indexbottom" style="margin-top:700px">
+    <img id="logobottom" src="../img/logobottom.png">
+    <div style="margin-left:80px;margin-top:20px;">
+        <ul style="float:left;list-style-type: none;">
+            <li><p style="color:white;"><img src="../img/icon.gif" width="30px" height="30px;" align="center"> Club Activity Management System</p></li>
+            <li style="padding-left: 100px;"><p style="color:white;"><img src="../img/location.gif" width="30px" height="30px;" align="center"> Foshan, Guanddong, China</p></li>
+            <li style="padding-left: 100px;"><p style="color:white;"><img src="../img/phone.gif" width="25px" height="25px;" align="center"> 189-2805-4351</p></li>
+            <li style="padding-left: 100px;"><p style="color:white;"><img src="../img/email.gif" width="30px" height="30px;" align="center"> cams@ntesmail.com</p></li>
+            <li style="padding-left: 100px;"><p style="color:white;"><img src="../img/copyright.gif" width="30px" height="30px;" align="center"> 2024 Club Activity Management System. All rights reserved.</p></li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>
