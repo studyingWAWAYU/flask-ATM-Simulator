@@ -1,0 +1,120 @@
+/*导航栏*/
+#logotop{
+    padding-left:30px;
+    background-color:#348684;
+    height:60px;
+    padding-right:400px;
+}
+#nav{
+    width: 1700px;
+    height:60px;
+    background-color: #348684;
+    position:fixed;
+    z-index:10;
+    margin-top:0;
+    left:50%;
+    margin-left:-850px;
+}
+*{
+    padding:0;
+    margin:0;
+    position:relative;
+}
+li{
+    float:left;
+}
+.navli{
+    list-style-type:none;
+    width: 160px;
+    height:60px;
+    line-height: 60px;
+    background: #348684;
+    font-family:"微软雅黑 Light";
+    color:white;
+    font-weight: bold;
+    align: center;
+    text-align: center;
+    border-left:2px solid #499693;
+}
+.navli:hover{
+    background-color: #54aeaa;
+    color:white;
+}
+#login{font-weight: normal;padding-left:10px;width:80px;}
+#register{font-weight: normal;border:none;width:80px;}
+#login:hover{
+    background-color: #348684;
+    font-weight: bold;
+}
+#register:hover{
+    background-color: #348684;
+    font-weight: bold;
+}
+
+
+#LoginContainer{
+    width:1700px;
+    height:1000px;
+    display: block;
+    margin:auto;
+}
+
+#loginTable{
+    padding-top:330px;
+    padding-left:950px;
+    width:600px;
+    height:500px;
+}
+table{
+    width: 520px;
+    height: 230px;
+    padding-left:50px;
+
+}
+#loginTitle{
+    background-color: #c5e7e5;
+    width:450px;
+    padding-left:70px;
+    border-radius: 7px;
+    box-shadow: 1px 1px 2px 2px #66b8b5;
+    margin-bottom: 30px;
+}
+#submit{
+    background-color: #c5e7e5;
+    width:520px;
+    height:30px;
+    border:none;
+    border-radius: 5px;
+    box-shadow: 1px 1px 2px 2px #66b8b5;
+    margin-top:25px;
+}
+#loginBorder{
+    width:600px;
+    height: 680px;
+    margin-bottom: -800px;
+    margin-left:584px;
+}
+#loginBg{
+    width:1700px;
+    height:950px;
+    position:absolute;
+    bottom:0;
+
+}
+
+
+/*底部*/
+#indexbottom{
+    width:1700px;
+    height:200px;
+    margin-top:170px;
+    background-color:#348684;
+    left:50%;
+    margin-left:-850px;
+}
+#logobottom{
+    width: 170px;
+    height:80px;
+    margin-top:30px;
+    margin-left:80px;
+}

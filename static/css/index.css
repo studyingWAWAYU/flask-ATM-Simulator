@@ -1,14 +1,14 @@
 /*导航栏*/
 #logotop{
-    padding-left:30px;
-    background-color:#B6DBFF;
+    padding-left:70px;
+    background-color:#C4E2FF;
     height:60px;
-    padding-right:520px;
+    padding-right:680px;
 }
 #nav{
     width: 1700px;
     height:60px;
-    background-color: #B6DBFF;
+    background-color: #C4E2FF;
     position:fixed;
     z-index:10;
     margin-top:0;
@@ -28,7 +28,7 @@ li{
     width: 160px;
     height:60px;
     line-height: 60px;
-    background: #B6DBFF;
+    background: #C4E2FF;
     font-family:"微软雅黑 Light";
     color:#415468;
     font-weight: bold;
@@ -43,71 +43,86 @@ li{
 #login{font-weight: normal;padding-left:10px;width:80px;}
 #register{font-weight: normal;border:none;width:80px;}
 #login:hover{
-    background-color: #DAEDFF;
+    background-color: #C4E2FF;
     font-weight: bold;
 }
 #register:hover{
-    background-color: #DAEDFF;
+    background-color: #C4E2FF;
     font-weight: bold;
 }
 /*end of navigation*/
 
 /*轮播图片*/
+#FunctionContainer{
+    width:1700px;
+    height:720px;
+    display: block;
+    margin:auto;
+}
 #alternatePlay{
     position:absolute;
-    width:575px;
-    height:345px;
-    top:155px;
-    left:231px;
+    width:760px;
+    height:500px;
+    top:135px;
+    left:20px;
 }
 #leftbtn{
     position:absolute;
-    width:30px;
-    height:30px;
-    top:320px;
-    left:235px;
+    width:40px;
+    height:40px;
+    top:360px;
+    left:30px;
 }
 #rightbtn{
     position:absolute;
-    width:30px;
-    height:30px;
-    top:320px;
-    left:770px;
+    width:40px;
+    height:40px;
+    top:360px;
+    left:730px;
 }
 #box{
-    width:1000px;
-    height:700px;
+    width:750px;
+    height:750px;
     margin-left:70px;
 }
-
 #upbox{
-    width:750px;
-    height:150px;
+    width:650px;
+    height:190px;
     margin-top:-470px;
     margin-left:920px;
 }
-#midbox{
-    width:750px;
-    height:150px;
-    margin-top:-25px;
+#lowbox{
+    width:650px;
+    height:190px;
+    margin-top:-75px;
     margin-left:920px;
 }
-#lowbox{
-    width:750px;
-    height:150px;
-    margin-top:-25px;
-    margin-left:920px;
+.allFunctions{
+    color:#415468;
+    float:left;
+    width:150px;
+    height:172px;
+    margin-top:-50px;
+    padding-top:18px;
+    background-color: rgba(255, 255, 255, 0.95);
+    border:1px solid #C4E2FF;
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px 3px #DAEDFF;
+    font-size:20px;
+}
+.allFunctions:hover{
+    z-index: 9;
 }
 
 /*functions provided for managers and members*/
-.sandt{
+.mandm{
     width:1700px;
-    height:500px;
+    height:200px;
     margin:20px auto;
     margin-top:50px;
 }
 .left{
-    width:600px;
+    width:650px;
     height:400px;
     float:left;
     margin-left:180px;
@@ -118,34 +133,29 @@ li{
     height:360px;
     float:left;
     margin-top:8px;
-    margin-left:15px;
+    margin-left:-10px;
     text-align: center;
 }
 .righttext{
     width:220px;
-    height:180px;
+    height:200px;
     float:right;
     margin-top:70px;
-    margin-left:-180px;
-    background-color: rgba(255, 255, 255, 0.97);
+    margin-left:-130px;
+    background-color: rgba(255, 255, 255, 0.95);
     font-size:20px;
-    color:#348684;
+    color:#58708D;
     box-shadow: 1px 1px 2px 2px #e6f8fa;
     padding-left:10px;
     padding-right:10px;
     padding-top: 10px;
 }
 .right{
-    width:600px;
+    width:650px;
     height:400px;
     float:right;
-    margin-right:180px;
+    margin-right:120px;
     margin-top:50px;
-}
-#greenbg{
-    margin-bottom: -500px;
-    position:sticky;
-    z-index:1;
 }
 
 
@@ -153,15 +163,10 @@ li{
 /*底部*/
 #indexbottom{
     width:1700px;
-    height:200px;
+    height:180px;
     margin-top:170px;
-    background-color:#348684;
+    background-color:#C4E2FF;
     left:50%;
     margin-left:-850px;
-}
-#logobottom{
-    width: 170px;
-    height:80px;
-    margin-top:30px;
-    margin-left:80px;
+    color:#415468;
 }
