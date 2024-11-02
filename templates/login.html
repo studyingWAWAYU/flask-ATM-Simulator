@@ -2,19 +2,63 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>用户登录</title>
-    <link rel="stylesheet" href="{{url_for('static',filename='beautify.css')}}">
+    <title>Login</title>
+    <link rel="stylesheet" href="../static/css/login.css">
 </head>
 <body>
-<h2>欢迎使用自动出纳机！</h2>
-    <h1>登录</h1>
-    <h4>请输入用户名：</h4>
-    <form method="post">
-        <input type='text' name="user">
-        <h4>请输入密码：</h4>
-        <input type="password" name="pwd">
-        <input type="submit" value="提交" class="btn">
-    </form>
-<h4>{{ get_flashed_messages()[0] }}</h4>
+<div id="nav">
+    <ul style="list-style: none">
+        <li><div id="logotop"><a href="/"><img src="../static/img/logo.png" width="100" height="100"></a></div></li>
+        <a href="Clubs"><li class="navli">Club Lobby</li></a>
+        <a href="MyClub"><li class="navli">My Club</li></a>
+        <a href="Activities"><li class="navli">Activity Lobby</li></a>
+        <a href="MyActivity"><li class="navli">My Activity</li></a>
+        <a href="Login"><li class="navli" id="login">Login</li></a>
+        <a href="Register"><li class="navli" id="register">Register</li></a>
+    </ul>
+</div>
+
+
+<div id="LoginContainer">
+<img src="../static/img/loginANDregister/loginbg.png" width="1200px" height="800px" style="padding-top:50px">
+<div id="loginTable">
+<form methond="get">
+    <div style="margin-left:100px;"><img src="../static/img/namelogo.png" width="300px" height="100px;"></div>
+    <div id="loginTitle"><h1 style="padding-left: 205px;padding-bottom:30px;padding-top:60px;color:#4C637D;">Login</h1></div>
+    <table  align="center">
+        <tr>
+            <td width="50px" height="45px;"><p style="font-size:18px;padding-left:50px;">User: </p></td>
+            <td><input type="text" placeholder="Please enter user name" id="username" name="user" style="width:230px;height:25px;border:1px solid #368785;padding:3px;"/></td>
+            <span id="UsernameError" style="position:absolute;left:430px;top:125px;color:red;"></span>
+        </tr>
+        <tr>
+            <td width="50px;" height="45px"><p style="font-size:18px;padding-right:10px;">Passwords:</p></td>
+            <td><input type="password" placeholder="Please enter password" id="password" name="pwd" style="width:230px;height:25px;border:1px solid #368785;padding:3px;"/></td>
+            <span id="PwdError" style="position:absolute;left:430px;top:210px;color:red;"></span>
+        </tr>
+        <tr>
+            <h4>{{ get_flashed_messages()[0] }}</h4>
+        </tr>
+    </table>
+    <input type="button" value="Submit" id="submit" align="center" onclick="log()">
+</form>
+</div>
+
+
+
+
+
+<!--Bottom-->
+<div id="indexbottom" style="margin-top:0px">
+    <div style="margin-left:80px;padding-top:60px;">
+        <ul style="float:left;list-style-type: none;">
+            <li><p><img src="../static/img/logo.png" width="40px" height="40px;" align="center"> Activity Hub</p></li>
+            <li style="padding-left: 100px;"><p><img src="../static/img/location.png" width="30px" height="30px;" align="center"> Foshan, Guanddong, China</p></li>
+            <li style="padding-left: 100px;"><p><img src="../static/img/phone.png" width="25px" height="25px;" align="center"> 189-2805-5891</p></li>
+            <li style="padding-left: 100px;"><p><img src="../static/img/mail.png" width="30px" height="30px;" align="center"> cams@ntesmail.com</p></li>
+            <li style="padding-left: 100px;"><p><img src="../static/img/rights.png" width="30px" height="30px;" align="center"> 2024 Activity Hub. All rights reserved.</p></li>
+        </ul>
+    </div>
+</div>
 </body>
 </html>
