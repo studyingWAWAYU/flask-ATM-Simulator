@@ -1,4 +1,4 @@
-Campus Club Activity Management System
+Activity Hub
 ====
 
 ### Table of Contents
@@ -13,14 +13,16 @@ Campus Club Activity Management System
 
 
 ### Background
-This project is a homework assignment for three freshmen students in China.
+This project is an assignment for five university students in China.
 
 
 ### Introduction
-Our project is a system that mimics an automatic teller machine (ATM), developed using the Flask framework in PythonWeb, with data stored in MySQL and accessed via a web interface.  
-The system can be broadly divided into seven parts: login function, homepage menu, balance inquiry, transfer business, financial management channel, recharge and payment, and cash withdrawal service.  
-**NOTICE: We have only simulated the functions of the ATM machine, and there is no real money involved. This is purely a virtual feature.**
-
+Activity Hub is a comprehensive platform designed to manage campus club activities efficiently. 
+It offers robust user management features, including user registration and login, role-based access for different user types, and personal profile management. 
+The platform enables club managers to create and edit club information, complete with dedicated pages showcasing activities, member lists, and announcements. 
+Activity Hub also streamlines event management, allowing managers to create, edit, or cancel events while providing users with a chronological list of upcoming activities and a personalized section to track their participation. 
+Additionally, the system supports online registration for events and includes participant management features for club leaders, along with a digital check-in process for efficient attendance tracking. 
+Overall, Activity Hub fosters engagement and collaboration within campus clubs, making it easier for users to connect and participate in various activities.
 
 ### Directory
 In the project main folder, there are three subfolders:
@@ -50,8 +52,7 @@ If you have installed successfully, you will see a login page.
 
 
 ### Usage
-You can check out the small project we have created using Flask framework, and we will appriciated if you could give us some practical suggestions.
-
+You can check out the small project we have created using Flask framework, and we are open to any advice you have.
 
 
 ### Maintainers
@@ -62,7 +63,8 @@ You can check out the small project we have created using Flask framework, and w
 
 ### Contributing
 Feel free to dive in Open an issue or submit PRs.  
-flask-ATM-Simulator follows the Contributor Covenant Code of Conduct.
-### License
- MIT License
+Activity Hub follows the Contributor Covenant Code of Conduct.
 
+
+### License
+MIT License
