@@ -11,8 +11,8 @@ db = SQLAlchemy(app)#实例化数据库对象，它提供访问Flask-SQLAlchemy�
 from ATMflask.views import index
 app.register_blueprint(index.idx)
 
-from ATMflask.views import login
-app.register_blueprint(login.lin)
+from ATMflask.views import loginANDregister
+app.register_blueprint(loginANDregister.lr)
 
 from ATMflask.views import InquiryService
 app.register_blueprint(InquiryService.IS)
