@@ -2,7 +2,7 @@ from flask import render_template,request,redirect, flash,session
 from flask import Blueprint
 
 from ATMflask import db
-from ATMflask.sql import User
+#from ATMflask.sql import User
 
 idx = Blueprint('idx',__name__)
 
