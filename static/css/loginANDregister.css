@@ -70,8 +70,6 @@ li{
 table{
     width: 520px;
     height: 130px;
-    padding-left:50px;
-
 }
 #submit{
     background-color: #C4E2FF;
@@ -89,7 +87,7 @@ table{
 /*底部*/
 #indexbottom{
     width:1700px;
-    height:180px;
+    height:130px;
     margin-top:-1500px;
     background-color:#C4E2FF;
     left:50%;
