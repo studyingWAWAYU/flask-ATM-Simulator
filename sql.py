@@ -35,10 +35,50 @@ class User(db.Model):
     MyClubId = db.Column(db.String(200),nullable=True)
     MyActivityId = db.Column(db.String(200),nullable=True)
 
+class Membership(db.Model):
+    __tablename__ = "Membership"
+    club_id = db.Column(db.Integer,foreign_key=True,primary_key=True)
+    user_id = db.Column(db.Integer,foreign_key=True,primary_key=True)
+    role = db.Column(db.Enum("member","manager"),nullable=False)
+    join_time = db.Column(db.Date,nullable=True)
+
+class Club(db.Model):
+    __tablename__ = "Club"
+    club_id = db.Column(db.Integer,primary_key=True,unique=True,autoincrement=True)
+    club_name = db.Column(db.String(50),nullable=False,unique=True)
+    description = db.Column(db.String(1000),nullable=True)
+    created_time = db.Column(db.Date,nullable=False)
+
+class Participant(db.Model):
+    __tablename__ = "Participant"
+    activity_id = db.Column(db.Integer,primary_key=True,foreign_key=True)
+    user_id = db.Column(db.Integer,primary_key=True,foreign_key=True)
+    status = db.Column(db.Enum("Registered","Confirmed","Absent","Present"),nullable=False)
+    role = db.Column(db.String(50),nullable=True)
+
+class Activity(db.Model):
+    __tablename__ = "Activity"
+    activity_id = db.Column(db.Integer,primary_key=True,unique=True,autoincrement=True)
+    activity_name = db.Column(db.String(50),nullable=False)
+    description = db.Column(db.String(1000),nullable=True)
+    type = db.Column(db.Enum("Cultural Events","Social Events","Career Development","Study Trips",
+                             "Academic Activities","Interest Groups","Sports","Volunteer Work"),nullable=False)
+    status = db.Column(db.Enum("Upcoming","Ongoing","Completed"),nullable=False)
+    contact_id = db.Column(db.Integer,nullable=True)
+    location = db.Column(db.String(80),nullable=False)
+    club_id = db.Column(db.Integer,nullable=False)
+    start_time = db.Column(db.DateTime,nullable=False)
+    end_time = db.Column(db.DateTime,nullable=False)
+    signin_code = db.Column(db.String(6),nullable=True)
+    signup_start = db.Column(db.DateTime,nullable=False)
+    signup_end = db.Column(db.DateTime,nullable=False)
+    max_participant = db.Column(db.Integer,nullable=False)
+
+
 '''
 with app.test_request_context():
-    db.create_all()#建表，建过之后注释掉
-    #db.drop_all()#删除表，如果要重新建表
+    db.create_all() #建表，建过之后注释掉
+    #db.drop_all() #删除表，如果要重新建表
 
 
 #写入数据，写过之后注释掉
