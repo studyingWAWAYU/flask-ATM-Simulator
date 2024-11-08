@@ -1,4 +1,6 @@
 from flask_migrate import Migrate
+from sqlalchemy import ForeignKey
+
 import ATMflask.settings as settings
 from ATMflask import app,db
 
@@ -37,8 +39,8 @@ class User(db.Model):
 
 class Membership(db.Model):
     __tablename__ = "Membership"
-    club_id = db.Column(db.Integer,foreign_key=True,primary_key=True)
-    user_id = db.Column(db.Integer,foreign_key=True,primary_key=True)
+    club_id = db.Column(db.Integer,ForeignKey("Club.club_id"),primary_key=True)
+    user_id = db.Column(db.Integer,ForeignKey("User.id"),primary_key=True)
     role = db.Column(db.Enum("member","manager"),nullable=False)
     join_time = db.Column(db.Date,nullable=True)
 
@@ -51,8 +53,8 @@ class Club(db.Model):
 
 class Participant(db.Model):
     __tablename__ = "Participant"
-    activity_id = db.Column(db.Integer,primary_key=True,foreign_key=True)
-    user_id = db.Column(db.Integer,primary_key=True,foreign_key=True)
+    activity_id = db.Column(db.Integer,ForeignKey("Activity.activity_id"),primary_key=True)
+    user_id = db.Column(db.Integer,ForeignKey("User.id"),primary_key=True)
     status = db.Column(db.Enum("Registered","Confirmed","Absent","Present"),nullable=False)
     role = db.Column(db.String(50),nullable=True)
 
