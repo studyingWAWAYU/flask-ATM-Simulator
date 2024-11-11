@@ -65,7 +65,7 @@ app.register_blueprint(passbookWithdrawal.pW)
 from ATMflask.views import TransferAccounts
 app.register_blueprint(TransferAccounts.TA)
 
-from  ATMflask.views import BankTransfer
+from ATMflask.views import BankTransfer
 app.register_blueprint(BankTransfer.BT)
 
 from ATMflask.views import Transfer_resent#近期收款人
