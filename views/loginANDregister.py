@@ -70,3 +70,7 @@ def register():
         flash('This username is already taken.')
         return render_template('register.html')
 
+@lr.route('/Logout', methods = ['GET','POST'])
+def logout():
+    session.pop('id', None)  # 清除session中的用户ID
+    return redirect('/')
