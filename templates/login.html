@@ -22,22 +22,21 @@
 <div id="LoginContainer">
 <img src="../static/img/loginANDregister/loginbg.png" width="1200px" height="800px" style="padding-top:50px">
 <div id="loginTable">
-<form method="get">
+<form method="post">
     <div style="margin-left:100px;"><img src="../static/img/namelogo.png" width="300px" height="100px;"></div>
     <div id="loginTitle"><h1 style="padding-left: 205px;padding-bottom:30px;padding-top:60px;color:#4C637D;">Login</h1></div>
     <table  align="center">
         <tr>
             <td width="170px;" height="45px"><p style="font-size:18px;padding-left:50px;">User Name: </p></td>
             <td><input type="text" placeholder="Please enter user name" id="username" name="user" style="width:230px;height:25px;border:1px solid #368785;padding:3px;"/></td>
-            <span id="UsernameError" style="position:absolute;left:430px;top:125px;color:red;"></span>
         </tr>
         <tr>
             <td width="150px;" height="45px"><p style="font-size:18px;padding-left:50px;">Passwords:</p></td>
             <td><input type="password" placeholder="Please enter password" id="password" name="pwd" style="width:230px;height:25px;border:1px solid #368785;padding:3px;"/></td>
-            <span id="PwdError" style="position:absolute;left:430px;top:210px;color:red;"></span>
         </tr>
         <tr>
-            <h4>{{ get_flashed_messages()[0] }}</h4>
+            <td colspan="2" height="40px;"><h4 align="center" style="color:#CC0000;">{{ get_flashed_messages()[0] }}</h4></td>
+
         </tr>
     </table>
     <input type="submit" value="Submit" id="submit" align="center">
