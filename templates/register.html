@@ -21,7 +21,7 @@
 <div id="LoginContainer">
 <img src="../static/img/loginANDregister/registerbg.png" width="1200px" height="800px" style="padding-top:50px">
 <div id="loginTable">
-<form methond="get">
+<form method="post">
     <div style="margin-left:100px;"><img src="../static/img/namelogo.png" width="300px" height="100px;"></div>
     <div id="loginTitle"><h1 style="padding-left: 185px;padding-bottom:30px;padding-top:50px;color:#4C637D;">Register</h1></div>
     <table  align="center">
@@ -49,7 +49,7 @@
             <h4>{{ get_flashed_messages()[0] }}</h4>
         </tr>
     </table>
-    <input type="button" value="Submit" id="submit" align="center" onclick="log()" style="margin-top:30px">
+    <input type="button" value="Submit" id="submit" align="center" onclick="register()" style="margin-top:30px">
 </form>
 </div>
 </div>
