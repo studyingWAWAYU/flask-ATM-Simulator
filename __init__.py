@@ -14,9 +14,6 @@ app.register_blueprint(index.idx)
 from ATMflask.views import loginANDregister
 app.register_blueprint(loginANDregister.lr)
 
-from ATMflask.views import ModifyPassword
-app.register_blueprint(ModifyPassword.MP)
-
 from ATMflask.views import ActivityLobby
 app.register_blueprint(ActivityLobby.actlb)
 
