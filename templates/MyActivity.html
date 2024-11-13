@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>MyActivity</title>
+    <link rel="stylesheet" href="../static/css/myActivity.css">
 </head>
 <body>
 <div id="nav">
@@ -12,10 +13,147 @@
         <a href="MyClub"><li class="navli">My Club</li></a>
         <a href="ActivityLobby"><li class="navli">Activity Lobby</li></a>
         <a href="MyActivity"><li class="navli">My Activity</li></a>
-        <a href="Login"><li class="navli" id="login">Login</li></a>
-        <a href="Register"><li class="navli" id="register">Register</li></a>
+        {% if username %}
+            <li class="navli" id="username">{{ username }}</li>
+            <form action="/Logout" method="post" id="logoutForm" style="display: none;">
+                <button type="submit" style="display: none;">Logout</button></form>
+            <a href="Logout" onclick="confirmLogout(event)"><li class="navli" id="logout">Logout</li></a>
+        {% else %}
+            <a href="Login"><li class="navli" id="login">Login</li></a>
+            <a href="Register"><li class="navli" id="register">Register</li></a>
+        {% endif %}
     </ul>
 </div>
+
+<!--Classification-->
+<div id="ClassificationContainer">
+	<table align="center" style="width: 1700px;border-collapse:separate; border-spacing:0px 15px;">
+		<tr>
+			<td align="left"><p style="font-size:18px;font-weight: 600;">Activity Type :</p></td>
+			<td>
+				<button class="category-btn" onclick="showActivities('culture')">Cultural Events</button>
+				<button class="category-btn" onclick="showActivities('social')">Social Events</button>
+				<button class="category-btn" onclick="showActivities('career')">Career Development</button>
+				<button class="category-btn" onclick="showActivities('study')">Study Trips</button>
+				<button class="category-btn" onclick="showActivities('academic')">Academic Activities</button>
+				<button class="category-btn" onclick="showActivities('interest')">Interest Groups</button>
+				<button class="category-btn" onclick="showActivities('sports')">Sports</button>
+				<button class="category-btn" onclick="showActivities('volunteer')">Volunteer Work</button>
+			</td>
+		</tr>
+		<tr>
+			<td align="left"><p style="font-size:18px;font-weight: 600;">Activity Status :</p></td>
+			<td>
+				<button class="category-btn" onclick="showActivities('upcoming')">Upcoming</button>
+				<button class="category-btn" onclick="showActivities('inprogress')">In progress</button>
+				<button class="category-btn" onclick="showActivities('completed')">Completed</button>
+			</td>
+		</tr>
+		<tr>
+			<td align="left"><p style="font-size:18px;font-weight: 600;">SignUp Time :</p></td>
+			<td>
+				<input type="date" id="startDate" class="date-picker" min="2019-01-01" value="2024-11-01">
+				<span>&nbsp; to &nbsp; </span>
+				<input type="date" id="endDate" class="date-picker" min="2019-01-01" value="2024-11-03">
+				<button id="showtime-btn" onclick="showTime()">apply</button>
+			</td>
+		</tr>
+
+	</table>
+</div>
+
+<hr style="width: 1700px; margin:20px auto; border:1px solid #e5e5e6;">
+
+<!--Activity-->
+<div id="ActivityContainer">
+<div id="searchbox" style="padding-top:20px; margin-bottom:20px;">
+	<input type="text" id="search-input" placeholder="Search Activities" class="hotword">
+	<input type="button" value="Search" id="search" align="center" onclick="search()">
+
+</div>
+
+<div class="item">
+<a href="#">
+	<div class="item-top" style="width: 380px; height: 80px;">
+		<div class="item-left">
+			<img src="../static/img/activities/sports.gif" width="80px" height="80px" style="display: block;"/>
+		</div>
+		<div class="item-right">
+			<div class="item-status">Status: Ongoing</div>
+			<div class="item-cnt">Remaining: 30</div>
+		</div>
+	</div>
+	<div class="item-bottom" style="width: 380px; height: 150px;margin-top:20px;">
+		<div class="item-name">Gym Volunteer</div>
+		<p class="item-signup"> <strong>SignUp Time:</strong> 2024/11/01 10:30 - 11/3 22:00</p>
+		<p class="item-time"><strong>Activity Time :</strong> 2024/11/05 18:30 - 11/18 20:00</p>
+		<p class="item-org">Published by : Sports Department of the Student Union</p>
+	</div>
+</a>
+</div>
+
+<div class="item">
+<a href="#">
+	<div class="item-top" style="width: 380px; height: 80px;">
+		<div class="item-left">
+			<img src="../static/img/activities/sports.gif" width="80px" height="80px" style="display: block;"/>
+		</div>
+		<div class="item-right">
+			<div class="item-status">Status: Ongoing</div>
+			<div class="item-cnt">Remaining: 30</div>
+		</div>
+	</div>
+	<div class="item-bottom" style="width: 380px; height: 150px;margin-top:20px;">
+		<div class="item-name">Gym Volunteer</div>
+		<p class="item-signup"> <strong>Sign Up :</strong> 2024/11/01 10:30 - 11/3 22:00</p>
+		<p class="item-time"><strong>Activity Time :</strong> 2024/11/05 18:30 - 11/18 20:00</p>
+		<p class="item-org">Published by : Sports Department of the Student Union</p>
+	</div>
+</a>
+</div>
+
+<div class="item">
+<a href="#">
+	<div class="item-top" style="width: 380px; height: 80px;">
+		<div class="item-left">
+			<img src="../static/img/activities/sports.gif" width="80px" height="80px" style="display: block;"/>
+		</div>
+		<div class="item-right">
+			<div class="item-status">Status: Ongoing</div>
+			<div class="item-cnt">Remaining: 30</div>
+		</div>
+	</div>
+	<div class="item-bottom" style="width: 380px; height: 150px;margin-top:20px;">
+		<div class="item-name">Gym Volunteer</div>
+		<p class="item-signup"> <strong>Sign Up :</strong> 2024/11/01 10:30 - 11/3 22:00</p>
+		<p class="item-time"><strong>Activity Time :</strong> 2024/11/05 18:30 - 11/18 20:00</p>
+		<p class="item-org">Published by : Sports Department of the Student Union</p>
+	</div>
+</a>
+</div>
+
+<div class="item">
+<a href="#">
+	<div class="item-top" style="width: 380px; height: 80px;">
+		<div class="item-left">
+			<img src="../static/img/activities/sports.gif" width="80px" height="80px" style="display: block;"/>
+		</div>
+		<div class="item-right">
+			<div class="item-status">Status: Ongoing</div>
+			<div class="item-cnt">Remaining: 30</div>
+		</div>
+	</div>
+	<div class="item-bottom" style="width: 380px; height: 150px;margin-top:20px;">
+		<div class="item-name">Gym Volunteer</div>
+		<p class="item-signup"> <strong>Sign Up :</strong> 2024/11/01 10:30 - 11/3 22:00</p>
+		<p class="item-time"><strong>Activity Time :</strong> 2024/11/05 18:30 - 11/18 20:00</p>
+		<p class="item-org">Published by : Sports Department of the Student Union</p>
+	</div>
+</a>
+</div>
+</div>
+
+
 
 
 
