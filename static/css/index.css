@@ -40,16 +40,17 @@ li{
     background-color: #DAEDFF;
     color:#28313A;
 }
-#login{font-weight: normal;padding-left:10px;width:80px;}
-#register{font-weight: normal;border:none;width:80px;}
-#login:hover{
-    background-color: #C4E2FF;
-    font-weight: bold;
-}
-#register:hover{
-    background-color: #C4E2FF;
-    font-weight: bold;
-}
+#login{padding-left:10px;width:80px;}
+#register{border:none;width:80px;}
+#username{padding-left:10px;width:80px;}
+#logout{border:none;width:80px;}
+#login:hover{background-color: #C4E2FF; font-weight: bold;}
+#register:hover{background-color: #C4E2FF; font-weight: bold;}
+#logout:hover{background-color: #C4E2FF; font-weight: bold;}
+#username:hover{background-color:#C4E2FF}
+
+
+
 /*end of navigation*/
 
 /*轮播图片*/
