@@ -17,3 +17,8 @@ def activityLobby():
 
     if request.method == 'GET':
         return render_template('ActivityLobby.html',username=username)
+
+@actlb.route('/ActivityContent',methods=['GET'])
+def activityContent():
+    if request.method == 'GET':
+        return render_template('ActivityContent.html')
