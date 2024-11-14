@@ -18,7 +18,7 @@ def login():
         flash('User name or password cannot be empty ')
         return render_template('login.html')
 
-    clientlist = db.session.query(User).all()
+    clientlist = db.session.query(User.id,User.username,User.password).all()
 
     for client in clientlist:
         if user == client.username and client.password == pwd:
@@ -61,10 +61,10 @@ def register():
     cursor.execute(sql_select)
     result = cursor.fetchall()
     if (len(result)==0):
-        sql_insert = "INSERT INTO user(username,password,phoneNumber) VALUES ('%s','%s','%s')" %(user,pwd,phoneNum)
-        cursor.execute(sql_insert)
-        conn.commit()  # 对数据库内容有改变，需要commit
-        conn.close()
+        new_user = User(username=user,password=pwd,phoneNumber=phoneNum)
+        db.session.add(new_user)
+        db.session.commit()  # 提交事务，保存数据到数据库
+        #db.session.close()  # 关闭会话，一般可以让Flask-SQLAlchemy自动管理会话
         return redirect('/Login')
     else:
         flash('This username is already taken.')
