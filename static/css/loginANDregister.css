@@ -75,14 +75,12 @@ table{
     background-color: #C4E2FF;
     width:300px;
     height:45px;
-    border:none;
-    border-radius: 5px;
-    box-shadow: 1px 1px 2px 2px #DAEDF;
     margin-left:100px;
     font-size:18px;
-    color:
+    border-radius: 5px;
+    border: 1px solid #99c2ed;
+    box-shadow:3px 3px 0px 0px #99c2ed;
 }
-
 
 /*底部*/
 #indexbottom{
