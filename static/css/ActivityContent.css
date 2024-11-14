@@ -73,14 +73,13 @@ li{
 	box-shadow: -4px -4px 0px 0px #DAEDFF;
 
 }
-#type-img{
-	width: 150px;
-	height: 150px;
+#act-img{
+	width: 400px;
+	height: 240px;
+	margin-bottom: 20px;
 	display: block;
-	padding:20px 120px;
-	/* border: 1px solid; */
+	/*border: 1px solid;*/
 }
-
 #club-box{
 	font-size: 18px;
 	margin: 30px auto;
@@ -95,7 +94,7 @@ li{
 	font-size: 40px;
 	padding: 10px 20px;
 	border-radius: 5px;
-	font-weight: bold;
+	font-weight: bold; 
 }
 .label {
 	font-size: 24px;
@@ -150,7 +149,6 @@ li{
 	font-weight: 800;
 	color: #4993dd;
 	margin-top: 20px;
-
 }
 
 
@@ -165,7 +163,6 @@ li{
 	border-radius: 10px;
 	box-shadow: 1px 1px 5px 3px #DAEDFF;
 }
-
 
 
 

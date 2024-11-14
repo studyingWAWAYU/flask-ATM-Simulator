@@ -15,3 +15,4 @@ function showActivities(activity, category) {
   // 你可以根据选中的活动类型和状态去处理显示相关内容
   console.log(`Selected ${category}: ${activity}`);
 }
+
