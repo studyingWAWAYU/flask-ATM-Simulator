@@ -67,7 +67,7 @@ li{
 #page-left{
 	width: 400px;
 	height: 1000px;
-	padding: 20px 40px;
+	padding: 40px 40px;
 	float: left;
 	border: 1px solid #C4E2FF;
 	box-shadow: -4px -4px 0px 0px #DAEDFF;
@@ -80,8 +80,6 @@ li{
 	display: block;
 	/*border: 1px solid;*/
 }
-
-
 #club-box{
 	font-size: 18px;
 	margin: 30px auto;
@@ -151,7 +149,6 @@ li{
 	font-weight: 800;
 	color: #4993dd;
 	margin-top: 20px;
-	
 }
 
 
@@ -166,9 +163,6 @@ li{
 	border-radius: 10px;
 	box-shadow: 1px 1px 5px 3px #DAEDFF;
 }
-
-
-
 
 
 

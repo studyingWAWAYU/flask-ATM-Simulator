@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AddActivity</title>
+    <link rel="stylesheet" href="../static/css/AddActivity.css">
+</head>
+<body>
+<div id="nav">
+    <ul style="list-style: none">
+        <li><div id="logotop"><a href="/"><img src="../static/img/logo.png" width="100" height="100"></a></div></li>
+        <a href="ClubLobby"><li class="navli">Club Lobby</li></a>
+        <a href="MyClub"><li class="navli">My Club</li></a>
+        <a href="ActivityLobby"><li class="navli">Activity Lobby</li></a>
+        <a href="MyActivity"><li class="navli">My Activity</li></a>
+        {% if username %}
+            <li class="navli" id="username">{{ username }}</li>
+            <form action="/Logout" method="post" id="logoutForm" style="display: none;">
+                <button type="submit" style="display: none;">Logout</button></form>
+            <a href="Logout" onclick="confirmLogout(event)"><li class="navli" id="logout">Logout</li></a>
+        {% else %}
+            <a href="Login"><li class="navli" id="login">Login</li></a>
+            <a href="Register"><li class="navli" id="register">Register</li></a>
+        {% endif %}
+    </ul>
+</div>
+
+<div id="FormContainer">
+
+    <form method="post">
+        <div style="margin:auto;"><img src="../static/img/activities/addAct.png" width="580px" height="50px;"></div>
+
+        <p class="inputTitle">Activity Title: </p>
+        <input type="text" id="ActTitle" name="ActTitle" class="inputText"/>
+        <br><br>
+        <p class="inputTitle">Location:</p>
+        <input type="text" id="location" name="location" class="inputText"/>
+        <br><br>
+        <button class="status-btn" onclick="showActivities('upcoming', 'status')">Upcoming</button>
+		<button class="status-btn" onclick="showActivities('inprogress', 'status')">In progress</button>
+		<button class="status-btn" onclick="showActivities('completed', 'status')">Completed</button>
+        <br><br>
+        <p class="inputTitle">Activity Time:</p>
+        <input type="datetime-local" id="actStart" class="date-picker" min="2024-12-01T00:00" value="2024-12-01T00:00">
+        to
+        <input type="datetime-local" id="actEnd" class="date-picker" min="2024-12-01T00:00" value="2024-12-01T00:00">
+        <br><br>
+        <p class="inputTitle">Contact Number:</p>
+        <input type="text" id="contact" name="contact" class="inputText"/>
+        <br><br>
+        <p class="inputTitle">Enrollment Time:</p>
+        <input type="datetime-local" id="enrollStart" class="date-picker" min="2024-12-01T00:00" value="2024-12-01T00:00">
+        to
+        <input type="datetime-local" id="enrollEnd" class="date-picker" min="2024-12-01T00:00" value="2024-12-01T00:00">
+        <br><br>
+        <p class="inputTitle">Enrollment Requirements:</p>
+        <input type="text" id="requirement" name="requirement" class="inputText"/>
+        <br><br>
+        <p class="inputTitle">Activity Description:</p>
+        <input type="text" id="description" name="description" class="inputText"/>
+        <br><br>
+
+
+
+
+        <div colspan="2" height="40px;"><h4 align="center" style="color:#CC0000;">{{ get_flashed_messages()[0] }}</h4></div>
+        <input type="submit" value="Submit" id="submit" align="center">
+
+        </form>
+
+
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" size="30" name="photo"/>
+        <br>
+        <input type="text" class="txt_input" name="name" style="margin-top:15px;"/>
+        <input type="submit" value="提交信息" class="button-new" style="margin-top:15px;"/>
+    </form>
+
+</div>
+
+
+
+
+<!--Bottom-->
+<div id="indexbottom" style="margin-top:200px">
+    <div style="margin-left:80px;padding-top:40px;">
+        <ul style="float:left;list-style-type: none;">
+            <li><p><img src="../static/img/logo.png" width="40px" height="40px;" align="center"> Activity Hub</p></li>
+            <li style="padding-left: 100px;"><p><img src="../static/img/location.png" width="30px" height="30px;" align="center"> Foshan, Guanddong, China</p></li>
+            <li style="padding-left: 100px;"><p><img src="../static/img/phone.png" width="25px" height="25px;" align="center"> 189-2805-5891</p></li>
+            <li style="padding-left: 100px;"><p><img src="../static/img/mail.png" width="30px" height="30px;" align="center"> cams@ntesmail.com</p></li>
+            <li style="padding-left: 100px;"><p><img src="../static/img/rights.png" width="30px" height="30px;" align="center"> 2024 Activity Hub. All rights reserved.</p></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

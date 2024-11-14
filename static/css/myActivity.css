@@ -1,0 +1,230 @@
+/*navigation*/
+#logotop{
+    padding-left:70px;
+    background-color:#C4E2FF;
+    height:60px;
+    padding-right:680px;
+}
+#nav{
+    width: 1700px;
+    height:60px;
+    background-color: #C4E2FF;
+    position:fixed;
+    z-index:10;
+    margin-top:0;
+    left:50%;
+    margin-left:-850px;
+}
+*{
+    padding:0;
+    margin:0;
+    position:relative;
+
+}
+li{
+    float:left;
+}
+.navli{
+    list-style-type:none;
+    width: 160px;
+    height:60px;
+    line-height: 60px;
+    background: #C4E2FF;
+    font-family:"微软雅黑 Light";
+    color:#415468;
+    font-weight: bold;
+    align: center;
+    text-align: center;
+    border-left:2px solid #DAEDFF;
+}
+.navli:hover{
+    background-color: #DAEDFF;
+    color:#28313A;
+}
+#login{padding-left:10px;width:80px;}
+#register{border:none;width:80px;}
+#username{padding-left:10px;width:80px;}
+#logout{border:none;width:80px;}
+#login:hover{background-color: #C4E2FF; font-weight: bold;}
+#register:hover{background-color: #C4E2FF; font-weight: bold;}
+#logout:hover{background-color: #C4E2FF; font-weight: bold;}
+#username:hover{background-color:#C4E2FF}
+
+/*end of navigation*/
+
+
+/*Classification*/
+#ClassificationContainer{
+    width:1700px;
+    height:240px;
+    display: block;
+    margin: auto;
+    padding-top: 140px;
+	padding-left: 80px;
+    /* border:1px solid; */
+}
+
+button.type-btn, .status-btn{
+	margin-right: 25px;
+	padding: 6px 14px;
+	border:1px solid #C4E2FF;
+	box-shadow: 1px 1px 1px 0px #99c2ed;
+	border-radius: 5px;
+	background-color: #f8f9fa;
+	font-size: 17px;
+	cursor: pointer;
+}
+button.type-btn:hover, .status-btn:hover {
+	background-color: #daedff;
+}
+button.type-btn.selected, .status-btn.selected{
+    background-color: #daedff;
+}
+
+.date-picker {
+	padding: 8px;
+	font-size: 15px;
+	border: 2px solid #99c2ed;
+	border-radius: 5px;
+	background-color: #f8f9fa;
+	width: 160px;
+}
+button#show-btn{
+	width: 100px;
+	margin-left: 100px;
+	padding: 6px 8px;
+	border: 1px solid #99c2ed;
+	border-radius: 10px;
+	background-color: #C4E2FF;
+	 font-size:17px;
+	 font-weight: 600;
+	cursor: pointer;
+}
+button#show-btn:hover {
+	background: #daedff;
+}
+
+button#createAct{
+	width: 200px;
+	margin-left: 30px;
+	padding: 6px 8px;
+	border: 1px solid #99c2ed;
+	border-radius: 10px;
+	background-color: #C4E2FF;
+	 font-size:17px;
+	 font-weight: 600;
+	cursor: pointer;
+}
+button#createAct:hover {
+	background: #daedff;
+}
+
+/*Activity*/
+#ActivityContainer{
+    width:1700px;
+    height:1000px;
+    display: block;
+    margin:auto;
+	/* border: 1px solid; */
+}
+
+#search-input{
+	width: 400px;
+	height: 50px;
+	border-radius: 8px;
+	margin-left: 50px;
+	padding-left: 10px;
+	font-weight: bold;
+	font-size: 16px;
+}
+#search{
+    background-color: #C4E2FF;
+    width:100px;
+    height:45px;
+    border: 1px solid #99c2ed;
+    border-radius: 10px;
+    margin-left:50px;
+    font-size:18px;
+	font-weight: 600;
+	cursor: pointer;
+}
+#search:hover{
+	background: #daedff;
+}
+
+a{
+	text-decoration: none;
+	color: black;
+}
+.item{
+	height: 250px;
+	width: 380px;
+	margin-top: 20px;
+	margin-left: 40px;
+	float: left;
+	background-color: rgba(255, 255, 255, 0.95);
+	border:1px solid #C4E2FF;
+	border-radius: 10px;
+	box-shadow: 4px 4px 0px 0px #DAEDFF;
+}
+.item-left{
+	width: 100px;
+	height: 80px;
+	padding-left: 10px;
+	padding-top:10px;
+	float: left;
+/* 	border: 1px solid ; */
+}
+.item-right{
+	width: 240px;
+	height: 80px;
+	padding-left: 5px;
+	padding-top:10px;
+	float: right;
+/* 	border: 1px solid ; */
+}
+.item-status{
+	font-size: 20px;
+	font-weight: 600;
+	padding-left: 80px;
+	padding-top: 15px;
+	color: #f06767;
+}
+.item-cnt{
+	font-size: 18px;
+	padding-left: 80px;
+	padding-top: 5px;
+}
+.item p{
+	padding-top:5px;
+	padding-left: 20px;
+	font-size: 14px;
+}
+.item-name{
+	font-size: 23px;
+	font-weight: 800;
+	padding-top: auto;
+	padding-bottom: 12px;
+	padding-left: 20px;
+	overflow: hidden;		/*内容会被修剪，并且其余内容是不可见的。*/
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	/* border: 1px solid; */
+}
+.item-club{
+	overflow: hidden;		/*内容会被修剪，并且其余内容是不可见的。*/
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+
+/*bottom*/
+#indexbottom{
+    width:1700px;
+    height:130px;
+    margin-top:-1500px;
+    background-color:#C4E2FF;
+    left:50%;
+    margin-left:-850px;
+    color:#415468;
+}

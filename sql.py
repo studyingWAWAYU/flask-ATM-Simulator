@@ -75,6 +75,7 @@ class Activity(db.Model):
     signup_start = db.Column(db.DateTime,nullable=False)
     signup_end = db.Column(db.DateTime,nullable=False)
     max_participant = db.Column(db.Integer,nullable=False)
+    requirement = db.Column(db.String(200),nullable=True)
 
 
 '''
