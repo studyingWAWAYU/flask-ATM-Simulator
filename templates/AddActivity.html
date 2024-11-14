@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>AddActivity</title>
+    <link rel="stylesheet" href="../static/css/AddActivity.css">
 </head>
 <body>
 <div id="nav">
@@ -24,14 +25,59 @@
     </ul>
 </div>
 
-<div>
-    <form method="post" action="http://localhost:5000/up_photo" enctype="multipart/form-data">
+<div id="FormContainer">
+
+    <form method="post">
+        <div style="margin:auto;"><img src="../static/img/activities/addAct.png" width="580px" height="50px;"></div>
+
+        <p class="inputTitle">Activity Title: </p>
+        <input type="text" id="ActTitle" name="ActTitle" class="inputText"/>
+        <br><br>
+        <p class="inputTitle">Location:</p>
+        <input type="text" id="location" name="location" class="inputText"/>
+        <br><br>
+        <button class="status-btn" onclick="showActivities('upcoming', 'status')">Upcoming</button>
+		<button class="status-btn" onclick="showActivities('inprogress', 'status')">In progress</button>
+		<button class="status-btn" onclick="showActivities('completed', 'status')">Completed</button>
+        <br><br>
+        <p class="inputTitle">Activity Time:</p>
+        <input type="datetime-local" id="actStart" class="date-picker" min="2024-12-01T00:00" value="2024-12-01T00:00">
+        to
+        <input type="datetime-local" id="actEnd" class="date-picker" min="2024-12-01T00:00" value="2024-12-01T00:00">
+        <br><br>
+        <p class="inputTitle">Contact Number:</p>
+        <input type="text" id="contact" name="contact" class="inputText"/>
+        <br><br>
+        <p class="inputTitle">Enrollment Time:</p>
+        <input type="datetime-local" id="enrollStart" class="date-picker" min="2024-12-01T00:00" value="2024-12-01T00:00">
+        to
+        <input type="datetime-local" id="enrollEnd" class="date-picker" min="2024-12-01T00:00" value="2024-12-01T00:00">
+        <br><br>
+        <p class="inputTitle">Enrollment Requirements:</p>
+        <input type="text" id="requirement" name="requirement" class="inputText"/>
+        <br><br>
+        <p class="inputTitle">Activity Description:</p>
+        <input type="text" id="description" name="description" class="inputText"/>
+        <br><br>
+
+
+
+
+        <div colspan="2" height="40px;"><h4 align="center" style="color:#CC0000;">{{ get_flashed_messages()[0] }}</h4></div>
+        <input type="submit" value="Submit" id="submit" align="center">
+
+        </form>
+
+
+    <form method="post" enctype="multipart/form-data">
         <input type="file" size="30" name="photo"/>
         <br>
         <input type="text" class="txt_input" name="name" style="margin-top:15px;"/>
         <input type="submit" value="提交信息" class="button-new" style="margin-top:15px;"/>
     </form>
+
 </div>
+
 
 
 

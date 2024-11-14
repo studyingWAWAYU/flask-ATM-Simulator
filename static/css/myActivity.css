@@ -19,6 +19,7 @@
     padding:0;
     margin:0;
     position:relative;
+
 }
 li{
     float:left;
@@ -48,8 +49,8 @@ li{
 #register:hover{background-color: #C4E2FF; font-weight: bold;}
 #logout:hover{background-color: #C4E2FF; font-weight: bold;}
 #username:hover{background-color:#C4E2FF}
-/*end of navigation*/
 
+/*end of navigation*/
 
 
 /*Classification*/
@@ -63,18 +64,21 @@ li{
     /* border:1px solid; */
 }
 
-button.category-btn{
+button.type-btn, .status-btn{
 	margin-right: 25px;
 	padding: 6px 14px;
 	border:1px solid #C4E2FF;
-	box-shadow: 2px 2px 0px 0px #99c2ed;
+	box-shadow: 1px 1px 1px 0px #99c2ed;
 	border-radius: 5px;
 	background-color: #f8f9fa;
 	font-size: 17px;
 	cursor: pointer;
 }
-button.category-btn:hover {
-	background: #daedff;
+button.type-btn:hover, .status-btn:hover {
+	background-color: #daedff;
+}
+button.type-btn.selected, .status-btn.selected{
+    background-color: #daedff;
 }
 
 .date-picker {
@@ -85,21 +89,37 @@ button.category-btn:hover {
 	background-color: #f8f9fa;
 	width: 160px;
 }
-button#showtime-btn{
-	margin-left: 20px;
+button#show-btn{
+	width: 100px;
+	margin-left: 100px;
 	padding: 6px 8px;
-	border:1px solid #C4E2FF;
-	box-shadow: 1px 1px 3px 1px #99c2ed;
-	border-radius: 5px;
-	background-color: #f8f9fa;
-	font-size: 14px;
+	border: 1px solid #99c2ed;
+	border-radius: 10px;
+	background-color: #C4E2FF;
+	 font-size:17px;
+	 font-weight: 600;
 	cursor: pointer;
 }
-button#showtime-btn:hover {
+button#show-btn:hover {
 	background: #daedff;
 }
 
-/*search*/
+button#createAct{
+	width: 200px;
+	margin-left: 30px;
+	padding: 6px 8px;
+	border: 1px solid #99c2ed;
+	border-radius: 10px;
+	background-color: #C4E2FF;
+	 font-size:17px;
+	 font-weight: 600;
+	cursor: pointer;
+}
+button#createAct:hover {
+	background: #daedff;
+}
+
+/*Activity*/
 #ActivityContainer{
     width:1700px;
     height:1000px;
@@ -120,17 +140,22 @@ button#showtime-btn:hover {
 #search{
     background-color: #C4E2FF;
     width:100px;
-    height:50px;
-    border:1px solid #99c2ed;
-    border-radius: 5px;
+    height:45px;
+    border: 1px solid #99c2ed;
+    border-radius: 10px;
     margin-left:50px;
     font-size:18px;
+	font-weight: 600;
 	cursor: pointer;
 }
 #search:hover{
 	background: #daedff;
 }
 
+a{
+	text-decoration: none;
+	color: black;
+}
 .item{
 	height: 250px;
 	width: 380px;
@@ -140,7 +165,7 @@ button#showtime-btn:hover {
 	background-color: rgba(255, 255, 255, 0.95);
 	border:1px solid #C4E2FF;
 	border-radius: 10px;
-	box-shadow: 4px 5px 0px 0px #DAEDFF;
+	box-shadow: 4px 4px 0px 0px #DAEDFF;
 }
 .item-left{
 	width: 100px;
@@ -159,15 +184,14 @@ button#showtime-btn:hover {
 /* 	border: 1px solid ; */
 }
 .item-status{
-	font-size: 18px;
+	font-size: 20px;
 	font-weight: 600;
 	padding-left: 80px;
-	padding-top: 25px;
-	color: red;
+	padding-top: 15px;
+	color: #f06767;
 }
 .item-cnt{
-	font-size: 16px;
-	font-weight: 600;
+	font-size: 18px;
 	padding-left: 80px;
 	padding-top: 5px;
 }
@@ -177,20 +201,28 @@ button#showtime-btn:hover {
 	font-size: 14px;
 }
 .item-name{
-	font-size: 24px;
+	font-size: 23px;
 	font-weight: 800;
-	padding-bottom:10px;
+	padding-top: auto;
+	padding-bottom: 12px;
 	padding-left: 20px;
+	overflow: hidden;		/*内容会被修剪，并且其余内容是不可见的。*/
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	/* border: 1px solid; */
+}
+.item-club{
+	overflow: hidden;		/*内容会被修剪，并且其余内容是不可见的。*/
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 
-
-
-/*底部*/
+/*bottom*/
 #indexbottom{
     width:1700px;
-    height:180px;
-    margin-top:170px;
+    height:130px;
+    margin-top:-1500px;
     background-color:#C4E2FF;
     left:50%;
     margin-left:-850px;
