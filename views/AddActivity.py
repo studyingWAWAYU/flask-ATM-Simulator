@@ -5,6 +5,8 @@ from flask import Blueprint
 
 from ATMflask import db
 from ATMflask.sql import User
+from ATMflask.sql import Membership
+from ATMflask.sql import Club
 
 addAct = Blueprint('addAct',__name__)
 
@@ -16,16 +18,22 @@ def addActivity():
     # 判断用户是否登录
     user_id = session.get('id')
     username = None
+    myClubNameLST = None
     if user_id:
         user = User.query.get(user_id)
         username = user.username
-        # 查询用户是否有manager身份
-        myClubId = user.MyClubId
-        print(myClubId)
+        # 查询用户作为manager的所有社团，结果是列表嵌套元组，例如[(1,),(2,)]
+        myClubId = db.session.query(Membership.club_id).filter_by(user_id=user_id,role='manager').all()
+        if myClubId == []:
+            flash("You are not the manager of any club, so you do not have permission to create a new activity.")
+        else:
+            myClubIdLST = [club_id[0] for club_id in myClubId]  # 把列表嵌套元组改为列表
+            myClubName = db.session.query(Club.club_name).filter(Club.club_id.in_(myClubIdLST)).all()
+            myClubNameLST = [club_name[0] for club_name in myClubName]
+            print(myClubNameLST)
 
     if request.method == 'GET':
-        return render_template('AddActivity.html',username=username)
-
+        return render_template('AddActivity.html',username=username,myClubNameLST=myClubNameLST)
 
     # 上传图片并保存
     if request.method == 'POST':
@@ -34,6 +42,6 @@ def addActivity():
             file.save(os.path.join(os.getcwd(),'static/img/uploads',file.filename))
             # TODO:提取新activity的id，保存图片的路径为os.getcwd()+static/img/uploads/activity/ + id + filename
 
-            return render_template('AddActivity.html',username=username)
+            return render_template('AddActivity.html')
 
 

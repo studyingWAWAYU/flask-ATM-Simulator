@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>AddActivity</title>
     <link rel="stylesheet" href="../static/css/AddActivity.css">
+    <script src="../static/js/AddActivity.js"></script>
 </head>
 <body>
 <div id="nav">
@@ -27,18 +28,41 @@
 
 <div id="FormContainer">
 
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
         <div style="margin:auto;"><img src="../static/img/activities/addAct.png" width="580px" height="50px;"></div>
 
-        <p class="inputTitle">Activity Title: </p>
+        <h4 align="center" style="color:#CC0000;">{{ get_flashed_messages()[0] }}</h4>
+
+        <p class="inputTitle">Activity Title *</p>
         <input type="text" id="ActTitle" name="ActTitle" class="inputText"/>
+        <br><br>
+        {% if myClubNameLST %}
+            <p class="inputTitle">Create Activity for CLub:</p>
+            <select name="clubs">
+            {% for clubName in myClubNameLST %}
+                <option>{{clubName}}</option>
+            {% endfor %}
+            </select>
+        {% endif %}
+        <br><br>
+        <p class="inputTitle">Activity Type:</p>
+        <select name="types">
+            <option>Cultural Events</option>
+            <option>Social Events</option>
+            <option>Career Development</option>
+            <option>Study Trips</option>
+            <option>Academic Activities</option>
+            <option>Interest Groups</option>
+            <option>Sports</option>
+            <option>Volunteer Work</option>
+        </select>
+
         <br><br>
         <p class="inputTitle">Location:</p>
         <input type="text" id="location" name="location" class="inputText"/>
         <br><br>
-        <button class="status-btn" onclick="showActivities('upcoming', 'status')">Upcoming</button>
-		<button class="status-btn" onclick="showActivities('inprogress', 'status')">In progress</button>
-		<button class="status-btn" onclick="showActivities('completed', 'status')">Completed</button>
+        <p class="inputTitle">Maximum Participant:</p>
+        <input type="number" id="max_participant" class="inputText"/>
         <br><br>
         <p class="inputTitle">Activity Time:</p>
         <input type="datetime-local" id="actStart" class="date-picker" min="2024-12-01T00:00" value="2024-12-01T00:00">
@@ -53,29 +77,23 @@
         to
         <input type="datetime-local" id="enrollEnd" class="date-picker" min="2024-12-01T00:00" value="2024-12-01T00:00">
         <br><br>
+        <p class="inputTitle">Participant roles:</p>
+        <input type="text" id="roles" name="riles" class="inputText"/>
+        <p>Note: If the activity requires participants to take on multiple roles,
+            <br>please separate each role with a semicolon.</p>
+        <br><br>
         <p class="inputTitle">Enrollment Requirements:</p>
         <input type="text" id="requirement" name="requirement" class="inputText"/>
         <br><br>
         <p class="inputTitle">Activity Description:</p>
         <input type="text" id="description" name="description" class="inputText"/>
         <br><br>
-
-
-
-
-        <div colspan="2" height="40px;"><h4 align="center" style="color:#CC0000;">{{ get_flashed_messages()[0] }}</h4></div>
+        <div id="custom_upload">Upload Photos</div>
+        <input type="file" id="uploadImg" name="photo" multiple="True"/>
+        <br>
         <input type="submit" value="Submit" id="submit" align="center">
 
-        </form>
-
-
-    <form method="post" enctype="multipart/form-data">
-        <input type="file" size="30" name="photo"/>
-        <br>
-        <input type="text" class="txt_input" name="name" style="margin-top:15px;"/>
-        <input type="submit" value="提交信息" class="button-new" style="margin-top:15px;"/>
     </form>
-
 </div>
 
 
