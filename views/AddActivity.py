@@ -20,7 +20,9 @@ def addActivity():
     if request.method == 'GET':
         return render_template('AddActivity.html',username=username)
 
-    file = request.files['file']
-    if file:
-        file.save(os.path.join(app.config['UPLOAD_FOLDER'],file.filename))
+    if request.method == 'POST':
+        file = request.files['file']
+        if file:
+            file.save(os.path.join(app.config['UPLOAD_FOLDER'],file.filename))
+
 

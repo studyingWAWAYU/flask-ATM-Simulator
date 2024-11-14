@@ -1,0 +1,181 @@
+/*navigation*/
+#logotop{
+    padding-left:70px;
+    background-color:#C4E2FF;
+    height:60px;
+    padding-right:680px;
+}
+#nav{
+    width: 1700px;
+    height:60px;
+    background-color: #C4E2FF;
+    position:fixed;
+    z-index:10;
+    margin-top:0;
+    left:50%;
+    margin-left:-850px;
+}
+*{
+    padding:0;
+    margin:0;
+    position:relative;
+}
+li{
+    float:left;
+}
+.navli{
+    list-style-type:none;
+    width: 160px;
+    height:60px;
+    line-height: 60px;
+    background: #C4E2FF;
+    font-family:"微软雅黑 Light";
+    color:#415468;
+    font-weight: bold;
+    align: center;
+    text-align: center;
+    border-left:2px solid #DAEDFF;
+}
+.navli:hover{
+    background-color: #DAEDFF;
+    color:#28313A;
+}
+#login{padding-left:10px;width:80px;}
+#register{border:none;width:80px;}
+#username{padding-left:10px;width:80px;}
+#logout{border:none;width:80px;}
+#login:hover{background-color: #C4E2FF; font-weight: bold;}
+#register:hover{background-color: #C4E2FF; font-weight: bold;}
+#logout:hover{background-color: #C4E2FF; font-weight: bold;}
+#username:hover{background-color:#C4E2FF}
+
+/*end of navigation*/
+
+
+/* Information */
+#InformationContainer{
+    width:1700px;
+    height:1000px;
+    display: block;
+    margin:auto;
+	padding-top: 140px;
+	padding-left: 80px;
+	/* border: 1px solid; */
+}
+
+/* Left Information */
+#page-left{
+	width: 400px;
+	height: 1000px;
+	padding: 40px 40px;
+	float: left;
+	border: 1px solid #C4E2FF;
+	box-shadow: -4px -4px 0px 0px #DAEDFF;
+
+}
+#type-img{
+	width: 150px;
+	height: 150px;
+	display: block;
+	padding:20px 120px;
+	/* border: 1px solid; */
+}
+
+#club-box{
+	font-size: 18px;
+	margin: 30px auto;
+	font-weight: 550;
+	display: flex;
+	color: #787776;
+}
+.number{
+	display: inline-block;
+	background-color: #fa8383;
+	color: white;
+	font-size: 40px;
+	padding: 10px 20px;
+	border-radius: 5px;
+	font-weight: bold;
+}
+.label {
+	font-size: 24px;
+	margin-left: 60px;
+	margin-right: 8px;
+	font-weight: bold;
+}
+
+#sup-btn{
+	background-color: #fa8383;
+    width:250px;
+    height:80px;
+    border:1px solid #fa8383;
+    border-radius: 50px;
+    margin:auto 65px;
+    font-size:25px;
+	font-weight: bold;
+	color: white;
+	cursor: pointer;
+}
+#sup-btn:hover{
+	background-color: #ff6e6e;
+}
+
+
+
+/* Right Information */
+#page-right{
+	width: 1000px;
+	height: 1000px;
+	margin-left: 60px;
+	padding: 40px 50px;
+	float: left;
+	background-color: #fafcff;
+	border: 1px solid #C4E2FF;
+	box-shadow: 4px 4px 0px 0px #DAEDFF;
+}
+#info table{
+	border-spacing: 10px 10px;
+	border-collapse: separate;
+	margin-bottom: 50px;
+	/* border: 1px solid ; */
+}
+
+#info table td{
+	padding-top: 10px;
+	padding-right: 60px;
+	font-size: 20px;
+}
+.info-title{
+	font-size: 22px;
+	font-weight: 800;
+	color: #4993dd;
+	margin-top: 20px;
+
+}
+
+
+.item{
+	height: 250px;
+	width: 380px;
+	margin-top: 20px;
+	margin-left: 40px;
+	float: left;
+	background-color: rgba(255, 255, 255, 0.95);
+	border:1px solid #C4E2FF;
+	border-radius: 10px;
+	box-shadow: 1px 1px 5px 3px #DAEDFF;
+}
+
+
+
+
+/*bottom*/
+#indexbottom{
+    width:1700px;
+    height:130px;
+    margin-top:-1500px;
+    background-color:#C4E2FF;
+    left:50%;
+    margin-left:-850px;
+    color:#415468;
+}
