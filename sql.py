@@ -64,7 +64,7 @@ class Activity(db.Model):
     type = db.Column(db.Enum("Cultural Events","Social Events","Career Development","Study Trips",
                              "Academic Activities","Interest Groups","Sports","Volunteer Work"),nullable=False)
     status = db.Column(db.Enum("Upcoming","Ongoing","Completed"),nullable=False)
-    contact_id = db.Column(db.Integer,nullable=True)
+    contact = db.Column(db.String(15),nullable=True)
     location = db.Column(db.String(80),nullable=False)
     club_id = db.Column(db.Integer,nullable=False)
     start_time = db.Column(db.DateTime,nullable=False)
@@ -74,14 +74,15 @@ class Activity(db.Model):
     signup_end = db.Column(db.DateTime,nullable=False)
     max_participant = db.Column(db.Integer,nullable=False)
     requirement = db.Column(db.String(200),nullable=True)
+    roles = db.Column(db.String(100),nullable=True)
 
 
-'''
+
 with app.test_request_context():
     db.create_all() #建表，建过之后注释掉
     #db.drop_all() #删除表，如果要重新建表
 
-
+'''
 #写入数据，写过之后注释掉
 with app.test_request_context():
     #创建ORM对象

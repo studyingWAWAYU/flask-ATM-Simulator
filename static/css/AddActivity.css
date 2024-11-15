@@ -52,30 +52,44 @@ li{
 
 
 #FormContainer{
-    width:600px;
-    height:1500px;
+    width:1700px;
+    height:1700px;
     display:block;
     margin:auto;
-    padding-top:100px;
+    padding-top:80px;
 }
-
-.inputTitle{
-    font-size:20px;
-}
-.inputText{
-    width:400px;
-    height:25px;
+#FormOutline{
+    width:1000px;
+    height:1600px;
+    margin-left:350px;
+    margin-top:50px;
     border:2px solid #99c2ed;
     border-radius: 5px;
-    padding:5px;
+    box-shadow: 4px 4px 0px 0px #99c2ed;
+}
+.inputTitle{
+    font-size:20px;
+    margin-left:250px;
+    margin-top:35px;
+    margin-bottom:5px;
+}
+.inputText{
+    width:495px;
+    height:35px;
+    border:2px solid #99c2ed;
+    border-radius: 5px;
+    padding-left:5px;
+    margin-left:250px;
+    font-size:18px;
 }
 select{
-    width:400px;
-    height:35px;
+    width:500px;
+    height:45px;
     font-size:18px;
-    padding:3px;
+    padding:5px;
     border-radius: 5px;
     border: 2px solid #99c2ed;
+    margin-left:250px;
 }
 .date-picker {
 	padding: 8px;
@@ -84,6 +98,9 @@ select{
 	border-radius: 5px;
     box-shadow:3px 3px 0px 0px #99c2ed;
 	width: 220px;
+	margin-left:5px;
+	margin-right:5px;
+
 }
 
 #uploadImg{
@@ -99,17 +116,19 @@ select{
     border: 1px solid #99c2ed;
 	border-radius: 5px;
     box-shadow:3px 3px 0px 0px #99c2ed;
+    margin-left:250px;
+    margin-top:35px;
 }
 #custom_upload:hover{
     background-color: #daedff;
 }
 #submit{
     background-color: #C4E2FF;
-    width:300px;
+    width:500px;
     height:45px;
-    margin-left:100px;
+    margin-left:250px;
     font-size:18px;
-    margin-top:50px;
+    margin-top:35px;
     border-radius: 5px;
     border: 1px solid #99c2ed;
     box-shadow:3px 3px 0px 0px #99c2ed;
