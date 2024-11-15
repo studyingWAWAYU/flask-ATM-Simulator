@@ -65,7 +65,8 @@ li{
     margin-top:50px;
     border:2px solid #99c2ed;
     border-radius: 5px;
-    box-shadow: 4px 4px 0px 0px #99c2ed;
+    box-shadow: 2px 2px 1px 2px #99c2ed;
+    background-color:#fafcff;
 }
 .inputTitle{
     font-size:20px;
@@ -102,7 +103,6 @@ select{
 	margin-right:5px;
 
 }
-
 #uploadImg{
     display:none;
 }

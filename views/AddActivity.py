@@ -66,6 +66,8 @@ def addActivity():
         # 将字符串转为 datetime 对象
         actStart = datetime.strptime(actStart, "%Y-%m-%dT%H:%M")
         actEnd = datetime.strptime(actEnd, "%Y-%m-%dT%H:%M")
+        enrollStart = datetime.strptime(enrollStart, "%Y-%m-%dT%H:%M")
+        enrollEnd = datetime.strptime(enrollEnd, "%Y-%m-%dT%H:%M")
         # 确定活动状态
         if current_time < actStart:
             status = 'upcoming'
@@ -88,7 +90,7 @@ def addActivity():
         # 定义允许的图片格式
         ALLOWED_EXTENSIONS = {'jpg', 'jpeg', 'png', 'gif'}
         def allowed_file(filename):
-            # 获取文件的扩展名（小写）
+            # 获取文件的扩展名
             return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
         file = request.files['photo']
