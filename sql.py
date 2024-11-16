@@ -47,6 +47,7 @@ class Club(db.Model):
     club_id = db.Column(db.Integer,primary_key=True,unique=True,autoincrement=True)
     club_name = db.Column(db.String(50),nullable=False,unique=True)
     description = db.Column(db.String(1000),nullable=True)
+    announcement = db.Column(db.String(800),nullable=True)
     created_time = db.Column(db.Date,nullable=False)
 
 class Participant(db.Model):
@@ -77,12 +78,12 @@ class Activity(db.Model):
     roles = db.Column(db.String(100),nullable=True)
 
 
-
+'''
 with app.test_request_context():
     db.create_all() #建表，建过之后注释掉
     #db.drop_all() #删除表，如果要重新建表
 
-'''
+
 #写入数据，写过之后注释掉
 with app.test_request_context():
     #创建ORM对象
