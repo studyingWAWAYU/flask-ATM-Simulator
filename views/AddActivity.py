@@ -4,7 +4,7 @@ from flask import render_template,request,redirect, flash,session
 from flask import Blueprint
 
 from ATMflask import db,app
-from ATMflask.sql import User,Membership,Club,Activity
+from ATMflask.sql import User,Membership,Club,Activity,Participant
 from datetime import datetime
 
 addAct = Blueprint('addAct',__name__)
@@ -21,14 +21,12 @@ def addActivity():
     if user_id:
         user = User.query.get(user_id)
         username = user.username
+
         # 查询用户作为manager的所有社团，结果是列表嵌套元组，例如[(1,),(2,)]
         myClubId = db.session.query(Membership.club_id).filter_by(user_id=user_id,role='manager').all()
-        if myClubId == []:
-            flash("You are not the manager of any club, so you do not have permission to create a new activity.")
-        else:
-            myClubIdLST = [club_id[0] for club_id in myClubId]  # 把列表嵌套元组改为列表
-            myClubName = db.session.query(Club.club_name).filter(Club.club_id.in_(myClubIdLST)).all()
-            myClubNameLST = [club_name[0] for club_name in myClubName]
+        myClubIdLST = [club_id[0] for club_id in myClubId]  # 把列表嵌套元组改为列表
+        myClubName = db.session.query(Club.club_name).filter(Club.club_id.in_(myClubIdLST)).all()
+        myClubNameLST = [club_name[0] for club_name in myClubName]
 
     if request.method == 'GET':
         return render_template('AddActivity.html',username=username,myClubNameLST=myClubNameLST)
@@ -86,6 +84,10 @@ def addActivity():
         db.session.add(newAct)
         db.session.commit()
 
+        participant_creator = Participant(activity_id=newAct.activity_id,user_id=user_id,status='Registered',role='creator')
+        db.session.add(participant_creator)
+        db.session.commit()
+
         # 上传图片
         # 定义允许的图片格式
         ALLOWED_EXTENSIONS = {'jpg', 'jpeg', 'png', 'gif'}
@@ -94,19 +96,20 @@ def addActivity():
             return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
         file = request.files['photo']
-        if file and allowed_file(file.filename):
-            activity_id = db.session.query(Activity.activity_id).filter_by(activity_name=actTitle).first()
-            if activity_id:
-                # 配置上传文件目录
-                #提取新activity的id，保存图片的路径为os.getcwd()+static/img/uploads/activity/ + activity_id + filename
-                upload_dir = os.path.join(os.getcwd(),'static','img','uploads',str(activity_id[0]))
-                if not os.path.exists(upload_dir):
-                    os.makedirs(upload_dir)
-                file.save(os.path.join(upload_dir,file.filename))
-                flash("Image uploaded successfully.")
-        else:
-            flash("Illegal image format: Please upload an image in JPG, JPEG, PNG or GIF format!")
+        if file:
+            if allowed_file(file.filename):
+                activity_id = db.session.query(Activity.activity_id).filter_by(activity_name=actTitle).first()
+                if activity_id:
+                    # 配置上传文件目录
+                    #提取新activity的id，保存图片的路径为os.getcwd()+static/img/uploads/activity/ + activity_id + filename
+                    upload_dir = os.path.join(os.getcwd(),'static','img','uploads',str(activity_id[0]))
+                    if not os.path.exists(upload_dir):
+                        os.makedirs(upload_dir)
+                    file.save(os.path.join(upload_dir,file.filename))
+                    flash("Image uploaded successfully.")
+            else:
+                flash("Illegal image format: Please upload an image in JPG, JPEG, PNG or GIF format!")
 
-        return render_template('AddActivity.html',username=username,myClubNameLST=myClubNameLST)
-
+        #return render_template('AddActivity.html',username=username,myClubNameLST=myClubNameLST)
+        return redirect('/MyActivity')
 

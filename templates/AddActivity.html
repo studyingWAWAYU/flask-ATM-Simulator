@@ -31,11 +31,11 @@
         <form method="post" enctype="multipart/form-data">
         <div style="margin-left:210px;margin-top:50px;"><img src="../static/img/activities/addAct.png" width="580px" height="52px;"></div>
 
-        <p class="inputTitle" style="margin-top:50px;">Activity Title *</p>
+        <p class="inputTitle" style="margin-top:40px;"><span>Activity Title </span><span style="color:#fa8383;">*</span></p>
         <input type="text" id="ActTitle" name="ActTitle" class="inputText"/>
 
         {% if myClubNameLST %}
-            <p class="inputTitle">Create Activity for CLub:</p>
+            <p class="inputTitle"><span>Create Activity for CLub </span><span style="color:#fa8383;">*</span></p>
             <select name="clubs">
             {% for clubName in myClubNameLST %}
                 <option>{{clubName}}</option>
@@ -43,7 +43,7 @@
             </select>
         {% endif %}
 
-        <p class="inputTitle">Activity Type:</p>
+        <p class="inputTitle"><span>Activity Type </span><span style="color:#fa8383;">*</span></p>
         <select name="types">
             <option>Cultural Events</option>
             <option>Social Events</option>
@@ -55,39 +55,39 @@
             <option>Volunteer Work</option>
         </select>
 
-        <p class="inputTitle">Location:</p>
+        <p class="inputTitle"><span>Location </span><span style="color:#fa8383;">*</span></p>
         <input type="text" id="location" name="location" class="inputText"/>
 
-        <p class="inputTitle">Maximum Participant:</p>
+        <p class="inputTitle"><span>Maximum Participant </span><span style="color:#fa8383;">*</span></p>
         <input type="number" name="max_participant" class="inputText"/>
 
-        <p class="inputTitle">Activity Time:</p>
+        <p class="inputTitle"><span>Activity Time </span><span style="color:#fa8383;">*</span></p>
         <input type="datetime-local" name="actStart" class="date-picker" min="2024-12-01T00:00" value="2024-12-01T00:00" style="margin-left:245px;">
         to<input type="datetime-local" name="actEnd" class="date-picker" min="2024-12-01T00:00" value="2024-12-01T00:00">
 
-        <p class="inputTitle">Contact Number:</p>
-        <input type="text" id="contact" name="contact" class="inputText"/>
-
-        <p class="inputTitle">Enrollment Time:</p>
+        <p class="inputTitle"><span>Enrollment Time </span><span style="color:#fa8383;">*</span></p>
         <input type="datetime-local" name="enrollStart" class="date-picker" min="2024-12-01T00:00" value="2024-12-01T00:00" style="margin-left:245px;">
         to<input type="datetime-local" name="enrollEnd" class="date-picker" min="2024-12-01T00:00" value="2024-12-01T00:00">
 
-        <p class="inputTitle">Participant roles:</p>
+        <p class="inputTitle">Contact Number </p>
+        <input type="text" id="contact" name="contact" class="inputText"/>
+
+        <p class="inputTitle">Participant roles </p>
         <input type="text" id="roles" name="roles" class="inputText"/>
         <p class="inputTitle" style="font-size:16px;margin-top:5px;">Note: If the activity requires participants to take on multiple roles,
             <br>please separate each role with a semicolon.</p>
 
-        <p class="inputTitle">Enrollment Requirements:</p>
+        <p class="inputTitle">Enrollment Requirements </p>
         <input type="text" id="requirement" name="requirement" class="inputText"/>
 
-        <p class="inputTitle">Activity Description:</p>
+        <p class="inputTitle">Activity Description </p>
         <input type="text" id="description" name="description" class="inputText"/>
 
         <div id="custom_upload">Upload Photos</div>
         <input type="file" id="uploadImg" name="photo" multiple="multiple"/>
 
         <p align="center" style="color:#CC0000;font-size:20px;margin-top:30px;">{{ get_flashed_messages()[0] }}</p>
-        <input type="submit" value="Submit" id="submit" align="center">
+        <a href="MyActivity"><input type="submit" value="Submit" id="submit" align="center"></a>
 
     </form>
 
