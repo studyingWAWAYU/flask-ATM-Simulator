@@ -4,7 +4,6 @@ from sqlalchemy import ForeignKey
 import ATMflask.settings as settings
 from ATMflask import app,db
 
-
 #配置数据库
 HOSTNAME = "127.0.0.1"
 PORT = "3306"
@@ -18,7 +17,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = settings.SQLALCHEMY_DATABASE_URI
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = settings.SQLALCHEMY_COMMIT_ON_TEARDOWN
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = settings.SQLALCHEMY_TRACK_MODIFICATIONS
 app.config['SQLALCHEMY_POOL_RECYCLE'] = settings.SQLALCHEMY_POOL_RECYCLE
-
 
 migrate = Migrate(app,db)
 
