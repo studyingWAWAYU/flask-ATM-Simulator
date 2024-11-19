@@ -48,6 +48,11 @@
             <span id="PwdError" style="position:absolute;left:430px;top:210px;color:red;"></span>
         </tr>
         <tr>
+            <td width="120px;" height="45px"><p style="font-size:16px;padding-left:10px">Repeat Passwords:</p></td>
+            <td><input type="password" placeholder="Please pass confirm your password" id="repassword" name="repwd"  value="{{ repassword }}" style="width:230px;height:25px;border:1px solid #368785;padding:3px;"/></td>
+            <span id="RePwdError" style="position:absolute;left:430px;top:210px;color:red;"></span>
+        </tr>
+        <tr>
             <td width="120px;" height="45px"><p style="font-size:16px;padding-left:88px">Gender:</p></td>
             <td>
             <select id="gender" name="gender" style="width:230px;height:25px;border:1px solid #368785;padding:3px;">
@@ -67,7 +72,7 @@
             <td colspan="2" height="30px"><h4 align="center" style="color:#CC0000;">{{ get_flashed_messages()[0] }}</h4></td>
         </tr>
     </table>
-    <input type="submit" value="Change" id="submit" align="center">
+    <input type="submit" value="Change" id="submit" align="center" onclick="confirmChange(event)">
 </form>
 </div>
 </div>

@@ -15,26 +15,30 @@ def myinformation():
     username = user.username
 
     if request.method == 'GET':
-        return render_template('MyInformation.html',username=user.username, password=user.password, gender=user.gender, phoneNum=user.phoneNumber)
+        return render_template('MyInformation.html', username=user.username, password=user.password, repassword=user.password, gender=user.gender, phoneNum=user.phoneNumber)
 
     # 处理POST请求
     newusername = request.form.get('user')
     newpwd = request.form.get('pwd')
+    newrepwd = request.form.get('repwd')
     newgender = request.form.get('gender')
     newphoneNum = request.form.get('phoneNum')
 
     if newusername == '':
         flash('Username cannot be empty.')
-        return render_template('MyInformation.html', username=user.username, password=user.password, gender=user.gender, phoneNum=user.phoneNumber)
+        return render_template('MyInformation.html', username=user.username, password=user.password, repassword=user.password, gender=user.gender, phoneNum=user.phoneNumber)
     elif newpwd == '':
         flash('Password cannot be empty.')
-        return render_template('MyInformation.html', username=user.username, password=user.password, gender=user.gender, phoneNum=user.phoneNumber)
+        return render_template('MyInformation.html', username=user.username, password=user.password, repassword=user.password, gender=user.gender, phoneNum=user.phoneNumber)
+    elif newpwd != newrepwd:
+        flash('Passwords do not match.')
+        return render_template('MyInformation.html', username=user.username, password=user.password, repassword=user.password, gender=user.gender, phoneNum=user.phoneNumber)
     elif newgender == ' ':
         flash('Gender cannot be empty.')
-        return render_template('MyInformation.html', username=user.username, password=user.password, gender=user.gender, phoneNum=user.phoneNumber)
+        return render_template('MyInformation.html', username=user.username, password=user.password, repassword=user.password, gender=user.gender, phoneNum=user.phoneNumber)
     elif newphoneNum == '':
         flash('Phone Number cannot be empty.')
-        return render_template('MyInformation.html', username=user.username, password=user.password, gender=user.gender, phoneNum=user.phoneNumber)
+        return render_template('MyInformation.html', username=user.username, password=user.password, repassword=user.password, gender=user.gender, phoneNum=user.phoneNumber)
 
 
 
@@ -51,7 +55,7 @@ def myinformation():
         existing_user = User.query.filter_by(username=newusername).first() # 检查新用户名是否已存在
         if existing_user:
             flash('Username already taken.')
-            return render_template('MyInformation.html', username=user.username, password=user.password, gender=user.gender, phoneNum=user.phoneNumber)
+            return render_template('MyInformation.html', username=user.username, password=user.password, repassword=user.password, gender=user.gender, phoneNum=user.phoneNumber)
         user.username = newusername
         user.password = newpwd
         user.gender = newgender
