@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>MyInformation</title>
 	<link rel="stylesheet" href="../static/css/myInformation.css">
+    <script src="../static/js/myInformation.js"></script>
+
 </head>
 <body>
 <!--Navigation-->
@@ -27,24 +29,57 @@
 </div>
 
 
-<!--Activity-->
-<div id="ActivityContainer">
-<div id="searchbox" style="padding-top:15px; margin-bottom:20px;">
-	<input type="text" id="search-input" placeholder="Search Activities" class="hotword">
-	<input type="button" value="Search" id="search" align="center" onclick="search()">
-    {% if createPermission %}
-	<button id="createAct"><a href="AddActivity">create new activity</a></button>
-    {% endif %}
+<!--Information-->
+<div id="InformationContainer">
+<img src="../static/img/loginANDregister/registerbg.png" width="1200px" height="800px" style="padding-top:50px">
+<div id="InformationTable">
+<form method="post">
+
+    <div id="InformationTitle"><h1 style="padding-left: 130px;padding-bottom:30px;padding-top:50px;color:#4C637D;">My Information</h1></div>
+    <table  align="center">
+        <tr>
+            <td width="170px;" height="45px"><p style="font-size:16px;padding-left:63px;">User Name: </p></td>
+            <td><input type="text" name="user" value="{{ username }}" style="width:230px;height:25px;border:1px solid #368785;padding:3px;"/></td>
+            <span id="UsernameError" style="position:absolute;left:430px;top:125px;color:red;"></span>
+        </tr>
+        <tr>
+            <td width="120px;" height="45px"><p style="font-size:16px;padding-left:68px;">Passwords:</p></td>
+            <td><input type="password" id="password" name="pwd" value="{{ password }}" style="width:230px;height:25px;border:1px solid #368785;padding:3px;"/></td>
+            <span id="PwdError" style="position:absolute;left:430px;top:210px;color:red;"></span>
+        </tr>
+        <tr>
+            <td width="120px;" height="45px"><p style="font-size:16px;padding-left:88px">Gender:</p></td>
+            <td>
+            <select id="gender" name="gender" style="width:230px;height:25px;border:1px solid #368785;padding:3px;">
+                <option value="Male" >Male</option>
+                <option value="Female" >Female</option>
+                <option value="Non-binary" >Non-binary</option>
+            </select><input type="hidden" id="currentGender" value="{{ gender }}" />
+            </td>
+            <span id="GenderError" style="position:absolute;left:430px;top:125px;color:red;"></span>
+        </tr>
+        <tr>
+            <td width="120px;" height="45px"><p style="font-size:16px;padding-left:30px;">Phone Number:</p></td>
+            <td><input type="text" id="phoneNum" name="phoneNum" value="{{ phoneNum }}" style="width:230px;height:25px;border:1px solid #368785;padding:3px;"/></td>
+            <span id="PhoneNumError" style="position:absolute;left:430px;top:210px;color:red;"></span>
+        </tr>
+        <tr>
+            <td colspan="2" height="30px"><h4 align="center" style="color:#CC0000;">{{ get_flashed_messages()[0] }}</h4></td>
+        </tr>
+    </table>
+    <input type="submit" value="Change" id="submit" align="center">
+</form>
+</div>
 </div>
 
-<p align="center" style="color:#CC0000;font-size:20px;margin-top:30px;">{{ get_flashed_messages()[0] }}</p>
 
-</div>
+
+
 
 
 <!--Bottom-->
-<div id="indexbottom" style="margin-top:400px">
-    <div style="margin-left:80px;padding-top:60px;">
+<div id="indexbottom" style="margin-top:200px">
+    <div style="margin-left:80px;padding-top:40px;">
         <ul style="float:left;list-style-type: none;">
             <li><p><img src="../static/img/logo.png" width="40px" height="40px;" align="center"> Activity Hub</p></li>
             <li style="padding-left: 100px;"><p><img src="../static/img/location.png" width="30px" height="30px;" align="center"> Foshan, Guanddong, China</p></li>
