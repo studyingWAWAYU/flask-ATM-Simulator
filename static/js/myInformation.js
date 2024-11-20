@@ -6,14 +6,6 @@ function confirmLogout(event) {
         document.getElementById("logoutForm").submit();
     }
 }
-function confirmChange(event) {
-    var confirmation = confirm("Are you sure you want to submit changes?");
-    if (confirmation) {
-        event.target.form.submit();
-    } else {
-        event.preventDefault();
-    }
-}
 document.addEventListener("DOMContentLoaded", function() {
     var currentGender = document.getElementById("currentGender").value;
     var genderSelect = document.getElementById("gender");
@@ -24,3 +16,26 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
 });
+
+function showAvatars(){
+    // 获取所有class=“avatar”的元素
+    const avatars = document.querySelectorAll('.avatar');
+    const largeAvatar = document.getElementById('largeAvatar');
+    const hiddenInput = document.getElementById('selectedAvatar');
+
+    // Add event listener for each avatar
+    avatars.forEach(avatar => {
+        avatar.addEventListener('click', function() {
+            // Remove 'selected' class from all avatars
+            avatars.forEach(item => item.classList.remove('selected'));
+
+            // Add 'selected' class to the clicked avatar
+            this.classList.add('selected');
+
+            // Change the large avatar to the selected one
+            largeAvatar.src = this.getAttribute('src');
+            hiddenInput.value = this.getAttribute('src');
+        });
+    });
+}
+

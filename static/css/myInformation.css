@@ -49,43 +49,57 @@ li{
 #register:hover{background-color: #C4E2FF; font-weight: bold;}
 #logout:hover{background-color: #C4E2FF; font-weight: bold;}
 #username:hover{background-color:#C4E2FF}
-
 /*end of navigation*/
 
 
-button#createAct{
-	width: 200px;
-	height:50px;
-	margin-left: 30px;
-	padding: 6px 8px;
-	border: 1px solid #99c2ed;
-	border-radius: 10px;
-	background-color: #C4E2FF;
-	 font-size:18px;
-	 font-weight: 600;
-	cursor: pointer;
-}
-button#createAct:hover {
-	background: #daedff;
-}
 
 /*Information*/
 #InformationContainer{
     width:1700px;
-    height:600px;
+    height:550px;
     display: block;
     margin:auto;
+    padding-top:150px;
 }
-
+#LeftContainer{
+    width:800px;
+    height:580px;
+    margin-left:150px;
+    border-radius: 5px;
+    border: 1px solid #99c2ed;
+    box-shadow:3px 3px 20px 5px #99c2ed;
+}
+.avatar{
+    width:100px;
+    height:100px;
+}
+#profileCard{
+    width:400px;
+    height:570px;
+    margin-top:-570px;
+    margin-left:400px;
+    text-align:center;
+}
+#largeAvatar{
+    width:300px;
+    height:300px;
+    margin-top:60px;
+}
 #InformationTable{
-    margin-top:-700px;
-    margin-left:1200px;
+    margin-top:-580px;
+    margin-left:1100px;
     width:500px;
     height:700px;
 }
 table{
     width: 500px;
     height: 130px;
+}
+.input{
+    width:230px;
+    height:25px;
+    border:1px solid #99c2ed;
+    padding:3px;
 }
 #submit{
     background-color: #C4E2FF;
@@ -96,6 +110,7 @@ table{
     border-radius: 5px;
     border: 1px solid #99c2ed;
     box-shadow:3px 3px 0px 0px #99c2ed;
+    margin-top:25px;
 }
 
 /*bottom*/

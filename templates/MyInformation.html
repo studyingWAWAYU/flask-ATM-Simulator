@@ -16,8 +16,8 @@
         <a href="MyClub"><li class="navli">My Club</li></a>
         <a href="ActivityLobby"><li class="navli">Activity Lobby</li></a>
         <a href="MyActivity"><li class="navli">My Activity</li></a>
-        {% if username %}
-            <a href="MyInformation"><li class="navli" id="username">{{ username }}</li></a>
+        {% if user.username %}
+            <a href="MyInformation"><li class="navli" id="username">{{ user.username }}</li></a>
             <form action="/Logout" method="post" id="logoutForm" style="display: none;">
                 <button type="submit" style="display: none;">Logout</button></form>
             <a href="Logout" onclick="confirmLogout(event)"><li class="navli" id="logout">Logout</li></a>
@@ -31,53 +31,90 @@
 
 <!--Information-->
 <div id="InformationContainer">
-<img src="../static/img/loginANDregister/registerbg.png" width="1200px" height="800px" style="padding-top:50px">
+    <div id="LeftContainer">
+        <div id="avatars">
+            <!-- Avatar images will go here -->
+            <p style="font-size:26px;padding:10px;color:#4C637D;margin-left:75px;">Choose an avatar:</p>
+            <button onclick="showAvatars()" style="border:none;margin-left:50px;">
+                <img src="../static/img/avatars/1.png" class="avatar">
+                <img src="../static/img/avatars/2.png" class="avatar">
+                <img src="../static/img/avatars/3.png" class="avatar">
+                <br>
+                <img src="../static/img/avatars/4.png" class="avatar">
+                <img src="../static/img/avatars/5.png" class="avatar">
+                <img src="../static/img/avatars/6.png" class="avatar">
+                <br>
+                <img src="../static/img/avatars/7.png" class="avatar">
+                <img src="../static/img/avatars/8.png" class="avatar">
+                <img src="../static/img/avatars/9.png" class="avatar">
+                <br>
+                <img src="../static/img/avatars/10.png" class="avatar">
+                <img src="../static/img/avatars/11.png" class="avatar">
+                <img src="../static/img/avatars/12.png" class="avatar">
+                <br>
+                <img src="../static/img/avatars/13.png" class="avatar">
+                <img src="../static/img/avatars/14.png" class="avatar">
+                <img src="../static/img/avatars/15.png" class="avatar">
+            </button>
+        </div>
+
+        <div id="profileCard">
+            <img id="largeAvatar" src={{user.avatar}}>
+            <p style="margin-top:25px;font-size:30px;color:#4C637D;">{{user.username}}</p>
+            <p style="margin-top:20px;font-size:22px;color:#4C637D;">Phone Number:{{user.phoneNumber}}</p>
+            <p style="margin-top:10px;;font-size:22px;color:#4C637D;">Gender:{{user.gender}}</p>
+        </div>
+
+    </div>
+
+
+
+
 <div id="InformationTable">
 <form method="post">
-
-    <div id="InformationTitle"><h1 style="padding-left: 130px;padding-bottom:30px;padding-top:50px;color:#4C637D;">My Information</h1></div>
+    <div id="InformationTitle"><h1 style="padding-left:110px;padding-bottom:30px;padding-top:50px;color:#4C637D;">Edit My Information</h1></div>
     <table  align="center">
         <tr>
-            <td width="170px;" height="45px"><p style="font-size:16px;padding-left:63px;">User Name: </p></td>
-            <td><input type="text" name="user" value="{{ username }}" style="width:230px;height:25px;border:1px solid #368785;padding:3px;"/></td>
-            <span id="UsernameError" style="position:absolute;left:430px;top:125px;color:red;"></span>
+            <td width="190px;" height="50px"><p style="font-size:16px;padding-left:90px;">User Name: </p></td>
+            <td><input type="text" class="input" name="user" value="{{ user.username }}"/></td>
         </tr>
         <tr>
-            <td width="120px;" height="45px"><p style="font-size:16px;padding-left:68px;">Passwords:</p></td>
-            <td><input type="password" id="password" name="pwd" value="{{ password }}" style="width:230px;height:25px;border:1px solid #368785;padding:3px;"/></td>
-            <span id="PwdError" style="position:absolute;left:430px;top:210px;color:red;"></span>
+            <td width="190px;" height="50px"><p style="font-size:16px;padding-left:35px;">Current Passwords:</p></td>
+            <td><input type="password" class="input" placeholder="Please enter your current password" name="curpwd"/></td>
         </tr>
         <tr>
-            <td width="120px;" height="45px"><p style="font-size:16px;padding-left:10px">Repeat Passwords:</p></td>
-            <td><input type="password" placeholder="Please pass confirm your password" id="repassword" name="repwd"  value="{{ repassword }}" style="width:230px;height:25px;border:1px solid #368785;padding:3px;"/></td>
-            <span id="RePwdError" style="position:absolute;left:430px;top:210px;color:red;"></span>
+            <td width="190px;" height="50px"><p style="font-size:16px;padding-left:57px;">New Passwords:</p></td>
+            <td><input type="password" class="input" placeholder="Please enter your new password" name="pwd"/></td>
         </tr>
         <tr>
-            <td width="120px;" height="45px"><p style="font-size:16px;padding-left:88px">Gender:</p></td>
+            <td width="190px;" height="50px"><p style="font-size:16px;padding-left:0px">Repeat New Passwords:</p></td>
+            <td><input type="password" class="input" placeholder="Please confirm your new password" name="repwd"/></td>
+        </tr>
+        <tr>
+            <td width="190px;" height="50px"><p style="font-size:16px;padding-left:120px">Gender:</p></td>
             <td>
-            <select id="gender" name="gender" style="width:230px;height:25px;border:1px solid #368785;padding:3px;">
+            <select class="input" name="gender" style="width:239px;height:34px;">
                 <option value="Male" >Male</option>
                 <option value="Female" >Female</option>
                 <option value="Non-binary" >Non-binary</option>
-            </select><input type="hidden" id="currentGender" value="{{ gender }}" />
+            </select><input type="hidden" id="currentGender" value="{{ user.gender }}" />
             </td>
-            <span id="GenderError" style="position:absolute;left:430px;top:125px;color:red;"></span>
         </tr>
         <tr>
-            <td width="120px;" height="45px"><p style="font-size:16px;padding-left:30px;">Phone Number:</p></td>
-            <td><input type="text" id="phoneNum" name="phoneNum" value="{{ phoneNum }}" style="width:230px;height:25px;border:1px solid #368785;padding:3px;"/></td>
-            <span id="PhoneNumError" style="position:absolute;left:430px;top:210px;color:red;"></span>
+            <td width="190px;" height="50px"><p style="font-size:16px;padding-left:60px;">Phone Number:</p></td>
+            <td><input type="text" class="input" name="phoneNum" value="{{ user.phoneNumber }}"/></td>
         </tr>
         <tr>
-            <td colspan="2" height="30px"><h4 align="center" style="color:#CC0000;">{{ get_flashed_messages()[0] }}</h4></td>
+            <td colspan="2" height="30px"><h4 align="center" style="color:#CC0000;margin-top:15px;">{{ get_flashed_messages()[0] }}</h4></td>
         </tr>
     </table>
-    <input type="submit" value="Change" id="submit" align="center" onclick="confirmChange(event)">
+
+    <input type="hidden" id="selectedAvatar" name="selectedAvatar">
+
+    <input type="submit" value="Submit" id="submit" align="center" onclick="confirmChange(event)">
 </form>
 </div>
 </div>
-
-
 
 
 

@@ -32,6 +32,7 @@ class User(db.Model):
     password = db.Column(db.String(15),nullable=False)
     gender = db.Column(db.Enum("Male","Female","Non-binary"),nullable=True)
     phoneNumber = db.Column(db.String(15),nullable=False)
+    avatar = db.Column(db.String(50),nullable=True)
 
 class Membership(db.Model):
     __tablename__ = "Membership"
