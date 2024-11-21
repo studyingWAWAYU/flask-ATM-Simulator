@@ -67,12 +67,13 @@ li{
 #page-left{
 	width: 400px;
 	height: 1000px;
-	padding: 40px 40px;
+	padding: 20px 40px;
 	float: left;
 	border: 1px solid #C4E2FF;
 	box-shadow: -4px -4px 0px 0px #DAEDFF;
 
 }
+
 #act-img{
 	width: 400px;
 	height: 240px;
@@ -80,6 +81,35 @@ li{
 	display: block;
 	/*border: 1px solid;*/
 }
+
+#carousel{
+    width: 400px;
+    height: 250px;
+    margin: 25px auto;
+    //overflow: hidden;
+    border:1px solid;
+}
+.carousel-imgs img{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+#leftbtn{
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    top: 20px;
+    left: -5px;
+}
+#rightbtn{
+    position: absolute;
+    width:30px;
+    height:30px;
+    top: 20px;
+    left: 373px;
+}
+
+
 #club-box{
 	font-size: 18px;
 	margin: 30px auto;

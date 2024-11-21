@@ -29,46 +29,49 @@
 
 <!--Classification-->
 <div id="ClassificationContainer">
+	<form method="post">
+
 	<table align="center" style="width: 1700px;border-collapse:separate; border-spacing:0px 15px;">
 		<tr>
 			<td align="left"><p style="font-size:18px;font-weight: 600;">Activity Type :</p></td>
 			<td>
-				<button class="type-btn" onclick="showActivities('culture', 'type')">Cultural Events</button>
-				<button class="type-btn" onclick="showActivities('social', 'type')">Social Events</button>
-				<button class="type-btn" onclick="showActivities('career', 'type')">Career Development</button>
-				<button class="type-btn" onclick="showActivities('study', 'type')">Study Trips</button>
-				<button class="type-btn" onclick="showActivities('academic', 'type')">Academic Activities</button>
-				<button class="type-btn" onclick="showActivities('interest', 'type')">Interest Groups</button>
-				<button class="type-btn" onclick="showActivities('sports', 'type')">Sports</button>
-				<button class="type-btn" onclick="showActivities('volunteer', 'type')">Volunteer Work</button>
+				<button class="type-btn" type="button" name="type" value="Cultural Events" onclick="showActivities('culture', 'type')">Cultural Events</button>
+				<button class="type-btn" type="button" name="type" value="Social Events" onclick="showActivities('social', 'type')">Social Events</button>
+				<button class="type-btn" type="button" name="type" value="Career Development" onclick="showActivities('career', 'type')">Career Development</button>
+				<button class="type-btn" type="button" name="type" value="Study Trips" onclick="showActivities('study', 'type')">Study Trips</button>
+				<button class="type-btn" type="button" name="type" value="Academic Activities" onclick="showActivities('academic', 'type')">Academic Activities</button>
+				<button class="type-btn" type="button" name="type" value="Interest Groups" onclick="showActivities('interest', 'type')">Interest Groups</button>
+				<button class="type-btn" type="button" name="type" value="Sports" onclick="showActivities('sports', 'type')">Sports</button>
+				<button class="type-btn" type="button" name="type" value="Volunteer Work" onclick="showActivities('volunteer', 'type')">Volunteer Work</button>
 			</td>
 		</tr>
 		<tr>
 			<td align="left"><p style="font-size:18px;font-weight: 600;">Activity Status :</p></td>
 			<td>
-				<button class="status-btn" onclick="showActivities('upcoming', 'status')">Upcoming</button>
-				<button class="status-btn" onclick="showActivities('inprogress', 'status')">In progress</button>
-				<button class="status-btn" onclick="showActivities('completed', 'status')">Completed</button>
+				<button class="status-btn" type="button" name="status" value="Upcoming" onclick="showActivities('upcoming', 'status')">Upcoming</button>
+				<button class="status-btn" type="button" name="status" value="Upcoming" onclick="showActivities('inprogress', 'status')">In progress</button>
+				<button class="status-btn" type="button" name="status" value="Upcoming" onclick="showActivities('completed', 'status')">Completed</button>
 			</td>
 		</tr>
 		<tr>
 			<td align="left"><p style="font-size:18px;font-weight: 600;">SignUp Time :</p></td>
 			<td>
-				<input type="date" id="supStart" class="date-picker" min="2019-01-01" value="2024-11-01">
+				<input type="date" id="signup_start" name="signup_start" class="date-picker" min="2019-01-01" value="2024-11-01">
 				<span>&nbsp; to &nbsp; </span>
-				<input type="date" id="supDDL" class="date-picker" min="2019-01-01" value="2024-11-03">
+				<input type="date" id="signup_end" name="signup_end" class="date-picker" min="2019-01-01" value="2024-11-01">
 			</td>
 		</tr>
 		<tr>
 			<td align="left"><p style="font-size:18px;font-weight: 600;">Activity Time :</p></td>
 			<td>
-				<input type="date" id="startDate" class="date-picker" min="2019-01-01" value="2024-11-10">
+				<input type="date" id="start_time" name="start_time" class="date-picker" min="2019-01-01" value="2024-11-10">
 				<span>&nbsp; to &nbsp; </span>
-				<input type="date" id="endDate" class="date-picker" min="2019-01-01" value="2024-11-11">
-				<button id="show-btn" onclick="showcards()">apply</button>
+				<input type="date" id="end_time" name="end_time" class="date-picker" min="2019-01-01" value="2024-11-11">
+				<button type="submit" id="show-btn" onclick="showcards()">apply</button>
 			</td>
 		</tr>
 	</table>
+	</form>
 </div>
 
 <hr style="width: 1700px; margin: 20px auto; border:1px solid #e5e5e6;">
@@ -96,6 +99,26 @@
 		<p class="item-signup"><span><strong>SignUp Time : </strong> &nbsp;</span> 2024/11/01 - 11/03</p>
 		<p class="item-time"><span><strong>Activity Time : </strong>&nbsp; </span> 2024/11/05 - 11/18</p>
 		<p class="item-club"><span><strong>Published by : </strong> &nbsp;</span> Sports Department of the Student Union</p>
+	</div>
+</a>
+</div>
+
+<div class="item">
+<a href="#">
+	<div class="item-top" style="width: 380px; height: 80px;">
+		<div class="item-left">
+			<img src="../static/img/activities/academic.gif" width="80px" height="80px" style="display: block;"/>
+		</div>
+		<div class="item-right">
+			<div class="item-status">Completed</div>
+			<div class="item-cnt"><span>Remaining: </span><strong>0</strong></div>
+		</div>
+	</div>
+	<div class="item-bottom" style="width: 380px; height: 150px;margin-top:20px;">
+		<div class="item-name">English Workshop</div>
+		<p class="item-signup"> <span><strong>SignUp Time : </strong> &nbsp;</span>2024/5/02 - 5/5 22:00</p>
+		<p class="item-time"><span><strong>Activity Time : </strong>&nbsp; </span> 2024/5/10 - 5/10 </p>
+		<p class="item-club"><span><strong>Published by : </strong> &nbsp;</span> English Club</p>
 	</div>
 </a>
 </div>
@@ -160,25 +183,7 @@
 </a>
 </div>
 
-<div class="item">
-<a href="#">
-	<div class="item-top" style="width: 380px; height: 80px;">
-		<div class="item-left">
-			<img src="../static/img/activities/academic.gif" width="80px" height="80px" style="display: block;"/>
-		</div>
-		<div class="item-right">
-			<div class="item-status">Completed</div>
-			<div class="item-cnt"><span>Remaining: </span><strong>0</strong></div>
-		</div>
-	</div>
-	<div class="item-bottom" style="width: 380px; height: 150px;margin-top:20px;">
-		<div class="item-name">English Workshop</div>
-		<p class="item-signup"> <span><strong>SignUp Time : </strong> &nbsp;</span>2024/5/02 - 5/5 22:00</p>
-		<p class="item-time"><span><strong>Activity Time : </strong>&nbsp; </span> 2024/5/10 - 5/10 </p>
-		<p class="item-club"><span><strong>Published by : </strong> &nbsp;</span> English Club</p>
-	</div>
-</a>
-</div>
+
 
 <div class="item">
 <a href="#">
