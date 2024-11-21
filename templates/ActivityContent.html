@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<title>ActivityContent</title>
 	<link rel="stylesheet" href="../static/css/ActivityContent.css">
-	<script src="../static/js/activitycont.js"></script>
+	<script src="../static/js/ActivityContent.js"></script>
 	
 </head>
 <body>
@@ -32,7 +32,21 @@
 <div id="InformationContainer">
 <div id="page-left">
 	<div id="left-top" style="margin: 45px auto;">
-		<div id="act-img"><img src="../static/img/activities/basketball.png" width="400px" height="240" /></div>
+<!--		<div id="act-img"><img src="../static/img/activities/basketball.png" width="400px" height="240" /></div>-->
+		<div id="carousel">
+			<div class="carousel-imgs">
+            {% if image_paths %}
+                {% for path in image_paths %}
+                    <img src="{{ url_for('static', filename='img/uploads/' + path.split('/')[-1]) }}" id="act-img" onclick="stopAndContinue()" alt="activity image">
+                {% endfor %}
+            {% else %}
+                <p style="font-size:40px;color:#787776;margin:100px 90px;">No Picture</p>
+            {% endif %}
+				<img src="../static/img/index/left.png" id="leftbtn" onclick="preimg()">
+				<img src="../static/img/index/right.png" id="rightbtn" onclick="nextimg()">
+        	</div>
+		</div>
+
 		<div id="activity-name" style="font-size: 24px;font-weight: bold;">College of Artificial Intelligence 2024 -- Basketball Match</div>
 		<div id="club-box"><span>Club : &nbsp;</span>
 			<div id="club" style="margin-left: 30px;">Sports Department of the Student Union</div>
