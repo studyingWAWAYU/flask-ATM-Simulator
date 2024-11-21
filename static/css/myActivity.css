@@ -53,65 +53,15 @@ li{
 /*end of navigation*/
 
 
-/*Classification*/
-#ClassificationContainer{
-    width:1700px;
-    height:240px;
-    display: block;
-    margin: auto;
-    padding-top: 140px;
-	padding-left: 80px;
-    /* border:1px solid; */
-}
-
-button.type-btn, .status-btn{
-	margin-right: 25px;
-	padding: 6px 14px;
-	border:1px solid #C4E2FF;
-	box-shadow: 1px 1px 1px 0px #99c2ed;
-	border-radius: 5px;
-	background-color: #f8f9fa;
-	font-size: 17px;
-	cursor: pointer;
-}
-button.type-btn:hover, .status-btn:hover {
-	background-color: #daedff;
-}
-button.type-btn.selected, .status-btn.selected{
-    background-color: #daedff;
-}
-
-.date-picker {
-	padding: 8px;
-	font-size: 15px;
-	border: 2px solid #99c2ed;
-	border-radius: 5px;
-	background-color: #f8f9fa;
-	width: 160px;
-}
-button#show-btn{
-	width: 100px;
-	margin-left: 100px;
-	padding: 6px 8px;
-	border: 1px solid #99c2ed;
-	border-radius: 10px;
-	background-color: #C4E2FF;
-	 font-size:17px;
-	 font-weight: 600;
-	cursor: pointer;
-}
-button#show-btn:hover {
-	background: #daedff;
-}
-
 button#createAct{
 	width: 200px;
+	height:50px;
 	margin-left: 30px;
 	padding: 6px 8px;
 	border: 1px solid #99c2ed;
 	border-radius: 10px;
 	background-color: #C4E2FF;
-	 font-size:17px;
+	 font-size:18px;
 	 font-weight: 600;
 	cursor: pointer;
 }
@@ -125,6 +75,7 @@ button#createAct:hover {
     height:1000px;
     display: block;
     margin:auto;
+    padding-top:150px;
 	/* border: 1px solid; */
 }
 

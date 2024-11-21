@@ -4,7 +4,6 @@ from sqlalchemy import ForeignKey
 import ATMflask.settings as settings
 from ATMflask import app,db
 
-
 #配置数据库
 HOSTNAME = "127.0.0.1"
 PORT = "3306"
@@ -18,7 +17,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = settings.SQLALCHEMY_DATABASE_URI
 app.config['SQLALCHEMY_COMMIT_ON_TEARDOWN'] = settings.SQLALCHEMY_COMMIT_ON_TEARDOWN
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = settings.SQLALCHEMY_TRACK_MODIFICATIONS
 app.config['SQLALCHEMY_POOL_RECYCLE'] = settings.SQLALCHEMY_POOL_RECYCLE
-
 
 migrate = Migrate(app,db)
 
@@ -34,8 +32,7 @@ class User(db.Model):
     password = db.Column(db.String(15),nullable=False)
     gender = db.Column(db.Enum("Male","Female","Non-binary"),nullable=True)
     phoneNumber = db.Column(db.String(15),nullable=False)
-    MyClubId = db.Column(db.String(200),nullable=True)
-    MyActivityId = db.Column(db.String(200),nullable=True)
+    avatar = db.Column(db.String(50),nullable=True)
 
 class Membership(db.Model):
     __tablename__ = "Membership"
@@ -49,6 +46,7 @@ class Club(db.Model):
     club_id = db.Column(db.Integer,primary_key=True,unique=True,autoincrement=True)
     club_name = db.Column(db.String(50),nullable=False,unique=True)
     description = db.Column(db.String(1000),nullable=True)
+    announcement = db.Column(db.String(800),nullable=True)
     created_time = db.Column(db.Date,nullable=False)
 
 class Participant(db.Model):
@@ -66,7 +64,7 @@ class Activity(db.Model):
     type = db.Column(db.Enum("Cultural Events","Social Events","Career Development","Study Trips",
                              "Academic Activities","Interest Groups","Sports","Volunteer Work"),nullable=False)
     status = db.Column(db.Enum("Upcoming","Ongoing","Completed"),nullable=False)
-    contact_id = db.Column(db.Integer,nullable=True)
+    contact = db.Column(db.String(15),nullable=True)
     location = db.Column(db.String(80),nullable=False)
     club_id = db.Column(db.Integer,nullable=False)
     start_time = db.Column(db.DateTime,nullable=False)
@@ -76,6 +74,7 @@ class Activity(db.Model):
     signup_end = db.Column(db.DateTime,nullable=False)
     max_participant = db.Column(db.Integer,nullable=False)
     requirement = db.Column(db.String(200),nullable=True)
+    roles = db.Column(db.String(100),nullable=True)
 
 
 '''
