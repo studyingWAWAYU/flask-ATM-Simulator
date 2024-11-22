@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EditActivity</title>
+    <link rel="stylesheet" href="../static/css/AddActivity.css">
+    <script src="../static/js/AddActivity.js"></script>
+</head>
+<body>
+<div id="nav">
+    <ul style="list-style: none">
+        <li><div id="logotop"><a href="/"><img src="../static/img/logo.png" width="100" height="100"></a></div></li>
+        <a href="../ClubLobby"><li class="navli">Club Lobby</li></a>
+        <a href="../MyClub"><li class="navli">My Club</li></a>
+        <a href="../ActivityLobby"><li class="navli">Activity Lobby</li></a>
+        <a href="../MyActivity"><li class="navli">My Activity</li></a>
+        {% if username %}
+            <li class="navli" id="username">{{ username }}</li>
+            <form action="/Logout" method="post" id="logoutForm" style="display: none;">
+                <button type="submit" style="display: none;">Logout</button></form>
+            <a href="../Logout" onclick="confirmLogout(event)"><li class="navli" id="logout">Logout</li></a>
+        {% else %}
+            <a href="../Login"><li class="navli" id="login">Login</li></a>
+            <a href="../Register"><li class="navli" id="register">Register</li></a>
+        {% endif %}
+    </ul>
+</div>
+
+<div id="FormContainer">
+    <div id="FormOutline">
+        <form method="post" enctype="multipart/form-data">
+        <div style="margin-left:210px;margin-top:50px;"><img src="../static/img/activities/EditAct.png" width="580px" height="56px;"></div>
+
+        <p class="inputTitle" style="margin-top:40px;"><span>Activity Title </span><span style="color:#fa8383;">*</span></p>
+        <input type="text" id="ActTitle" name="ActTitle" class="inputText" value="{{actOrigin.activity_name}}"/>
+
+        {% if myClubNameLST %}
+            <p class="inputTitle"><span>Create Activity for CLub </span><span style="color:#fa8383;">*</span></p>
+            <select name="clubs">
+            {% for clubName in myClubNameLST %}
+                {% if clubName == current_clubName %}
+                    <option selected>{{clubName}}</option>
+                {% else %}
+                    <option>{{clubName}}</option>
+                {% endif %}
+            {% endfor %}
+            </select>
+        {% endif %}
+
+        <p class="inputTitle"><span>Activity Type </span><span style="color:#fa8383;">*</span></p>
+        <select name="types">
+            {% for type in actTypes %}
+                {% if type == actOrigin.type %}
+                    <option selected>{{type}}</option>
+                {% else %}
+                    <option>{{type}}</option>
+                {% endif %}
+            {% endfor %}
+        </select>
+
+        <p class="inputTitle"><span>Location </span><span style="color:#fa8383;">*</span></p>
+        <input type="text" id="location" name="location" class="inputText" value="{{actOrigin.location}}"/>
+
+        <p class="inputTitle"><span>Maximum Participant </span><span style="color:#fa8383;">*</span></p>
+        <input type="number" name="max_participant" class="inputText" value="{{actOrigin.max_participant}}"/>
+
+        <p class="inputTitle"><span>Activity Time </span><span style="color:#fa8383;">*</span></p>
+        <input type="datetime-local" name="actStart" class="date-picker" min="2024-12-01T00:00" value="{{actOrigin.start_time}}" style="margin-left:245px;">
+        to<input type="datetime-local" name="actEnd" class="date-picker" min="2024-12-01T00:00" value="{{actOrigin.end_time}}">
+
+        <p class="inputTitle"><span>Enrollment Time </span><span style="color:#fa8383;">*</span></p>
+        <input type="datetime-local" name="enrollStart" class="date-picker" min="2024-12-01T00:00" value="{{actOrigin.signup_start}}" style="margin-left:245px;">
+        to<input type="datetime-local" name="enrollEnd" class="date-picker" min="2024-12-01T00:00" value="{{actOrigin.signup_end}}">
+
+        <p class="inputTitle">Contact Number </p>
+        <input type="text" id="contact" name="contact" class="inputText" value="{{actOrigin.contact}}"/>
+
+        <p class="inputTitle">Participant roles </p>
+        <input type="text" id="roles" name="roles" class="inputText" value="{{actOrigin.roles}}"/>
+        <p class="inputTitle" style="font-size:16px;margin-top:5px;">Note: If the activity requires participants to take on multiple roles,
+            <br>please separate each role with a semicolon.</p>
+
+        <p class="inputTitle">Enrollment Requirements </p>
+        <input type="text" id="requirement" name="requirement" class="inputText" value="{{actOrigin.requirement}}"/>
+
+        <p class="inputTitle">Activity Description </p>
+        <input type="text" id="description" name="description" class="inputText" value="{{actOrigin.description}}"/>
+
+        <div id="custom_upload">Upload Photos</div>
+        <input type="file" id="uploadImg" name="photo" multiple="multiple"/>
+
+        <p align="center" style="color:#CC0000;font-size:20px;margin-top:30px;">{{ get_flashed_messages()[0] }}</p>
+        <a href="MyActivity"><input type="submit" value="Submit" id="submit" align="center"></a>
+
+    </form>
+
+    </div>
+</div>
+
+
+
+
+<!--Bottom-->
+<div id="indexbottom" style="margin-top:200px">
+    <div style="margin-left:80px;padding-top:40px;">
+        <ul style="float:left;list-style-type: none;">
+            <li><p><img src="../static/img/logo.png" width="40px" height="40px;" align="center"> Activity Hub</p></li>
+            <li style="padding-left: 100px;"><p><img src="../static/img/location.png" width="30px" height="30px;" align="center"> Foshan, Guanddong, China</p></li>
+            <li style="padding-left: 100px;"><p><img src="../static/img/phone.png" width="25px" height="25px;" align="center"> 189-2805-5891</p></li>
+            <li style="padding-left: 100px;"><p><img src="../static/img/mail.png" width="30px" height="30px;" align="center"> cams@ntesmail.com</p></li>
+            <li style="padding-left: 100px;"><p><img src="../static/img/rights.png" width="30px" height="30px;" align="center"> 2024 Activity Hub. All rights reserved.</p></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
