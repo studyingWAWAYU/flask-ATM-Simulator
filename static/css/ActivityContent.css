@@ -66,7 +66,7 @@ li{
 /* Left Information */
 #page-left{
 	width: 400px;
-	height: 1000px;
+	height: 1045px;
 	padding: 20px 40px;
 	float: left;
 	border: 1px solid #C4E2FF;
@@ -108,8 +108,6 @@ li{
     top: 20px;
     left: 373px;
 }
-
-
 #club-box{
 	font-size: 18px;
 	margin: 30px auto;
@@ -145,8 +143,33 @@ li{
 	color: white;
 	cursor: pointer;
 }
-#sup-btn:hover{
+#sup-btn:hover, #edit-btn:hover{
 	background-color: #ff6e6e;
+}
+#edit-btn{
+	background-color: #fa8383;
+    width:270px;
+    height:80px;
+    border:1px solid #fa8383;
+    border-radius: 50px;
+    margin:auto 60px;
+    font-size:25px;
+	font-weight: bold;
+	color: white;
+	cursor: pointer;
+	margin-bottom:20px;
+}
+#delete-btn{
+    font-size:25px;
+    color: #fa8383;
+    border:none;
+	font-weight: bold;
+	text-decoration:none;
+	cursor: pointer;
+	margin-left:75px;
+}
+#delete-btn:hover{
+    color: #ff6e6e;
 }
 
 

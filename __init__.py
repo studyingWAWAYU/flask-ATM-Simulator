@@ -22,8 +22,14 @@ app.register_blueprint(MyActivity.myAct)
 from ATMflask.views import AddActivity
 app.register_blueprint(AddActivity.addAct)
 
+from ATMflask.views import EditActivity
+app.register_blueprint(EditActivity.editAct)
+
 from ATMflask.views import ActivityLobby
 app.register_blueprint(ActivityLobby.actlb)
+
+from ATMflask.views import ActivityContent
+app.register_blueprint(ActivityContent.actct)
 
 
 

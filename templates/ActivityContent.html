@@ -12,18 +12,18 @@
 <div id="nav">
     <ul style="list-style: none">
         <li><div id="logotop"><a href="/"><img src="../static/img/logo.png" width="100" height="100"></a></div></li>
-        <a href="ClubLobby"><li class="navli">Club Lobby</li></a>
-        <a href="MyClub"><li class="navli">My Club</li></a>
-        <a href="ActivityLobby"><li class="navli">Activity Lobby</li></a>
-        <a href="MyActivity"><li class="navli">My Activity</li></a>
+        <a href="../ClubLobby"><li class="navli">Club Lobby</li></a>
+        <a href="../MyClub"><li class="navli">My Club</li></a>
+        <a href="../ActivityLobby"><li class="navli">Activity Lobby</li></a>
+        <a href="../MyActivity"><li class="navli">My Activity</li></a>
         {% if username %}
-            <a href="MyInformation"><li class="navli" id="username">{{ username }}</li></a>
+            <a href="../MyInformation"><li class="navli" id="username">{{ username }}</li></a>
             <form action="/Logout" method="post" id="logoutForm" style="display: none;">
                 <button type="submit" style="display: none;">Logout</button></form>
-            <a href="Logout" onclick="confirmLogout(event)"><li class="navli" id="logout">Logout</li></a>
+            <a href="../Logout" onclick="confirmLogout(event)"><li class="navli" id="logout">Logout</li></a>
         {% else %}
-            <a href="Login"><li class="navli" id="login">Login</li></a>
-            <a href="Register"><li class="navli" id="register">Register</li></a>
+            <a href="../Login"><li class="navli" id="login">Login</li></a>
+            <a href="../Register"><li class="navli" id="register">Register</li></a>
         {% endif %}
     </ul>
 </div>
@@ -47,9 +47,9 @@
         	</div>
 		</div>
 
-		<div id="activity-name" style="font-size: 24px;font-weight: bold;">College of Artificial Intelligence 2024 -- Basketball Match</div>
+		<div id="activity-name" style="font-size: 24px;font-weight: bold;">{{actContent.activity_name}}</div>
 		<div id="club-box"><span>Club : &nbsp;</span>
-			<div id="club" style="margin-left: 30px;">Sports Department of the Student Union</div>
+			<div id="club" style="margin-left: 30px;">{{clubName}}</div>
 		</div>
 	</div>
 
@@ -58,15 +58,23 @@
 	<div id="left-bottom" style="margin: 80px auto;">
 		<div class="people" style="margin: 40px auto">
 			<span class="label">REMAINING : &nbsp;</span>
-			<div id="rem-participants" class="number">08</div>
+			<div id="rem-participants" class="number">{{remaining}}</div>
 		</div>
 		<div class="people" style="margin: 40px auto">	
 			<span class="label">MAX : &nbsp;</span>
-			<div id="max-participants" class="number">20</div>
+			<div id="max-participants" class="number">{{actContent.max_participant}}</div>
 		</div>
 	</div>
-	
-	<button id="sup-btn" onclick="signup()">Sign Up Now</button>
+
+	{% if not isManager %}
+		<button id="sup-btn">{{par_status}}</button>
+	{% else %}
+		<a href="/EditActivity/{{actContent.activity_id}}"><button id="edit-btn" >Edit this Activity</button></a>
+	 	<form id="deleteForm" action="/delete_activity/{{actContent.activity_id}}" method="POST" style="display:none;">
+			<button type="submit" style="display:none;"></button>
+		</form>
+		<a href="/delete_activity/{{actContent.activity_id}}" id="delete-btn" onclick="confirmDelete(event)" style="margin-top:20px;">Delete this Activity</a>
+	{% endif %}
 </div>
 	
 	
@@ -74,28 +82,28 @@
 	<div id="info">
 		<div class="info-item">
 			<div class="info-title">| Activity&nbsp;&nbsp;Information</div>
-			<table align="left" width=1000 >
+			<table align="left" width="1000px;" >
 				<col style="width: 200px;">
 				<col style="width: 800px;">
 				<tr>
 					<td align="left"><p style="font-size:18px;font-weight: 600;">Location</p></td>
-					<td><p>Gymnasium of South China Normal University, Foshan City, Guangdong Province</p></td>
+					<td><p>{{actContent.location}}</p></td>
 				</tr>
 				<tr>
 					<td align="left"><p style="font-size:18px;font-weight: 600;">Club</p></td>
-					<td><p>Sports Department of the Student Union</p></td>
+					<td><p>{{clubName}}</p></td>
 				</tr>
 				<tr>
 					<td align="left"><p style="font-size:18px;font-weight: 600;">Start Time</p></td>
-					<td><p>2024/11/05 18:00</p></td>
+					<td><p>{{actContent.start_time}}</p></td>
 				</tr>
 				<tr>
 					<td align="left"><p style="font-size:18px;font-weight: 600;">End Time</p></td>
-					<td><p>2024/11/05 21:00</p></td>
+					<td><p>{{actContent.end_time}}</p></td>
 				</tr>
 				<tr>
 					<td align="left"><p style="font-size:18px;font-weight: 600;">Contact</p></td>
-					<td><p>130-1000-2000</p></td>
+					<td><p>{{actContent.contact}}</p></td>
 				</tr>
 			</table>
 		</div>
@@ -107,49 +115,52 @@
 				<col style="width: 800px;">
 				<tr>
 					<td align="left"><p style="font-size:18px;font-weight: 600;">Start Time</p></td>
-					<td align="left"><p>2024/11/01 8:00</p></td>
+					<td align="left"><p>{{actContent.signup_start}}</p></td>
 				</tr>
 				<tr>
 					<td align="left"><p style="font-size:18px;font-weight: 600;">End Time</p></td>
-					<td align="left"><p>2024/11/03 21:00</p></td>
+					<td align="left"><p>{{actContent.signup_end}}</p></td>
 				</tr>
 				<tr>
 					<td align="left"><p style="font-size:18px;font-weight: 600;">Role</p></td>
-					<td align="left"><p>player, referee</p></td>
+					<td align="left"><p>{{actContent.roles}}</p></td>
 				</tr>
 				<tr>
 					<td align="left"><p style="font-size:18px;font-weight: 600;">Requirement</p></td>
-					<td align="left">
-						<p>
-						1. Dress code: Bring your own tracksuit;<br>
-						2. Discipline requirements: Participate in training on time, participate in the whole process of the match<br>
-						3. Skill requirements: Players must have competition experience; <br>
-						Referees need to understand the rules of basketball, and relevant experience is preferred.
-						</p>
-					</td>
+					<td align="left"><p>{{actContent.requirement}}</p></td>
 				</tr>
 				
 			</table>
 		</div>
-		
+
+		{% if actContent.description %}
 		<div class="info-item">
 			<div class="info-title">| Activity&nbsp;&nbsp;Description</div>
 			<table align="left" width=1000>
-				<tr>
-					<td><p>This is the annual basketball match of Artificial Intelligence College, 
-					reflecting everyone's sportsmanship, welcome to sign up!</p></td>
-				</tr>
+				<tr><td><p>{{actContent.description}}</p></td></tr>
 			</table>
 		</div>
+		{% endif %}
+
+		{% if isManager %}
+		<div class="info-item">
+			<div class="info-title">| Participants: </div>
+			<table align="left" width="1000px;">
+				<col style="width:200px;">
+				<col style="width:800px;">
+				{% for category, users in participants_dict.items() %}
+					<tr><td align="left"><p style="font-size:18px;font-weight:600;">{{category}}:</p></td>
+					{% for user in users %}
+						<td><p>{{user}}</p></td>
+					</tr>
+					{% endfor %}
+				{% endfor %}
+			</table>
+		</div>
+		{% endif %}
 	</div>
-	
-
 </div>
-	
 </div>
-
-
-
 
 
 
