@@ -28,10 +28,7 @@ def MyActivity():
         else:
             myActIdLST = [activity_id[0] for activity_id in myActId]  # 把列表嵌套元组改为列表
             myAct = Activity.query.filter(Activity.activity_id.in_(myActIdLST)).all()
-            print(myAct)
-
-
-
+            #print(myAct)
 
     else:
         flash("Please login first to check your activities.")
