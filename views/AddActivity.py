@@ -18,6 +18,9 @@ def addActivity():
     username = None
     myClubNameLST = None
     myClubIdLST = None
+    current_time = datetime.now()
+    nowTime = current_time.strftime('%Y-%m-%dT%H:%M')
+
     if user_id:
         user = User.query.get(user_id)
         username = user.username
@@ -29,7 +32,7 @@ def addActivity():
         myClubNameLST = [club_name[0] for club_name in myClubName]
 
     if request.method == 'GET':
-        return render_template('AddActivity.html',username=username,myClubNameLST=myClubNameLST)
+        return render_template('AddActivity.html',username=username,myClubNameLST=myClubNameLST,nowTime=nowTime)
 
     # 上传图片并保存
     if request.method == 'POST':
@@ -59,9 +62,7 @@ def addActivity():
             flash("Maximum Participant cannot be empty")
             return render_template('AddActivity.html', username=username, myClubNameLST=myClubNameLST)
 
-        # 与当前时间对比得到活动status
-        current_time = datetime.now()
-        # 将字符串转为 datetime 对象
+        # 与当前时间对比得到活动status, 将字符串转为 datetime 对象
         actStart = datetime.strptime(actStart, "%Y-%m-%dT%H:%M")
         actEnd = datetime.strptime(actEnd, "%Y-%m-%dT%H:%M")
         enrollStart = datetime.strptime(enrollStart, "%Y-%m-%dT%H:%M")
@@ -84,8 +85,8 @@ def addActivity():
         db.session.add(newAct)
         db.session.commit()
 
-        participant_creator = Participant(activity_id=newAct.activity_id,user_id=user_id,status='Registered',role='creator')
-        db.session.add(participant_creator)
+        participant_manager = Participant(activity_id=newAct.activity_id,user_id=user_id,status='Registered',role='manager')
+        db.session.add(participant_manager)
         db.session.commit()
 
         # 上传图片
