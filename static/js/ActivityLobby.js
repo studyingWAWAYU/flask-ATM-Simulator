@@ -20,7 +20,7 @@ function showActivities(activity, category) {
   });
   // 为点击的按钮添加选中状态
   event.target.classList.add('selected');
-  // 你可以根据选中的活动类型和状态去处理显示相关内容
+  // 可以根据选中的活动类型和状态去处理显示相关内容
   console.log(`Selected ${category}: ${activity}`);
 }
 

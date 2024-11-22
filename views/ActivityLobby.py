@@ -4,7 +4,7 @@ from datetime import datetime
 import pymysql
 
 from ATMflask import db
-from ATMflask.sql import User
+from ATMflask.sql import User,Activity
 
 actlb = Blueprint('actlb',__name__)
 
@@ -17,18 +17,23 @@ def parseDate(date_str):
 def activityLobby():
     user_id = session.get('id')
     username = None
+    Act = None
 
     if user_id:
         user = User.query.get(user_id)
         username = user.username
 
-    if request.method == 'GET':
-        return render_template('ActivityLobby.html',username=username)
+        ActId = db.session.query(Activity.activity_id).all()
+        if ActId == []:
+            flash("No activities have been created yet.")
+        else:
+            ActIdLst = [activity_id[0] for activity_id in ActId]  # 把列表嵌套元组改为列表
+            Act = Activity.query.filter(Activity.activity_id.in_(ActIdLst)).all()
 
-@actlb.route('/ActivityContent',methods=['GET'])
-def activityContent():
     if request.method == 'GET':
-        return render_template('ActivityContent.html')
+        return render_template('ActivityLobby.html',username=username,Act=Act)
+
+
 
 @actlb.route('/GetActivity', methods=['GET','POST'])
 def getActivity(type=None, status=None, signup_start=None, signup_end=None, start_time=None, end_time=None):
