@@ -38,7 +38,7 @@ def activityContent(activity_id):
         remaining = actContent.max_participant - len(participant) + 1  # 要加一因为manager也在里面
 
         # 如果是manager就查询并显示用户列表
-        par_role = db.session.query(Participant.role).filter_by(user_id=user_id).scalar()
+        par_role = db.session.query(Participant.role).filter_by(user_id=user_id,activity_id = actContent.activity_id).scalar()
         if par_role == "manager":
             isManager = True
             # 如果没有指定role，或role只有一种就按status分类显示
