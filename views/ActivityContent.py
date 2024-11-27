@@ -33,9 +33,9 @@ def activityContent(activity_id):
         if par_status is None:
             par_status = "Sign up now"
 
-        participant = db.session.query(Participant).filter_by(activity_id=ActId).all()
+        participant = db.session.query(Participant).filter_by(activity_id=ActId).filter(Participant.role != 'manager').all()
         # 剩余报名人数
-        remaining = actContent.max_participant - len(participant) + 1  # 要加一因为manager也在里面
+        remaining = actContent.max_participant - len(participant)
 
         # 如果是manager就查询并显示用户列表
         par_role = db.session.query(Participant.role).filter_by(user_id=user_id,activity_id = actContent.activity_id).scalar()
