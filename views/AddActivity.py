@@ -57,13 +57,13 @@ def addActivity():
         # 判断不可为NULL的值
         if actTitle=="":
             flash("Activity Title cannot be empty.")
-            return render_template('AddActivity.html', username=username, myClubNameLST=myClubNameLST)
+            return render_template('AddActivity.html', username=username, myClubNameLST=myClubNameLST,nowTime=nowTime,newTime=newTime)
         elif location == "":
             flash("Location cannot be empty.")
-            return render_template('AddActivity.html', username=username, myClubNameLST=myClubNameLST)
+            return render_template('AddActivity.html', username=username, myClubNameLST=myClubNameLST,nowTime=nowTime,newTime=newTime)
         elif max_participant is None:
             flash("Maximum Participant cannot be empty")
-            return render_template('AddActivity.html', username=username, myClubNameLST=myClubNameLST)
+            return render_template('AddActivity.html', username=username, myClubNameLST=myClubNameLST,nowTime=nowTime,newTime=newTime)
 
         # 与当前时间对比得到活动status, 将字符串转为 datetime 对象
         actStart = datetime.strptime(actStart, "%Y-%m-%dT%H:%M")
@@ -81,17 +81,6 @@ def addActivity():
         # 从club_name拿到club_id
         club_id_selected = myClubIdLST[myClubNameLST.index(club)]
 
-        # 将数据放进数据库
-        newAct = Activity(activity_name=actTitle, type=type, status=status, contact=contact, location=location,
-                          club_id=club_id_selected,start_time=actStart, end_time=actEnd, signup_start=enrollStart,
-                          signup_end=enrollEnd,roles=roles, requirement=requirement, description=description,max_participant=max_participant)
-        db.session.add(newAct)
-        db.session.commit()
-
-        participant_manager = Participant(activity_id=newAct.activity_id,user_id=user_id,status='Registered',role='manager')
-        db.session.add(participant_manager)
-        db.session.commit()
-
         # 上传图片
         # 定义允许的图片格式
         ALLOWED_EXTENSIONS = {'jpg', 'jpeg', 'png', 'gif'}
@@ -102,8 +91,9 @@ def addActivity():
         files = request.files.getlist('photo')
         if files:
             if len(files) > 8:
-                flash("You can only upload up to 6 images.")
-
+                flash("You can only upload up to 8 images.")
+                return render_template('AddActivity.html', username=username, myClubNameLST=myClubNameLST,
+                                       nowTime=nowTime, newTime=newTime)
             for file in files:
                 if file and allowed_file(file.filename):
                     activity_id = db.session.query(Activity.activity_id).filter_by(activity_name=actTitle).first()
@@ -115,9 +105,27 @@ def addActivity():
                             os.makedirs(upload_dir)
                         file.save(os.path.join(upload_dir,file.filename))
                         flash("Image uploaded successfully.")
+
                 else:
                     flash("Illegal image format: Please upload an image in JPG, JPEG, PNG or GIF format!")
+                    return render_template('AddActivity.html', username=username, myClubNameLST=myClubNameLST,
+                                           nowTime=nowTime, newTime=newTime)
 
+
+        # 将数据放进数据库
+        newAct = Activity(activity_name=actTitle, type=type, status=status, contact=contact, location=location,
+                          club_id=club_id_selected, start_time=actStart, end_time=actEnd,
+                          signup_start=enrollStart,
+                          signup_end=enrollEnd, roles=roles, requirement=requirement, description=description,
+                          max_participant=max_participant)
+        db.session.add(newAct)
+        db.session.commit()
+
+        participant_manager = Participant(activity_id=newAct.activity_id, user_id=user_id, status='Registered',
+                                          role='manager')
+        db.session.add(participant_manager)
+        db.session.commit()
         #return render_template('AddActivity.html',username=username,myClubNameLST=myClubNameLST)
+
         return redirect('/MyActivity')
 
