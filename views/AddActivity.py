@@ -5,7 +5,7 @@ from flask import Blueprint
 
 from ATMflask import db,app
 from ATMflask.sql import User,Membership,Club,Activity,Participant
-from datetime import datetime
+from datetime import datetime,timedelta
 
 addAct = Blueprint('addAct',__name__)
 
@@ -20,6 +20,9 @@ def addActivity():
     myClubIdLST = None
     current_time = datetime.now()
     nowTime = current_time.strftime('%Y-%m-%dT%H:%M')
+    # 加一天
+    newTime_dt = current_time + timedelta(days=1)
+    newTime = newTime_dt.strftime('%Y-%m-%dT%H:%M')
 
     if user_id:
         user = User.query.get(user_id)
@@ -32,9 +35,9 @@ def addActivity():
         myClubNameLST = [club_name[0] for club_name in myClubName]
 
     if request.method == 'GET':
-        return render_template('AddActivity.html',username=username,myClubNameLST=myClubNameLST,nowTime=nowTime)
+        return render_template('AddActivity.html',username=username,myClubNameLST=myClubNameLST,nowTime=nowTime,newTime=newTime)
 
-    # 上传图片并保存
+
     if request.method == 'POST':
         # 从表单取数据
         actTitle = request.form.get('ActTitle')
@@ -96,20 +99,24 @@ def addActivity():
             # 获取文件的扩展名
             return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-        file = request.files['photo']
-        if file:
-            if allowed_file(file.filename):
-                activity_id = db.session.query(Activity.activity_id).filter_by(activity_name=actTitle).first()
-                if activity_id:
-                    # 配置上传文件目录
-                    #提取新activity的id，保存图片的路径为os.getcwd()+static/img/uploads/activity/ + activity_id + filename
-                    upload_dir = os.path.join(os.getcwd(),'static','img','uploads',str(activity_id[0]))
-                    if not os.path.exists(upload_dir):
-                        os.makedirs(upload_dir)
-                    file.save(os.path.join(upload_dir,file.filename))
-                    flash("Image uploaded successfully.")
-            else:
-                flash("Illegal image format: Please upload an image in JPG, JPEG, PNG or GIF format!")
+        files = request.files.getlist('photo')
+        if files:
+            if len(files) > 8:
+                flash("You can only upload up to 6 images.")
+
+            for file in files:
+                if file and allowed_file(file.filename):
+                    activity_id = db.session.query(Activity.activity_id).filter_by(activity_name=actTitle).first()
+                    if activity_id:
+                        # 配置上传文件目录
+                        #提取新activity的id，保存图片的路径为os.getcwd()+static/img/uploads/activity/ + activity_id + filename
+                        upload_dir = os.path.join(os.getcwd(),'static','img','uploads',str(activity_id[0]))
+                        if not os.path.exists(upload_dir):
+                            os.makedirs(upload_dir)
+                        file.save(os.path.join(upload_dir,file.filename))
+                        flash("Image uploaded successfully.")
+                else:
+                    flash("Illegal image format: Please upload an image in JPG, JPEG, PNG or GIF format!")
 
         #return render_template('AddActivity.html',username=username,myClubNameLST=myClubNameLST)
         return redirect('/MyActivity')
