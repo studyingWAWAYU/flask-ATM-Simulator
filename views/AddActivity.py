@@ -80,6 +80,19 @@ def addActivity():
 
         # 从club_name拿到club_id
         club_id_selected = myClubIdLST[myClubNameLST.index(club)]
+        # 将数据放进数据库
+        newAct = Activity(activity_name=actTitle, type=type, status=status, contact=contact, location=location,
+                          club_id=club_id_selected, start_time=actStart, end_time=actEnd,
+                          signup_start=enrollStart,
+                          signup_end=enrollEnd, roles=roles, requirement=requirement, description=description,
+                          max_participant=max_participant)
+        db.session.add(newAct)
+        db.session.commit()
+
+        participant_manager = Participant(activity_id=newAct.activity_id, user_id=user_id, status='Registered',
+                                          role='manager')
+        db.session.add(participant_manager)
+        db.session.commit()
 
         # 上传图片
         # 定义允许的图片格式
@@ -111,21 +124,6 @@ def addActivity():
                     return render_template('AddActivity.html', username=username, myClubNameLST=myClubNameLST,
                                            nowTime=nowTime, newTime=newTime)
 
-
-        # 将数据放进数据库
-        newAct = Activity(activity_name=actTitle, type=type, status=status, contact=contact, location=location,
-                          club_id=club_id_selected, start_time=actStart, end_time=actEnd,
-                          signup_start=enrollStart,
-                          signup_end=enrollEnd, roles=roles, requirement=requirement, description=description,
-                          max_participant=max_participant)
-        db.session.add(newAct)
-        db.session.commit()
-
-        participant_manager = Participant(activity_id=newAct.activity_id, user_id=user_id, status='Registered',
-                                          role='manager')
-        db.session.add(participant_manager)
-        db.session.commit()
         #return render_template('AddActivity.html',username=username,myClubNameLST=myClubNameLST)
-
         return redirect('/MyActivity')
 

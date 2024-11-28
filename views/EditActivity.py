@@ -140,4 +140,4 @@ def EditActivity(activity_id):
             else:
                 flash("Illegal image format: Please upload an image in JPG, JPEG, PNG or GIF format!")
 
-        return redirect('/ActivityContent/'+str(activity_id))
+        return redirect('/ActivityContent/'+str(activity_id[0]))
