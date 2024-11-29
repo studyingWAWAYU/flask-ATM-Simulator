@@ -1,7 +1,8 @@
+import os
+
 from flask import render_template,request,redirect, flash,session
 from flask import Blueprint
-from datetime import datetime
-import pymysql
+
 import shutil
 import os
 
@@ -65,6 +66,9 @@ def activityContent(activity_id):
 
             # 如果是manager就可以编辑、删除这个活动。
 
+        # 图片
+        files = os.listdir(os.path.join(os.getcwd(), 'static', 'img', 'uploads', str(activity_id)))
+        filelist = [f for f in files]
 
     else:
         flash("Please login first to check all activities.")
@@ -72,7 +76,7 @@ def activityContent(activity_id):
 
     if request.method == 'GET':
         return render_template('ActivityContent.html',username=username,actContent=actContent,clubName=clubName,
-                               par_status=par_status,remaining=remaining,isManager=isManager,participants_dict=participants_dict)
+                               par_status=par_status,remaining=remaining,isManager=isManager,participants_dict=participants_dict,filelist=filelist)
 
 
 @actct.route('/delete_activity/<int:activity_id>',methods=['POST'])

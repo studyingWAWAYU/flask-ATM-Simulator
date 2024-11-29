@@ -1,10 +1,9 @@
-from flask import render_template,request,redirect, flash,session
+from flask import render_template,request, flash,session
 from flask import Blueprint
 from datetime import datetime
-import pymysql
 
 from ATMflask import db
-from ATMflask.sql import User,Activity
+from ATMflask.sql import User, Activity, Club
 
 actlb = Blueprint('actlb',__name__)
 
@@ -18,6 +17,10 @@ def activityLobby():
     user_id = session.get('id')
     username = None
     Act = None
+    selected_acts = None
+    clubNames = {}
+
+    nowTime = datetime.now().strftime('%Y-%m-%d')
 
     if user_id:
         user = User.query.get(user_id)
@@ -30,53 +33,75 @@ def activityLobby():
             ActIdLst = [activity_id[0] for activity_id in ActId]  # 把列表嵌套元组改为列表
             Act = Activity.query.filter(Activity.activity_id.in_(ActIdLst)).all()
 
+            for act in Act:
+                ClubId = act.club_id
+                clubName = db.session.query(Club.club_name).filter_by(club_id=ClubId).scalar()
+                clubNames[act.activity_id] = clubName
+
+        if request.method == 'POST':
+            action = request.form.get('action')
+            print(f"Action received: {action}")
+            print("Form data received:", request.form)
+            # 筛选
+            if action == 'apply':
+                type = request.form.get('type')
+                status = request.form.get('status')
+                signup_start = request.form.get('signup_start')
+                signup_end = request.form.get('signup_end')
+                start_time = request.form.get('start_time')
+                end_time = request.form.get('end_time')
+
+                signup_start = parseDate(signup_start)
+                signup_end = parseDate(signup_end).replace(hour=23, minute=59, second=59)
+
+                start_time = parseDate(start_time)
+                end_time = parseDate(end_time).replace(hour=23, minute=59, second=59)
+
+                query = Activity.query
+                if type:
+                    query = query.filter(Activity.type == type)
+                if status:
+                    query = query.filter(Activity.status == status)
+                if signup_start:
+                    query = query.filter(Activity.signup_start >= signup_start)
+                if signup_end:
+                    query = query.filter(Activity.signup_end <= signup_end)
+                if start_time:
+                    query = query.filter(Activity.start_time >= start_time)
+                if end_time:
+                    query = query.filter(Activity.end_time <= end_time)
+
+                selected_acts = query.all()
+                print(f"Searching for : {type} and {status} time: {signup_start} and {end_time}")
+                print(f"Found activities: {selected_acts}")
+                if not selected_acts:
+                    flash("No matching activities were found yet.")
+
+            # 搜索
+            elif action == 'search':
+                search_word = request.form.get('search-input')
+                print(f"Searching for activities: {search_word}")
+                if search_word:
+                    selected_acts = Activity.query.filter(Activity.activity_name.ilike(f"%{search_word}%")).all()
+                    if not selected_acts:
+                        flash("No matching activities were found yet.")
+                else:
+                    selected_acts = Act
+                print(f"Found activities: {selected_acts}")
+
+            # 清除
+            elif action == 'clear':
+                print("Clear all activities.")
+                selected_acts = Act
+
+
+        return render_template('ActivityLobby.html', username=username, nowTime=nowTime,Act=Act,selected_acts=selected_acts,clubNames=clubNames)
+
+
     if request.method == 'GET':
-        return render_template('ActivityLobby.html',username=username,Act=Act)
+        return render_template('ActivityLobby.html',username=username,nowTime=nowTime,Act=Act,selected_acts=selected_acts,clubNames=clubNames)
 
 
 
-@actlb.route('/GetActivity', methods=['GET','POST'])
-def getActivity(type=None, status=None, signup_start=None, signup_end=None, start_time=None, end_time=None):
-    type = request.form.get('type')
-    status = request.form.get('status')
-    signup_start = request.form.get('signup_start')
-    signup_end = request.form.get('signup_end')
-    start_time = request.form.get('start_time')
-    end_time = request.form.get('end_time')
 
-    query = db.Activity.query()
-    signup_start = parseDate(signup_start)
-    signup_end = parseDate(signup_end)
-    start_time = parseDate(start_time)
-    end_time = parseDate(end_time)
 
-    if type:
-        query = query.filter(db.Activity.type == type)
-    if status:
-        query = query.filter(db.Activity.status == status)
-    if signup_start:
-        query = query.filter(db.Activity.signup_start >= signup_start)
-    if signup_end:
-        query = query.filter(db.Activity.signup_end <= signup_end)
-    if start_time:
-        query = query.filter(db.Activity.start_time >= start_time)
-    if end_time:
-        query = query.filter(db.Activity.end_time <= end_time)
-
-    # 执行查询并返回结果
-    activities = query.all()
-    return render_template('ActivityLobby.html', activities=activities)
-
-    #创建连接
-    # conn = pymysql.connect(host='127.0.0.1', port=3306, user='root', passwd='root', db='acthub')
-    #创建游标
-    # cursor = conn.cursor()
-
-'''
-# 搜索功能，还没写完
-@actlb.route('/Search', methods=['GET', 'POST'])
-def search():
-    if request.method == 'GET':
-        act_name = db.search("select * from activity_name")
-        return render_template('ActivityLobby.html')
-'''
