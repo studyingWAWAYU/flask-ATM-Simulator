@@ -74,7 +74,7 @@ li{
 
 }
 
-#act-img{
+#act-imgs{
 	width: 400px;
 	height: 240px;
 	margin-bottom: 20px;
@@ -86,26 +86,26 @@ li{
     width: 400px;
     height: 250px;
     margin: 25px auto;
-    //overflow: hidden;
+    overflow: hidden;
     border:1px solid;
 }
-.carousel-imgs img{
+.act-img{
     width: 100%;
-    height: auto;
+    height: 240px;
     object-fit: cover;
 }
 #leftbtn{
     position: absolute;
     width: 30px;
     height: 30px;
-    top: 20px;
+    top: 100px;
     left: -5px;
 }
 #rightbtn{
     position: absolute;
     width:30px;
     height:30px;
-    top: 20px;
+    top: 100px;
     left: 373px;
 }
 #club-box{

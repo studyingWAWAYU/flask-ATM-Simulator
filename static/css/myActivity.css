@@ -88,7 +88,7 @@ button#createAct:hover {
 	font-weight: bold;
 	font-size: 16px;
 }
-#search{
+#sch-btn{
     background-color: #C4E2FF;
     width:100px;
     height:45px;
@@ -99,7 +99,7 @@ button#createAct:hover {
 	font-weight: 600;
 	cursor: pointer;
 }
-#search:hover{
+#sch-btn:hover{
 	background: #daedff;
 }
 
