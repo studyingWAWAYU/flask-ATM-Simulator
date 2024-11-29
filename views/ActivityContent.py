@@ -67,8 +67,11 @@ def activityContent(activity_id):
             # 如果是manager就可以编辑、删除这个活动。
 
         # 图片
-        files = os.listdir(os.path.join(os.getcwd(), 'static', 'img', 'uploads', str(activity_id)))
-        filelist = [f for f in files]
+        try:
+            files = os.listdir(os.path.join(os.getcwd(), 'static', 'img', 'uploads', str(activity_id)))
+            filelist = [f for f in files]
+        except FileNotFoundError:
+            filelist = None
 
     else:
         flash("Please login first to check all activities.")

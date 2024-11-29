@@ -34,11 +34,13 @@
 	<div id="left-top" style="margin: 45px auto;">
 		<div id="carousel">
 			<div class="carousel-imgs">
+				{% if filelist %}
 				{% for fname in filelist %}
 				<img class="act-imgs" src= "../static/img/uploads/{{actContent.activity_id}}/{{fname}}" width="400px" height="240"style="display:none;"/>
 				{% endfor %}
 				<img id="act-img" src="../static/img/uploads/{{actContent.activity_id}}/{{filelist[0]}}" width="400px" height="250" onclick="stopAndContinue()"/>
-        	</div>
+        		{% endif %}
+			</div>
 			<img src="../static/img/index/left.png" id="leftbtn" onclick=" preimg()">
 			<img src="../static/img/index/right.png" id="rightbtn" onclick=" nextimg()">
 		</div>
