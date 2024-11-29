@@ -12,6 +12,12 @@ def parseDate(date_str):
         return datetime.strptime(date_str, '%Y-%m-%d')
     return None
 
+def format_date(date):
+    if date:
+        return date.strftime('%Y-%m-%d')
+    else:
+        return ''
+
 @actlb.route('/ActivityLobby',methods = ['GET','POST'])  # 用装饰器定义路由的对应关系
 def activityLobby():
     user_id = session.get('id')
@@ -20,7 +26,12 @@ def activityLobby():
     selected_acts = None
     clubNames = {}
 
-    nowTime = datetime.now().strftime('%Y-%m-%d')
+    type = None
+    status = None
+    signup_start = None
+    signup_end = None
+    start_time = None
+    end_time = None
 
     if user_id:
         user = User.query.get(user_id)
@@ -40,8 +51,9 @@ def activityLobby():
 
         if request.method == 'POST':
             action = request.form.get('action')
-            print(f"Action received: {action}")
-            print("Form data received:", request.form)
+            # print(f"Action received: {action}")
+            # print("Form data received:", request.form)
+
             # 筛选
             if action == 'apply':
                 type = request.form.get('type')
@@ -51,11 +63,11 @@ def activityLobby():
                 start_time = request.form.get('start_time')
                 end_time = request.form.get('end_time')
 
-                signup_start = parseDate(signup_start)
-                signup_end = parseDate(signup_end).replace(hour=23, minute=59, second=59)
+                signup_start = parseDate(signup_start) if signup_start else None
+                signup_end = parseDate(signup_end).replace(hour=23, minute=59, second=59) if signup_end else None
 
-                start_time = parseDate(start_time)
-                end_time = parseDate(end_time).replace(hour=23, minute=59, second=59)
+                start_time = parseDate(start_time) if start_time else None
+                end_time = parseDate(end_time).replace(hour=23, minute=59, second=59) if end_time else None
 
                 query = Activity.query
                 if type:
@@ -75,7 +87,11 @@ def activityLobby():
                 print(f"Searching for : {type} and {status} time: {signup_start} and {end_time}")
                 print(f"Found activities: {selected_acts}")
                 if not selected_acts:
-                    flash("No matching activities were found yet.")
+                    flash("No matching activities were found yet. All activities are displayed below.")
+
+            # 清除
+            elif action == 'clear':
+                selected_acts = Act
 
             # 搜索
             elif action == 'search':
@@ -89,18 +105,18 @@ def activityLobby():
                     selected_acts = Act
                 print(f"Found activities: {selected_acts}")
 
-            # 清除
-            elif action == 'clear':
-                print("Clear all activities.")
-                selected_acts = Act
+            return render_template('ActivityLobby.html', username=username,Act=Act,selected_acts=selected_acts,clubNames=clubNames,
+                                   type=type,status=status, signup_start=format_date(signup_start),signup_end=format_date(signup_end),
+                                   start_time=format_date(start_time),end_time=format_date(end_time))
 
-
-        return render_template('ActivityLobby.html', username=username, nowTime=nowTime,Act=Act,selected_acts=selected_acts,clubNames=clubNames)
-
-
+        # 默认显示所有活动
+        return render_template('ActivityLobby.html', username=username, Act=Act, selected_acts=selected_acts,clubNames=clubNames,
+                               type=type,status=status,signup_start=format_date(signup_start),signup_end=format_date(signup_end),
+                               start_time=format_date(start_time),end_time=format_date(end_time))
     if request.method == 'GET':
-        return render_template('ActivityLobby.html',username=username,nowTime=nowTime,Act=Act,selected_acts=selected_acts,clubNames=clubNames)
-
+        return render_template('ActivityLobby.html',username=username,Act=Act,selected_acts=selected_acts,clubNames=clubNames,
+                               type=type,status=status,signup_start=format_date(signup_start),signup_end=format_date(signup_end),
+                               start_time=format_date(start_time),end_time=format_date(end_time))
 
 
 

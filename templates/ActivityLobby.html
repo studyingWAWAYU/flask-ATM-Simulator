@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>Activity Lobby</title>
 	<link rel="stylesheet" href="../static/css/ActivityLobby.css">
-
 </head>
 <body>
 <!--Navigation-->
@@ -34,38 +33,44 @@
 		<tr>
 			<td align="left" width="200px"><p style="font-size:18px;font-weight: 600;">Activity Type :</p></td>
 			<td>
-				<button type="button" class="type-btn" value="Cultural Events" onclick="toggleSelection(this, 'type')">Cultural Events</button>
-				<button type="button" class="type-btn" value="Social Events" onclick="toggleSelection(this, 'type')">Social Events</button>
-				<button type="button" class="type-btn" value="Career Development" onclick="toggleSelection(this, 'type')">Career Development</button>
-				<button type="button" class="type-btn" value="Study Trips" onclick="toggleSelection(this, 'type')">Study Trips</button>
-				<button type="button" class="type-btn" value="Academic Activities" onclick="toggleSelection(this, 'type')">Academic Activities</button>
-				<button type="button" class="type-btn" value="Interest Groups" onclick="toggleSelection(this, 'type')">Interest Groups</button>
-				<button type="button" class="type-btn" value="Sports" onclick="toggleSelection(this, 'type')">Sports</button>
-				<button type="button" class="type-btn" value="Volunteer Work" onclick="toggleSelection(this, 'type')">Volunteer Work</button>
+				 {% for tp in ["Cultural Events", "Social Events", "Career Development", "Study Trips",
+				"Academic Activities", "Interest Groups", "Sports", "Volunteer Work"] %}
+                <button type="button"
+                        class="type-btn {{ 'selected' if tp == type else '' }}"
+                        value="{{ tp }}"
+                        onclick="toggleSelection(this, 'type')">
+                    {{ tp }}
+                </button>
+                {% endfor %}
 			</td>
 		</tr>
 		<tr>
 			<td align="left"><p style="font-size:18px;font-weight: 600;">Activity Status :</p></td>
 			<td>
-				<button type="button" class="status-btn"  value="Upcoming" onclick="toggleSelection(this, 'status')">Upcoming</button>
-				<button type="button" class="status-btn"  value="Ongoing" onclick="toggleSelection(this, 'status')">Ongoing</button>
-				<button type="button" class="status-btn"  value="Completed" onclick="toggleSelection(this, 'status')">Completed</button>
+				{% for sts in ["Upcoming", "Ongoing", "Completed"] %}
+                <button type="button"
+                        class="status-btn {{ 'selected' if sts == status else '' }}"
+                        value="{{ sts }}"
+                        onclick="toggleSelection(this, 'status')">
+                    {{ sts }}
+                </button>
+                {% endfor %}
 			</td>
 		</tr>
 		<tr>
 			<td align="left"><p style="font-size:18px;font-weight: 600;">SignUp Time :</p></td>
 			<td>
-				<input type="date" id="signup_start"  class="date-picker">
+				<input type="date" id="signup_start" name="signup_start" class="date-picker" value="{{ signup_start if signup_start else '' }}" >
 				<span>&nbsp; to &nbsp; </span>
-				<input type="date" id="signup_end"  class="date-picker">
+				<input type="date" id="signup_end" name="signup_end" class="date-picker" value="{{ signup_end if signup_end else '' }}">
 			</td>
 		</tr>
 		<tr>
 			<td align="left"><p style="font-size:18px;font-weight: 600;">Activity Time :</p></td>
 			<td>
-				<input type="date" id="start_time"  class="date-picker">
+				<input type="date" id="start_time" class="date-picker" value="{{ start_time or '' }}">
 				<span>&nbsp; to &nbsp; </span>
-				<input type="date" id="end_time"  class="date-picker">
+				<input type="date" id="end_time"  name="end_time" class="date-picker" value="{{ end_time or '' }}">
 				<button type="submit" id="show-btn" name="action" value="apply" >apply</button>
 				<button type="submit" id="clear-btn" name="action" value="clear" style="margin-left:15px;" >clear</button>
 			</td>
