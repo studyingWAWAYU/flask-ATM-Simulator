@@ -61,7 +61,7 @@ def addActivity():
         elif location == "":
             flash("Location cannot be empty.")
             return render_template('AddActivity.html', username=username, myClubNameLST=myClubNameLST,nowTime=nowTime,newTime=newTime)
-        elif max_participant is None:
+        elif max_participant is None or max_participant == '':
             flash("Maximum Participant cannot be empty")
             return render_template('AddActivity.html', username=username, myClubNameLST=myClubNameLST,nowTime=nowTime,newTime=newTime)
 
@@ -101,8 +101,8 @@ def addActivity():
             # 获取文件的扩展名
             return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-        files = request.files.getlist('photo')
-        if files:
+        if 'photo[]' in request.files:
+            files = request.files.getlist('photo[]')
             if len(files) > 8:
                 flash("You can only upload up to 8 images.")
                 return render_template('AddActivity.html', username=username, myClubNameLST=myClubNameLST,
@@ -117,10 +117,10 @@ def addActivity():
                         if not os.path.exists(upload_dir):
                             os.makedirs(upload_dir)
                         file.save(os.path.join(upload_dir,file.filename))
-                        flash("Image uploaded successfully.")
+                        flash("Images uploaded successfully.")
 
                 else:
-                    flash("Illegal image format: Please upload an image in JPG, JPEG, PNG or GIF format!")
+                    flash("Illegal image format: Please upload images in JPG, JPEG, PNG or GIF format!")
                     return render_template('AddActivity.html', username=username, myClubNameLST=myClubNameLST,
                                            nowTime=nowTime, newTime=newTime)
 
