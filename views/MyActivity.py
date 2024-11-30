@@ -13,7 +13,8 @@ def MyActivity():
     myAct = None
     createPermission = False
     selected_acts = None
-    clubNames={}
+    clubNames = {}
+    remainings = {}
 
     if user_id:
         user = User.query.get(user_id)
@@ -36,6 +37,12 @@ def MyActivity():
                 clubName = db.session.query(Club.club_name).filter_by(club_id=ClubId).scalar()
                 clubNames[act.activity_id] = clubName
 
+                eachActId = act.activity_id
+                participant = db.session.query(Participant).filter_by(activity_id=eachActId).filter(
+                    Participant.role != 'manager').all()
+                # 剩余报名人数
+                remainings[act.activity_id] = act.max_participant - len(participant)
+
         if request.method == 'POST':
             search_word = request.form.get('search-input')
             print(f"Searching for activities: {search_word}")
@@ -47,10 +54,11 @@ def MyActivity():
                 selected_acts = myAct
             print(f"Found activities: {selected_acts}")
             return render_template('MyActivity.html', username=username, myAct=myAct, createPermission=createPermission,
-                                   clubNames=clubNames, selected_acts=selected_acts)
+                                   clubNames=clubNames, selected_acts=selected_acts, remainings=remainings)
 
     else:
         flash("Please login first to check your activities.")
 
     if request.method == 'GET':
-        return render_template('MyActivity.html',username=username,myAct=myAct,createPermission=createPermission,clubNames=clubNames,selected_acts=selected_acts)
+        return render_template('MyActivity.html',username=username,myAct=myAct,createPermission=createPermission,
+                               clubNames=clubNames,selected_acts=selected_acts,remainings=remainings)

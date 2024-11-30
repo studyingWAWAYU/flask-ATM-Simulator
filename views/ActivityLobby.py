@@ -3,7 +3,7 @@ from flask import Blueprint
 from datetime import datetime
 
 from ATMflask import db
-from ATMflask.sql import User, Activity, Club
+from ATMflask.sql import User, Activity, Club,Participant
 
 actlb = Blueprint('actlb',__name__)
 
@@ -25,6 +25,7 @@ def activityLobby():
     Act = None
     selected_acts = None
     clubNames = {}
+    remainings = {}
 
     type = None
     status = None
@@ -48,6 +49,12 @@ def activityLobby():
                 ClubId = act.club_id
                 clubName = db.session.query(Club.club_name).filter_by(club_id=ClubId).scalar()
                 clubNames[act.activity_id] = clubName
+
+                eachActId = act.activity_id
+                participant = db.session.query(Participant).filter_by(activity_id=eachActId).filter(
+                    Participant.role != 'manager').all()
+                # 剩余报名人数
+                remainings[act.activity_id] = act.max_participant - len(participant)
 
         if request.method == 'POST':
             action = request.form.get('action')
@@ -107,16 +114,16 @@ def activityLobby():
 
             return render_template('ActivityLobby.html', username=username,Act=Act,selected_acts=selected_acts,clubNames=clubNames,
                                    type=type,status=status, signup_start=format_date(signup_start),signup_end=format_date(signup_end),
-                                   start_time=format_date(start_time),end_time=format_date(end_time))
+                                   start_time=format_date(start_time),end_time=format_date(end_time),remainings=remainings)
 
         # 默认显示所有活动
         return render_template('ActivityLobby.html', username=username, Act=Act, selected_acts=selected_acts,clubNames=clubNames,
                                type=type,status=status,signup_start=format_date(signup_start),signup_end=format_date(signup_end),
-                               start_time=format_date(start_time),end_time=format_date(end_time))
+                               start_time=format_date(start_time),end_time=format_date(end_time),remainings=remainings)
     if request.method == 'GET':
         return render_template('ActivityLobby.html',username=username,Act=Act,selected_acts=selected_acts,clubNames=clubNames,
                                type=type,status=status,signup_start=format_date(signup_start),signup_end=format_date(signup_end),
-                               start_time=format_date(start_time),end_time=format_date(end_time))
+                               start_time=format_date(start_time),end_time=format_date(end_time),remainings=remainings)
 
 
 
