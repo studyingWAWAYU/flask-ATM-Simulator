@@ -64,8 +64,6 @@ def activityContent(activity_id):
                         role_dict[role].append(user_name + " (" + p.status + ")")
                 participants_dict = role_dict
 
-            # 如果是manager就可以编辑、删除这个活动。
-
         # 图片
         try:
             files = os.listdir(os.path.join(os.getcwd(), 'static', 'img', 'uploads', str(activity_id)))
@@ -82,6 +80,7 @@ def activityContent(activity_id):
                                par_status=par_status,remaining=remaining,isManager=isManager,participants_dict=participants_dict,filelist=filelist)
 
 
+# 如果是manager就可以编辑、删除这个活动。
 @actct.route('/delete_activity/<int:activity_id>',methods=['POST'])
 def delete_activity(activity_id):
     current_activity = Activity.query.get(activity_id)

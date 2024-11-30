@@ -40,7 +40,6 @@ function toggleSelection(button, category) {
 //点击apply时，将选择的type和status传给后端
 
 document.addEventListener('DOMContentLoaded', function () {
-    console.log("DOMContentLoaded event triggered");
     showBtn = document.getElementById('show-btn')
     const form = document.getElementById('filter-form');
 
