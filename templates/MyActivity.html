@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Activity Lobby</title>
 	<link rel="stylesheet" href="../static/css/myActivity.css">
-	<script src="../static/js/ActivityLobby.js"></script>
+	<script src="../static/js/MyActivity.js"></script>
 </head>
 <body>
 <!--Navigation-->
@@ -35,7 +35,7 @@
 		<input type="text" id="search-input" name="search-input" placeholder="Search Activities" >
 		<button type="submit" id="sch-btn" name="action" value="search">Search</button>
     {% if createPermission %}
-	<button id="createAct"><a href="AddActivity">create new activity</a></button>
+	<button id="createAct"><a href="/AddActivity">create new activity</a></button>
     {% endif %}
     </form>
 </div>
