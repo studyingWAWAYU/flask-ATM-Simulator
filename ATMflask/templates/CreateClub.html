@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>MyClub</title>
+    <title>Create Club</title>
+    <link rel="stylesheet" href="../static/css/CreateClub.css">
+    <script src="../static/js/index.js"></script>
 </head>
 <body>
 <div id="nav">
@@ -25,6 +27,23 @@
 </div>
 
 
+<div id="CreateClub">
+    <div id="FormOutline">
+        <form action="{{ url_for('clublb.createClub') }}" method="POST">
+            <div style="margin-left:210px;margin-top:50px;"><img src="../static/img/CreateClub.png" width="580px" height="52px;"></div>
+            <p class="inputTitle" style="margin-top:40px;"><span>Club Name: </span><span style="color:#fa8383;">*</span></p>
+            <input type="text" id="club_name" name="club_name" required class="inputText"><br><br>
+
+            <p class="inputTitle" style="margin-top:10px;"><span>Description: </span><span style="color:#fa8383;">*</span></p>
+            <textarea id="description" name="description" rows="4" cols="50" required class="inputText"></textarea><br><br>
+
+            <button type="submit" id="submit">Create Club</button>
+            <button type="button" id="back" onclick="window.history.back();">Back</button>
+        </form>
+    </div>
+</div>
+
+
 <!--Bottom-->
 <div id="indexbottom" style="margin-top:400px">
     <div style="margin-left:80px;padding-top:60px;">
@@ -37,5 +56,6 @@
         </ul>
     </div>
 </div>
+
 </body>
 </html>

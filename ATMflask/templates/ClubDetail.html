@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ club.club_name }}</title>
+    <link rel="stylesheet" href="../static/css/ClubDetail.css">
+    <script src="../static/js/ClubDetail.js"></script>
+</head>
+<body>
+<div id="nav">
+    <ul style="list-style: none">
+        <li><div id="logotop"><a href="/"><img src="../static/img/logo.png" width="100" height="100"></a></div></li>
+        <a href="{{ url_for('clublb.clublobby') }}"><li class="navli">Club Lobby</li></a>
+        <a href="{{ url_for('myclub.MyClub') }}"><li class="navli">My Club</li></a>
+        <a href="{{ url_for('actlb.activityLobby') }}"><li class="navli">Activity Lobby</li></a>
+        <a href="{{ url_for('myAct.MyActivity') }}"><li class="navli">My Activity</li></a>
+        {% if username %}
+            <a href="{{ url_for('myInfo.myInformation') }}"><li class="navli" id="username">{{ username }}</li></a>
+            <form action="/Logout" method="post" id="logoutForm" style="display: none;">
+                <button type="submit" style="display: none;">Logout</button></form>
+            <a href="{{ url_for('lr.logout') }}" onclick="confirmLogout(event)"><li class="navli" id="logout">Logout</li></a>
+        {% else %}
+            <a href="{{ url_for('lr.login') }}"><li class="navli" id="login">Login</li></a>
+            <a href="{{ url_for('lr.register') }}"><li class="navli" id="register">Register</li></a>
+        {% endif %}
+    </ul>
+</div>
+
+<div id="ClubDetail">
+
+    <!-- 如果当前用户是社团的经理，则显示“Edit Club”和“Delete Club”按钮 -->
+    {% if is_manager %}
+    <div id="button-area">
+        <a href="{{ url_for('clubdt.releaseAnnouncement', club_id=club.club_id) }}">
+            <button class="clubmg">Release Post</button>
+        </a>
+        <a href="{{ url_for('clubdt.editClub', club_id=club.club_id) }}">
+            <button class="clubmg">Edit Club</button>
+        </a>
+        <a href="{{ url_for('clubdt.deleteClub', club_id=club.club_id) }}">
+            <button class="clubmg" onclick="confirmDelete(event, {{ club.club_id }})">Delete Club</button>
+        </a>
+    </div>
+    {% endif %}
+
+    <hr style="width: 1700px; margin: 5px auto; border:1px solid #e5e5e6;">
+
+    <div class="ClubInfo">
+        <h1 style="text-align: center;margin-top: 20px">{{ club.club_name }}</h1>  <!-- 显示社团名称 -->
+        <p style="text-align: center;color:gray;margin-top: 7px"><strong>Created on:</strong> {{ club.created_time }}</p>  <!-- 显示创建时间 -->
+    </div>
+
+    <div class="ClubInfo"  id="container">
+        <div id="left">
+            <div id="post">
+                <h2 class="special_title">Post</h2>
+                <p>{{ club.announcement }}</p>
+            </div>
+            <div id="description">
+                <h2 class="special_title">Description</h2>
+                <p>{{ club.description }}</p>
+            </div>
+        </div>
+        <div id="right">
+            <div id="manager">
+                <h2 class="special_title">Manager</h2>
+                <div class="manager-container">
+                    <div class="member-list">
+                        <div class="member">
+                            <p style="text-align: center;font-family: 'Baskerville Old Face';font-size: large">{{ manager.username }}</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div id="member-list">
+                <h2 class="special_title">Member List({{ num_members }})</h2>
+                <div class="member-list-container">
+                    <div class="member-list">
+                        {% if members %}
+                        {% for member in members %}
+                            <div class="member"><p style="text-align: center;font-family: 'Baskerville Old Face';font-size: large">{{ member.username }}</p></div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!--Bottom-->
+<div id="indexbottom" style="margin-top:400px">
+    <div style="margin-left:80px;padding-top:60px;">
+        <ul style="float:left;list-style-type: none;">
+            <li><p><img src="../static/img/logo.png" width="40px" height="40px;" align="center"> Activity Hub</p></li>
+            <li style="padding-left: 100px;"><p><img src="../static/img/location.png" width="30px" height="30px;" align="center"> Foshan, Guanddong, China</p></li>
+            <li style="padding-left: 100px;"><p><img src="../static/img/phone.png" width="25px" height="25px;" align="center"> 189-2805-5891</p></li>
+            <li style="padding-left: 100px;"><p><img src="../static/img/mail.png" width="30px" height="30px;" align="center"> cams@ntesmail.com</p></li>
+            <li style="padding-left: 100px;"><p><img src="../static/img/rights.png" width="30px" height="30px;" align="center"> 2024 Activity Hub. All rights reserved.</p></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

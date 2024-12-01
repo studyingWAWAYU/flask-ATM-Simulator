@@ -31,6 +31,17 @@ app.register_blueprint(ActivityLobby.actlb)
 from ATMflask.views import ActivityContent
 app.register_blueprint(ActivityContent.actct)
 
+from ATMflask.views import ClubLobby
+app.register_blueprint(ClubLobby.clublb)
+
+from ATMflask.views import ClubDetail
+app.register_blueprint(ClubDetail.clubdt)
+
+from ATMflask.views import MyClub
+app.register_blueprint(MyClub.myclub)
+
+
+
 
 
 

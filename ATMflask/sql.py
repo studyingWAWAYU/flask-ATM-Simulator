@@ -81,8 +81,9 @@ class Activity(db.Model):
 with app.test_request_context():
     db.create_all() #建表，建过之后注释掉
     #db.drop_all() #删除表，如果要重新建表
+'''
 
-
+'''
 #写入数据，写过之后注释掉
 with app.test_request_context():
     #创建ORM对象
@@ -93,3 +94,4 @@ with app.test_request_context():
 
     #将db.session中的改变同步到数据库
 '''
+

@@ -1,0 +1,357 @@
+/*navigation*/
+#logotop{
+    padding-left:70px;
+    background-color:#C4E2FF;
+    height:60px;
+    padding-right:680px;
+}
+#nav{
+    width: 1700px;
+    height:60px;
+    background-color: #C4E2FF;
+    position:fixed;
+    z-index:10;
+    margin-top:0;
+    left:50%;
+    margin-left:-850px;
+}
+*{
+    padding:0;
+    margin:0;
+    position:relative;
+
+}
+li{
+    float:left;
+}
+.navli{
+    list-style-type:none;
+    width: 160px;
+    height:60px;
+    line-height: 60px;
+    background: #C4E2FF;
+    font-family:"微软雅黑 Light";
+    color:#415468;
+    font-weight: bold;
+    align: center;
+    text-align: center;
+    border-left:2px solid #DAEDFF;
+}
+.navli:hover{
+    background-color: #DAEDFF;
+    color:#28313A;
+}
+#login{padding-left:10px;width:80px;}
+#register{border:none;width:80px;}
+#username{padding-left:10px;width:80px;}
+#logout{border:none;width:80px;}
+#login:hover{background-color: #C4E2FF; font-weight: bold;}
+#register:hover{background-color: #C4E2FF; font-weight: bold;}
+#logout:hover{background-color: #C4E2FF; font-weight: bold;}
+#username:hover{background-color:#C4E2FF}
+
+/*end of navigation*/
+
+
+/*ClubContainer*/
+#ClubContainer{
+    width:1700px;
+    height:240px;
+    display: block;
+    margin: auto;
+    padding-top: 140px;
+	padding-left: 80px;
+    /* border:1px solid; */
+}
+
+/*MyClub*/
+#MyClub{
+    width:1700px;
+    height:240px;
+    display: block;
+    margin: auto;
+    padding-top: 140px;
+	padding-left: 80px;
+    /* border:1px solid; */
+}
+
+button.type-btn, .status-btn{
+	margin-right: 25px;
+	padding: 6px 14px;
+	border:1px solid #C4E2FF;
+	box-shadow: 1px 1px 1px 0px #99c2ed;
+	border-radius: 5px;
+	background-color: #f8f9fa;
+	font-size: 17px;
+	cursor: pointer;
+}
+button.type-btn:hover, .status-btn:hover {
+	background-color: #daedff;
+}
+button.type-btn.selected, .status-btn.selected{
+    background-color: #daedff;
+}
+
+.date-picker {
+	padding: 8px;
+	font-size: 15px;
+	border: 2px solid #99c2ed;
+	border-radius: 5px;
+	background-color: #f8f9fa;
+	width: 160px;
+}
+button#show-btn{
+	width: 100px;
+	margin-left: 100px;
+	padding: 6px 8px;
+	border: 1px solid #99c2ed;
+	border-radius: 10px;
+	background-color: #C4E2FF;
+	 font-size:17px;
+	 font-weight: 600;
+	cursor: pointer;
+}
+button#show-btn:hover {
+	background: #daedff;
+}
+
+/*ClubTableStyle*/
+.table-container {
+            margin-top: 20px;
+        }
+h2 {
+	margin-top: 40px;
+}
+
+/*AllClub*/
+#AllClub{
+    width:1700px;
+    height:1000px;
+    display: block;
+    margin:auto;
+	/* border: 1px solid; */
+}
+
+#search-input{
+	width: 400px;
+	height: 50px;
+	border-radius: 8px;
+	margin-left: 0px;
+	padding-left: 10px;
+	font-weight: bold;
+	font-size: 16px;
+}
+
+#search-input:focus{
+	width: 84%;
+}
+
+#search{
+    background-color: #C4E2FF;
+    width:100px;
+    height:45px;
+    border: 1px solid #99c2ed;
+    border-radius: 10px;
+    margin-left:50px;
+    font-size:18px;
+	font-weight: 600;
+	cursor: pointer;
+}
+#search:hover{
+	background: #daedff;
+}
+
+a{
+	text-decoration: none;
+	color: black;
+}
+.item{
+	height: 250px;
+	width: 380px;
+	margin-top: 20px;
+	margin-left: 40px;
+	float: left;
+	background-color: rgba(255, 255, 255, 0.95);
+	border:1px solid #C4E2FF;
+	border-radius: 10px;
+	box-shadow: 4px 4px 0px 0px #DAEDFF;
+}
+.item-left{
+	width: 100px;
+	height: 80px;
+	padding-left: 10px;
+	padding-top:10px;
+	float: left;
+/* 	border: 1px solid ; */
+}
+.item-right{
+	width: 240px;
+	height: 80px;
+	padding-left: 5px;
+	padding-top:10px;
+	float: right;
+/* 	border: 1px solid ; */
+}
+.item-status{
+	font-size: 20px;
+	font-weight: 600;
+	padding-left: 80px;
+	padding-top: 15px;
+	color: #f06767;
+}
+.item-cnt{
+	font-size: 18px;
+	padding-left: 80px;
+	padding-top: 5px;
+}
+.item p{
+	padding-top:5px;
+	padding-left: 20px;
+	font-size: 14px;
+}
+.item-name{
+	font-size: 23px;
+	font-weight: 800;
+	padding-top: auto;
+	padding-bottom: 12px;
+	padding-left: 20px;
+	overflow: hidden;		/*内容会被修剪，并且其余内容是不可见的。*/
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	/* border: 1px solid; */
+}
+.item-club{
+	overflow: hidden;		/*内容会被修剪，并且其余内容是不可见的。*/
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+
+/*bottom*/
+#indexbottom{
+    width:1700px;
+    height:130px;
+    margin-top:-1500px;
+    background-color:#C4E2FF;
+    left:50%;
+    margin-left:-850px;
+    color:#415468;
+}
+
+/* 表格样式 */
+.club-table {
+    width: 95%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* 添加阴影效果 */
+}
+
+.club-table th, .club-table td {
+    padding: 12px;
+    text-align: left;
+    border-top: 1px solid #ddd;  /* 默认顶部边框 */
+    border-left: 1px solid #ddd; /* 默认左边框 */
+    text-align: center;  /* 让表头内容居中 */
+}
+
+.club-table th {
+    background-color: #c4e2ff;  /* 主题色 */
+    font-weight: bold;
+}
+
+.club-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.club-table tr:hover {
+    background-color: #f1f1f1;
+    color: deepskyblue;
+}
+.club-table tr:hover th {
+    color: black;  /* 在鼠标悬停时，表头文字颜色保持不变 */
+}
+
+/* 边框细节：左边和上边的边框细，右边和下边的边框粗 */
+.club-table td:first-child, .club-table th:first-child {
+    border-left-width: 1px; /* 左边框细 */
+}
+
+.club-table td:last-child, .club-table th:last-child {
+    border-right-width: 2px; /* 右边框粗 */
+}
+
+.club-table tr:first-child td, .club-table tr:first-child th {
+    border-top-width: 1px; /* 上边框细 */
+}
+
+.club-table tr:last-child td, .club-table tr:last-child th {
+    border-bottom-width: 2px; /* 下边框粗 */
+}
+
+/* 响应式样式：让表格自适应父div的宽度 */
+@media (max-width: 768px) {
+    .club-table {
+        font-size: 14px;
+    }
+
+    .club-table th, .club-table td {
+        padding: 8px;
+    }
+}
+
+/*输入框的样式*/
+/* 容器 */
+.google-search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* 输入框 */
+.google-search-input {
+    width: 400px; /* 输入框宽度 */
+    padding: 10px 20px; /* 内边距，上下10px，左右20px */
+    border: 1px solid #dcdcdc; /* 边框颜色 */
+    border-radius: 24px; /* 圆角 */
+    font-size: 16px; /* 字体大小 */
+    background-color: #f8f8f8; /* 背景颜色 */
+    color: #333; /* 输入文字颜色 */
+    transition: all 0.3s ease; /* 平滑过渡效果 */
+}
+
+/* 输入框获得焦点时 */
+.google-search-input:focus {
+    width: 800px;
+    border-color: #4285f4; /* 聚焦时的边框颜色（谷歌蓝） */
+    box-shadow: 0 0 5px rgba(66, 133, 244, 0.5); /* 聚焦时的阴影 */
+    outline: none; /* 移除默认的焦点边框 */
+}
+
+/* 占位符样式 */
+.google-search-input::placeholder {
+    color: #aaa; /* 占位符文字颜色 */
+    font-style: italic; /* 占位符字体样式 */
+}
+
+/* 设置鼠标悬停时的链接样式 */
+.tablehref:hover{
+    color: deepskyblue;;               /* 悬停时的链接颜色变深 */
+    text-decoration: underline;   /* 悬停时添加下划线 */
+    transform: scale(1.1);        /* 鼠标悬停时放大 */
+}
+
+#createClub{
+        background-color: #C4E2FF;
+    width:150px;
+    height:45px;
+    border: 1px solid #99c2ed;
+    border-radius: 10px;
+    margin-left:0;
+    font-size:18px;
+	font-weight: 600;
+	cursor: pointer;
+}
+#createAct:hover{
+	background: #daedff;
+}
