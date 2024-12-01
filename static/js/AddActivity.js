@@ -26,9 +26,6 @@ document.addEventListener('DOMContentLoaded', function() {
     imageInput.addEventListener('change', function(event) {
         const files = event.target.files;
 
-        // 清空预览容器
-        //imagePreviewContainer.innerHTML = '';
-
         for (let i = 0; i < files.length; i++) {
             const file = files[i];
             if (file && file.type.startsWith('image/')) {
