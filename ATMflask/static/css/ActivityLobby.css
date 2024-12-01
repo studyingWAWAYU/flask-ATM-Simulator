@@ -64,20 +64,26 @@ li{
     /* border:1px solid; */
 }
 
-button.type-btn, .status-btn{
+.status-btn{width: 110px;}
+.type-btn{
+    width: 190px;
+    margin-bottom: 8px;
+}
+button.type-btn, button.status-btn{
+    text-align: center;
 	margin-right: 25px;
-	padding: 6px 14px;
+	padding: 6px 6px;
 	border:1px solid #C4E2FF;
 	box-shadow: 1px 1px 1px 0px #99c2ed;
 	border-radius: 5px;
 	background-color: #f8f9fa;
-	font-size: 17px;
+	font-size: 18px;
 	cursor: pointer;
 }
-button.type-btn:hover, .status-btn:hover {
+.type-btn:hover, .status-btn:hover {
 	background-color: #daedff;
 }
-button.type-btn.selected, .status-btn.selected{
+button.selected{
     background-color: #daedff;
 }
 
@@ -89,18 +95,18 @@ button.type-btn.selected, .status-btn.selected{
 	background-color: #f8f9fa;
 	width: 160px;
 }
-button#show-btn{
+#show-btn, #clear-btn{
 	width: 100px;
 	margin-left: 100px;
 	padding: 6px 8px;
 	border: 1px solid #99c2ed;
 	border-radius: 10px;
 	background-color: #C4E2FF;
-	 font-size:17px;
-	 font-weight: 600;
+	font-size:17px;
+	font-weight: 600;
 	cursor: pointer;
 }
-button#show-btn:hover {
+#show-btn:hover, #clear-btn:hover {
 	background: #daedff;
 }
 
@@ -123,7 +129,7 @@ button#show-btn:hover {
 	font-weight: bold;
 	font-size: 16px;
 }
-#search{
+#sch-btn{
     background-color: #C4E2FF;
     width:100px;
     height:45px;
@@ -134,12 +140,10 @@ button#show-btn:hover {
 	font-weight: 600;
 	cursor: pointer;
 }
-#search:hover{
-	background: #daedff;
-}
+#sch-btn:hover{	background: #daedff; }
 
 a{
-	text-decoration: none;
+    text-decoration: none;
 	color: black;
 }
 .item{

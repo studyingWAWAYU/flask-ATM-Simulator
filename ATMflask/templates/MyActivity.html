@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Activity Lobby</title>
 	<link rel="stylesheet" href="../static/css/myActivity.css">
-	<script src="../static/js/ActivityLobby.js"></script>
+	<script src="../static/js/MyActivity.js"></script>
 </head>
 <body>
 <!--Navigation-->
@@ -31,37 +31,61 @@
 <!--Activity-->
 <div id="ActivityContainer">
 <div id="searchbox" style="padding-top:15px; margin-bottom:20px;">
-	<input type="text" id="search-input" placeholder="Search Activities" class="hotword">
-	<input type="button" value="Search" id="search" align="center" onclick="search()">
+	<form id="search-form" method="post">
+		<input type="text" id="search-input" name="search-input" placeholder="Search Activities" >
+		<button type="submit" id="sch-btn" name="action" value="search">Search</button>
     {% if createPermission %}
-	<button id="createAct"><a href="AddActivity">create new activity</a></button>
+	<button id="createAct"><a href="/AddActivity">create new activity</a></button>
     {% endif %}
+    </form>
 </div>
 
 <p align="center" style="color:#CC0000;font-size:20px;margin-top:30px;">{{ get_flashed_messages()[0] }}</p>
 
-{% if myAct %}
-    {% for act in myAct %}
-    <div class="item">
-        <a href="/ActivityContent/{{act.activity_id}}">
-            <div class="item-top" style="width: 380px; height: 80px;">
-                <div class="item-left">
-                    <img src="../static/img/activities/sports.gif" width="80px" height="80px" style="display: block;"/>
-                </div>
-                <div class="item-right">
-                    <div class="item-status">{{act.status}}</div>
-                    <div class="item-cnt"><span>Remaining: </span><strong>20</strong></div>
-                </div>
-            </div>
-            <div class="item-bottom" style="width: 370px; height: 150px;margin-top:15px;">
-                <div class="item-name" >{{act.activity_name}}</div>
-                <p class="item-signup"><span><strong>SignUp Time : </strong> &nbsp;</span> 2024/11/01 - 11/03</p>
-                <p class="item-time"><span><strong>Activity Time : </strong>&nbsp; </span> 2024/11/05 - 11/18</p>
-                <p class="item-club"><span><strong>Published by : </strong> &nbsp;</span> Sports Department of the Student Union</p>
-            </div>
-        </a>
-    </div>
-    {% endfor %}
+{% if selected_acts %}
+	{% for act in selected_acts %}
+	<div class="item">
+		<a href="/ActivityContent/{{act.activity_id}}">
+			<div class="item-top" style="width: 380px; height: 80px;">
+				<div class="item-left">
+					<img src="../static/img/activities/{{act.type}}.gif" width="80px" height="80px" style="display: block;"/>
+				</div>
+				<div class="item-right">
+					<div class="item-status">{{act.status}}</div>
+					<div class="item-cnt"><span>Remaining: </span><strong>{{remainings[act.activity_id]}}</strong></div>
+				</div>
+			</div>
+			<div class="item-bottom" style="width: 370px; height: 150px;margin-top:15px;">
+				<div class="item-name" >{{act.activity_name}}</div>
+				<p class="item-signup"><span><strong>SignUp Time : </strong> &nbsp;</span>{{act.signup_start}} - {{act.signup_end}}</p>
+				<p class="item-time"><span><strong>Activity Time : </strong>&nbsp; </span> {{act.start_time}} - {{act.end_time}}</p>
+				<p class="item-club"><span><strong>Published by : </strong> &nbsp;</span> {{clubNames[act.activity_id]}}</p>
+			</div>
+		</a>
+	</div>
+	{% endfor %}
+{% elif myAct %}
+	{% for act in myAct %}
+	<div class="item">
+		<a href="/ActivityContent/{{act.activity_id}}">
+			<div class="item-top" style="width: 380px; height: 80px;">
+				<div class="item-left">
+					<img src="../static/img/activities/{{act.type}}.gif" width="80px" height="80px" style="display: block;"/>
+				</div>
+				<div class="item-right">
+					<div class="item-status">{{act.status}}</div>
+					<div class="item-cnt"><span>Remaining: </span><strong>{{remainings[act.activity_id]}}</strong></div>
+				</div>
+			</div>
+			<div class="item-bottom" style="width: 370px; height: 150px;margin-top:15px;">
+				<div class="item-name" >{{act.activity_name}}</div>
+				<p class="item-signup"><span><strong>SignUp Time : </strong> &nbsp;</span>{{act.signup_start}} - {{act.signup_end}}</p>
+				<p class="item-time"><span><strong>Activity Time : </strong>&nbsp; </span> {{act.start_time}} - {{act.end_time}}</p>
+				<p class="item-club"><span><strong>Published by : </strong> &nbsp;</span> {{clubNames[act.activity_id]}}</p>
+			</div>
+		</a>
+	</div>
+	{% endfor %}
 {% endif %}
 
 </div>

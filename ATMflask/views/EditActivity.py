@@ -138,6 +138,6 @@ def EditActivity(activity_id):
                     file.save(os.path.join(upload_dir, file.filename))
                     flash("Image uploaded successfully.")
             else:
-                flash("Illegal image format: Please upload an image in JPG, JPEG, PNG or GIF format!")
+                flash("Illegal image format: Please upload images in JPG, JPEG, PNG or GIF format!")
 
         return redirect('/ActivityContent/'+str(activity_id))

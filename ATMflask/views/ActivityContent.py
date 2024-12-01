@@ -1,7 +1,10 @@
+import os
+
 from flask import render_template,request,redirect, flash,session
 from flask import Blueprint
-from datetime import datetime
-import pymysql
+
+import shutil
+import os
 
 from ATMflask import db
 from ATMflask.sql import User,Activity,Club,Participant
@@ -61,8 +64,12 @@ def activityContent(activity_id):
                         role_dict[role].append(user_name + " (" + p.status + ")")
                 participants_dict = role_dict
 
-            # 如果是manager就可以编辑、删除这个活动。
-
+        # 图片
+        try:
+            files = os.listdir(os.path.join(os.getcwd(), 'static', 'img', 'uploads', str(activity_id)))
+            filelist = [f for f in files]
+        except FileNotFoundError:
+            filelist = None
 
     else:
         flash("Please login first to check all activities.")
@@ -70,12 +77,19 @@ def activityContent(activity_id):
 
     if request.method == 'GET':
         return render_template('ActivityContent.html',username=username,actContent=actContent,clubName=clubName,
-                               par_status=par_status,remaining=remaining,isManager=isManager,participants_dict=participants_dict)
+                               par_status=par_status,remaining=remaining,isManager=isManager,participants_dict=participants_dict,filelist=filelist)
 
 
+# 如果是manager就可以编辑、删除这个活动。
 @actct.route('/delete_activity/<int:activity_id>',methods=['POST'])
 def delete_activity(activity_id):
     current_activity = Activity.query.get(activity_id)
+    # 删除所有图片
+    upload_dir = os.path.join(os.getcwd(),'static','img','uploads',str(activity_id))
+    if  os.path.exists(upload_dir):
+        shutil.rmtree(upload_dir)
+
+    # 删除数据库内容
     current_participants = Participant.query.filter_by(activity_id=activity_id).all()
     for each_participant in current_participants:
         db.session.delete(each_participant)

@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Activity Lobby</title>
 	<link rel="stylesheet" href="../static/css/ActivityLobby.css">
-	<script src="../static/js/ActivityLobby.js"></script>
 </head>
 <body>
 <!--Navigation-->
@@ -29,80 +28,111 @@
 
 <!--Classification-->
 <div id="ClassificationContainer">
-	<form method="post">
-
-	<table align="center" style="width: 1700px;border-collapse:separate; border-spacing:0px 15px;">
+	<form id="filter-form" method="post">
+	<table align="center" style="width: 1200px;border-collapse:separate; border-spacing:0px 15px;">
 		<tr>
-			<td align="left"><p style="font-size:18px;font-weight: 600;">Activity Type :</p></td>
+			<td align="left" width="200px"><p style="font-size:18px;font-weight: 600;">Activity Type :</p></td>
 			<td>
-				<button class="type-btn" type="button" name="type" value="Cultural Events" onclick="showActivities('culture', 'type')">Cultural Events</button>
-				<button class="type-btn" type="button" name="type" value="Social Events" onclick="showActivities('social', 'type')">Social Events</button>
-				<button class="type-btn" type="button" name="type" value="Career Development" onclick="showActivities('career', 'type')">Career Development</button>
-				<button class="type-btn" type="button" name="type" value="Study Trips" onclick="showActivities('study', 'type')">Study Trips</button>
-				<button class="type-btn" type="button" name="type" value="Academic Activities" onclick="showActivities('academic', 'type')">Academic Activities</button>
-				<button class="type-btn" type="button" name="type" value="Interest Groups" onclick="showActivities('interest', 'type')">Interest Groups</button>
-				<button class="type-btn" type="button" name="type" value="Sports" onclick="showActivities('sports', 'type')">Sports</button>
-				<button class="type-btn" type="button" name="type" value="Volunteer Work" onclick="showActivities('volunteer', 'type')">Volunteer Work</button>
+				 {% for tp in ["Cultural Events", "Social Events", "Career Development", "Study Trips",
+				"Academic Activities", "Interest Groups", "Sports", "Volunteer Work"] %}
+                <button type="button"
+                        class="type-btn {{ 'selected' if tp == type else '' }}"
+                        value="{{ tp }}"
+                        onclick="toggleSelection(this, 'type')">
+                    {{ tp }}
+                </button>
+                {% endfor %}
 			</td>
 		</tr>
 		<tr>
 			<td align="left"><p style="font-size:18px;font-weight: 600;">Activity Status :</p></td>
 			<td>
-				<button class="status-btn" type="button" name="status" value="Upcoming" onclick="showActivities('upcoming', 'status')">Upcoming</button>
-				<button class="status-btn" type="button" name="status" value="Upcoming" onclick="showActivities('inprogress', 'status')">In progress</button>
-				<button class="status-btn" type="button" name="status" value="Upcoming" onclick="showActivities('completed', 'status')">Completed</button>
+				{% for sts in ["Upcoming", "Ongoing", "Completed"] %}
+                <button type="button"
+                        class="status-btn {{ 'selected' if sts == status else '' }}"
+                        value="{{ sts }}"
+                        onclick="toggleSelection(this, 'status')">
+                    {{ sts }}
+                </button>
+                {% endfor %}
 			</td>
 		</tr>
 		<tr>
 			<td align="left"><p style="font-size:18px;font-weight: 600;">SignUp Time :</p></td>
 			<td>
-				<input type="date" id="signup_start" name="signup_start" class="date-picker" min="2019-01-01" value="2024-11-01">
+				<input type="date" id="signup_start" name="signup_start" class="date-picker" value="{{ signup_start if signup_start else '' }}" >
 				<span>&nbsp; to &nbsp; </span>
-				<input type="date" id="signup_end" name="signup_end" class="date-picker" min="2019-01-01" value="2024-11-01">
+				<input type="date" id="signup_end" name="signup_end" class="date-picker" value="{{ signup_end if signup_end else '' }}">
 			</td>
 		</tr>
 		<tr>
 			<td align="left"><p style="font-size:18px;font-weight: 600;">Activity Time :</p></td>
 			<td>
-				<input type="date" id="start_time" name="start_time" class="date-picker" min="2019-01-01" value="2024-11-10">
+				<input type="date" id="start_time" class="date-picker" value="{{ start_time or '' }}">
 				<span>&nbsp; to &nbsp; </span>
-				<input type="date" id="end_time" name="end_time" class="date-picker" min="2019-01-01" value="2024-11-11">
-				<button type="submit" id="show-btn" onclick="showcards()">apply</button>
+				<input type="date" id="end_time"  name="end_time" class="date-picker" value="{{ end_time or '' }}">
+				<button type="submit" id="show-btn" name="action" value="apply" >apply</button>
+				<button type="submit" id="clear-btn" name="action" value="clear" style="margin-left:15px;" >clear</button>
 			</td>
 		</tr>
 	</table>
 	</form>
 </div>
 
-<hr style="width: 1700px; margin: 20px auto; border:1px solid #e5e5e6;">
+<hr style="width: 1700px; margin: 50px auto; border:1px solid #e5e5e6;">
 
 <!--Activity-->
 <div id="ActivityContainer">
-<div id="searchbox" style="padding-top:15px; margin-bottom:20px;">
-	<input type="text" id="search-input" placeholder="Search Activities" class="hotword">
-	<input type="button" value="Search" id="search" align="center" onclick="search()">
+<div id="searchbox" style=" margin-bottom:20px;">
+	<form id="search-form" method="post">
+		<input type="text" id="search-input" name="search-input" placeholder="Search Activities" >
+		<button type="submit" id="sch-btn" name="action" value="search">Search</button>
+	</form>
 </div>
 
 <p align="center" style="color:#CC0000;font-size:20px;margin-top:30px;margin-bottom:5px;">{{ get_flashed_messages()[0] }}</p>
 
-{% if Act %}
-	{% for act in Act %}
+
+{% if selected_acts %}
+	{% for act in selected_acts %}
 	<div class="item">
 		<a href="/ActivityContent/{{act.activity_id}}">
 			<div class="item-top" style="width: 380px; height: 80px;">
 				<div class="item-left">
-					<img src="../static/img/activities/sports.gif" width="80px" height="80px" style="display: block;"/>
+					<img src="../static/img/activities/{{act.type}}.gif" width="80px" height="80px" style="display: block;"/>
 				</div>
 				<div class="item-right">
 					<div class="item-status">{{act.status}}</div>
-					<div class="item-cnt"><span>Remaining: </span><strong>20</strong></div>
+					<div class="item-cnt"><span>Remaining: </span><strong>{{remainings[act.activity_id]}}</strong></div>
 				</div>
 			</div>
 			<div class="item-bottom" style="width: 370px; height: 150px;margin-top:15px;">
 				<div class="item-name" >{{act.activity_name}}</div>
 				<p class="item-signup"><span><strong>SignUp Time : </strong> &nbsp;</span>{{act.signup_start}} - {{act.signup_end}}</p>
 				<p class="item-time"><span><strong>Activity Time : </strong>&nbsp; </span> {{act.start_time}} - {{act.end_time}}</p>
-				<p class="item-club"><span><strong>Published by : </strong> &nbsp;</span> Sports Department of the Student Union</p>
+				<p class="item-club"><span><strong>Published by : </strong> &nbsp;</span> {{clubNames[act.activity_id]}}</p>
+			</div>
+		</a>
+	</div>
+	{% endfor %}
+{% elif Act %}
+	{% for act in Act %}
+	<div class="item">
+		<a href="/ActivityContent/{{act.activity_id}}">
+			<div class="item-top" style="width: 380px; height: 80px;">
+				<div class="item-left">
+					<img src="../static/img/activities/{{act.type}}.gif" width="80px" height="80px" style="display: block;"/>
+				</div>
+				<div class="item-right">
+					<div class="item-status">{{act.status}}</div>
+					<div class="item-cnt"><span>Remaining: </span><strong>{{remainings[act.activity_id]}}</strong></div>
+				</div>
+			</div>
+			<div class="item-bottom" style="width: 370px; height: 150px;margin-top:15px;">
+				<div class="item-name" >{{act.activity_name}}</div>
+				<p class="item-signup"><span><strong>SignUp Time : </strong> &nbsp;</span>{{act.signup_start}} - {{act.signup_end}}</p>
+				<p class="item-time"><span><strong>Activity Time : </strong>&nbsp; </span> {{act.start_time}} - {{act.end_time}}</p>
+				<p class="item-club"><span><strong>Published by : </strong> &nbsp;</span> {{clubNames[act.activity_id]}}</p>
 			</div>
 		</a>
 	</div>
@@ -124,5 +154,7 @@
         </ul>
     </div>
 </div>
+
+<script src="../static/js/ActivityLobby.js"></script>
 </body>
 </html>

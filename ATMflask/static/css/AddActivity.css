@@ -121,6 +121,33 @@ select{
 #custom_upload:hover{
     background-color: #daedff;
 }
+#image-preview-container{
+    margin-left:230px;
+    width:600px;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap:15px;
+    margin-top:10px;
+}
+.image-preview img {
+    border-radius: 5px;
+}
+.image-preview button {
+    width:25px;
+    height:25px;
+    border: 1px solid #99c2ed;
+    font-size: 12px;
+    cursor: pointer;
+    border-radius: 15px;
+    background-color:#fafcff;
+    margin-top:-25px;
+    margin-left:-25px;
+}
+.image-preview button:hover {
+    background-color: #daedff;
+}
+
 #submit{
     background-color: #C4E2FF;
     width:500px;

@@ -2,7 +2,7 @@ from flask import render_template,request,redirect, flash,session
 from flask import Blueprint
 
 from ATMflask import db
-from ATMflask.sql import User,Participant,Activity,Membership
+from ATMflask.sql import User, Participant, Activity, Membership, Club
 
 myAct = Blueprint('myAct',__name__)
 
@@ -12,6 +12,9 @@ def MyActivity():
     username = None
     myAct = None
     createPermission = False
+    selected_acts = None
+    clubNames = {}
+    remainings = {}
 
     if user_id:
         user = User.query.get(user_id)
@@ -29,9 +32,33 @@ def MyActivity():
             myActIdLST = [activity_id[0] for activity_id in myActId]  # 把列表嵌套元组改为列表
             myAct = Activity.query.filter(Activity.activity_id.in_(myActIdLST)).all()
             #print(myAct)
+            for act in myAct:
+                ClubId = act.club_id
+                clubName = db.session.query(Club.club_name).filter_by(club_id=ClubId).scalar()
+                clubNames[act.activity_id] = clubName
+
+                eachActId = act.activity_id
+                participant = db.session.query(Participant).filter_by(activity_id=eachActId).filter(
+                    Participant.role != 'manager').all()
+                # 剩余报名人数
+                remainings[act.activity_id] = act.max_participant - len(participant)
+
+        if request.method == 'POST':
+            search_word = request.form.get('search-input')
+            print(f"Searching for activities: {search_word}")
+            if search_word:
+                selected_acts = Activity.query.filter(Activity.activity_name.ilike(f"%{search_word}%")).all()
+                if not selected_acts:
+                    flash("No matching activities were found yet. All activities are displayed below.")
+            else:
+                selected_acts = myAct
+            print(f"Found activities: {selected_acts}")
+            return render_template('MyActivity.html', username=username, myAct=myAct, createPermission=createPermission,
+                                   clubNames=clubNames, selected_acts=selected_acts, remainings=remainings)
 
     else:
         flash("Please login first to check your activities.")
 
     if request.method == 'GET':
-        return render_template('MyActivity.html',username=username,myAct=myAct,createPermission=createPermission)
+        return render_template('MyActivity.html',username=username,myAct=myAct,createPermission=createPermission,
+                               clubNames=clubNames,selected_acts=selected_acts,remainings=remainings)
