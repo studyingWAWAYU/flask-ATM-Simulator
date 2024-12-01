@@ -37,10 +37,10 @@
 				{% if filelist %}
 					{% for fname in filelist %}
 						<img class="act-imgs" src= "../static/img/uploads/{{actContent.activity_id}}/{{fname}}" width="400px" height="240" style="display:none;"/>
+						<img id="act-img" src="../static/img/uploads/{{actContent.activity_id}}/{{filelist[0]}}" width="400px" height="250" onclick="stopAndContinue()"/>
 					{% endfor %}
 				{% else %}
 					<p style="font-size:40px;color:#787776;margin:100px 90px;">No Picture</p>
-					<img id="act-img" src="../static/img/uploads/{{actContent.activity_id}}/{{filelist[0]}}" width="400px" height="250" onclick="stopAndContinue()"/>
         		{% endif %}
 			</div>
 			<img src="../static/img/index/left.png" id="leftbtn" onclick=" preimg()">
