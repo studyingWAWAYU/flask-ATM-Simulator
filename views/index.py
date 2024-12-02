@@ -6,7 +6,7 @@ from ATMflask.sql import User
 
 idx = Blueprint('idx',__name__)
 
-@idx.route('/',methods = ['GET','POST'])  # 用装饰器定义路由的对应关系
+@idx.route('/',methods = ['GET','POST'])
 def index():
     user_id = session.get('id')
     username = None

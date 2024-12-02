@@ -24,9 +24,7 @@ migrate = Migrate(app,db)
 
 #ORM对象关系映射
 class User(db.Model):
-    #定义表名
     __tablename__ = "User"
-    #ID设为主键
     id = db.Column(db.Integer,primary_key=True,unique=True,autoincrement=True)
     username = db.Column(db.String(20),unique = True,nullable=False)
     password = db.Column(db.String(15),nullable=False)
