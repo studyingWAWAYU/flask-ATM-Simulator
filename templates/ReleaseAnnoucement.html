@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Release Announcement</title>
+    <link rel="stylesheet" href="../static/css/ReleaseAnnouncement.css">
+</head>
+<body>
+    <div id="nav">
+    <ul style="list-style: none">
+        <li><div id="logotop"><a href="/"><img src="../static/img/logo.png" width="100" height="100"></a></div></li>
+        <a href="ClubLobby"><li class="navli">Club Lobby</li></a>
+        <a href="MyClub"><li class="navli">My Club</li></a>
+        <a href="ActivityLobby"><li class="navli">Activity Lobby</li></a>
+        <a href="MyActivity"><li class="navli">My Activity</li></a>
+        {% if username %}
+            <a href="MyInformation"><li class="navli" id="username">{{ username }}</li></a>
+            <form action="/Logout" method="post" id="logoutForm" style="display: none;">
+                <button type="submit" style="display: none;">Logout</button></form>
+            <a href="Logout" onclick="confirmLogout(event)"><li class="navli" id="logout">Logout</li></a>
+        {% else %}
+            <a href="Login"><li class="navli" id="login">Login</li></a>
+            <a href="Register"><li class="navli" id="register">Register</li></a>
+        {% endif %}
+    </ul>
+    </div>
+
+<div id="release-post">
+    <div id="FormOutline">
+        <div style="margin-left:210px;margin-top:50px;"><img src="../static/img/Release%20Announcement.png" width="580px" height="52px;"></div>
+
+    <form action="{{ url_for('clubdt.releaseAnnouncement', club_id=club_id) }}" method="POST">
+        <p class="inputTitle" style="margin-top:40px;"><span>Announcement Content: </span><span style="color:#fa8383;">*</span></p>
+        <textarea name="announcement" id="announcement" rows="5" cols="50" class="inputText"></textarea><br><br>
+
+        <!-- 发布公告按钮 -->
+        <button id="submit" type="submit">Release Announcement</button>
+    </form>
+
+    <!-- 返回按钮 -->
+    <button id="back" onclick="window.location.href='{{ url_for('clubdt.clubDetail', club_id=club_id) }}'">Back to Club Detail</button>
+    </div>
+
+</div>
+
+
+    <!--Bottom-->
+<div id="indexbottom" style="margin-top:400px">
+    <div style="margin-left:80px;padding-top:60px;">
+        <ul style="float:left;list-style-type: none;">
+            <li><p><img src="../static/img/logo.png" width="40px" height="40px;" align="center"> Activity Hub</p></li>
+            <li style="padding-left: 100px;"><p><img src="../static/img/location.png" width="30px" height="30px;" align="center"> Foshan, Guanddong, China</p></li>
+            <li style="padding-left: 100px;"><p><img src="../static/img/phone.png" width="25px" height="25px;" align="center"> 189-2805-5891</p></li>
+            <li style="padding-left: 100px;"><p><img src="../static/img/mail.png" width="30px" height="30px;" align="center"> cams@ntesmail.com</p></li>
+            <li style="padding-left: 100px;"><p><img src="../static/img/rights.png" width="30px" height="30px;" align="center"> 2024 Activity Hub. All rights reserved.</p></li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html>

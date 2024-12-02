@@ -1,0 +1,94 @@
+/*navigation*/
+#logotop{
+    padding-left:70px;
+    background-color:#C4E2FF;
+    height:60px;
+    padding-right:680px;
+}
+#nav{
+    width: 1700px;
+    height:60px;
+    background-color: #C4E2FF;
+    position:fixed;
+    z-index:10;
+    margin-top:0;
+    left:50%;
+    margin-left:-850px;
+}
+*{
+    padding:0;
+    margin:0;
+    position:relative;
+}
+li{
+    float:left;
+}
+.navli{
+    list-style-type:none;
+    width: 160px;
+    height:60px;
+    line-height: 60px;
+    background: #C4E2FF;
+    font-family:"微软雅黑 Light";
+    color:#415468;
+    font-weight: bold;
+    align: center;
+    text-align: center;
+    border-left:2px solid #DAEDFF;
+}
+.navli:hover{
+    background-color: #DAEDFF;
+    color:#28313A;
+}
+#login{font-weight: normal;padding-left:10px;width:80px;}
+#register{font-weight: normal;border:none;width:80px;}
+#login:hover{
+    background-color: #C4E2FF;
+    font-weight: bold;
+}
+#register:hover{
+    background-color: #C4E2FF;
+    font-weight: bold;
+}
+/*end of navigation*/
+
+
+/*Login*/
+#LoginContainer{
+    width:1700px;
+    height:600px;
+    display: block;
+    margin:auto;
+}
+
+#loginTable{
+    margin-top:-700px;
+    margin-left:1200px;
+    width:500px;
+    height:700px;
+}
+table{
+    width: 500px;
+    height: 130px;
+}
+#submit{
+    background-color: #C4E2FF;
+    width:300px;
+    height:45px;
+    margin-left:100px;
+    font-size:18px;
+    border-radius: 5px;
+    border: 1px solid #99c2ed;
+    box-shadow:3px 3px 0px 0px #99c2ed;
+}
+
+/*底部*/
+#indexbottom{
+    width:1700px;
+    height:130px;
+    margin-top:-1500px;
+    background-color:#C4E2FF;
+    left:50%;
+    margin-left:-850px;
+    color:#415468;
+}

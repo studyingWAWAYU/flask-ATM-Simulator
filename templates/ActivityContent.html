@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>ActivityContent</title>
+	<link rel="stylesheet" href="../static/css/ActivityContent.css">
+	<script src="../static/js/ActivityContent.js"></script>
+	
+</head>
+<body>
+<!--Navigation-->
+<div id="nav">
+    <ul style="list-style: none">
+        <li><div id="logotop"><a href="/"><img src="../static/img/logo.png" width="100" height="100"></a></div></li>
+        <a href="../ClubLobby"><li class="navli">Club Lobby</li></a>
+        <a href="../MyClub"><li class="navli">My Club</li></a>
+        <a href="../ActivityLobby"><li class="navli">Activity Lobby</li></a>
+        <a href="../MyActivity"><li class="navli">My Activity</li></a>
+        {% if username %}
+            <a href="../MyInformation"><li class="navli" id="username">{{ username }}</li></a>
+            <form action="/Logout" method="post" id="logoutForm" style="display: none;">
+                <button type="submit" style="display: none;">Logout</button></form>
+            <a href="../Logout" onclick="confirmLogout(event)"><li class="navli" id="logout">Logout</li></a>
+        {% else %}
+            <a href="../Login"><li class="navli" id="login">Login</li></a>
+            <a href="../Register"><li class="navli" id="register">Register</li></a>
+        {% endif %}
+    </ul>
+</div>
+
+<!-- Information -->
+<div id="InformationContainer">
+<div id="page-left">
+	<div id="left-top" style="margin: 45px auto;">
+		<div id="carousel">
+			<div class="carousel-imgs">
+				{% if filelist %}
+					{% for fname in filelist %}
+						<img class="act-imgs" src= "../static/img/uploads/{{actContent.activity_id}}/{{fname}}" width="400px" height="240" style="display:none;"/>
+						<img id="act-img" src="../static/img/uploads/{{actContent.activity_id}}/{{filelist[0]}}" width="400px" height="250" onclick="stopAndContinue()"/>
+					{% endfor %}
+				{% else %}
+					<p style="font-size:40px;color:#787776;margin:100px 90px;">No Picture</p>
+        		{% endif %}
+			</div>
+			<img src="../static/img/index/left.png" id="leftbtn" onclick=" preimg()">
+			<img src="../static/img/index/right.png" id="rightbtn" onclick=" nextimg()">
+		</div>
+
+		<div id="activity-name" style="font-size: 24px;font-weight: bold;">{{actContent.activity_name}}</div>
+		<div id="club-box"><span>Club : &nbsp;</span>
+			<div id="club" style="margin-left: 30px;">{{clubName}}</div>
+		</div>
+	</div>
+
+<hr style="width: 400px; margin:20px auto; border:1px solid #e5e5e6;">
+
+	<div id="left-bottom" style="margin: 80px auto;">
+		<div class="people" style="margin: 40px auto">
+			<span class="label">REMAINING : &nbsp;</span>
+			<div id="rem-participants" class="number">{{remaining}}</div>
+		</div>
+		<div class="people" style="margin: 40px auto">	
+			<span class="label">MAX : &nbsp;</span>
+			<div id="max-participants" class="number">{{actContent.max_participant}}</div>
+		</div>
+	</div>
+
+	{% if not isManager %}
+		<button id="sup-btn">{{par_status}}</button>
+	{% else %}
+		<a href="/EditActivity/{{actContent.activity_id}}"><button id="edit-btn" >Edit this Activity</button></a>
+	 	<form id="deleteForm" action="/delete_activity/{{actContent.activity_id}}" method="POST" style="display:none;">
+			<button type="submit" style="display:none;"></button>
+		</form>
+		<a href="/delete_activity/{{actContent.activity_id}}" id="delete-btn" onclick="confirmDelete(event)" style="margin-top:20px;">Delete this Activity</a>
+	{% endif %}
+</div>
+	
+	
+<div id="page-right">
+	<div id="info">
+		<div class="info-item">
+			<div class="info-title">| Activity&nbsp;&nbsp;Information</div>
+			<table align="left" width="1000px;" >
+				<col style="width: 200px;">
+				<col style="width: 800px;">
+				<tr>
+					<td align="left"><p style="font-size:18px;font-weight: 600;">Location</p></td>
+					<td><p>{{actContent.location}}</p></td>
+				</tr>
+				<tr>
+					<td align="left"><p style="font-size:18px;font-weight: 600;">Club</p></td>
+					<td><p>{{clubName}}</p></td>
+				</tr>
+				<tr>
+					<td align="left"><p style="font-size:18px;font-weight: 600;">Start Time</p></td>
+					<td><p>{{actContent.start_time}}</p></td>
+				</tr>
+				<tr>
+					<td align="left"><p style="font-size:18px;font-weight: 600;">End Time</p></td>
+					<td><p>{{actContent.end_time}}</p></td>
+				</tr>
+				<tr>
+					<td align="left"><p style="font-size:18px;font-weight: 600;">Contact</p></td>
+					<td><p>{{actContent.contact}}</p></td>
+				</tr>
+			</table>
+		</div>
+		
+		<div class="info-signup">
+			<div class="info-title">| Activity&nbsp;&nbsp;SignUp</div>
+			<table align="left" width=1000>
+				<col style="width: 200px;">
+				<col style="width: 800px;">
+				<tr>
+					<td align="left"><p style="font-size:18px;font-weight: 600;">Start Time</p></td>
+					<td align="left"><p>{{actContent.signup_start}}</p></td>
+				</tr>
+				<tr>
+					<td align="left"><p style="font-size:18px;font-weight: 600;">End Time</p></td>
+					<td align="left"><p>{{actContent.signup_end}}</p></td>
+				</tr>
+				<tr>
+					<td align="left"><p style="font-size:18px;font-weight: 600;">Role</p></td>
+					<td align="left"><p>{{actContent.roles}}</p></td>
+				</tr>
+				<tr>
+					<td align="left"><p style="font-size:18px;font-weight: 600;">Requirement</p></td>
+					<td align="left"><p>{{actContent.requirement}}</p></td>
+				</tr>
+				
+			</table>
+		</div>
+
+		{% if actContent.description %}
+		<div class="info-item">
+			<div class="info-title">| Activity&nbsp;&nbsp;Description</div>
+			<table align="left" width=1000>
+				<tr><td><p>{{actContent.description}}</p></td></tr>
+			</table>
+		</div>
+		{% endif %}
+
+		{% if isManager %}
+		<div class="info-item">
+			<div class="info-title">| Participants: </div>
+			<table align="left" width="1000px;">
+				<col style="width:200px;">
+				<col style="width:800px;">
+				{% for category, users in participants_dict.items() %}
+					<tr><td align="left"><p style="font-size:18px;font-weight:600;">{{category}}:</p></td>
+					{% for user in users %}
+						<td><p>{{user}}</p></td>
+					</tr>
+					{% endfor %}
+				{% endfor %}
+			</table>
+		</div>
+		{% endif %}
+	</div>
+</div>
+</div>
+
+
+
+<!--Bottom-->
+<div id="indexbottom" style="margin-top:400px">
+    <div style="margin-left:80px;padding-top:60px;">
+        <ul style="float:left;list-style-type: none;">
+            <li><p><img src="../static/img/logo.png" width="40px" height="40px;" align="center"> Activity Hub</p></li>
+            <li style="padding-left: 100px;"><p><img src="../static/img/location.png" width="30px" height="30px;" align="center"> Foshan, Guanddong, China</p></li>
+            <li style="padding-left: 100px;"><p><img src="../static/img/phone.png" width="25px" height="25px;" align="center"> 189-2805-5891</p></li>
+            <li style="padding-left: 100px;"><p><img src="../static/img/mail.png" width="30px" height="30px;" align="center"> cams@ntesmail.com</p></li>
+            <li style="padding-left: 100px;"><p><img src="../static/img/rights.png" width="30px" height="30px;" align="center"> 2024 Activity Hub. All rights reserved.</p></li>
+        </ul>
+    </div>
+</div>	
+</body>
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ club.club_name }}</title>
+    <link rel="stylesheet" href="../static/css/EditClub.css">
+    <script src="../static/js/ClubDetail.js"></script>
+</head>
+<body>
+<div id="nav">
+    <ul style="list-style: none">
+        <li><div id="logotop"><a href="/"><img src="../static/img/logo.png" width="100" height="100"></a></div></li>
+        <a href="{{ url_for('clublb.clublobby') }}"><li class="navli">Club Lobby</li></a>
+        <a href="{{ url_for('myclub.MyClub') }}"><li class="navli">My Club</li></a>
+        <a href="{{ url_for('actlb.activityLobby') }}"><li class="navli">Activity Lobby</li></a>
+        <a href="{{ url_for('myAct.MyActivity') }}"><li class="navli">My Activity</li></a>
+        {% if username %}
+            <a href="{{ url_for('myInfo.myInformation') }}"><li class="navli" id="username">{{ username }}</li></a>
+            <form action="/Logout" method="post" id="logoutForm" style="display: none;">
+                <button type="submit" style="display: none;">Logout</button></form>
+            <a href="{{ url_for('lr.logout') }}" onclick="confirmLogout(event)"><li class="navli" id="logout">Logout</li></a>
+        {% else %}
+            <a href="{{ url_for('lr.login') }}"><li class="navli" id="login">Login</li></a>
+            <a href="{{ url_for('lr.register') }}"><li class="navli" id="register">Register</li></a>
+        {% endif %}
+    </ul>
+</div>
+
+<div id="EditClub">
+    <div id="FormOutline">
+
+        <!-- 表单提交时调用confirmSave()函数 -->
+        <form id="editClubForm" method="POST" onsubmit="confirmSave(event)">
+            <div style="margin-left:210px;margin-top:50px;"><img src="../static/img/EditClub.png" width="580px" height="52px;"></div>
+            <p class="inputTitle" style="margin-top:40px;"><span>Club Name: </span><span style="color:#fa8383;">*</span></p>
+            <input class="inputText" type="text" id="club_name" name="club_name" value="{{ club.club_name }}" required><br><br>
+
+            <p class="inputTitle" style="margin-top:10px;"><span>Description: </span><span style="color:#fa8383;">*</span></p>
+            <textarea class="inputText" id="description" name="description" rows="4" cols="50" required>{{ club.description }}</textarea><br><br>
+
+            <!-- 提交按钮 -->
+            <button type="submit" id="submit">Save Changes</button>
+        </form>
+
+        <!-- 返回按钮 -->
+        <a href="{{ url_for('clubdt.clubDetail', club_id=club.club_id) }}">
+            <button id="back">Back</button>
+        </a>
+    </div>
+</div>
+
+<!--Bottom-->
+<div id="indexbottom" style="margin-top:400px">
+    <div style="margin-left:80px;padding-top:60px;">
+        <ul style="float:left;list-style-type: none;">
+            <li><p><img src="../static/img/logo.png" width="40px" height="40px;" align="center"> Activity Hub</p></li>
+            <li style="padding-left: 100px;"><p><img src="../static/img/location.png" width="30px" height="30px;" align="center"> Foshan, Guanddong, China</p></li>
+            <li style="padding-left: 100px;"><p><img src="../static/img/phone.png" width="25px" height="25px;" align="center"> 189-2805-5891</p></li>
+            <li style="padding-left: 100px;"><p><img src="../static/img/mail.png" width="30px" height="30px;" align="center"> cams@ntesmail.com</p></li>
+            <li style="padding-left: 100px;"><p><img src="../static/img/rights.png" width="30px" height="30px;" align="center"> 2024 Activity Hub. All rights reserved.</p></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>
