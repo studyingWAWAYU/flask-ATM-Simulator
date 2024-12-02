@@ -150,10 +150,13 @@
 				<col style="width:800px;">
 				{% for category, users in participants_dict.items() %}
 					<tr><td align="left"><p style="font-size:18px;font-weight:600;">{{category}}:</p></td>
-					{% for user in users %}
-						<td><p>{{user}}</p></td>
+					<td>
+						{% for user in users %}
+							{{user}},ensp;
+						{% endfor %}
+					</td>
 					</tr>
-					{% endfor %}
+
 				{% endfor %}
 			</table>
 		</div>
