@@ -44,5 +44,3 @@ app.register_blueprint(MyClub.myclub)
 
 
 
-
-

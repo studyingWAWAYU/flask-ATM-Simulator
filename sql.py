@@ -84,6 +84,7 @@ with app.test_request_context():
 '''
 
 '''
+
 #写入数据，写过之后注释掉
 with app.test_request_context():
     #创建ORM对象
@@ -94,4 +95,3 @@ with app.test_request_context():
 
     #将db.session中的改变同步到数据库
 '''
-
