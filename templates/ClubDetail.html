@@ -32,7 +32,7 @@
     {% if is_manager %}
     <div id="button-area">
         <a href="{{ url_for('clubdt.releaseAnnouncement', club_id=club.club_id) }}">
-            <button class="clubmg">Release Announcement</button>
+            <button class="clubmg" style="width:250px;">Release Announcement</button>
         </a>
         <a href="{{ url_for('clubdt.editClub', club_id=club.club_id) }}">
             <button class="clubmg">Edit Club</button>
