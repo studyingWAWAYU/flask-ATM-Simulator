@@ -2,10 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Club Lobby</title>
-    <link rel="stylesheet" href="../static/css/ClubLobby.css">
-    <script src="../static/js/ClubLobby.js"></script>
+    <title>Create Club</title>
+    <link rel="stylesheet" href="../static/css/CreateClub.css">
+    <script src="../static/js/index.js"></script>
 </head>
 <body>
 <div id="nav">
@@ -28,48 +27,21 @@
 </div>
 
 
-<div id="ClubContainer">
+<div id="CreateClub">
+    <div id="FormOutline">
+        <form action="{{ url_for('clublb.createClub') }}" method="POST">
+            <div style="margin-left:210px;margin-top:50px;"><img src="../static/img/CreateClub.png" width="580px" height="52px;"></div>
+            <p class="inputTitle" style="margin-top:40px;"><span>Club Name: </span><span style="color:#fa8383;">*</span></p>
+            <input type="text" id="club_name" name="club_name" required class="inputText"><br><br>
 
-    <hr style="width: 1700px; margin: 20px auto; border:1px solid #e5e5e6;">
-    <div id="searchbox" style="padding-top:15px; margin-bottom:20px;">
-        <form action="{{ url_for('clublb.clublobby') }}" method="get">
-            <input type="text" id="search-input" class="google-search-input" name="search" placeholder="Search clubs..." value="{{ search_query or '' }}">
-            <button type="submit" id="search">Search</button>
+            <p class="inputTitle" style="margin-top:10px;"><span>Description: </span><span style="color:#fa8383;">*</span></p>
+            <textarea id="description" name="description" rows="4" cols="50" required class="inputText"></textarea><br><br>
+
+            <button type="submit" id="submit">Create Club</button>
+            <button type="button" id="back" onclick="window.history.back();">Back</button>
         </form>
     </div>
-
-    <!-- 当前用户参与的社团 -->
-    <div class="section">
-        <h2>Your Clubs</h2>
-        {% if user_id %}
-            {% if user_clubs %}
-            <table class="club-table">
-                <thead>
-                    <tr>
-                        <th>Club Name</th>
-                        <th>Manager</th>
-                        <th>Num of Members</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for club,manager,numMembers in user_clubs %}
-                        <tr>
-                            <td><a href="{{ url_for('clubdt.clubDetail', club_id=club.club_id) }}" class="tablehref">{{ club.club_name }}</a></td>
-                            <td>{{ manager }}</td>
-                            <td>{{ numMembers }}</td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-            {% else %}
-            <p align="center" style="color:#CC0000;font-size:20px;margin-top:30px;">You are not a member of any club yet.</p>
-            {% endif %}
-        {% else %}<p align="center" style="color:#CC0000;font-size:20px;margin-top:30px;">Please login in first to check your club.</p>
-        {% endif %}
-    </div>
-
-    <hr style="width: 1700px; margin: 20px auto; border:1px solid #e5e5e6;">
-
+</div>
 
 
 <!--Bottom-->
@@ -84,5 +56,6 @@
         </ul>
     </div>
 </div>
+
 </body>
 </html>

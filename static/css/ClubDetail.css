@@ -1,0 +1,333 @@
+/*navigation*/
+#logotop{
+    padding-left:70px;
+    background-color:#C4E2FF;
+    height:60px;
+    padding-right:680px;
+}
+#nav{
+    width: 1700px;
+    height:60px;
+    background-color: #C4E2FF;
+    position:fixed;
+    z-index:10;
+    margin-top:0;
+    left:50%;
+    margin-left:-850px;
+}
+*{
+    padding:0;
+    margin:0;
+    position:relative;
+}
+li{
+    float:left;
+}
+.navli{
+    list-style-type:none;
+    width: 160px;
+    height:60px;
+    line-height: 60px;
+    background: #C4E2FF;
+    font-family:"微软雅黑 Light";
+    color:#415468;
+    font-weight: bold;
+    align: center;
+    text-align: center;
+    border-left:2px solid #DAEDFF;
+}
+.navli:hover{
+    background-color: #DAEDFF;
+    color:#28313A;
+}
+#login{padding-left:10px;width:80px;}
+#register{border:none;width:80px;}
+#username{padding-left:10px;width:80px;}
+#logout{border:none;width:80px;}
+#login:hover{background-color: #C4E2FF; font-weight: bold;}
+#register:hover{background-color: #C4E2FF; font-weight: bold;}
+#logout:hover{background-color: #C4E2FF; font-weight: bold;}
+#username:hover{background-color:#C4E2FF}
+/*end of navigation*/
+
+/*轮播图片*/
+#FunctionContainer{
+    width:1700px;
+    height:720px;
+    display: block;
+    margin:auto;
+}
+#alternatePlay{
+    position:absolute;
+    width:760px;
+    height:500px;
+    top:135px;
+    left:20px;
+}
+#leftbtn{
+    position:absolute;
+    width:40px;
+    height:40px;
+    top:360px;
+    left:30px;
+}
+#rightbtn{
+    position:absolute;
+    width:40px;
+    height:40px;
+    top:360px;
+    left:730px;
+}
+#box{
+    width:750px;
+    height:750px;
+    margin-left:70px;
+}
+#upbox{
+    width:650px;
+    height:190px;
+    margin-top:-470px;
+    margin-left:920px;
+}
+#lowbox{
+    width:650px;
+    height:190px;
+    margin-top:-75px;
+    margin-left:920px;
+}
+.allFunctions{
+    color:#415468;
+    float:left;
+    width:150px;
+    height:172px;
+    margin-top:-50px;
+    padding-top:18px;
+    background-color: rgba(255, 255, 255, 0.95);
+    border:1px solid #C4E2FF;
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px 3px #DAEDFF;
+    font-size:20px;
+}
+.allFunctions:hover{
+    z-index: 9;
+}
+
+/*functions provided for managers and members*/
+.mandm{
+    width:1700px;
+    height:200px;
+    margin:20px auto;
+    margin-top:50px;
+}
+.left{
+    width:650px;
+    height:400px;
+    float:left;
+    margin-left:180px;
+    margin-top:50px;
+}
+.leftimg{
+    width:500px;
+    height:360px;
+    float:left;
+    margin-top:8px;
+    margin-left:-10px;
+    text-align: center;
+}
+.righttext{
+    width:220px;
+    height:200px;
+    float:right;
+    margin-top:70px;
+    margin-left:-130px;
+    background-color: rgba(255, 255, 255, 0.95);
+    font-size:20px;
+    color:#58708D;
+    box-shadow: 1px 1px 2px 2px #e6f8fa;
+    padding-left:10px;
+    padding-right:10px;
+    padding-top: 10px;
+}
+.right{
+    width:650px;
+    height:400px;
+    float:right;
+    margin-right:120px;
+    margin-top:50px;
+}
+
+
+
+/*底部*/
+#indexbottom{
+    width:1700px;
+    height:180px;
+    margin-top:170px;
+    background-color:#C4E2FF;
+    left:50%;
+    margin-left:-850px;
+    color:#415468;
+    position: fixed;     /* 固定定位 */
+    bottom: 0;           /* 距离页面底部为0 */
+}
+
+/*Classification*/
+#ClubDetail{
+    width:1700px;
+    height:240px;
+    display: block;
+    margin: auto;
+    padding-top: 140px;
+	padding-left: 80px;
+    /* border:1px solid; */
+}
+
+.clubmg{
+    background-color: #C4E2FF;
+    width:180px;
+    height:45px;
+    border: 1px solid #99c2ed;
+    border-radius: 10px;
+    margin-right:20px;
+    margin-bottom: 50px;
+    font-size:18px;
+	font-weight: 600;
+	cursor: pointer;
+}
+.clubmg:hover{
+	background: #daedff;
+}
+
+h1,p{
+    font-family: 'Baskerville Old Face'
+}
+
+
+#container {
+    display: flex;               /* 激活 flexbox 布局 */
+    justify-content: space-between; /* 子元素左右分布，左边对齐，右边对齐 */
+    padding: 0;               /* 容器内边距 */
+    height: 230px;
+    width: 94%;
+    margin-top: 20px;
+}
+
+#left {
+    flex: 0 0 70%;  /* 不允许扩展或收缩，占用父容器的 70% 宽度 */
+    margin-right: 10px;
+}
+
+#right {
+    flex: 0 0 30%;  /* 不允许扩展或收缩，占用父容器的 30% 宽度 */
+
+}
+
+#post,#description,#manager,#description,#member-list{
+    color:black;
+    background-color: white;
+    border-radius: 5px;
+    padding-top: 40px;
+    font-size: 26px;
+}
+
+.special_title{
+    animation: colorChange 3s infinite, float 3s ease-in-out infinite;
+    text-align: center;
+    margin-bottom:10px;
+    font-size: 32px;
+}
+
+/* 字体颜色渐变动画 */
+@keyframes colorChange {
+    0% {
+        color: aliceblue;
+    }
+    50% {
+        color: skyblue; /* 变化到珊瑚色 */
+    }
+    100% {
+        color: aliceblue; /* 回到原来的蓝色 */
+    }
+}
+
+/* 浮动效果 */
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px); /* 向上浮动10px */
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+
+#post {
+
+    padding: 40px 20px;
+	border: 1px solid #C4E2FF;
+	box-shadow: 4px 4px 0px 0px #DAEDFF;
+}
+
+#description {
+
+    padding: 40px 20px;
+    margin-top: 10px;
+	border: 1px solid #C4E2FF;
+	box-shadow: 4px 4px 0px 0px #DAEDFF;
+}
+
+#manager {
+
+    padding: 40px 20px;
+	border: 1px solid #C4E2FF;
+	box-shadow: 4px 4px 0px 0px #DAEDFF;
+    display: block;
+    height: 90px;
+}
+
+#member-list {
+    padding: 40px 20px;
+    margin-top: 10px;
+	border: 1px solid #C4E2FF;
+	box-shadow: 4px 4px 0px 0px #DAEDFF;
+    display: block;
+    height: 307px;
+}
+
+.member-list-container {
+    height:250px;
+    overflow-y: auto; /* 当内容超出时，显示垂直滚动条 */
+    border: 2px solid #c4e2ff; /* 边框样式 */
+    padding: 10px;
+    background-color: #f9f9f9; /* 背景颜色 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+}
+
+.manager-container{
+    height:40px;
+    border: 2px solid #c4e2ff; /* 边框样式 */
+    padding: 10px;
+    background-color: #f9f9f9; /* 背景颜色 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 阴影效果 */
+}
+
+.member-list {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+}
+
+.member {
+    padding: 8px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e0e0e0; /* 分隔线 */
+    transition: background-color 0.3s ease;
+}
+
+.member:hover {
+    background-color: #f0f0f0; /* 悬浮效果 */
+}
+

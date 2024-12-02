@@ -2,7 +2,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Clubs</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Club Lobby</title>
+    <link rel="stylesheet" href="../static/css/ClubLobby.css">
+    <script src="../static/js/ClubLobby.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.0/dist/echarts.min.js"></script>
+    <style>
+        #chart {
+            width: 95%;
+            height: 400px;
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
 <div id="nav">
@@ -25,8 +36,98 @@
 </div>
 
 
+<div id="ClubContainer">
 
+    <button id="createClub"><a href="{{ url_for('clublb.createClub') }}">To create club</a></button>
 
+    <hr style="width: 1600px; margin: 40px 0; border:1px solid #e5e5e6;">
+    <h2 style="text-align: center;width: 95%">Top 10 Clubs by Member Count</h2>
+    <div id="chart"></div> <!-- 图表容器 -->
+
+    <script type="text/javascript">
+        // 获取从 Flask 传递的俱乐部名称和成员数
+        var clubNames = {{ club_names | tojson }};
+        var memberCounts = {{ member_counts | tojson }};
+
+        // 使用 ECharts 渲染图表
+        var myChart = echarts.init(document.getElementById('chart'));
+
+        var option = {
+            title: {
+                text: '',
+            },
+            tooltip: {
+                trigger: 'axis',
+                axisPointer: { type: 'shadow' }
+            },
+            xAxis: {
+                type: 'category',
+                data: clubNames
+            },
+            yAxis: {
+                type: 'value'
+            },
+            series: [{
+                name: 'Member Count',
+                type: 'bar',
+                data: memberCounts,
+                emphasis: {
+                    focus: 'series'
+                },
+                itemStyle: {
+                    normal: {
+                        // 设置柱子的颜色
+                        color: function(params) {
+                            // 可以根据某些条件自定义颜色，或者使用一个颜色数组
+                            var colors = ['#A3D2CA', '#99c2ed', '#ffcccb', '#ffa07a', '#f0e68c', '#D8BFD8', '#FFC857', '#009999', '#b0e0e6', '#ff6347'];
+                            return colors[params.dataIndex % colors.length];  // 循环使用颜色数组中的颜色
+                        }
+                    }
+                }
+            }]
+        };
+
+        myChart.setOption(option);
+    </script>
+    <hr style="width: 1600px; margin: 40px 0; border:1px solid #e5e5e6;">
+    <div id="searchbox" style="padding-top:15px; margin-bottom:20px;">
+        <form action="{{ url_for('clublb.clublobby') }}" method="get">
+            <input type="text" id="search-input" class="google-search-input" name="search" placeholder="Search clubs..." value="{{ search_query or '' }}">
+            <button type="submit" id="search">Search</button>
+        </form>
+    </div>
+
+    <!-- 所有社团的列表 -->
+    <div class="section">
+        <h2>All Clubs</h2>
+        {% if clubs %}
+            <table class="club-table">
+                <thead>
+                    <tr>
+                        <th>Club Name</th>
+                        <th>Manager</th>
+                        <th>Num Of Members</th>
+                        <th>Description</th>
+                        <th>Created Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for club,manager,numMembers in clubs %}
+                        <tr>
+                            <td><a href="{{ url_for('clubdt.clubDetail', club_id=club.club_id) }}" class="tablehref">{{ club.club_name }}</a></td>
+                            <td>{{ manager.username }}</td>
+                            <td>{{ numMembers }}</td>
+                            <td>{{ club.description }}</td>
+                            <td>{{ club.created_time }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No clubs available at the moment.</p>
+        {% endif %}
+    </div>
+</div>
 
 <!--Bottom-->
 <div id="indexbottom" style="margin-top:400px">
