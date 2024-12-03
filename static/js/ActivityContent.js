@@ -80,39 +80,26 @@ document.addEventListener('DOMContentLoaded', function () {
         postSigninCodeBtn.addEventListener('click', function(event) {
             event.preventDefault();
 
+            const signinCode = prompt('Enter a 6-digit sign-in code:');
+
+            // Validate if the input is a 6-digit number
+            if (!/^\d{6}$/.test(signinCode)) {
+                alert('Sign-in code invalid.');
+                return;
+            }
+
             fetch('/postSigninCode', {
-                method: 'GET',
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ signin_code: signinCode })
             })
-            .then (response => response.json())
+            .then(response => response.json())
             .then(data => {
-                if (data.signin_code) {
-                    // 如果已有签到码，显示错误信息
-                    alert('This activity already has a sign-in code.');
-                } else {
-                    // 弹出输入框让用户输入签到码
-                    const signinCode = prompt('Enter a 6-digit sign-in code:');
-
-                    // Validate if the input is a 6-digit number
-                    if (!/^\d{6}$/.test(signinCode)) {
-                        alert('Sign-in code invalid.');
-                        return;
-                    }
-
-                    // 发送请求到后端
-                    fetch('/postSigninCode', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ signin_code: signinCode})
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.message) {
-                            alert(data.message);  // 显示成功消息
-                            location.reload();  // 刷新页面
-                        }
-                    });
+                if (data.message) {
+                    alert(data.message);  // Show success message
+                    location.reload();  // Reload the page to reflect changes
                 }
             });
         });

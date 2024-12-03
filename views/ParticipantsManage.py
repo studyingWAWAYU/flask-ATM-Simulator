@@ -134,13 +134,8 @@ def add_participant():
         return jsonify({"message": "Participant added successfully!"})
 
 # 发布签到码
-@parManage.route('/postSigninCode', methods=['GET', 'POST'])
+@parManage.route('/postSigninCode', methods=['POST'])
 def post_signin_code():
-    if request.method == 'GET':
-        activity_id = session.get('activity_id')
-        signin_code = db.session.query(Activity.signin_code).filter_by(activity_id=activity_id).scalar()
-        if signin_code:
-            return jsonify({'signin_code': signin_code})
     if request.method == 'POST':
         data = request.get_json()  # 获取前端发送的 JSON 数据
         activity_id = session.get('activity_id')  # 获取活动 ID
