@@ -18,6 +18,15 @@ def format_date(date):
     else:
         return ''
 
+def update_status(act):
+    current = datetime.now()
+    if act.end_time < current:
+        return 'Completed'
+    elif act.start_time <= current <= act.end_time:
+        return 'Ongoing'
+    else:
+        return 'Upcoming'
+
 @actlb.route('/ActivityLobby',methods = ['GET','POST'])  # 用装饰器定义路由的对应关系
 def activityLobby():
     user_id = session.get('id')
@@ -46,6 +55,7 @@ def activityLobby():
             Act = Activity.query.filter(Activity.activity_id.in_(ActIdLst)).all()
 
             for act in Act:
+                act.status = update_status(act)
                 ClubId = act.club_id
                 clubName = db.session.query(Club.club_name).filter_by(club_id=ClubId).scalar()
                 clubNames[act.activity_id] = clubName
