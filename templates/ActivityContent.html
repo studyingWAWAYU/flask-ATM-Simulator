@@ -64,14 +64,26 @@
 			<span class="label">REMAINING : &nbsp;</span>
 			<div id="rem-participants" class="number">{{remaining}}</div>
 		</div>
-
 	</div>
 
 	{% if not isManager %}
 		<button id="sup-btn">{{par_status}}</button>
+        <input type="hidden" id="activity-id" value="{{ actContent.activity_id }}">
+        <input type="hidden" id="user-id" value="{{ session.get('id') }}">
+        <th>
+            <div class="signin-container">
+                <button id="signin-btn" class="signin-btn">Sign In</button>
+            </div>
+        </th>
+
 	{% else %}
 		<a href="/EditActivity/{{actContent.activity_id}}"><button id="edit-btn" >Edit this Activity</button></a>
-	 	<form id="deleteForm" action="/delete_activity/{{actContent.activity_id}}" method="POST" style="display:none;">
+        <th>
+            <div class="post-signin-code-container">
+            <button id="post-signin-code-btn" class="post-signin-code-btn">Post Sign In Code</button>
+            </div>
+        </th>
+        <form id="deleteForm" action="/delete_activity/{{actContent.activity_id}}" method="POST" style="display:none;">
 			<button type="submit" style="display:none;"></button>
 		</form>
 		<a href="/delete_activity/{{actContent.activity_id}}" id="delete-btn" onclick="confirmDelete(event)" style="margin-top:20px;">Delete this Activity</a>
@@ -145,7 +157,11 @@
 
 		{% if isManager %}
 		<div class="info-item">
-			<div class="info-title">| Participants: </div>
+			<div class="info-title">| Participants:
+            <a href="{{ url_for('actManage.manage_act', activity_id=actContent.activity_id) }}">
+                <button id="manage-participants-btn">Manage Participants</button>
+            </a>
+            </div>
 			<table align="left" width="1000px;">
 				<col style="width:200px;">
 				<col style="width:800px;">
@@ -157,7 +173,6 @@
 						{% endfor %}
 					</td>
 					</tr>
-
 				{% endfor %}
 			</table>
 		</div>

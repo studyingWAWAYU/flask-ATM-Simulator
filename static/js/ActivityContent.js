@@ -16,6 +16,137 @@ function confirmDelete(event){
     }
 }
 
+document.addEventListener("DOMContentLoaded", function() {
+    const signupBtn = document.getElementById("sup-btn");
+    if (signupBtn) {
+        signupBtn.addEventListener("click", function(event) {
+            event.preventDefault();
+
+            // 弹出确认框
+            const confirmation = confirm("Are you sure you want to sign up for this activity?");
+            if (!confirmation) {
+                return;  // 如果用户取消报名，直接返回
+            }
+
+            // 获取活动 ID 和用户 ID 从页面中的 hidden input 或其他元素
+            const activityId = document.getElementById('activity-id').value;  // 获取活动 ID
+            const userId = document.getElementById('user-id').value;  // 获取用户 ID
+
+            if (!userId) {
+                // 如果用户未登录，提示并跳转到登录页面
+                alert("Please log in first to sign up for the activity.");
+                window.location.href = "/Login";  // 跳转到登录页面
+                return;
+            }
+
+            // 获取当前的报名状态
+            const parStatus = signupBtn.textContent.trim();
+            if (parStatus === "Confirmed" || parStatus === "Registered") {
+                // 如果用户已经确认报名，则不能再次报名
+                alert("You have already confirmed your participation.");
+                return;
+            }
+
+            // 向后端发送报名请求
+            fetch('/applyAct', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    userId: userId,
+                    activityId: activityId
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert("You have successfully signed up!");
+                    signupBtn.textContent = "Registered";  // 更新按钮状态
+                    const remainingCount = document.getElementById("rem-participants");
+                    remainingCount.textContent = data.remaining;  // 更新剩余名额
+                    location.reload();  // 刷新页面
+                } else {
+                    alert(data.message);  // 显示错误信息
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                alert("An error occurred. Please try again later.");
+            });
+        });
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const postSigninCodeBtn = document.getElementById('post-signin-code-btn');
+    if (postSigninCodeBtn) {
+        postSigninCodeBtn.addEventListener('click', function(event) {
+            event.preventDefault();
+
+            const signinCode = prompt('Enter a 6-digit sign-in code:');
+
+            // Validate if the input is a 6-digit number
+            if (!/^\d{6}$/.test(signinCode)) {
+                alert('Sign-in code invalid.');
+                return;
+            }
+
+            fetch('/postSigninCode', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ signin_code: signinCode })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    alert(data.message);  // Show success message
+                    location.reload();  // Reload the page to reflect changes
+                }
+            });
+        });
+    }
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const SigninBtn = document.getElementById('signin-btn');
+
+    if (SigninBtn) {
+        SigninBtn.addEventListener('click', function(event) {
+            event.preventDefault();
+
+            // 弹出提示框让用户输入签到码
+            const signinCode = prompt('Enter a 6-digit sign-in code:');
+
+            // 校验签到码是否是6位数字
+            if (!/^\d{6}$/.test(signinCode)) {
+                alert('Incorrect sign-in code.');
+                return;
+            }
+
+            // 发送请求到后端
+            fetch('/signin', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ new_signin_code: signinCode })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.message) {
+                    alert(data.message);  // 显示成功消息
+                    location.reload();  // 刷新页面
+                } else if (data.error) {
+                    alert(data.error);  // 显示错误消息
+                }
+            });
+        });
+    }
+});
+
 var idx = 0;
 var t = null;
 var totalImgs = 0;
