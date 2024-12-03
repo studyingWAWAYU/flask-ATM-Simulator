@@ -63,12 +63,6 @@ li{
     width:1500px;
     margin-left:100px;
 }
-
-.add-participant-container {
-    display: flex;
-    justify-content: flex-start;
-}
-
 .add-participant-btn {
     background-color: #C4E2FF;
     padding: 10px 20px;
