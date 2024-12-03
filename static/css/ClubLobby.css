@@ -265,8 +265,13 @@ a{
 
 .club-table tr:hover {
     background-color: #f1f1f1;
-    color: deepskyblue;
+    color: cornflowerblue;
 }
+
+.club-table tr:hover a{
+    color: cornflowerblue;
+}
+
 .club-table tr:hover th {
     color: black;  /* 在鼠标悬停时，表头文字颜色保持不变 */
 }
@@ -336,7 +341,7 @@ a{
 
 /* 设置鼠标悬停时的链接样式 */
 .tablehref:hover{
-    color: deepskyblue;;               /* 悬停时的链接颜色变深 */
+    color: cornflowerblue;;               /* 悬停时的链接颜色变深 */
     text-decoration: underline;   /* 悬停时添加下划线 */
     transform: scale(1.1);        /* 鼠标悬停时放大 */
 }
