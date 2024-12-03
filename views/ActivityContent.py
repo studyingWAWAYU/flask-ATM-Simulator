@@ -45,7 +45,7 @@ def activityContent(activity_id):
         if par_role == "manager":
             isManager = True
             # 如果没有指定role，或role只有一种就按status分类显示
-            if ";" not in actContent.roles or actContent.roles is None:
+            if actContent.roles is None or ";" not in actContent.roles:
                 status_dict = {}
                 for p in participant:
                     status = p.status

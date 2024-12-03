@@ -5,10 +5,10 @@ from ATMflask import db
 from ATMflask.sql import User, Participant, Activity
 
 # 定义 Blueprint，用于模块化管理活动相关的路由
-actManage = Blueprint('actManage', __name__)
+parManage = Blueprint('parManage', __name__)
 
 # 报名活动的路由
-@actManage.route('/applyAct', methods=['POST'])
+@parManage.route('/applyAct', methods=['POST'])
 def apply_act():
     data = request.get_json()
     user_id = data.get('userId')  # 获取用户 ID
@@ -48,7 +48,7 @@ def apply_act():
 
 
 # 管理活动的路由
-@actManage.route('/ParticipantsManage/<int:activity_id>', methods=['GET', 'POST'])
+@parManage.route('/ParticipantsManage/<int:activity_id>', methods=['GET', 'POST'])
 def manage_act(activity_id):
     # 获取活动 ID
     activity_id = activity_id
@@ -77,7 +77,7 @@ def manage_act(activity_id):
                     'user_phone_number': user_phone_number if user_phone_number else 'N/A'})
         return render_template('ParticipantsManage.html', participants=participant_details, activity_id=activity_id)
 #删除参与者
-@actManage.route('/deleteParticipant', methods=['POST'])
+@parManage.route('/deleteParticipant', methods=['POST'])
 def delete_participant():
         data = request.get_json()
         user_id = data.get('user_id')
@@ -91,7 +91,7 @@ def delete_participant():
         return jsonify({"message": "Participant deleted successfully!"})
 
 # 更新参与者状态
-@actManage.route('/updateStatus', methods=['POST'])
+@parManage.route('/updateStatus', methods=['POST'])
 def update_status():
     data = request.get_json()
     user_id = data.get('user_id')
@@ -106,7 +106,7 @@ def update_status():
         return jsonify({"message": "Status updated successfully!"})
 
 # 增加参与者
-@actManage.route('/addParticipant', methods=['POST'])
+@parManage.route('/addParticipant', methods=['POST'])
 def add_participant():
     data = request.get_json()
     user_id = data.get('user_id')
@@ -133,7 +133,7 @@ def add_participant():
         return jsonify({"message": "Participant added successfully!"})
 
 # 发布签到码
-@actManage.route('/postSigninCode', methods=['POST'])
+@parManage.route('/postSigninCode', methods=['POST'])
 def post_signin_code():
     if request.method == 'POST':
         data = request.get_json()  # 获取前端发送的 JSON 数据
@@ -151,7 +151,7 @@ def post_signin_code():
             return jsonify({'error': 'Activity ID not found.'}), 400  # 返回错误信息
 
 # 签到
-@actManage.route('/signin', methods=['POST'])
+@parManage.route('/signin', methods=['POST'])
 def signin():
     user_id = session.get('id')
     activity_id = session.get('activity_id')

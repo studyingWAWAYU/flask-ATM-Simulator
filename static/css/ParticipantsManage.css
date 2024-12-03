@@ -63,12 +63,6 @@ li{
     width:1500px;
     margin-left:100px;
 }
-
-.add-participant-container {
-    display: flex;
-    justify-content: flex-start;
-}
-
 .add-participant-btn {
     background-color: #C4E2FF;
     padding: 10px 20px;
@@ -80,7 +74,6 @@ li{
     margin-top:-8px;
     margin-left:5px;
 }
-
 .add-participant-btn:hover {
     background-color: #daedff;
 }
@@ -98,17 +91,14 @@ table {
     border-collapse: collapse;
     font-size: 18px;
 }
-
 table th, table td {
     padding: 12px;
     text-align: center;
     border-bottom: 1px solid #ddd;
-    vertical-align: top;
 }
-
 table th {
     padding-top:20px;
-    padding-bottom:10px;
+    padding-bottom:15px;
     background-color: #f4f4f4;
 }
 
