@@ -1,11 +1,20 @@
 from flask import render_template,request,redirect, flash,session
 from flask import Blueprint
+from datetime import datetime
 
 from ATMflask import db
 from ATMflask.sql import User, Participant, Activity, Membership, Club
 
 myAct = Blueprint('myAct',__name__)
 
+def update_status(act):
+    current = datetime.now()
+    if act.end_time < current:
+        return 'Completed'
+    elif act.start_time <= current <= act.end_time:
+        return 'Ongoing'
+    else:
+        return 'Upcoming'
 @myAct.route('/MyActivity',methods = ['GET','POST'])  # 用装饰器定义路由的对应关系
 def MyActivity():
     user_id = session.get('id')
@@ -33,6 +42,7 @@ def MyActivity():
             myAct = Activity.query.filter(Activity.activity_id.in_(myActIdLST)).all()
             #print(myAct)
             for act in myAct:
+                act.status = update_status(act)
                 ClubId = act.club_id
                 clubName = db.session.query(Club.club_name).filter_by(club_id=ClubId).scalar()
                 clubNames[act.activity_id] = clubName
