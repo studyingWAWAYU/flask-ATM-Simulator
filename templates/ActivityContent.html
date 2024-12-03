@@ -34,8 +34,8 @@
 	<div id="left-top" style="margin: 45px auto;">
 		<div id="carousel">
 			<div class="carousel-imgs">
-			{% if filelist %}
-				{% for fname in filelist %}
+		{% if filelist %}
+			{% for fname in filelist %}
 						<img class="act-imgs" src= "../static/img/uploads/{{actContent.activity_id}}/{{fname}}" width="400px" height="240" style="display:none;"/>
 						<img id="act-img" src="../static/img/uploads/{{actContent.activity_id}}/{{filelist[0]}}" width="400px" height="250" onclick="stopAndContinue()"/>
 					{% endfor %}
@@ -56,13 +56,13 @@
 <hr style="width: 400px; margin:20px auto; border:1px solid #e5e5e6;">
 
 	<div id="left-bottom" style="margin: 80px auto;">
-		<div class="people" style="margin: 40px auto">
-			<span class="label">REMAINING : &nbsp;</span>
-			<div id="rem-participants" class="number">{{remaining}}</div>
-		</div>
 		<div class="people" style="margin: 40px auto">	
 			<span class="label">MAX : &nbsp;</span>
 			<div id="max-participants" class="number">{{actContent.max_participant}}</div>
+		</div>
+		<div class="people" style="margin: 40px auto">
+			<span class="label">REMAINING : &nbsp;</span>
+			<div id="rem-participants" class="number">{{remaining}}</div>
 		</div>
 	</div>
 
