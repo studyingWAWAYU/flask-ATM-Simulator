@@ -78,11 +78,13 @@
 
 	{% else %}
 		<a href="/EditActivity/{{actContent.activity_id}}"><button id="edit-btn" >Edit this Activity</button></a>
+        {% if not isSignincode %}
         <th>
             <div class="post-signin-code-container">
             <button id="post-signin-code-btn" class="post-signin-code-btn">Post Sign In Code</button>
             </div>
         </th>
+        {% endif %}
         <form id="deleteForm" action="/delete_activity/{{actContent.activity_id}}" method="POST" style="display:none;">
 			<button type="submit" style="display:none;"></button>
 		</form>

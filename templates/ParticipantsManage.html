@@ -9,24 +9,24 @@
 </head>
 <body>
     <!--Navigation-->
-    <div id="nav">
-        <ul style="list-style: none">
-            <li><div id="logotop"><a href="/"><img src="../static/img/logo.png" width="100" height="100"></a></div></li>
-            <a href="../ClubLobby"><li class="navli">Club Lobby</li></a>
-            <a href="../MyClub"><li class="navli">My Club</li></a>
-            <a href="../ActivityLobby"><li class="navli">Activity Lobby</li></a>
-            <a href="../MyActivity"><li class="navli">My Activity</li></a>
-            {% if username %}
-                <a href="../MyInformation"><li class="navli" id="username">{{ username }}</li></a>
-                <form action="/Logout" method="post" id="logoutForm" style="display: none;">
-                    <button type="submit" style="display: none;">Logout</button></form>
-                <a href="../Logout" onclick="confirmLogout(event)"><li class="navli" id="logout">Logout</li></a>
-            {% else %}
-                <a href="../Login"><li class="navli" id="login">Login</li></a>
-                <a href="../Register"><li class="navli" id="register">Register</li></a>
-            {% endif %}
-        </ul>
-    </div>
+<div id="nav">
+    <ul style="list-style: none">
+        <li><div id="logotop"><a href="/"><img src="../static/img/logo.png" width="100" height="100"></a></div></li>
+        <a href="../ClubLobby"><li class="navli">Club Lobby</li></a>
+        <a href="../MyClub"><li class="navli">My Club</li></a>
+        <a href="../ActivityLobby"><li class="navli">Activity Lobby</li></a>
+        <a href="../MyActivity"><li class="navli">My Activity</li></a>
+        {% if username %}
+            <a href="../MyInformation"><li class="navli" id="username">{{ username }}</li></a>
+            <form action="/Logout" method="post" id="logoutForm" style="display: none;">
+                <button type="submit" style="display: none;">Logout</button></form>
+            <a href="../Logout" onclick="confirmLogout(event)"><li class="navli" id="logout">Logout</li></a>
+        {% else %}
+            <a href="../Login"><li class="navli" id="login">Login</li></a>
+            <a href="../Register"><li class="navli" id="register">Register</li></a>
+        {% endif %}
+    </ul>
+</div>
 
 
 <!-- Add Button - Placed next to the table, not in the Actions column -->

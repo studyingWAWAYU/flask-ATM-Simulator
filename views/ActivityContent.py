@@ -22,6 +22,7 @@ def activityContent(activity_id):
     remaining = None
     isManager = False
     participants_dict = None
+    isSignincode = None
 
     if user_id:
         user = User.query.get(user_id)
@@ -63,7 +64,8 @@ def activityContent(activity_id):
                         user_name = db.session.query(User.username).filter_by(id=p.user_id).scalar()
                         role_dict[role].append(user_name + " (" + p.status + ")")
                 participants_dict = role_dict
-
+        if actContent.signin_code:
+            isSignincode = True
         # 图片
         try:
             files = os.listdir(os.path.join(os.getcwd(), 'static', 'img', 'uploads', str(activity_id)))
@@ -77,7 +79,7 @@ def activityContent(activity_id):
 
     if request.method == 'GET':
         return render_template('ActivityContent.html',username=username,actContent=actContent,clubName=clubName,
-                               par_status=par_status,remaining=remaining,isManager=isManager,participants_dict=participants_dict,filelist=filelist)
+                               par_status=par_status,remaining=remaining,isManager=isManager,participants_dict=participants_dict,filelist=filelist,isSignincode=isSignincode)
 
 
 # 如果是manager就可以编辑、删除这个活动。
