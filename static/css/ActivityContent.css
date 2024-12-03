@@ -131,10 +131,10 @@ li{
 	font-weight: bold;
 }
 
-#sup-btn{
+#sup-btn, #signin-btn{
 	background-color: #fa8383;
     width:250px;
-    height:80px;
+    height:70px;
     border:1px solid #fa8383;
     border-radius: 50px;
     margin:auto 65px;
@@ -142,14 +142,15 @@ li{
 	font-weight: bold;
 	color: white;
 	cursor: pointer;
+    margin-bottom:20px;
 }
-#sup-btn:hover, #edit-btn:hover{
+#sup-btn:hover, #edit-btn:hover, #post-signin-code-btn:hover, #signin-btn:hover{
 	background-color: #ff6e6e;
 }
-#edit-btn{
+#edit-btn, #post-signin-code-btn{
 	background-color: #fa8383;
     width:270px;
-    height:80px;
+    height:60px;
     border:1px solid #fa8383;
     border-radius: 50px;
     margin:auto 60px;
@@ -171,8 +172,6 @@ li{
 #delete-btn:hover{
     color: #ff6e6e;
 }
-
-
 
 /* Right Information */
 #page-right{
@@ -217,7 +216,22 @@ li{
 	box-shadow: 1px 1px 5px 3px #DAEDFF;
 }
 
+#manage-participants-btn {
+    background-color: #C4E2FF;
+    width:220px;
+    font-size: 18px;
+    font-weight: 550;
+    border: 1px solid #99c2ed;
+    border-radius: 10px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-left: 35px;
+    transition: background-color 0.3s ease;
+}
 
+#manage-participants-btn:hover {
+    background-color: #daedff;
+}
 
 /*bottom*/
 #indexbottom{

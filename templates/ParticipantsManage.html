@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Participants Management</title>
+    <link rel="stylesheet" href="../static/css/ParticipantsManage.css">
+    <script src="../static/js/ParticipantsManage.js" defer></script>
+</head>
+<body>
+    <!--Navigation-->
+    <div id="nav">
+        <ul style="list-style: none">
+            <li><div id="logotop"><a href="/"><img src="../static/img/logo.png" width="100" height="100"></a></div></li>
+            <a href="../ClubLobby"><li class="navli">Club Lobby</li></a>
+            <a href="../MyClub"><li class="navli">My Club</li></a>
+            <a href="../ActivityLobby"><li class="navli">Activity Lobby</li></a>
+            <a href="../MyActivity"><li class="navli">My Activity</li></a>
+            {% if username %}
+                <a href="../MyInformation"><li class="navli" id="username">{{ username }}</li></a>
+                <form action="/Logout" method="post" id="logoutForm" style="display: none;">
+                    <button type="submit" style="display: none;">Logout</button></form>
+                <a href="../Logout" onclick="confirmLogout(event)"><li class="navli" id="logout">Logout</li></a>
+            {% else %}
+                <a href="../Login"><li class="navli" id="login">Login</li></a>
+                <a href="../Register"><li class="navli" id="register">Register</li></a>
+            {% endif %}
+        </ul>
+    </div>
+
+
+<!-- Add Button - Placed next to the table, not in the Actions column -->
+<div class="container">
+    <div id="table-container">
+        <table id="participant-table">
+            <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>User Name</th>
+                    <th>Gender</th>
+                    <th>Phone</th>
+                    <th>Status</th>
+                    <th>Role</th>
+                    <th style="width: 50px">Actions</th>
+                    <th style="width: 50px">
+                        <div class="add-participant-container">
+                        <button id="add-participant-btn" class="add-participant-btn">Add</button>
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for participant in participants %}
+                <tr>
+                    <td>{{ participant.user_id }}</td>
+                    <td>{{ participant.user_name }}</td>
+                    <td>{{ participant.user_gender }}</td>
+                    <td>{{ participant.user_phone_number }}</td>
+                    <td>
+                        <select class="status-dropdown" data-user-id="{{ participant.user_id }}" data-activity-id="{{ activity_id }}">
+                            <option value="Registered" {% if participant.status == 'Registered' %}selected{% endif %}>Registered</option>
+                            <option value="Confirmed" {% if participant.status == 'Confirmed' %}selected{% endif %}>Confirmed</option>
+                            <option value="Present" {% if participant.status == 'Present' %}selected{% endif %}>Present</option>
+                            <option value="Absent" {% if participant.status == 'Absent' %}selected{% endif %}>Absent</option>
+                        </select>
+                    </td>
+                    <td>{{ participant.role }}</td>
+                    <td>
+                        <button class="delete-btn" data-user-id="{{ participant.user_id }}" data-activity-id="{{ activity_id }}">Delete</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!--Bottom-->
+<div id="indexbottom">
+    <div style="margin-left:80px;padding-top:60px;">
+    <ul style="float:left;list-style-type: none;">
+        <li><p><img src="../static/img/logo.png" width="40px" height="40px;" align="center"> Activity Hub</p></li>
+        <li style="padding-left: 100px;"><p><img src="../static/img/location.png" width="30px" height="30px;" align="center"> Foshan, Guanddong, China</p></li>
+        <li style="padding-left: 100px;"><p><img src="../static/img/phone.png" width="25px" height="25px;" align="center"> 189-2805-5891</p></li>
+        <li style="padding-left: 100px;"><p><img src="../static/img/mail.png" width="30px" height="30px;" align="center"> cams@ntesmail.com</p></li>
+        <li style="padding-left: 100px;"><p><img src="../static/img/rights.png" width="30px" height="30px;" align="center"> 2024 Activity Hub. All rights reserved.</p></li>
+    </ul>
+    </div>
+</div>
+</body>
+</html>

@@ -3,9 +3,9 @@ from flask_sqlalchemy import SQLAlchemy
 import ATMflask.settings as settings
 
 
-app = Flask(__name__)#实例化flask对象
-app.config.from_object(settings)#配置文件
-db = SQLAlchemy(app)#实例化数据库对象，它提供访问Flask-SQLAlchemy的所有功能
+app = Flask(__name__)  # 实例化flask对象
+app.config.from_object(settings)  # 配置文件
+db = SQLAlchemy(app)  # 实例化数据库对象，它提供访问Flask-SQLAlchemy的所有功能
 
 from ATMflask.views import index
 app.register_blueprint(index.idx)
@@ -39,6 +39,9 @@ app.register_blueprint(ClubDetail.clubdt)
 
 from ATMflask.views import MyClub
 app.register_blueprint(MyClub.myclub)
+
+from ATMflask.views import ActivityManage
+app.register_blueprint(ActivityManage.actManage)
 
 
 
