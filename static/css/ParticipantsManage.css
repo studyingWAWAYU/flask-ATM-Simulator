@@ -1,0 +1,138 @@
+/*navigation*/
+#logotop{
+    padding-left:70px;
+    background-color:#C4E2FF;
+    height:60px;
+    padding-right:680px;
+}
+#nav{
+    width: 1700px;
+    height:60px;
+    background-color: #C4E2FF;
+    position:fixed;
+    z-index:10;
+    margin-top:0;
+    left:50%;
+    margin-left:-850px;
+}
+*{
+    padding:0;
+    margin:0;
+    position:relative;
+}
+li{
+    float:left;
+}
+.navli{
+    list-style-type:none;
+    width: 160px;
+    height:60px;
+    line-height: 60px;
+    background: #C4E2FF;
+    font-family:"微软雅黑 Light";
+    color:#415468;
+    font-weight: bold;
+    align: center;
+    text-align: center;
+    border-left:2px solid #DAEDFF;
+}
+.navli:hover{
+    background-color: #DAEDFF;
+    color:#28313A;
+}
+#login{padding-left:10px;width:80px;}
+#register{border:none;width:80px;}
+#username{padding-left:10px;width:80px;}
+#logout{border:none;width:80px;}
+#login:hover{background-color: #C4E2FF; font-weight: bold;}
+#register:hover{background-color: #C4E2FF; font-weight: bold;}
+#logout:hover{background-color: #C4E2FF; font-weight: bold;}
+#username:hover{background-color:#C4E2FF}
+
+/*end of navigation*/
+
+/* 表格样式 */
+.container {
+    position: relative;
+    top:120px;
+    width: 55%;
+    left: 700px;
+
+}
+
+.add-participant-container {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.add-participant-btn {
+    background-color: #007BFF; /* 蓝色 */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.add-participant-btn:hover {
+    background-color: #0056b3; /* 悬停时变深的蓝色 */
+}
+
+/* 表格容器 */
+.table-container {
+    margin-top: 20px;
+    overflow-x: auto;
+    height: 700px;
+}
+
+/* 表格样式 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 23px;
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    vertical-align: top;
+}
+
+table th {
+    background-color: #f4f4f4;
+}
+
+/* 下拉框样式 */
+.status-dropdown {
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.delete-btn {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.delete-btn:hover {
+    background-color: #e53935;
+}
+
+/*bottom*/
+#indexbottom{
+    position: relative;
+    width:1700px;
+    height:130px;
+    top:350px;
+    background-color:#C4E2FF;
+    left:50%;
+    margin-left:-850px;
+    color:#415468;
+}

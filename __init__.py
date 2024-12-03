@@ -40,6 +40,9 @@ app.register_blueprint(ClubDetail.clubdt)
 from ATMflask.views import MyClub
 app.register_blueprint(MyClub.myclub)
 
+from ATMflask.views import ActivityManage
+app.register_blueprint(ActivityManage.actManage)
+
 
 
 
