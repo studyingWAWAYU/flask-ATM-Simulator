@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", function() {
             .then(response => response.json())
             .then(data => {
                 if (data.message) {
-                    alert(data.message);  // 状态更新成功，显示提示
+                    /*alert(data.message);  // 状态更新成功，显示提示*/
                     location.reload();  // 刷新页面
                 } else {
                     alert(data.error);  // 如果失败，显示错误信息

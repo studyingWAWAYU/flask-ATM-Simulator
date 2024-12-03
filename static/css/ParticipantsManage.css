@@ -53,11 +53,15 @@ li{
 
 /* 表格样式 */
 .container {
-    position: relative;
-    top:120px;
-    width: 55%;
-    left: 700px;
+    width:1700px;
+    display:block;
+    margin:auto;
+    padding-top:100px;
 
+}
+#table-container{
+    width:1500px;
+    margin-left:100px;
 }
 
 .add-participant-container {
@@ -66,18 +70,19 @@ li{
 }
 
 .add-participant-btn {
-    background-color: #007BFF; /* 蓝色 */
-    color: white;
-    border: none;
+    background-color: #C4E2FF;
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
     border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #99c2ed;
+    box-shadow:1px 1px 0px 0px #99c2ed;
+    margin-top:-8px;
+    margin-left:5px;
 }
 
 .add-participant-btn:hover {
-    background-color: #0056b3; /* 悬停时变深的蓝色 */
+    background-color: #daedff;
 }
 
 /* 表格容器 */
@@ -91,7 +96,7 @@ li{
 table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 23px;
+    font-size: 18px;
 }
 
 table th, table td {
@@ -102,6 +107,8 @@ table th, table td {
 }
 
 table th {
+    padding-top:20px;
+    padding-bottom:10px;
     background-color: #f4f4f4;
 }
 
@@ -110,15 +117,18 @@ table th {
     padding: 5px;
     border: 1px solid #ddd;
     border-radius: 5px;
+    font-size:18px;
 }
 
 .delete-btn {
-    background-color: #f44336;
+    background-color: #fa8383;
     color: white;
     border: none;
     padding: 5px 10px;
     cursor: pointer;
-    border-radius: 5px;
+    font-size:18px;
+    font-weight:600px;
+    border-radius: 10px;
 }
 
 .delete-btn:hover {
