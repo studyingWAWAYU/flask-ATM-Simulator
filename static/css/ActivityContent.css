@@ -217,12 +217,12 @@ li{
 }
 
 #manage-participants-btn {
-    background-color: #007bff;
-    color: white;
+    background-color: #C4E2FF;
+    width:220px;
     font-size: 18px;
-    font-weight: bold;
-    border: none;
-    border-radius: 50px;
+    font-weight: 550;
+    border: 1px solid #99c2ed;
+    border-radius: 10px;
     padding: 10px 20px;
     cursor: pointer;
     margin-left: 35px;
@@ -230,7 +230,7 @@ li{
 }
 
 #manage-participants-btn:hover {
-    background-color: #0056b3;
+    background-color: #daedff;
 }
 
 /*bottom*/
