@@ -21,6 +21,10 @@ document.addEventListener("DOMContentLoaded", function() {
     if (signupBtn) {
         signupBtn.addEventListener("click", function(event) {
             event.preventDefault();
+            const parStatus = signupBtn.textContent.trim();
+            if (parStatus === "Registered" || parStatus === "Confirmed" || parStatus === "Present" || parStatus === "Absent") {
+                return;
+            }
 
             // 弹出确认框
             const confirmation = confirm("Are you sure you want to sign up for this activity?");
@@ -36,14 +40,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 // 如果用户未登录，提示并跳转到登录页面
                 alert("Please log in first to sign up for the activity.");
                 window.location.href = "/Login";  // 跳转到登录页面
-                return;
-            }
-
-            // 获取当前的报名状态
-            const parStatus = signupBtn.textContent.trim();
-            if (parStatus === "Confirmed" || parStatus === "Registered") {
-                // 如果用户已经确认报名，则不能再次报名
-                alert("You have already confirmed your participation.");
                 return;
             }
 
@@ -84,26 +80,39 @@ document.addEventListener('DOMContentLoaded', function () {
         postSigninCodeBtn.addEventListener('click', function(event) {
             event.preventDefault();
 
-            const signinCode = prompt('Enter a 6-digit sign-in code:');
-
-            // Validate if the input is a 6-digit number
-            if (!/^\d{6}$/.test(signinCode)) {
-                alert('Sign-in code invalid.');
-                return;
-            }
-
             fetch('/postSigninCode', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ signin_code: signinCode })
+                method: 'GET',
             })
-            .then(response => response.json())
+            .then (response => response.json())
             .then(data => {
-                if (data.message) {
-                    alert(data.message);  // Show success message
-                    location.reload();  // Reload the page to reflect changes
+                if (data.signin_code) {
+                    // 如果已有签到码，显示错误信息
+                    alert('This activity already has a sign-in code.');
+                } else {
+                    // 弹出输入框让用户输入签到码
+                    const signinCode = prompt('Enter a 6-digit sign-in code:');
+
+                    // Validate if the input is a 6-digit number
+                    if (!/^\d{6}$/.test(signinCode)) {
+                        alert('Sign-in code invalid.');
+                        return;
+                    }
+
+                    // 发送请求到后端
+                    fetch('/postSigninCode', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ signin_code: signinCode})
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.message) {
+                            alert(data.message);  // 显示成功消息
+                            location.reload();  // 刷新页面
+                        }
+                    });
                 }
             });
         });
@@ -141,6 +150,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     location.reload();  // 刷新页面
                 } else if (data.error) {
                     alert(data.error);  // 显示错误消息
+                    location.reload();  // 刷新页面
                 }
             });
         });

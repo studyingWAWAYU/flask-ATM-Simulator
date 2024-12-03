@@ -26,7 +26,7 @@ def apply_act():
         return jsonify({'success': False, 'message': 'Activity not found.'})
 
     # 检查活动是否已满
-    current_participants = Participant.query.filter_by(activity_id=act_id).all()
+    current_participants = Participant.query.filter_by(activity_id=act_id, role="participant").all()
     if len(current_participants) >= activity.max_participant:
         return jsonify({'success': False, 'message': 'Activity is already full.'})
 
@@ -56,6 +56,7 @@ def manage_act(activity_id):
 
     # 获取当前用户信息
     user_id = session.get('id')
+    username = db.session.query(User.username).filter_by(id=user_id).scalar()
     par_role = db.session.query(Participant.role).filter_by(user_id=user_id, activity_id=activity_id).scalar()
 
     if request.method == 'GET':  # 显示参与者列表
@@ -75,7 +76,7 @@ def manage_act(activity_id):
                     'user_name': user_name if user_name else 'N/A',
                     'user_gender': user_gender if user_gender else 'N/A',
                     'user_phone_number': user_phone_number if user_phone_number else 'N/A'})
-        return render_template('ParticipantsManage.html', participants=participant_details, activity_id=activity_id)
+        return render_template('ParticipantsManage.html', username = username, participants=participant_details, activity_id=activity_id)
 #删除参与者
 @parManage.route('/deleteParticipant', methods=['POST'])
 def delete_participant():
@@ -120,7 +121,7 @@ def add_participant():
     if request.method == 'POST':
         activity = db.session.query(Activity).filter_by(activity_id=activity_id).first()
         participant = db.session.query(Participant).filter_by(user_id=user_id, activity_id=activity_id).first()
-        current_participants = Participant.query.filter_by(activity_id=activity_id).all()
+        current_participants = Participant.query.filter_by(activity_id=activity_id, role="participant" ).all()
         if participant:
             return jsonify({'error': 'User is already signed up for this activity.'})
         elif len(current_participants) >= activity.max_participant:
@@ -133,8 +134,13 @@ def add_participant():
         return jsonify({"message": "Participant added successfully!"})
 
 # 发布签到码
-@parManage.route('/postSigninCode', methods=['POST'])
+@parManage.route('/postSigninCode', methods=['GET', 'POST'])
 def post_signin_code():
+    if request.method == 'GET':
+        activity_id = session.get('activity_id')
+        signin_code = db.session.query(Activity.signin_code).filter_by(activity_id=activity_id).scalar()
+        if signin_code:
+            return jsonify({'signin_code': signin_code})
     if request.method == 'POST':
         data = request.get_json()  # 获取前端发送的 JSON 数据
         activity_id = session.get('activity_id')  # 获取活动 ID
