@@ -109,6 +109,9 @@
                         <th>Num Of Members</th>
                         <th>Description</th>
                         <th>Created Time</th>
+                        <th>
+                            Action
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -119,6 +122,9 @@
                             <td>{{ numMembers }}</td>
                             <td>{{ club.description }}</td>
                             <td>{{ club.created_time }}</td>
+                            <td>
+                                <button class="join-club-btn" data-club-id="{{ club.club_id }}">Join</button>
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -128,6 +134,7 @@
         {% endif %}
     </div>
 </div>
+<script src="../static/js/joinClub.js"></script>
 
 <!--Bottom-->
 <div id="indexbottom" style="margin-top:400px">
