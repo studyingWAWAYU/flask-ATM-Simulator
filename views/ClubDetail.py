@@ -36,15 +36,18 @@ def clubDetail(club_id):
 
     # 获取当前登录的用户
     user_id = session.get('id')
+    username = None
     is_manager = False
 
     if user_id:
+        user = User.query.get(user_id)
+        username = user.username
         # 判断当前用户是否为该社团的经理
         if manager and manager.id == user_id:
             is_manager = True
 
     # 返回模板并传递数据
-    return render_template('ClubDetail.html', club=club, manager=manager, num_members=num_members, is_manager=is_manager,members=members)
+    return render_template('ClubDetail.html', club=club, manager=manager, num_members=num_members, is_manager=is_manager,members=members,username=username)
 
 @clubdt.route('/EditClub/<int:club_id>', methods=['GET', 'POST'])
 def editClub(club_id):
