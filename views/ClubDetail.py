@@ -24,8 +24,12 @@ def clubDetail(club_id):
 
     # 获取当前登录的用户
     user_id = session.get('id')
-    user = User.query.get(user_id)
-    username = user.username
+    username = None
+
+    if user_id:
+        user = User.query.get(user_id)
+        username = user.username
+
     # 获取该社团的信息
     club = db.session.query(Club).get(club_id)
 

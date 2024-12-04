@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from flask import render_template, request, redirect, flash, session, url_for
+from flask import render_template, request, redirect, flash, session, url_for, jsonify
 from flask import Blueprint
 
 from ATMflask import db,app
@@ -137,3 +137,26 @@ def createClub():
             return redirect(url_for('clubdt.clubDetail', club_id=club_id))
 
     return render_template('CreateClub.html')
+
+@clublb.route('/joinClub', methods=['POST','GET'])
+def joinClub():
+    data = request.get_json()
+    club_id = data.get("club_id")
+
+    # 获取当前登录的用户
+    user_id = session.get('id')
+    username = None
+
+    if user_id:
+        user = User.query.get(user_id)
+        username = user.username
+        # 检查用户是否已是该俱乐部的成员
+        existing_member = Membership.query.filter_by(club_id=club_id, user_id=user_id).first()
+        if existing_member:
+            return jsonify({'error': 'You are already a member of this club!'})
+
+        # 添加用户到俱乐部
+        new_member = Membership(club_id=club_id, user_id=user_id, role="member")
+        db.session.add(new_member)
+        db.session.commit()
+        return jsonify({'message': 'Successfully joined the club!'})
