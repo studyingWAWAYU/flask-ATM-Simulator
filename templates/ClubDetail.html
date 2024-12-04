@@ -34,6 +34,9 @@
         <a href="{{ url_for('clubdt.releaseAnnouncement', club_id=club.club_id) }}">
             <button class="clubmg" style="width:250px;">Release Announcement</button>
         </a>
+        <a href="{{ url_for('clubdt.manageMemberList', club_id=club.club_id) }}">
+            <button class="clubmg" style="width:250px;">Manage Member List</button>
+        </a>
         <a href="{{ url_for('clubdt.editClub', club_id=club.club_id) }}">
             <button class="clubmg">Edit Club</button>
         </a>
