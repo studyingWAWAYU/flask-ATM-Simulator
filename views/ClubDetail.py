@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, flash, session, url_for
+from flask import render_template, request, redirect, flash, session, url_for, jsonify
 from flask import Blueprint
 
 from ATMflask import db
@@ -151,5 +151,45 @@ def releaseAnnouncement(club_id):
 
     return render_template('ReleaseAnnoucement.html', club_name=club.club_name, club_id=club_id,club=club)
 
+@clubdt.route('/ClubMemberManage/<int:club_id>', methods=['GET', 'POST'])
+def manageMemberList(club_id):
 
+    # 获取该社团的成员列表
+    members = get_club_members(club_id)
 
+    return render_template('ClubMemberManage.html', club_id=club_id,members=members)
+
+@clubdt.route('/addClubMember', methods=['POST'])
+def addClubMember():
+    data = request.get_json()
+    user_id = data.get('user_id')
+    club_id = data.get('club_id')
+
+    # 检查用户是否存在
+    user = db.session.query(User).filter_by(id=user_id).first()
+    if not user:
+        return jsonify({"error": "User not found"}), 404  # 返回错误信息，用户未找到
+
+    if request.method == 'POST':
+        # 增加成员
+        existing_member = Membership.query.filter_by(club_id=club_id, user_id=user_id).first()
+        if existing_member:
+            return jsonify({'error':'User is already a member of this club!'}),409
+        else:
+            new_member = Membership(club_id=club_id, user_id=user_id, role='member')
+            db.session.add(new_member)
+            db.session.commit()
+            return jsonify({'message':'Member added successfully!'}),201
+
+@clubdt.route('/deleteClubMember', methods=['POST'])
+def deleteClubMember():
+        data = request.get_json()
+        user_id = data.get('user_id')
+        club_id = data.get('club_id')
+
+        if request.method == 'POST':
+            member = db.session.query(Membership).filter_by(user_id=user_id,club_id=club_id).first()
+            if member is not None:
+                db.session.delete(member)
+                db.session.commit()
+        return jsonify({"message": "Member is deleted successfully!"})
