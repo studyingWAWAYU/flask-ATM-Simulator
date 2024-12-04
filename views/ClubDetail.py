@@ -21,6 +21,11 @@ def get_club_members(club_id):
 
 @clubdt.route('/ClubDetail/<int:club_id>', methods=['GET', 'POST'])
 def clubDetail(club_id):
+
+    # 获取当前登录的用户
+    user_id = session.get('id')
+    user = User.query.get(user_id)
+    username = user.username
     # 获取该社团的信息
     club = db.session.query(Club).get(club_id)
 
@@ -44,10 +49,15 @@ def clubDetail(club_id):
             is_manager = True
 
     # 返回模板并传递数据
-    return render_template('ClubDetail.html', club=club, manager=manager, num_members=num_members, is_manager=is_manager,members=members)
+    return render_template('ClubDetail.html', club=club, manager=manager, num_members=num_members, is_manager=is_manager,members=members,username=username)
 
 @clubdt.route('/EditClub/<int:club_id>', methods=['GET', 'POST'])
 def editClub(club_id):
+    # 获取当前登录的用户
+    user_id = session.get('id')
+    user = User.query.get(user_id)
+    username = user.username
+
     # 获取该社团的信息
     club = db.session.query(Club).get(club_id)
     manager = db.session.query(User).join(Membership).filter(Membership.club_id == club.club_id,
@@ -81,11 +91,12 @@ def editClub(club_id):
             flash('Error updating club. Please try again.', 'danger')
 
     # 如果是GET请求，则渲染编辑表单
-    return render_template('editClub.html', club=club,is_manager=is_manager)
+    return render_template('editClub.html', club=club,is_manager=is_manager,username=username)
 
 
 @clubdt.route('/DeleteClub/<int:club_id>', methods=['GET'])
 def deleteClub(club_id):
+
     # 获取社团信息
     club = db.session.query(Club).get(club_id)
 
@@ -127,6 +138,11 @@ def deleteClub(club_id):
 # Release Announcement 页面
 @clubdt.route('/ReleaseAnnoucement/<int:club_id>', methods=['GET', 'POST'])
 def releaseAnnouncement(club_id):
+    # 获取当前登录的用户
+    user_id = session.get('id')
+    user = User.query.get(user_id)
+    username = user.username
+
     club = db.session.query(Club).get(club_id)
 
     if not club:
@@ -149,15 +165,19 @@ def releaseAnnouncement(club_id):
             flash('Announcement successfully released!', 'success')  # 显示成功信息
             return redirect(url_for('clubdt.clubDetail', club_id=club_id))  # 重定向到该社团的详情页面
 
-    return render_template('ReleaseAnnoucement.html', club_name=club.club_name, club_id=club_id,club=club)
+    return render_template('ReleaseAnnoucement.html', club_name=club.club_name, club_id=club_id,club=club,username=username)
 
 @clubdt.route('/ClubMemberManage/<int:club_id>', methods=['GET', 'POST'])
 def manageMemberList(club_id):
+    # 获取当前登录的用户
+    user_id = session.get('id')
+    user = User.query.get(user_id)
+    username = user.username
 
     # 获取该社团的成员列表
     members = get_club_members(club_id)
 
-    return render_template('ClubMemberManage.html', club_id=club_id,members=members)
+    return render_template('ClubMemberManage.html', club_id=club_id,members=members,username=username)
 
 @clubdt.route('/addClubMember', methods=['POST'])
 def addClubMember():
