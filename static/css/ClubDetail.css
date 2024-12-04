@@ -194,6 +194,15 @@ li{
 	font-weight: 600;
 	cursor: pointer;
 }
+.clubmg a{
+    color: black;
+    text-decoration: none;
+}
+.clubmg a{
+    color: black;
+    text-decoration: none;
+}
+
 .clubmg:hover{
 	background: #daedff;
 }

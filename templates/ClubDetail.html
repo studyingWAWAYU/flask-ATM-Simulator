@@ -31,18 +31,17 @@
     <!-- 如果当前用户是社团的经理，则显示“Edit Club”和“Delete Club”按钮 -->
     {% if is_manager %}
     <div id="button-area">
-        <a href="{{ url_for('clubdt.releaseAnnouncement', club_id=club.club_id) }}">
-            <button class="clubmg" style="width:250px;">Release Announcement</button>
-        </a>
-        <a href="{{ url_for('clubdt.manageMemberList', club_id=club.club_id) }}">
-            <button class="clubmg" style="width:250px;">Manage Member List</button>
-        </a>
-        <a href="{{ url_for('clubdt.editClub', club_id=club.club_id) }}">
-            <button class="clubmg">Edit Club</button>
-        </a>
-        <a href="{{ url_for('clubdt.deleteClub', club_id=club.club_id) }}">
-            <button class="clubmg" onclick="confirmDelete(event, {{ club.club_id }})">Delete Club</button>
-        </a>
+        <button class="clubmg" style="width:250px;" value=""><a href="{{ url_for('clubdt.releaseAnnouncement', club_id=club.club_id) }}">Release Announcement</a></button>
+
+
+        <button class="clubmg" style="width:250px;"><a href="{{ url_for('clubdt.manageMemberList', club_id=club.club_id) }}">Manage Member List</a></button>
+
+
+        <button class="clubmg"><a href="{{ url_for('clubdt.editClub', club_id=club.club_id) }}">Edit Club</a></button>
+
+
+        <button class="clubmg" onclick="confirmDelete(event, {{ club.club_id }})"><a href="{{ url_for('clubdt.deleteClub', club_id=club.club_id) }}">Delete Club<a href="{{ url_for('clubdt.deleteClub', club_id=club.club_id) }}"></a></button>
+
     </div>
     {% endif %}
 
