@@ -57,7 +57,7 @@ def MyActivity():
             search_word = request.form.get('search-input')
             print(f"Searching for activities: {search_word}")
             if search_word:
-                selected_acts = Activity.query.filter(Activity.activity_name.ilike(f"%{search_word}%")).all()
+                selected_acts = [act for act in myAct if search_word.lower() in act.activity_name.lower()]
                 if not selected_acts:
                     flash("No matching activities were found yet. All activities are displayed below.")
             else:
