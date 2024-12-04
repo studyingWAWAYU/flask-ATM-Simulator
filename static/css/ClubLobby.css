@@ -56,7 +56,7 @@ li{
 /*ClubContainer*/
 #ClubContainer{
     width:1700px;
-    height:800px;
+    height:1500px;
     display: block;
     margin: auto;
     padding-top: 140px;
@@ -67,7 +67,7 @@ li{
 /*MyClub*/
 #MyClub{
     width:1700px;
-    height:240px;
+    height:1000px;
     display: block;
     margin: auto;
     padding-top: 140px;
@@ -118,7 +118,7 @@ button#show-btn:hover {
 /*ClubTableStyle*/
 .table-container {
             margin-top: 20px;
-        }
+}
 h2 {
 	margin-top: 40px;
 }
@@ -236,6 +236,8 @@ a{
     left:50%;
     margin-left:-850px;
     color:#415468;
+}
+
 }
 
 /* 表格样式 */
