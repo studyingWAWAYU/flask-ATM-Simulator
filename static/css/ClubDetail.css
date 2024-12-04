@@ -112,69 +112,11 @@ li{
     z-index: 9;
 }
 
-/*functions provided for managers and members*/
-.mandm{
-    width:1700px;
-    height:200px;
-    margin:20px auto;
-    margin-top:50px;
-}
-.left{
-    width:650px;
-    height:400px;
-    float:left;
-    margin-left:180px;
-    margin-top:50px;
-}
-.leftimg{
-    width:500px;
-    height:360px;
-    float:left;
-    margin-top:8px;
-    margin-left:-10px;
-    text-align: center;
-}
-.righttext{
-    width:220px;
-    height:200px;
-    float:right;
-    margin-top:70px;
-    margin-left:-130px;
-    background-color: rgba(255, 255, 255, 0.95);
-    font-size:20px;
-    color:#58708D;
-    box-shadow: 1px 1px 2px 2px #e6f8fa;
-    padding-left:10px;
-    padding-right:10px;
-    padding-top: 10px;
-}
-.right{
-    width:650px;
-    height:400px;
-    float:right;
-    margin-right:120px;
-    margin-top:50px;
-}
-
-
-
-/*底部*/
-#indexbottom{
-    width:1700px;
-    height:180px;
-    margin-top:170px;
-    background-color:#C4E2FF;
-    left:50%;
-    margin-left:-850px;
-    color:#415468;
-    position: fixed;     /* 固定定位 */
-    bottom: 0;           /* 距离页面底部为0 */
-}
 
 /*Classification*/
 #ClubDetail{
     width:1700px;
-    height:240px;
+    height:500px;
     display: block;
     margin: auto;
     padding-top: 140px;
@@ -340,3 +282,15 @@ h1,p{
     background-color: #f0f0f0; /* 悬浮效果 */
 }
 
+/*底部*/
+#indexbottom{
+    width:1700px;
+    height:180px;
+    margin-top:170px;
+    background-color:#C4E2FF;
+    left:50%;
+    margin-left:-850px;
+    color:#415468;
+    /*position: fixed;     /* 固定定位 */
+    bottom: 0;           /* 距离页面底部为0 */
+}
