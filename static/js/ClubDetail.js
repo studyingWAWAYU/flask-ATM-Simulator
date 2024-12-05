@@ -31,3 +31,74 @@ function confirmSave(event) {
         document.getElementById('editClubForm').submit();
     }
 }
+
+// 加入社团
+document.addEventListener("DOMContentLoaded", () => {
+    const joinClubButton = document.getElementById('join-club-btn');
+    const club_id = document.getElementById('club-id').value;
+
+    if (joinClubButton){
+        joinClubButton.addEventListener('click', function () {
+            // 弹出确认框
+            const confirmation = confirm("Do you want to join this club now?");
+            if (!confirmation) {
+                return;
+            }
+            fetch(`/joinClub/`+ club_id, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({club_id: club_id}) // 可以扩展传递的数据结构
+                })
+                .then(response => {
+                    // 如果后端返回的是 HTML 页面，则使用 DOM 操作来更新页面内容
+                    return response.text();
+                })
+                .then(html => {
+                    // 将返回的 HTML 插入到页面中
+                    document.open();
+                    document.write(html);
+                    document.close();
+                })
+                .catch(error => {
+                alert('There was a problem with your request: ' + error.message);
+                });
+        });
+    }
+});
+
+// 退出社团
+document.addEventListener("DOMContentLoaded", () => {
+    const quitClubButton = document.getElementById('quit-club-btn');
+    const club_id = document.getElementById('club-id').value;
+    if (quitClubButton){
+        quitClubButton.addEventListener('click', function () {
+            // 弹出确认框
+            const confirmation = confirm("Are you sure to quit this club?");
+            if (!confirmation) {
+                return;
+            }
+            fetch(`/quitClub/` + club_id, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({club_id: club_id}) // 可以扩展传递的数据结构
+                })
+                .then(response => {
+                    // 如果后端返回的是 HTML 页面，则使用 DOM 操作来更新页面内容
+                    return response.text();
+                })
+                .then(html => {
+                    // 将返回的 HTML 插入到页面中
+                    document.open();
+                    document.write(html);
+                    document.close();
+                })
+                .catch(error => {
+                alert('There was a problem with your request: ' + error.message);
+                });
+        });
+    }
+});

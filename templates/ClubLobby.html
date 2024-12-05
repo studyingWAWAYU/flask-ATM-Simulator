@@ -40,9 +40,9 @@
 
     <button id="createClub"><a href="/CreateClub">Create club</a></button>
 
-    <hr style="width: 1600px; margin: 40px 0; border:1px solid #e5e5e6;">
+    <hr style="width: 1600px; margin: 40px 0; border:1px solid #e5e5e6;margin-left:50px;">
     <h2 style="text-align: center;width: 95%">Top 10 Clubs by Member Count</h2>
-    <div id="chart"></div> <!-- 图表容器 -->
+    <div id="chart" style="margin-left:40px;"></div> <!-- 图表容器 -->
 
     <script type="text/javascript">
         // 获取从 Flask 传递的俱乐部名称和成员数
@@ -89,16 +89,18 @@
 
         myChart.setOption(option);
     </script>
-    <hr style="width: 1600px; margin: 40px 0; border:1px solid #e5e5e6;">
-    <div id="searchbox" style="padding-top:15px; margin-bottom:20px;">
-        <form action="{{ url_for('clublb.clublobby') }}" method="get">
-            <input type="text" id="search-input" class="google-search-input" name="search" placeholder="Search clubs..." value="{{ search_query or '' }}">
-            <button type="submit" id="search">Search</button>
-        </form>
-    </div>
+    <hr style="width: 1600px; margin: 40px 0; border:1px solid #e5e5e6;margin-left:50px;">
 
-    <!-- 所有社团的列表 -->
-    <div class="section">
+    <div id="section">
+
+        <div id="searchbox" style="padding-top:15px; margin-bottom:20px;">
+            <form action="{{ url_for('clublb.clublobby') }}" method="get">
+                <input type="text" id="search-input" class="google-search-input" name="search" placeholder="Search clubs..." value="{{ search_query or '' }}">
+                <button type="submit" id="search">Search</button>
+            </form>
+        </div>
+
+        <!-- 所有社团的列表 -->
         <h2>All Clubs</h2>
         {% if clubs %}
             <table class="club-table">
@@ -109,9 +111,6 @@
                         <th>Num Of Members</th>
                         <th>Description</th>
                         <th>Created Time</th>
-                        <th>
-                            Action
-                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -122,9 +121,6 @@
                             <td>{{ numMembers }}</td>
                             <td>{{ club.description }}</td>
                             <td>{{ club.created_time }}</td>
-                            <td>
-                                <button class="join-club-btn" data-club-id="{{ club.club_id }}">Join</button>
-                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -134,7 +130,6 @@
         {% endif %}
     </div>
 </div>
-<script src="../static/js/joinClub.js"></script>
 
 <!--Bottom-->
 <div id="indexbottom" style="margin-top:400px">

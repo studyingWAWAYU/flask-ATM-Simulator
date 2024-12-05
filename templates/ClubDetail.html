@@ -32,17 +32,19 @@
     {% if is_manager %}
     <div id="button-area">
         <button class="clubmg" style="width:250px;" value=""><a href="{{ url_for('clubdt.releaseAnnouncement', club_id=club.club_id) }}">Release Announcement</a></button>
-
-
         <button class="clubmg" style="width:250px;"><a href="{{ url_for('clubdt.manageMemberList', club_id=club.club_id) }}">Manage Member List</a></button>
-
-
         <button class="clubmg"><a href="{{ url_for('clubdt.editClub', club_id=club.club_id) }}">Edit Club</a></button>
-
-
-        <button class="clubmg" onclick="confirmDelete(event, {{ club.club_id }})"><a href="{{ url_for('clubdt.deleteClub', club_id=club.club_id) }}">Delete Club<a href="{{ url_for('clubdt.deleteClub', club_id=club.club_id) }}"></a></button>
-
+        <button class="clubmg" onclick="confirmDelete(event, {{ club.club_id }})">
+            <a href="{{ url_for('clubdt.deleteClub', club_id=club.club_id) }}"></a>Delete Club
+        </button>
     </div>
+    {% else %}
+        {% if ifjoined %}
+            <button class="clubmg" id="quit-club-btn" style="width:170px;" data-club-id="{{ club.club_id }}"><a href="/quitClub/{{club.club_id}}">Quit this Club</a></button>
+        {% else %}
+            <button class="clubmg" id="join-club-btn" style="width:170px;" data-club-id="{{ club.club_id }}"><a href="/joinClub/{{club.club_id}}">Join Now</a></button>
+        {% endif %}
+        <input type="hidden" id="club-id" value="{{ club.club_id }}">
     {% endif %}
 
     <hr style="width: 1700px; margin: 5px auto; border:1px solid #e5e5e6;">
@@ -69,7 +71,7 @@
                 <div class="manager-container">
                     <div class="member-list">
                         <div class="member">
-                            <p style="text-align: center;font-family: 'Baskerville Old Face';font-size: large">{{ manager.username }}</p>
+                            <p style="text-align: center;font-size: large">{{ manager.username }}</p>
                         </div>
                     </div>
                 </div>
@@ -82,7 +84,7 @@
                     <div class="member-list">
                         {% if members %}
                         {% for member in members %}
-                            <div class="member"><p style="text-align: center;font-family: 'Baskerville Old Face';font-size: large">{{ member.username }}</p></div>
+                            <div class="member"><p style="text-align:center;font-size:large">{{ member.username }}</p></div>
                         {% endfor %}
                     </div>
                 {% endif %}

@@ -3,6 +3,7 @@ from flask import Blueprint
 
 from ATMflask import db
 from ATMflask.sql import User, Participant, Activity, Membership, Club
+from datetime import datetime
 
 clubdt = Blueprint('clubdt', __name__)
 
@@ -10,7 +11,6 @@ clubdt = Blueprint('clubdt', __name__)
 def get_club_members(club_id):
     # 获取社团
     club = db.session.query(Club).get(club_id)
-
     if not club:
         return None  # 如果没有找到社团，返回None
 
@@ -21,24 +21,12 @@ def get_club_members(club_id):
 
 @clubdt.route('/ClubDetail/<int:club_id>', methods=['GET', 'POST'])
 def clubDetail(club_id):
-
-    # 获取当前登录的用户
-    user_id = session.get('id')
-    username = None
-
-    if user_id:
-        user = User.query.get(user_id)
-        username = user.username
-
     # 获取该社团的信息
     club = db.session.query(Club).get(club_id)
-
     # 获取该社团的成员列表
     members = get_club_members(club_id)
-
     # 获取该社团的成员数量
     num_members = db.session.query(Membership).filter(Membership.club_id == club.club_id).count()
-
     # 获取社团的经理
     manager = db.session.query(User).join(Membership).filter(Membership.club_id == club.club_id,
                                                              Membership.role == 'manager').first()
@@ -47,6 +35,7 @@ def clubDetail(club_id):
     user_id = session.get('id')
     username = None
     is_manager = False
+    ifjoined = False
 
     if user_id:
         user = User.query.get(user_id)
@@ -55,8 +44,14 @@ def clubDetail(club_id):
         if manager and manager.id == user_id:
             is_manager = True
 
+        for member in members:
+            if member.id == user_id:
+                ifjoined = True
+                break
+
     # 返回模板并传递数据
-    return render_template('ClubDetail.html', club=club, manager=manager, num_members=num_members, is_manager=is_manager,members=members,username=username)
+    return render_template('ClubDetail.html', club=club, manager=manager, num_members=num_members, is_manager=is_manager,
+                           members=members,username=username, ifjoined = ifjoined)
 
 @clubdt.route('/EditClub/<int:club_id>', methods=['GET', 'POST'])
 def editClub(club_id):
@@ -220,3 +215,33 @@ def deleteClubMember():
                 db.session.delete(member)
                 db.session.commit()
         return jsonify({"message": "Member is deleted successfully!"})
+
+@clubdt.route('/joinClub/<int:club_id>', methods=['POST','GET'])
+def joinClub(club_id):
+    # 获取当前登录的用户
+    user_id = session.get('id')
+
+    if user_id:
+        current_time = datetime.now()
+        nowTime = current_time.strftime('%Y-%m-%dT%H:%M')
+
+        # 添加用户到俱乐部
+        new_member = Membership(club_id=club_id, user_id=user_id, role="member",join_time = nowTime)
+        db.session.add(new_member)
+        db.session.commit()
+
+        return redirect("/ClubDetail/"+str(club_id))
+
+
+@clubdt.route('/quitClub/<int:club_id>', methods=['POST','GET'])
+def quitClub(club_id):
+    # 获取当前登录的用户
+    user_id = session.get('id')
+
+    if user_id:
+        # 在俱乐部里删除用户
+        current_member = Membership.query.filter_by(user_id = user_id, club_id=club_id).first()
+        db.session.delete(current_member)
+        db.session.commit()
+
+        return redirect("/ClubDetail/"+str(club_id))

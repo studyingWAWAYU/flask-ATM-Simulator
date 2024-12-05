@@ -29,37 +29,3 @@ searchInput.addEventListener('blur', function() {
         searchInput.style.width = '400px';  // 没有输入内容时恢复
     }
 });
-
-
-document.addEventListener("DOMContentLoaded", () => {
-    const joinClubButton = document.querySelectorAll('.join-club-btn');
-    joinClubButton.forEach(button => {
-        button.addEventListener('click', function () {
-            // 弹出确认框
-            const confirmation = confirm("Are you sure you want to join this club?");
-            if (!confirmation) {
-                return;  // 如果管理员取消删除，则返回
-            }
-
-            const club_id = this.dataset.clubId; // 获取俱乐部ID
-            fetch(`/joinClub`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({club_id: club_id}) // 可以扩展传递的数据结构
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.message) {
-                        alert(data.message);  // 显示成功消息
-                    } else if (data.error) {
-                        alert(data.error);    // 显示错误消息
-                    }
-                })
-                .catch(error => {
-                alert('There was a problem with your request: ' + error.message);
-                });
-        });
-    });
-});

@@ -96,9 +96,6 @@ def clublobby():
     club_names = [club['club_name'] for club in clubs]
     member_counts = [club['member_count'] for club in clubs]
 
-
-
-
     return render_template('ClubLobby.html', user_clubs=club_details, clubs=all_clubs_data,user_id=user_id,username=username,club_names=club_names,member_counts=member_counts)
 
 @clublb.route('/CreateClub', methods=['GET', 'POST'])
@@ -125,8 +122,6 @@ def createClub():
             # 获取新创建的俱乐部ID
             club_id = new_club.club_id
 
-
-
             # 创建该社团的经理和成员关系
             membership = Membership(user_id=user_id, club_id=club_id, role='manager')
             db.session.add(membership)
@@ -137,26 +132,3 @@ def createClub():
             return redirect(url_for('clubdt.clubDetail', club_id=club_id))
 
     return render_template('CreateClub.html')
-
-@clublb.route('/joinClub', methods=['POST','GET'])
-def joinClub():
-    data = request.get_json()
-    club_id = data.get("club_id")
-
-    # 获取当前登录的用户
-    user_id = session.get('id')
-    username = None
-
-    if user_id:
-        user = User.query.get(user_id)
-        username = user.username
-        # 检查用户是否已是该俱乐部的成员
-        existing_member = Membership.query.filter_by(club_id=club_id, user_id=user_id).first()
-        if existing_member:
-            return jsonify({'error': 'You are already a member of this club!'})
-
-        # 添加用户到俱乐部
-        new_member = Membership(club_id=club_id, user_id=user_id, role="member")
-        db.session.add(new_member)
-        db.session.commit()
-        return jsonify({'message': 'Successfully joined the club!'})
