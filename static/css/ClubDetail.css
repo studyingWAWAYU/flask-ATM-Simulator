@@ -50,68 +50,6 @@ li{
 #username:hover{background-color:#C4E2FF}
 /*end of navigation*/
 
-/*轮播图片*/
-#FunctionContainer{
-    width:1700px;
-    height:720px;
-    display: block;
-    margin:auto;
-}
-#alternatePlay{
-    position:absolute;
-    width:760px;
-    height:500px;
-    top:135px;
-    left:20px;
-}
-#leftbtn{
-    position:absolute;
-    width:40px;
-    height:40px;
-    top:360px;
-    left:30px;
-}
-#rightbtn{
-    position:absolute;
-    width:40px;
-    height:40px;
-    top:360px;
-    left:730px;
-}
-#box{
-    width:750px;
-    height:750px;
-    margin-left:70px;
-}
-#upbox{
-    width:650px;
-    height:190px;
-    margin-top:-470px;
-    margin-left:920px;
-}
-#lowbox{
-    width:650px;
-    height:190px;
-    margin-top:-75px;
-    margin-left:920px;
-}
-.allFunctions{
-    color:#415468;
-    float:left;
-    width:150px;
-    height:172px;
-    margin-top:-50px;
-    padding-top:18px;
-    background-color: rgba(255, 255, 255, 0.95);
-    border:1px solid #C4E2FF;
-    border-radius: 10px;
-    box-shadow: 1px 1px 5px 3px #DAEDFF;
-    font-size:20px;
-}
-.allFunctions:hover{
-    z-index: 9;
-}
-
 
 /*Classification*/
 #ClubDetail{

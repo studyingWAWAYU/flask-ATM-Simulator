@@ -60,18 +60,16 @@ li{
     display: block;
     margin: auto;
     padding-top: 140px;
-	padding-left: 80px;
     /* border:1px solid; */
 }
 
 /*MyClub*/
 #MyClub{
-    width:1700px;
+    width:1600px;
     height:1000px;
     display: block;
     margin: auto;
     padding-top: 140px;
-	padding-left: 80px;
     /* border:1px solid; */
 }
 
@@ -227,30 +225,24 @@ a{
 }
 
 
-/*bottom*/
-#indexbottom{
-    width:1700px;
-    height:130px;
-    margin-top:-1500px;
-    background-color:#C4E2FF;
-    left:50%;
-    margin-left:-850px;
-    color:#415468;
-}
-
-}
 
 /* 表格样式 */
-.club-table {
+#section{
+    width:1600px;
+    margin:auto;
+}
+table{
     width: 95%;
+    font-size: 18px;
+    margin-left:20px;
+}
+.club-table {
     border-collapse: collapse;
     margin-top: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);  /* 添加阴影效果 */
 }
 
 .club-table th, .club-table td {
-    padding: 12px;
-    text-align: left;
     border-top: 1px solid #ddd;  /* 默认顶部边框 */
     border-left: 1px solid #ddd; /* 默认左边框 */
     text-align: center;  /* 让表头内容居中 */
@@ -282,27 +274,24 @@ a{
 .club-table td:first-child, .club-table th:first-child {
     border-left-width: 1px; /* 左边框细 */
 }
-
 .club-table td:last-child, .club-table th:last-child {
     border-right-width: 2px; /* 右边框粗 */
 }
-
 .club-table tr:first-child td, .club-table tr:first-child th {
     border-top-width: 1px; /* 上边框细 */
 }
-
 .club-table tr:last-child td, .club-table tr:last-child th {
     border-bottom-width: 2px; /* 下边框粗 */
 }
 
 /* 响应式样式：让表格自适应父div的宽度 */
-@media (max-width: 768px) {
+@media (max-width: 1700px) {
     .club-table {
-        font-size: 14px;
+        font-size: 18px;
     }
 
     .club-table th, .club-table td {
-        padding: 8px;
+        padding: 20px;
     }
 }
 
@@ -354,11 +343,22 @@ a{
     height:45px;
     border: 1px solid #99c2ed;
     border-radius: 10px;
-    margin-left:0;
+    margin-left:60px;
     font-size:18px;
 	font-weight: 600;
 	cursor: pointer;
 }
 #createAct:hover{
 	background: #daedff;
+}
+
+/*bottom*/
+#indexbottom{
+    width:1700px;
+    height:130px;
+    margin-top:-1500px;
+    background-color:#C4E2FF;
+    left:50%;
+    margin-left:-850px;
+    color:#415468;
 }
