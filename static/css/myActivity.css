@@ -49,7 +49,6 @@ li{
 #register:hover{background-color: #C4E2FF; font-weight: bold;}
 #logout:hover{background-color: #C4E2FF; font-weight: bold;}
 #username:hover{background-color:#C4E2FF}
-
 /*end of navigation*/
 
 
@@ -72,7 +71,7 @@ button#createAct:hover {
 /*Activity*/
 #ActivityContainer{
     width:1700px;
-    height:1000px;
+    height:800px;
     display: block;
     margin:auto;
     padding-top:150px;

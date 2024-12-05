@@ -59,7 +59,6 @@ li{
     display: block;
     margin:auto;
 	padding-top: 140px;
-	padding-left: 80px;
 	/* border: 1px solid; */
 }
 
@@ -71,7 +70,7 @@ li{
 	float: left;
 	border: 1px solid #C4E2FF;
 	box-shadow: -4px -4px 0px 0px #DAEDFF;
-
+    margin-left:50px;
 }
 
 #act-imgs{
@@ -175,7 +174,7 @@ li{
 
 /* Right Information */
 #page-right{
-	width: 1000px;
+	width: 950px;
 	height: 1000px;
 	margin-left: 60px;
 	padding: 40px 50px;
