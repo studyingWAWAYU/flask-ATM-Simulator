@@ -11,6 +11,7 @@ actct = Blueprint('actct',__name__)
 @actct.route('/ActivityContent/<int:activity_id>',methods=['GET','POST'])
 def activityContent(activity_id):
     user_id = session.get('id')
+    session['activity_id'] = activity_id
     username = None
     actContent = None
     clubName = None
