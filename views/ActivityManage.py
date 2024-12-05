@@ -53,13 +53,7 @@ def addActivity():
         description = request.form.get('description')
 
         # 判断不可为NULL的值
-        if actTitle=="":
-            flash("Activity Title cannot be empty.")
-            return render_template('AddActivity.html', username=username, myClubNameLST=myClubNameLST,nowTime=nowTime,newTime=newTime)
-        elif location == "":
-            flash("Location cannot be empty.")
-            return render_template('AddActivity.html', username=username, myClubNameLST=myClubNameLST,nowTime=nowTime,newTime=newTime)
-        elif max_participant is None:
+        if max_participant is None or max_participant == "":
             flash("Maximum Participant cannot be empty")
             return render_template('AddActivity.html', username=username, myClubNameLST=myClubNameLST,nowTime=nowTime,newTime=newTime)
 
@@ -174,17 +168,7 @@ def EditActivity(activity_id):
         description = request.form.get('description')
 
         # 判断不可为NULL的值
-        if actTitle == "":
-            flash("Activity Title cannot be empty.")
-            return render_template('EditActivity.html', username=username, actOrigin=actOrigin,
-                                   current_clubName=current_clubName,
-                                   myClubNameLST=myClubNameLST, actTypes=actTypes)
-        elif location == "":
-            flash("Location cannot be empty.")
-            return render_template('EditActivity.html', username=username, actOrigin=actOrigin,
-                                   current_clubName=current_clubName,
-                                   myClubNameLST=myClubNameLST, actTypes=actTypes)
-        elif max_participant is None:
+        if max_participant is None or max_participant == "":
             flash("Maximum Participant cannot be empty")
             return render_template('EditActivity.html', username=username, actOrigin=actOrigin,
                                    current_clubName=current_clubName,
@@ -192,14 +176,17 @@ def EditActivity(activity_id):
 
         # 检查新actTitle是否已存在
         if actTitle != actOrigin.activity_name:
-            existing_actname = Activity.query.filter_by(activity_name = actTitle).one_or_none()
-            if existing_actname:
+            existing_actname = Activity.query.filter_by(activity_name = actTitle).first()
+            print(existing_actname)
+            if existing_actname is not None:
                 flash('Activity title already taken.')
                 return render_template('EditActivity.html', username=username, actOrigin=actOrigin,
                                        current_clubName=current_clubName,
                                        myClubNameLST=myClubNameLST, actTypes=actTypes)
             else:
-                Activity.activity_name = actTitle
+                actOrigin.activity_name = actTitle
+                db.session.commit()
+
 
         # 与当前时间对比得到活动status
         current_time = datetime.now()

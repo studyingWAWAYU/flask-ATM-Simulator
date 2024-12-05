@@ -296,14 +296,14 @@ table{
 
 /* 输入框 */
 .google-search-input {
-    width: 400px; /* 输入框宽度 */
-    padding: 10px 20px; /* 内边距，上下10px，左右20px */
-    border: 1px solid #dcdcdc; /* 边框颜色 */
-    border-radius: 24px; /* 圆角 */
-    font-size: 16px; /* 字体大小 */
-    background-color: #f8f8f8; /* 背景颜色 */
-    color: #333; /* 输入文字颜色 */
-    transition: all 0.3s ease; /* 平滑过渡效果 */
+    width: 400px;
+    padding: 10px 20px;
+    border: 1px solid #dcdcdc;
+    border-radius: 24px;
+    font-size: 16px;
+    background-color: #f8f8f8;
+    color: #333;
+    transition: all 0.3s ease;
 }
 
 /* 输入框获得焦点时 */
@@ -316,15 +316,15 @@ table{
 
 /* 占位符样式 */
 .google-search-input::placeholder {
-    color: #aaa; /* 占位符文字颜色 */
-    font-style: italic; /* 占位符字体样式 */
+    color: #aaa;
+    font-style: italic;
 }
 
 /* 设置鼠标悬停时的链接样式 */
 .tablehref:hover{
-    color: cornflowerblue;;               /* 悬停时的链接颜色变深 */
-    text-decoration: underline;   /* 悬停时添加下划线 */
-    transform: scale(1.1);        /* 鼠标悬停时放大 */
+    color: cornflowerblue;
+    text-decoration: underline;
+    transform: scale(1.1);
 }
 
 #createClub{
@@ -346,7 +346,6 @@ table{
 #indexbottom{
     width:1700px;
     height:130px;
-    margin-top:-1500px;
     background-color:#C4E2FF;
     left:50%;
     margin-left:-850px;

@@ -43,6 +43,8 @@ def register():
     if user == '':
         flash('Username cannot be empty.')
         return render_template('register.html')
+    elif len(user)>20:
+        flash('The username length cannot exceed 20 characters.')
     elif pwd == '':
         flash('Password cannot be empty.')
         return render_template('register.html')
@@ -53,15 +55,8 @@ def register():
         flash('Phone Number cannot be empty.')
         return render_template('register.html')
 
-    # 创建连接
-    conn = pymysql.connect(host='127.0.0.1',port=3306,user='root',passwd='root',db='acthub')
-    # 创建游标
-    cursor = conn.cursor()
-
-    sql_select = "SELECT username FROM user WHERE username='%s'" %(user)
-    cursor.execute(sql_select)
-    result = cursor.fetchall()
-    if (len(result)==0):
+    user_exists = db.session.query(User).filter_by(username=user).first()
+    if not user_exists:
         new_user = User(username=user,password=pwd,phoneNumber=phoneNum)
         db.session.add(new_user)
         db.session.commit()  # 提交事务，保存数据到数据库

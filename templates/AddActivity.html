@@ -32,7 +32,7 @@
         <div style="margin-left:210px;margin-top:50px;"><img src="../static/img/activities/addAct.png" width="580px" height="52px;"></div>
 
         <p class="inputTitle" style="margin-top:40px;"><span>Activity Title </span><span style="color:#fa8383;">*</span></p>
-        <input type="text" id="ActTitle" name="ActTitle" class="inputText"/>
+        <input type="text" id="ActTitle" name="ActTitle" class="inputText" required/>
 
         {% if myClubNameLST %}
             <p class="inputTitle"><span>Create Activity for CLub </span><span style="color:#fa8383;">*</span></p>
@@ -56,18 +56,18 @@
         </select>
 
         <p class="inputTitle"><span>Location </span><span style="color:#fa8383;">*</span></p>
-        <input type="text" id="location" name="location" class="inputText"/>
+        <input type="text" id="location" name="location" class="inputText" required/>
 
         <p class="inputTitle"><span>Maximum Participant </span><span style="color:#fa8383;">*</span></p>
-        <input type="number" name="max_participant" class="inputText"/>
+        <input type="number" name="max_participant" class="inputText" required min="1"/>
 
         <p class="inputTitle"><span>Activity Time </span><span style="color:#fa8383;">*</span></p>
-        <input type="datetime-local" name="actStart" class="date-picker" min="{{nowTime}}" value="{{nowTime}}" style="margin-left:245px;">
-        to<input type="datetime-local" name="actEnd" class="date-picker" min="{{nowTime}}" value="{{newTime}}">
+        <input type="datetime-local" name="actStart" class="date-picker" min="{{nowTime}}" value="{{nowTime}}" style="margin-left:245px;" required>
+        to<input type="datetime-local" name="actEnd" class="date-picker" min="{{nowTime}}" value="{{newTime}}" required>
 
         <p class="inputTitle"><span>Enrollment Time </span><span style="color:#fa8383;">*</span></p>
-        <input type="datetime-local" name="enrollStart" class="date-picker" min="{{nowTime}}" value="{{nowTime}}" style="margin-left:245px;">
-        to<input type="datetime-local" name="enrollEnd" class="date-picker" min="{{nowTime}}" value="{{newTime}}">
+        <input type="datetime-local" name="enrollStart" class="date-picker" min="{{nowTime}}" value="{{nowTime}}" style="margin-left:245px;" required>
+        to<input type="datetime-local" name="enrollEnd" class="date-picker" min="{{nowTime}}" value="{{newTime}}" required>
 
         <p class="inputTitle">Contact Number </p>
         <input type="text" id="contact" name="contact" class="inputText"/>
