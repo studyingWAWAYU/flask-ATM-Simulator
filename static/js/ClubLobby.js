@@ -1,3 +1,11 @@
+function confirmLogout(event) {
+    event.preventDefault();  // 阻止默认行为，即阻止直接跳转
+    const isConfirmed = confirm("Are you sure you want to log out?");
+    if (isConfirmed) {
+        window.location.href = event.target.href;  // 如果确认，执行登出操作
+        document.getElementById("logoutForm").submit();
+    }
+}
 // 获取输入框元素
 const searchInput = document.getElementById('search-input');
 // 监听输入框的焦点事件

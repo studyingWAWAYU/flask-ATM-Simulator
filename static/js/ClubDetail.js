@@ -1,3 +1,11 @@
+function confirmLogout(event) {
+    event.preventDefault();  // 阻止默认行为，即阻止直接跳转
+    const isConfirmed = confirm("Are you sure you want to log out?");
+    if (isConfirmed) {
+        window.location.href = event.target.href;  // 如果确认，执行登出操作
+        document.getElementById("logoutForm").submit();
+    }
+}
 // 确认删除社团的功能
 function confirmDelete(event, club_id) {
     // 弹出确认框
