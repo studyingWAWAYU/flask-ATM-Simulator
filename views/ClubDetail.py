@@ -59,20 +59,16 @@ def clubDetail(club_id):
 def editClub(club_id):
     # 获取当前登录的用户
     user_id = session.get('id')
-    user = User.query.get(user_id)
-    username = user.username
-
+    username = None
+    is_manager = False
     # 获取该社团的信息
     club = db.session.query(Club).get(club_id)
     manager = db.session.query(User).join(Membership).filter(Membership.club_id == club.club_id,
                                                              Membership.role == 'manager').first()
 
-    # 获取当前登录的用户
-    user_id = session.get('id')
-    is_manager = False
-
     if user_id:
-        # 检查当前用户是否是社团的负责人 (manager)
+        user = User.query.get(user_id)
+        username = user.username
         if manager and manager.id == user_id:
             is_manager = True
 
@@ -214,6 +210,8 @@ def deleteClubMember():
         if request.method == 'POST':
             member = db.session.query(Membership).filter_by(user_id=user_id,club_id=club_id).first()
             if member is not None:
+                if member.role == "manager":
+                    return jsonify({'error': 'Cannot delete club manager!'})
                 db.session.delete(member)
                 db.session.commit()
         return jsonify({"message": "Member is deleted successfully!"})
