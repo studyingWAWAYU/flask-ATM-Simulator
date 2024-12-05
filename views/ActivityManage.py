@@ -176,14 +176,17 @@ def EditActivity(activity_id):
 
         # 检查新actTitle是否已存在
         if actTitle != actOrigin.activity_name:
-            existing_actname = Activity.query.filter_by(activity_name = actTitle).one_or_none()
-            if existing_actname:
+            existing_actname = Activity.query.filter_by(activity_name = actTitle).first()
+            print(existing_actname)
+            if existing_actname is not None:
                 flash('Activity title already taken.')
                 return render_template('EditActivity.html', username=username, actOrigin=actOrigin,
                                        current_clubName=current_clubName,
                                        myClubNameLST=myClubNameLST, actTypes=actTypes)
             else:
-                Activity.activity_name = actTitle
+                actOrigin.activity_name = actTitle
+                db.session.commit()
+
 
         # 与当前时间对比得到活动status
         current_time = datetime.now()
