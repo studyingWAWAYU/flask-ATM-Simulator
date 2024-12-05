@@ -246,6 +246,7 @@ table{
     border-top: 1px solid #ddd;  /* 默认顶部边框 */
     border-left: 1px solid #ddd; /* 默认左边框 */
     text-align: center;  /* 让表头内容居中 */
+    padding: 20px;
 }
 
 .club-table th {
@@ -282,17 +283,6 @@ table{
 }
 .club-table tr:last-child td, .club-table tr:last-child th {
     border-bottom-width: 2px; /* 下边框粗 */
-}
-
-/* 响应式样式：让表格自适应父div的宽度 */
-@media (max-width: 1700px) {
-    .club-table {
-        font-size: 18px;
-    }
-
-    .club-table th, .club-table td {
-        padding: 20px;
-    }
 }
 
 /*输入框的样式*/
