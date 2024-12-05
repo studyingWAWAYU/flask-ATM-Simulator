@@ -33,7 +33,7 @@
 
         <p class="inputTitle" style="margin-top:40px;"><span>Activity Title </span><span style="color:#fa8383;">*</span></p>
 
-        <input type="text" id="ActTitle" name="ActTitle" class="inputText" value="{{actOrigin.activity_name}}"/>
+        <input type="text" id="ActTitle" name="ActTitle" class="inputText" value="{{actOrigin.activity_name}}" required/>
 
         {% if myClubNameLST %}
             <p class="inputTitle"><span>Create Activity for CLub </span><span style="color:#fa8383;">*</span></p>
@@ -60,18 +60,18 @@
         </select>
 
         <p class="inputTitle"><span>Location </span><span style="color:#fa8383;">*</span></p>
-        <input type="text" id="location" name="location" class="inputText" value="{{actOrigin.location}}"/>
+        <input type="text" id="location" name="location" class="inputText" value="{{actOrigin.location}}" required/>
 
         <p class="inputTitle"><span>Maximum Participant </span><span style="color:#fa8383;">*</span></p>
-        <input type="number" name="max_participant" class="inputText" value="{{actOrigin.max_participant}}"/>
+        <input type="number" name="max_participant" class="inputText" value="{{actOrigin.max_participant}}" required/>
 
         <p class="inputTitle"><span>Activity Time </span><span style="color:#fa8383;">*</span></p>
-        <input type="datetime-local" name="actStart" class="date-picker" value="{{actOrigin.start_time}}" style="margin-left:245px;">
-        to<input type="datetime-local" name="actEnd" class="date-picker" value="{{actOrigin.end_time}}">
+        <input type="datetime-local" name="actStart" class="date-picker" value="{{actOrigin.start_time}}" style="margin-left:245px;" required>
+        to<input type="datetime-local" name="actEnd" class="date-picker" value="{{actOrigin.end_time}}" required>
 
         <p class="inputTitle"><span>Enrollment Time </span><span style="color:#fa8383;">*</span></p>
-        <input type="datetime-local" name="enrollStart" class="date-picker" value="{{actOrigin.signup_start}}" style="margin-left:245px;">
-        to<input type="datetime-local" name="enrollEnd" class="date-picker" value="{{actOrigin.signup_end}}">
+        <input type="datetime-local" name="enrollStart" class="date-picker" value="{{actOrigin.signup_start}}" style="margin-left:245px;" required>
+        to<input type="datetime-local" name="enrollEnd" class="date-picker" value="{{actOrigin.signup_end}}" required>
 
         <p class="inputTitle">Contact Number </p>
         <input type="text" id="contact" name="contact" class="inputText" value="{{actOrigin.contact}}"/>

@@ -53,13 +53,7 @@ def addActivity():
         description = request.form.get('description')
 
         # 判断不可为NULL的值
-        if actTitle=="":
-            flash("Activity Title cannot be empty.")
-            return render_template('AddActivity.html', username=username, myClubNameLST=myClubNameLST,nowTime=nowTime,newTime=newTime)
-        elif location == "":
-            flash("Location cannot be empty.")
-            return render_template('AddActivity.html', username=username, myClubNameLST=myClubNameLST,nowTime=nowTime,newTime=newTime)
-        elif max_participant is None:
+        if max_participant is None or max_participant == "":
             flash("Maximum Participant cannot be empty")
             return render_template('AddActivity.html', username=username, myClubNameLST=myClubNameLST,nowTime=nowTime,newTime=newTime)
 
@@ -174,17 +168,7 @@ def EditActivity(activity_id):
         description = request.form.get('description')
 
         # 判断不可为NULL的值
-        if actTitle == "":
-            flash("Activity Title cannot be empty.")
-            return render_template('EditActivity.html', username=username, actOrigin=actOrigin,
-                                   current_clubName=current_clubName,
-                                   myClubNameLST=myClubNameLST, actTypes=actTypes)
-        elif location == "":
-            flash("Location cannot be empty.")
-            return render_template('EditActivity.html', username=username, actOrigin=actOrigin,
-                                   current_clubName=current_clubName,
-                                   myClubNameLST=myClubNameLST, actTypes=actTypes)
-        elif max_participant is None:
+        if max_participant is None or max_participant == "":
             flash("Maximum Participant cannot be empty")
             return render_template('EditActivity.html', username=username, actOrigin=actOrigin,
                                    current_clubName=current_clubName,
