@@ -117,7 +117,7 @@ def activityLobby():
                 if search_word:
                     selected_acts = Activity.query.filter(Activity.activity_name.ilike(f"%{search_word}%")).all()
                     if not selected_acts:
-                        flash("No matching activities were found yet.")
+                        flash("No matching activities were found yet. All activities are displayed below.")
                 else:
                     selected_acts = Act
                 print(f"Found activities: {selected_acts}")
