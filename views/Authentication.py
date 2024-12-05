@@ -1,3 +1,4 @@
+# 登录和注册功能
 from flask import render_template,request,redirect, flash,session
 from flask import Blueprint
 
@@ -5,9 +6,9 @@ from ATMflask import db
 from ATMflask.sql import User
 import pymysql
 
-lr = Blueprint('lr',__name__)
+auth = Blueprint('auth',__name__)
 
-@lr.route('/Login',methods = ['GET','POST'])  # 用装饰器定义路由的对应关系
+@auth.route('/Login',methods = ['GET','POST'])  # 用装饰器定义路由的对应关系
 def login():
     if request.method =='GET':
         return render_template('login.html')
@@ -30,7 +31,7 @@ def login():
         return render_template('login.html')
 
 
-@lr.route('/Register',methods = ['GET','POST'])  # 用装饰器定义路由的对应关系
+@auth.route('/Register',methods = ['GET','POST'])  # 用装饰器定义路由的对应关系
 def register():
     if request.method =='GET':
         return render_template('register.html')
@@ -70,7 +71,7 @@ def register():
         flash('This username is already taken.')
         return render_template('register.html')
 
-@lr.route('/Logout', methods = ['GET','POST'])
+@auth.route('/Logout', methods = ['GET','POST'])
 def logout():
     session.pop('id', None)  # 清除session中的用户ID
     return redirect('/')
