@@ -43,6 +43,8 @@ def register():
     if user == '':
         flash('Username cannot be empty.')
         return render_template('register.html')
+    elif len(user)>20:
+        flash('The username length cannot exceed 20 characters.')
     elif pwd == '':
         flash('Password cannot be empty.')
         return render_template('register.html')
