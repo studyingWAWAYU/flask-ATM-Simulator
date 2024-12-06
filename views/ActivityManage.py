@@ -187,7 +187,6 @@ def EditActivity(activity_id):
                 actOrigin.activity_name = actTitle
                 db.session.commit()
 
-
         # 与当前时间对比得到活动status
         current_time = datetime.now()
         # 将字符串转为 datetime 对象
