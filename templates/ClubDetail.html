@@ -15,7 +15,7 @@
         <a href="{{ url_for('actlb.activityLobby') }}"><li class="navli">Activity Lobby</li></a>
         <a href="{{ url_for('myAct.MyActivity') }}"><li class="navli">My Activity</li></a>
         {% if username %}
-            <a href="{{ url_for('myInfo.myInformation') }}"><li class="navli" id="username">{{ username }}</li></a>
+            <a href="{{ url_for('myProf.myProfile') }}"><li class="navli" id="username">{{ username }}</li></a>
             <form action="/Logout" method="post" id="logoutForm" style="display: none;">
                 <button type="submit" style="display: none;">Logout</button></form>
             <a href="{{ url_for('auth.logout') }}" onclick="confirmLogout(event)"><li class="navli" id="logout">Logout</li></a>

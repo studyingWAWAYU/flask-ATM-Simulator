@@ -12,8 +12,8 @@ app.register_blueprint(index.idx)
 from ATMflask.views import Authentication
 app.register_blueprint(Authentication.auth)
 
-from ATMflask.views import MyInformation
-app.register_blueprint(MyInformation.myInfo)
+from ATMflask.views import MyProfile
+app.register_blueprint(MyProfile.myProf)
 
 from ATMflask.views import MyActivity
 app.register_blueprint(MyActivity.myAct)
