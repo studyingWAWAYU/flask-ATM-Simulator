@@ -74,8 +74,10 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
+
 document.addEventListener('DOMContentLoaded', function () {
     const postSigninCodeBtn = document.getElementById('post-signin-code-btn');
+    const activity_id = postSigninCodeBtn.dataset.activityId;
     if (postSigninCodeBtn) {
         postSigninCodeBtn.addEventListener('click', function(event) {
             event.preventDefault();
@@ -87,8 +89,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 alert('Sign-in code invalid.');
                 return;
             }
-
-            fetch('/postSigninCode', {
+            fetch('/postSigninCode/'+activity_id, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -108,11 +109,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
 document.addEventListener('DOMContentLoaded', function () {
     const SigninBtn = document.getElementById('signin-btn');
-
+    const activity_id = SigninBtn.dataset.activityId;
     if (SigninBtn) {
         SigninBtn.addEventListener('click', function(event) {
             event.preventDefault();
-
             // 弹出提示框让用户输入签到码
             const signinCode = prompt('Enter a 6-digit sign-in code:');
 
@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             // 发送请求到后端
-            fetch('/signin', {
+            fetch('/signin/'+activity_id, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

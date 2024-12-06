@@ -46,7 +46,6 @@ document.addEventListener("DOMContentLoaded", function() {
                 break;
             }
         }
-
         // 监听状态变化
         dropdown.addEventListener('change', function() {
             const status = this.value;  // 获取选择的新状态

@@ -68,28 +68,23 @@
 
 	{% if not isManager %}
 		<button id="sup-btn">{{par_status}}</button>
-        <input type="hidden" id="activity-id" value="{{ actContent.activity_id }}">
-        <input type="hidden" id="user-id" value="{{ session.get('id') }}">
-        <th>
-            <div class="signin-container">
-                <button id="signin-btn" class="signin-btn">Sign In</button>
-            </div>
-        </th>
-
+		{% if actContent.status == 'Ongoing' and actContent.signin_code and par_status != 'Present' %}
+			<th><button id="signin-btn" data-activity-id="{{actContent.activity_id}}">Sign In</button></th>
+		{% endif %}
+	<!-- if user is the manager -->
 	{% else %}
 		<a href="/EditActivity/{{actContent.activity_id}}"><button id="edit-btn" >Edit this Activity</button></a>
-        {% if not isSignincode %}
-        <th>
-            <div class="post-signin-code-container">
-            <button id="post-signin-code-btn" class="post-signin-code-btn">Post Sign In Code</button>
-            </div>
-        </th>
+        {% if not actContent.signin_code and actContent.status=='Ongoing' %}
+			<th>
+				<button id="post-signin-code-btn" data-activity-id="{{ actContent.activity_id }}">Post Sign-in Code</button>
+			</th>
         {% endif %}
         <form id="deleteForm" action="/delete_activity/{{actContent.activity_id}}" method="POST" style="display:none;">
 			<button type="submit" style="display:none;"></button>
 		</form>
 		<a href="/delete_activity/{{actContent.activity_id}}" id="delete-btn" onclick="confirmDelete(event)" style="margin-top:20px;">Delete this Activity</a>
 	{% endif %}
+
 </div>
 	
 	
@@ -179,10 +174,19 @@
 			</table>
 		</div>
 		{% endif %}
+
+		{% if isManager and actContent.signin_code %}
+		<div class="info-item">
+			<div class="info-title">| Sign In Code</div>
+			<table align="left" width=1000>
+				<tr><td><p>{{actContent.signin_code}}</p></td></tr>
+			</table>
+		</div>
+		{% endif %}
+
 	</div>
 </div>
 </div>
-
 
 
 <!--Bottom-->

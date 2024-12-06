@@ -35,7 +35,7 @@ function confirmSave(event) {
 // 加入社团
 document.addEventListener("DOMContentLoaded", () => {
     const joinClubButton = document.getElementById('join-club-btn');
-    const club_id = document.getElementById('club-id').value;
+    const club_id = joinClubButton.dataset.clubId;
 
     if (joinClubButton){
         joinClubButton.addEventListener('click', function () {
@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
 // 退出社团
 document.addEventListener("DOMContentLoaded", () => {
     const quitClubButton = document.getElementById('quit-club-btn');
-    const club_id = document.getElementById('club-id').value;
+    const club_id = quitClubButton.dataset.clubId;
     if (quitClubButton){
         quitClubButton.addEventListener('click', function () {
             // 弹出确认框
