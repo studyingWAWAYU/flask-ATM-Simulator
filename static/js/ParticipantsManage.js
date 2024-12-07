@@ -38,9 +38,10 @@ document.addEventListener("DOMContentLoaded", function() {
     statusDropdowns.forEach(dropdown => {
         const status = dropdown.value;  // 获取当前状态
         const userId = dropdown.dataset.userId;  // 获取用户ID
+        const activityId = dropdown.dataset.activityId;
 
         // 根据当前状态在选择框中设定默认值
-        for (let i = 0; i < dropdown.options.length; i++) {
+        for (let i = 0; i < 4; i++) {
             if (dropdown.options[i].value === status) {
                 dropdown.options[i].selected = true;
                 break;
@@ -59,6 +60,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 body: JSON.stringify({
                     user_id: userId,
                     status: status,
+                    activity_id: activityId,
                 })
             })
             .then(response => response.json())
