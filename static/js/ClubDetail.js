@@ -18,20 +18,6 @@ function confirmDelete(event, club_id) {
     }
 }
 
-//保存
-// 提交前弹出确认框
-function confirmSave(event) {
-    event.preventDefault();  // 防止表单默认提交
-
-    // 显示确认框
-    var confirmAction = confirm("Are you sure you want to save changes?");
-
-    // 如果用户点击确认，提交表单
-    if (confirmAction) {
-        document.getElementById('editClubForm').submit();
-    }
-}
-
 // 加入社团
 document.addEventListener("DOMContentLoaded", () => {
     const joinClubButton = document.getElementById('join-club-btn');
