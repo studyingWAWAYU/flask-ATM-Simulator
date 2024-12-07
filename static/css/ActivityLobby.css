@@ -114,7 +114,7 @@ button.selected{
 /*Activity*/
 #ActivityContainer{
     width:1700px;
-    height:700px;
+    min-height:700px;
     display: block;
     margin:auto;
 	/* border: 1px solid; */

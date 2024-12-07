@@ -55,8 +55,8 @@ li{
 /* Information */
 #InformationContainer{
     width:1700px;
-    min-height:1000px;
-    display: inline-block;
+    min-height:1100px;
+    display: block;
     margin:auto;
 	padding-top: 140px;
 	/* border: 1px solid; */
