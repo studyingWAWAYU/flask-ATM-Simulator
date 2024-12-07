@@ -50,124 +50,6 @@ li{
 #username:hover{background-color:#C4E2FF}
 /*end of navigation*/
 
-/*轮播图片*/
-#FunctionContainer{
-    width:1700px;
-    height:720px;
-    display: block;
-    margin:auto;
-}
-#alternatePlay{
-    position:absolute;
-    width:760px;
-    height:500px;
-    top:135px;
-    left:20px;
-}
-#leftbtn{
-    position:absolute;
-    width:40px;
-    height:40px;
-    top:360px;
-    left:30px;
-}
-#rightbtn{
-    position:absolute;
-    width:40px;
-    height:40px;
-    top:360px;
-    left:730px;
-}
-#box{
-    width:750px;
-    height:750px;
-    margin-left:70px;
-}
-#upbox{
-    width:650px;
-    height:190px;
-    margin-top:-470px;
-    margin-left:920px;
-}
-#lowbox{
-    width:650px;
-    height:190px;
-    margin-top:-75px;
-    margin-left:920px;
-}
-.allFunctions{
-    color:#415468;
-    float:left;
-    width:150px;
-    height:172px;
-    margin-top:-50px;
-    padding-top:18px;
-    background-color: rgba(255, 255, 255, 0.95);
-    border:1px solid #C4E2FF;
-    border-radius: 10px;
-    box-shadow: 1px 1px 5px 3px #DAEDFF;
-    font-size:20px;
-}
-.allFunctions:hover{
-    z-index: 9;
-}
-
-/*functions provided for managers and members*/
-.mandm{
-    width:1700px;
-    height:200px;
-    margin:20px auto;
-    margin-top:50px;
-}
-.left{
-    width:650px;
-    height:400px;
-    float:left;
-    margin-left:180px;
-    margin-top:50px;
-}
-.leftimg{
-    width:500px;
-    height:360px;
-    float:left;
-    margin-top:8px;
-    margin-left:-10px;
-    text-align: center;
-}
-.righttext{
-    width:220px;
-    height:200px;
-    float:right;
-    margin-top:70px;
-    margin-left:-130px;
-    background-color: rgba(255, 255, 255, 0.95);
-    font-size:20px;
-    color:#58708D;
-    box-shadow: 1px 1px 2px 2px #e6f8fa;
-    padding-left:10px;
-    padding-right:10px;
-    padding-top: 10px;
-}
-.right{
-    width:650px;
-    height:400px;
-    float:right;
-    margin-right:120px;
-    margin-top:50px;
-}
-
-
-
-/*底部*/
-#indexbottom{
-    width:1700px;
-    height:180px;
-    margin-top:170px;
-    background-color:#C4E2FF;
-    left:50%;
-    margin-left:-850px;
-    color:#415468;
-}
 
 /*Classification*/
 #EditClub{
@@ -195,17 +77,6 @@ table{
     height:25px;
     border:1px solid #99c2ed;
     padding:3px;
-}
-#submit{
-    background-color: #C4E2FF;
-    width:300px;
-    height:45px;
-    margin-left:100px;
-    font-size:18px;
-    border-radius: 5px;
-    border: 1px solid #99c2ed;
-    box-shadow:3px 3px 0px 0px #99c2ed;
-    margin-top:25px;
 }
 
 #FormContainer{
@@ -278,17 +149,7 @@ select{
 #custom_upload:hover{
     background-color: #daedff;
 }
-#submit{
-    background-color: #C4E2FF;
-    width:500px;
-    height:45px;
-    margin-left:250px;
-    font-size:18px;
-    margin-top:35px;
-    border-radius: 5px;
-    border: 1px solid #99c2ed;
-    box-shadow:3px 3px 0px 0px #99c2ed;
-}
+
 /* 定义输入框的基本样式 */
 textarea {
     height: 600px; /* 设置固定高度 */
@@ -311,12 +172,11 @@ textarea:hover {
     width: 480px;
 }
 
-
 #FormOutline{
     width:1000px;
     height:780px;
     margin-left:350px;
-    margin-top:50px;
+    margin-top:20px;
     border:2px solid #99c2ed;
     border-radius: 5px;
     box-shadow: 2px 2px 1px 2px #99c2ed;
@@ -338,13 +198,14 @@ textarea:hover {
     padding-left:5px;
     margin-left:250px;
     font-size:18px;
+    font-family:Ariel;
 }
 
 #description{
     height: 250px;
 }
 
-#submit,#back{
+#submit-btn,#back{
     background-color: #C4E2FF;
     width:500px;
     height:45px;
@@ -358,4 +219,15 @@ textarea:hover {
 
 #announcement{
     height: 400px;
+}
+
+/*底部*/
+#indexbottom{
+    width:1700px;
+    height:180px;
+    margin-top:170px;
+    background-color:#C4E2FF;
+    left:50%;
+    margin-left:-850px;
+    color:#415468;
 }
