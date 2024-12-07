@@ -7,6 +7,7 @@ function confirmLogout(event) {
     }
 }
 
+/*删除活动*/
 function confirmDelete(event){
     event.preventDefault();
     console.log("Delete button clicked");
@@ -16,6 +17,7 @@ function confirmDelete(event){
     }
 }
 
+/*报名*/
 document.addEventListener("DOMContentLoaded", function() {
     const signupBtn = document.getElementById("sup-btn");
     if (signupBtn) {
@@ -74,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-
+/*发布签到码*/
 document.addEventListener('DOMContentLoaded', function () {
     const postSigninCodeBtn = document.getElementById('post-signin-code-btn');
     const activity_id = postSigninCodeBtn.dataset.activityId;
@@ -107,6 +109,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+/*签到*/
 document.addEventListener('DOMContentLoaded', function () {
     const SigninBtn = document.getElementById('signin-btn');
     const activity_id = SigninBtn.dataset.activityId;
@@ -144,6 +147,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+
+/*活动轮播图*/
 var idx = 0;
 var t = null;
 var totalImgs = 0;
