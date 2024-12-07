@@ -67,7 +67,9 @@
 	</div>
 
 	{% if not isManager %}
-		<button id="sup-btn">{{par_status}}</button>
+		{% isSignup %}
+			<button id="sup-btn" data-activity-id="{{actContent.activity_id}}">{{par_status}}</button>
+		{% endif %}
 		{% if actContent.status == 'Ongoing' and actContent.signin_code and par_status != 'Present' %}
 			<th><button id="signin-btn" data-activity-id="{{actContent.activity_id}}">Sign In</button></th>
 		{% endif %}
@@ -117,7 +119,7 @@
 				</tr>
 			</table>
 		</div>
-		
+
 		<div class="info-signup">
 			<div class="info-title">| Activity&nbsp;&nbsp;SignUp</div>
 			<table align="left" width=1000>

@@ -27,6 +27,8 @@ def activityContent(activity_id):
     remaining = None
     isManager = False
     participants_dict = None
+    filelist = None
+    isSignup = False
 
     if user_id:
         user = User.query.get(user_id)
@@ -72,19 +74,54 @@ def activityContent(activity_id):
                 participants_dict = role_dict
 
         # 图片
-        try:
-            files = os.listdir(os.path.join(os.getcwd(), 'static', 'img', 'uploads', str(activity_id)))
-            filelist = [f for f in files]
-        except FileNotFoundError:
-            filelist = None
+        files = os.listdir(os.path.join(os.getcwd(), 'static', 'img', 'uploads', str(activity_id)))
+        filelist = [f for f in files]
+
+        # 报名时间
+        current = datetime.now()
+        if actContent.signup_start <= current <= actContent.signup_end:
+            isSignup = True
 
     else:
         flash("Please login first to check all activities.")
+        redirect('ActivityLobby')
 
     if request.method == 'GET':
         return render_template('ActivityContent.html',username=username,actContent=actContent,clubName=clubName,par_status=par_status,
-                               remaining=remaining,isManager=isManager,participants_dict=participants_dict,filelist=filelist)
+                               remaining=remaining,isManager=isManager,participants_dict=participants_dict,filelist=filelist,isSignup=isSignup)
 
+# 报名活动
+@actct.route('/Signup', methods=['POST'])
+def signup():
+    user_id = session.get('id')
+    data = request.get_json()
+    act_id = data.get('activity_id')  # 获取活动 ID
+
+    # 获取活动信息
+    activity = Activity.query.get(act_id)
+    if not activity:
+        return jsonify({'success': False, 'message': 'Activity not found.'})
+
+    # 检查活动是否已满
+    current_participants = Participant.query.filter_by(activity_id=act_id).all()
+    if len(current_participants) >= activity.max_participant:
+        return jsonify({'success': False, 'message': 'Activity is already full.'})
+
+    # 检查用户是否已经报名
+    existing_participant = Participant.query.filter_by(user_id=user_id,activity_id=act_id).first()
+    if existing_participant:
+        return jsonify({'success': False, 'message': 'You have signed up for this activity before.'})
+
+    # 创建新报名记录
+    new_participant = Participant(user_id=user_id,activity_id=act_id,status="Registered")
+    db.session.add(new_participant)
+    db.session.commit()
+
+    # 更新剩余名额
+    remaining = activity.max_participant - len(current_participants) - 1
+    db.session.commit()
+
+    return jsonify({'success': True, 'remaining': remaining})
 
 # 发布签到码
 @actct.route('/postSigninCode/<int:activity_id>', methods=['POST'])
