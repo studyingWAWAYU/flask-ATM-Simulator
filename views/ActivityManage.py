@@ -81,11 +81,6 @@ def addActivity():
         db.session.add(newAct)
         db.session.commit()
 
-        participant_manager = Participant(activity_id=newAct.activity_id, user_id=user_id, status='Registered',
-                                          role='manager')
-        db.session.add(participant_manager)
-        db.session.commit()
-
         # 上传图片
         # 定义允许的图片格式
         ALLOWED_EXTENSIONS = {'jpg', 'jpeg', 'png', 'gif'}
@@ -118,8 +113,6 @@ def addActivity():
 
         #return render_template('AddActivity.html',username=username,myClubNameLST=myClubNameLST)
         return redirect('/MyActivity')
-
-
 
 
 @actManage.route('/EditActivity/<int:activity_id>',methods=['GET','POST'])
@@ -248,7 +241,7 @@ def EditActivity(activity_id):
 
         return redirect('/ActivityContent/'+str(activity_id))
 
-# 如果是manager就可以编辑、删除这个活动。
+# Delete an activity
 @actManage.route('/delete_activity/<int:activity_id>',methods=['POST'])
 def delete_activity(activity_id):
     current_activity = Activity.query.get(activity_id)
