@@ -21,17 +21,6 @@ def get_club_members(club_id):
 
 @clubct.route('/ClubContent/<int:club_id>', methods=['GET', 'POST'])
 def clubContent(club_id):
-    # 获取该社团的信息
-    club = db.session.query(Club).get(club_id)
-    # 获取该社团的成员列表
-    members = get_club_members(club_id)
-    # 获取该社团的成员数量
-    num_members = db.session.query(Membership).filter(Membership.club_id == club.club_id).count()
-    # 获取社团的经理
-    manager = db.session.query(User).join(Membership).filter(Membership.club_id == club.club_id,
-                                                             Membership.role == 'manager').first()
-
-    # 获取当前登录的用户
     user_id = session.get('id')
     username = None
     is_manager = False
@@ -40,7 +29,17 @@ def clubContent(club_id):
     if user_id:
         user = User.query.get(user_id)
         username = user.username
-        # 判断当前用户是否为该社团的经理
+
+        # 获取该社团的信息
+        club = db.session.query(Club).get(club_id)
+        # 获取该社团的成员列表
+        members = get_club_members(club_id)
+        # 获取该社团的成员数量
+        num_members = db.session.query(Membership).filter(Membership.club_id == club.club_id).count()
+        # 获取社团的经理
+        manager = db.session.query(User).join(Membership).filter(Membership.club_id == club.club_id,Membership.role == 'manager').first()
+
+        # 判断当前用户是否为该社团的manager
         if manager and manager.id == user_id:
             is_manager = True
 
@@ -49,9 +48,12 @@ def clubContent(club_id):
                 ifjoined = True
                 break
 
-    # 返回模板并传递数据
-    return render_template('ClubContent.html', club=club, manager=manager, num_members=num_members, is_manager=is_manager,
-                           members=members,username=username, ifjoined = ifjoined)
+        # 返回模板并传递数据
+        return render_template('ClubContent.html', club=club, manager=manager, num_members=num_members,
+                               is_manager=is_manager, members=members,username=username, ifjoined = ifjoined)
+    else:  # 如果用户没有登录
+        flash('You must log in first to view the club details.')
+        return redirect('/ClubLobby')
 
 @clubct.route('/EditClub/<int:club_id>', methods=['GET', 'POST'])
 def editClub(club_id):
