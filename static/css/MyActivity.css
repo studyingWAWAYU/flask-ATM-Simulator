@@ -71,11 +71,9 @@ button#createAct:hover {
 /*Activity*/
 #ActivityContainer{
     width:1700px;
-    height:800px;
-    display: block;
+    min-height:800px;
     margin:auto;
     padding-top:150px;
-	/* border: 1px solid; */
 }
 
 #search-input{

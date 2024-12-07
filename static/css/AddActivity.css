@@ -53,14 +53,14 @@ li{
 
 #FormContainer{
     width:1700px;
-    height:1700px;
+    min-height:1700px;
     display:block;
     margin:auto;
     padding-top:80px;
 }
 #FormOutline{
     width:1000px;
-    height:1600px;
+    min-height:1600px;
     margin-left:350px;
     margin-top:50px;
     border:2px solid #99c2ed;

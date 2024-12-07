@@ -55,8 +55,8 @@ li{
 /* Information */
 #InformationContainer{
     width:1700px;
-    height:1000px;
-    display: block;
+    min-height:1000px;
+    display: inline-block;
     margin:auto;
 	padding-top: 140px;
 	/* border: 1px solid; */
@@ -65,7 +65,7 @@ li{
 /* Left Information */
 #page-left{
 	width: 400px;
-	height: 1045px;
+	min-height: 1045px;
 	padding: 20px 40px;
 	float: left;
 	border: 1px solid #C4E2FF;
@@ -175,7 +175,7 @@ li{
 /* Right Information */
 #page-right{
 	width: 950px;
-	height: 1000px;
+	min-height: 1000px;
 	margin-left: 60px;
 	padding: 40px 50px;
 	float: left;

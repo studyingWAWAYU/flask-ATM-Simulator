@@ -18,8 +18,6 @@ document.addEventListener('DOMContentLoaded',function(){
 document.addEventListener('DOMContentLoaded', function() {
     const imageInput = document.getElementById('uploadImg');
     const imagePreviewContainer = document.getElementById('image-preview-container');
-    const FormContainer = document.getElementById('FormContainer');
-    const FormOutline = document.getElementById('FormOutline');
     let selectedFiles = [];
 
     // 处理文件选择并显示预览
@@ -50,8 +48,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     previewDiv.appendChild(deleteBtn);
 
                     imagePreviewContainer.appendChild(previewDiv);
-
-                    adjustHeight();
                 };
 
                 reader.readAsDataURL(file);
@@ -72,7 +68,6 @@ document.addEventListener('DOMContentLoaded', function() {
             previewDivs[index].remove(); // 删除对应的预览图
         }
         updatePreviews();
-        adjustHeight();
     }
 
     // 更新预览容器中的图片
@@ -103,19 +98,6 @@ document.addEventListener('DOMContentLoaded', function() {
             };
             reader.readAsDataURL(file);
         });
-    }
-
-    function adjustHeight(){
-        if(selectedFiles.length>5){
-            FormContainer.style.height = 1920+'px';
-            FormOutline.style.height = 1860+'px';
-        }else if(selectedFiles.length>0){
-            FormContainer.style.height = 1820+'px';
-            FormOutline.style.height = 1760+'px';
-        }else{
-            FormContainer.style.height = 1700+'px';
-            FormOutline.style.height = 1600+'px';
-        }
     }
 
     // 提交表单时，上传选择的文件
