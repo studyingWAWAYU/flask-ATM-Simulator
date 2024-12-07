@@ -52,6 +52,13 @@ def addActivity():
         requirement = request.form.get('requirement')
         description = request.form.get('description')
 
+        #判断actTitle不能重复
+        actTitle_exists = Activity.query.filter_by(activity_name=actTitle)
+        if actTitle_exists:
+            flash("This activity title already exists.")
+            return render_template('AddActivity.html', username=username, myClubNameLST=myClubNameLST, nowTime=nowTime,
+                                   newTime=newTime)
+
         # 判断不可为NULL的值
         if max_participant is None or max_participant == "":
             flash("Maximum Participant cannot be empty")
