@@ -98,9 +98,8 @@ def editClub(club_id):
 
 @clubdt.route('/DeleteClub/<int:club_id>', methods=['GET'])
 def deleteClub(club_id):
-
     # 获取社团信息
-    club = db.session.query(Club).get(club_id)
+    club = Club.query.get(club_id)
 
     if not club:
         flash("Club not found.", "error")
@@ -122,10 +121,23 @@ def deleteClub(club_id):
 
     # 删除社团及其相关信息
     try:
-        # 删除社团成员关系
-        db.session.query(Membership).filter(Membership.club_id == club_id).delete()
         # 删除活动关联（如果有）
-        db.session.query(Activity).filter(Activity.club_id == club_id).delete()
+        Activities = Activity.query.filter_by(club_id = club_id).all()
+        print(Activities)
+        if Activities:
+            for eachActivity in Activities:
+                # 删除关联活动的participants
+                current_participants = Participant.query.filter_by(activity_id=eachActivity.activity_id).all()
+                print(current_participants)
+                if current_participants:
+                    for each_participant in current_participants:
+                        db.session.delete(each_participant)
+                    db.session.commit()
+                db.session.delete(eachActivity)
+
+        # 删除社团成员关系
+        db.session.query(Membership).filter_by(club_id = club_id).delete()
+        db.session.commit()
         # 删除社团
         db.session.delete(club)
         db.session.commit()
@@ -215,6 +227,7 @@ def deleteClubMember():
                 db.session.delete(member)
                 db.session.commit()
         return jsonify({"message": "Member is deleted successfully!"})
+
 
 @clubdt.route('/joinClub/<int:club_id>', methods=['POST','GET'])
 def joinClub(club_id):
