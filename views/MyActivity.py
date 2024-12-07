@@ -15,6 +15,7 @@ def update_status(act):
         return 'Ongoing'
     else:
         return 'Upcoming'
+
 @myAct.route('/MyActivity',methods = ['GET','POST'])  # 用装饰器定义路由的对应关系
 def MyActivity():
     user_id = session.get('id')
@@ -28,19 +29,31 @@ def MyActivity():
     if user_id:
         user = User.query.get(user_id)
         username = user.username
+        myActIdLST = []
 
         # 查询用户作为manager的所有社团
         myClubId = db.session.query(Membership.club_id).filter_by(user_id=user_id, role='manager').all()
-        if myClubId != []:  # 如果用户是某社团的manager，就可以create new activity
-            createPermission = True
+        print('myCLubId:',myClubId)
+        if myClubId != []:
+            createPermission = True  # 如果用户是某社团的manager，就可以create new activity
 
-        myActId = db.session.query(Participant.activity_id).filter_by(user_id=user_id).all()
-        if myActId == []:
+            # 查询用户管理的社团
+            for eachClubId in myClubId:
+                manage_ActId = db.session.query(Activity.activity_id).filter_by(club_id=eachClubId[0]).all()
+                if manage_ActId:
+                    manage_ActIdLST = [activity_id[0] for activity_id in manage_ActId]
+                    myActIdLST.extend(manage_ActIdLST)
+        # 查询用户参与的社团
+        par_ActId = db.session.query(Participant.activity_id).filter_by(user_id=user_id).all()
+        if par_ActId:
+            par_ActIdLST = [activity_id[0] for activity_id in par_ActId]
+            myActIdLST.extend(par_ActIdLST)
+
+        if myActIdLST == []:
             flash("You haven't participated in any activity.")
         else:
-            myActIdLST = [activity_id[0] for activity_id in myActId]  # 把列表嵌套元组改为列表
             myAct = Activity.query.filter(Activity.activity_id.in_(myActIdLST)).all()
-            #print(myAct)
+
             for act in myAct:
                 act.status = update_status(act)
                 ClubId = act.club_id
