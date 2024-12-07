@@ -22,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const signupBtn = document.getElementById("sup-btn");
     if (signupBtn) {
         signupBtn.addEventListener("click", function(event) {
+            const activityId = signupBtn.dataset.activityId;
             event.preventDefault();
             const parStatus = signupBtn.textContent.trim();
             if (parStatus === "Registered" || parStatus === "Confirmed" || parStatus === "Present" || parStatus === "Absent") {
@@ -34,26 +35,14 @@ document.addEventListener("DOMContentLoaded", function() {
                 return;  // 如果用户取消报名，直接返回
             }
 
-            // 获取活动 ID 和用户 ID 从页面中的 hidden input 或其他元素
-            const activityId = document.getElementById('activity-id').value;  // 获取活动 ID
-            const userId = document.getElementById('user-id').value;  // 获取用户 ID
-
-            if (!userId) {
-                // 如果用户未登录，提示并跳转到登录页面
-                alert("Please log in first to sign up for the activity.");
-                window.location.href = "/Login";  // 跳转到登录页面
-                return;
-            }
-
             // 向后端发送报名请求
-            fetch('/applyAct', {
+            fetch('/Signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    userId: userId,
-                    activityId: activityId
+                    activity_id: activityId
                 })
             })
             .then(response => response.json())
@@ -79,9 +68,9 @@ document.addEventListener("DOMContentLoaded", function() {
 /*发布签到码*/
 document.addEventListener('DOMContentLoaded', function () {
     const postSigninCodeBtn = document.getElementById('post-signin-code-btn');
-    const activity_id = postSigninCodeBtn.dataset.activityId;
     if (postSigninCodeBtn) {
         postSigninCodeBtn.addEventListener('click', function(event) {
+            const activity_id = postSigninCodeBtn.dataset.activityId;
             event.preventDefault();
 
             const signinCode = prompt('Enter a 6-digit sign-in code:');
@@ -112,9 +101,9 @@ document.addEventListener('DOMContentLoaded', function () {
 /*签到*/
 document.addEventListener('DOMContentLoaded', function () {
     const SigninBtn = document.getElementById('signin-btn');
-    const activity_id = SigninBtn.dataset.activityId;
     if (SigninBtn) {
         SigninBtn.addEventListener('click', function(event) {
+            const activity_id = SigninBtn.dataset.activityId;
             event.preventDefault();
             // 弹出提示框让用户输入签到码
             const signinCode = prompt('Enter a 6-digit sign-in code:');
@@ -156,11 +145,11 @@ var imgPaths = [];
 
 window.onload=function(){
     imgs = document.querySelectorAll(".act-imgs");
-    totalImgs = imgs.length;
-    imgs.forEach( function(img) {imgPaths.push(img.src);} );
-    t = setInterval(carousel,2000);
-    //console.log("Total images: " + totalImgs);
-   // console.log(imgPaths)
+    if(imgs.length != 0){
+        totalImgs = imgs.length;
+        imgs.forEach( function(img) {imgPaths.push(img.src);} );
+        t = setInterval(carousel,2000);
+    }
 }
 
 function carousel(){

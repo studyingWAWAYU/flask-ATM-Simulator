@@ -4,48 +4,7 @@ from flask import render_template, request, flash, session, Blueprint, jsonify
 from ATMflask import db
 from ATMflask.sql import User, Participant, Activity
 
-# 定义 Blueprint，用于模块化管理活动相关的路由
 parManage = Blueprint('parManage', __name__)
-
-# 报名活动的路由
-@parManage.route('/applyAct', methods=['POST'])
-def apply_act():
-    data = request.get_json()
-    user_id = data.get('userId')  # 获取用户 ID
-    act_id = data.get('activityId')  # 获取活动 ID
-
-    if not act_id:
-        return jsonify({'success': False, 'message': 'Activity ID is required.'})
-
-    if not user_id:
-        return jsonify({'success': False, 'message': 'User ID is required.'})
-
-    # 获取活动信息
-    activity = Activity.query.get(act_id)
-    if not activity:
-        return jsonify({'success': False, 'message': 'Activity not found.'})
-
-    # 检查活动是否已满
-    current_participants = Participant.query.filter_by(activity_id=act_id).all()
-    if len(current_participants) >= activity.max_participant:
-        return jsonify({'success': False, 'message': 'Activity is already full.'})
-
-    # 检查用户是否已经报名
-    existing_participant = Participant.query.filter_by(user_id=user_id,activity_id=act_id).first()
-    if existing_participant:
-        return jsonify({'success': False, 'message': 'You have signed up for this activity before.'})
-
-    # 创建新报名记录
-    new_participant = Participant(user_id=user_id,activity_id=act_id,status="Registered")
-    db.session.add(new_participant)
-    db.session.commit()
-
-    # 更新剩余名额
-    remaining = activity.max_participant - len(current_participants) - 1
-    db.session.commit()
-
-    return jsonify({'success': True, 'remaining': remaining})
-
 
 # 管理活动的路由
 @parManage.route('/ParticipantsManage/<int:activity_id>', methods=['GET', 'POST'])
