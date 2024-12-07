@@ -54,7 +54,7 @@
                 <tbody>
                     {% for club,manager,numMembers in user_clubs %}
                         <tr>
-                            <td><a href="{{ url_for('clubdt.clubDetail', club_id=club.club_id) }}" class="tablehref">{{ club.club_name }}</a></td>
+                            <td><a href="{{ url_for('clubct.clubContent', club_id=club.club_id) }}" class="tablehref">{{ club.club_name }}</a></td>
                             <td>{{ manager }}</td>
                             <td>{{ numMembers }}</td>
                         </tr>

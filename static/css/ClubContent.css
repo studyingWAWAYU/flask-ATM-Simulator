@@ -51,10 +51,9 @@ li{
 /*end of navigation*/
 
 
-/*Classification*/
-#ClubDetail{
+#ClubContent{
     width:1620px;
-    height:500px;
+    min-height:500px;
     display: block;
     margin: auto;
     padding-top: 140px;
@@ -111,7 +110,7 @@ h1,p{
 
 }
 
-#post,#description,#manager,#description,#member-list{
+#announcement,#description,#manager,#description,#member-list{
     color:black;
     background-color: white;
     border-radius: 5px;
@@ -153,7 +152,7 @@ h1,p{
 }
 
 
-#post {
+#announcement {
     padding: 40px 20px;
 	border: 1px solid #C4E2FF;
 	box-shadow: 4px 4px 0px 0px #DAEDFF;
