@@ -65,6 +65,20 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+    const supBtnRole = document.getElementById("sup-btn-role");
+    const hiddenSignupConfirmation = document.getElementById("hidden-signup-confirmation");
+    const supForm = document.getElementById("sup-form");
+    if (supBtnRole){
+        supBtnRole.addEventListener("click", function() {
+        // 隐藏按钮
+        supBtnRole.style.display = "none";
+        // 显示表单
+        hiddenSignupConfirmation.style.display = "block";
+        });
+    }
+});
+
 /*发布签到码*/
 document.addEventListener('DOMContentLoaded', function () {
     const postSigninCodeBtn = document.getElementById('post-signin-code-btn');

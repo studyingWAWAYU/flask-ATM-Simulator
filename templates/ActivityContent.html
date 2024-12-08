@@ -67,10 +67,28 @@
 	</div>
 
 	{% if not isManager %}
-		{% isSignup %}
-			<button id="sup-btn" data-activity-id="{{actContent.activity_id}}">{{par_status}}</button>
+		{% if par_status!='Sign up now' %}  <!--如果已经报名了，就只显示状态-->
+			<button id="status-btn">{{par_status}}</button>
+		{% elif isSignup and remaining>0 %}  <!--用户没报名，且到了报名时间，且还有剩余名额-->
+			{% if len(roles_list)>1 %}  <!--如果需要选择role-->
+				<button id="sup-btn-role" data-activity-id="{{actContent.activity_id}}">{{par_status}}</button>
+				<div id="hidden-signup-confirmation" style="display:none;">
+					<p style="font-size:22px;margin-left:50px;">Choose one role to sign up:</p>
+						<form id="sup-form" action="/Signup_role/{{actContent.activity_id}}" method="POST">
+							<select name="roles-select">
+								{% for role in roles_list %}
+									<option>{{role}}</option>
+								{% endfor %}
+							</select>
+							<button id="sup-confirm" type="submit">Confirm to register with this role</button>
+						</form>
+				</div>
+			{% else %}  <!--不需要选择role-->
+				<button id="sup-btn" data-activity-id="{{actContent.activity_id}}">{{par_status}}</button>
+			{% endif %}
 		{% endif %}
-		{% if actContent.status == 'Ongoing' and actContent.signin_code and par_status != 'Present' %}
+
+		{% if actContent.status == 'Ongoing' and actContent.signin_code and par_status == 'Confirmed' %}
 			<th><button id="signin-btn" data-activity-id="{{actContent.activity_id}}">Sign In</button></th>
 		{% endif %}
 	<!-- if user is the manager -->

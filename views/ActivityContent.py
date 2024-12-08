@@ -29,6 +29,7 @@ def activityContent(activity_id):
     participants_dict = None
     filelist = None
     isSignup = False
+    roles_list = None
 
     if user_id:
         user = User.query.get(user_id)
@@ -44,6 +45,14 @@ def activityContent(activity_id):
         par_status = db.session.query(Participant.status).filter_by(user_id=user_id,activity_id=ActId).scalar()
         if par_status is None:
             par_status = "Sign up now"
+
+        # 报名时间
+        current = datetime.now()
+        if actContent.signup_start <= current <= actContent.signup_end:
+            isSignup = True
+
+        if actContent.roles:
+            roles_list = [roles.strip() for roles in actContent.roles.split(';')]
 
         participant = db.session.query(Participant).filter_by(activity_id=ActId).all()
         # 剩余报名人数
@@ -74,21 +83,20 @@ def activityContent(activity_id):
                 participants_dict = role_dict
 
         # 图片
-        files = os.listdir(os.path.join(os.getcwd(), 'static', 'img', 'uploads', str(activity_id)))
-        filelist = [f for f in files]
-
-        # 报名时间
-        current = datetime.now()
-        if actContent.signup_start <= current <= actContent.signup_end:
-            isSignup = True
+        try:
+            files = os.listdir(os.path.join(os.getcwd(), 'static', 'img', 'uploads', str(activity_id)))
+            filelist = [f for f in files]
+        except Exception as e:
+            pass
 
     else:
         flash("Please login first to check all activities.")
         redirect('ActivityLobby')
 
     if request.method == 'GET':
-        return render_template('ActivityContent.html',username=username,actContent=actContent,clubName=clubName,par_status=par_status,
-                               remaining=remaining,isManager=isManager,participants_dict=participants_dict,filelist=filelist,isSignup=isSignup)
+        return render_template('ActivityContent.html',username=username,actContent=actContent,clubName=clubName,
+                               par_status=par_status,remaining=remaining,isManager=isManager,roles_list=roles_list,
+                               participants_dict=participants_dict,filelist=filelist,isSignup=isSignup)
 
 # 报名活动
 @actct.route('/Signup', methods=['POST'])
@@ -122,6 +130,26 @@ def signup():
     db.session.commit()
 
     return jsonify({'success': True, 'remaining': remaining})
+
+@actct.route('/Signup_role/<int:activity_id>', methods=['POST'])
+def signup_role(activity_id):
+    user_id = session.get('id')
+    role = request.form.get('roles-select')
+    # 获取活动信息
+    activity = Activity.query.get(activity_id)
+
+    # 创建新报名记录
+    new_participant = Participant(user_id=user_id,activity_id=activity_id,status="Registered",role=role)
+    db.session.add(new_participant)
+    db.session.commit()
+
+    # 更新剩余名额
+    current_participants = Participant.query.filter_by(activity_id=activity_id).all()
+    remaining = activity.max_participant - len(current_participants)
+    db.session.commit()
+
+    return redirect('/ActivityContent/'+str(activity_id))
+
 
 # 发布签到码
 @actct.route('/postSigninCode/<int:activity_id>', methods=['POST'])
