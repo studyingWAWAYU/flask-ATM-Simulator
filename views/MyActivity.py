@@ -33,7 +33,6 @@ def MyActivity():
 
         # 查询用户作为manager的所有社团
         myClubId = db.session.query(Membership.club_id).filter_by(user_id=user_id, role='manager').all()
-        print('myCLubId:',myClubId)
         if myClubId != []:
             createPermission = True  # 如果用户是某社团的manager，就可以create new activity
 
@@ -68,14 +67,12 @@ def MyActivity():
 
         if request.method == 'POST':
             search_word = request.form.get('search-input')
-            print(f"Searching for activities: {search_word}")
             if search_word:
                 selected_acts = [act for act in myAct if search_word.lower() in act.activity_name.lower()]
                 if not selected_acts:
                     flash("No matching activities were found yet. All activities are displayed below.")
             else:
                 selected_acts = myAct
-            print(f"Found activities: {selected_acts}")
             return render_template('MyActivity.html', username=username, myAct=myAct, createPermission=createPermission,
                                    clubNames=clubNames, selected_acts=selected_acts, remainings=remainings)
 
