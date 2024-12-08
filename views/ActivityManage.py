@@ -53,7 +53,7 @@ def addActivity():
         description = request.form.get('description')
 
         #判断actTitle不能重复
-        actTitle_exists = Activity.query.filter_by(activity_name=actTitle)
+        actTitle_exists = Activity.query.filter_by(activity_name=actTitle).first()
         if actTitle_exists:
             flash("This activity title already exists.")
             return render_template('AddActivity.html', username=username, myClubNameLST=myClubNameLST, nowTime=nowTime,
@@ -88,11 +88,12 @@ def addActivity():
         db.session.add(newAct)
         db.session.commit()
 
+        activity_id = db.session.query(Activity.activity_id).filter_by(activity_name=actTitle).scalar()
+
         # 上传图片
         # 定义允许的图片格式
         ALLOWED_EXTENSIONS = {'jpg', 'jpeg', 'png', 'gif'}
         def allowed_file(filename):
-            # 获取文件的扩展名
             return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
         if 'photo[]' in request.files:
@@ -103,11 +104,10 @@ def addActivity():
                                        nowTime=nowTime, newTime=newTime)
             for file in files:
                 if file and allowed_file(file.filename):
-                    activity_id = db.session.query(Activity.activity_id).filter_by(activity_name=actTitle).first()
                     if activity_id:
                         # 配置上传文件目录
                         #提取新activity的id，保存图片的路径为os.getcwd()+static/img/uploads/activity/ + activity_id + filename
-                        upload_dir = os.path.join(os.getcwd(),'static','img','uploads',str(activity_id[0]))
+                        upload_dir = os.path.join(os.getcwd(),'static','img','uploads',str(activity_id))
                         if not os.path.exists(upload_dir):
                             os.makedirs(upload_dir)
                         file.save(os.path.join(upload_dir,file.filename))
@@ -119,7 +119,7 @@ def addActivity():
                                            nowTime=nowTime, newTime=newTime)
 
         #return render_template('AddActivity.html',username=username,myClubNameLST=myClubNameLST)
-        return redirect('/MyActivity')
+        return redirect('/ActivityContent/'+str(activity_id))
 
 
 @actManage.route('/EditActivity/<int:activity_id>',methods=['GET','POST'])
@@ -128,6 +128,7 @@ def EditActivity(activity_id):
     username = None
     actOrigin = None
     current_clubName = None
+    filelist = None
 
     if user_id:
         user = User.query.get(user_id)
@@ -147,9 +148,19 @@ def EditActivity(activity_id):
     actTypes = ["Cultural Events","Social Events","Career Development","Study Trips",
                 "Academic Activities","Interest Groups","Sports","Volunteer Work"]
 
+    try:
+        origin_upload_dir = os.path.join(os.getcwd(), 'static', 'img', 'uploads', str(activity_id))
+        if not os.path.exists(origin_upload_dir):
+            filelist = "[]"
+        else:
+            files = os.listdir(os.path.join(os.getcwd(), 'static', 'img', 'uploads', str(activity_id)))
+            filelist = ["../static/img/uploads/"+str(actOrigin.activity_id)+'/'+f for f in files]
+    except Exception as e:
+        print(e)
+
     if request.method == 'GET':
         return render_template('EditActivity.html',username=username,actOrigin=actOrigin,current_clubName=current_clubName,
-                               myClubNameLST=myClubNameLST,actTypes=actTypes)
+                               myClubNameLST=myClubNameLST,actTypes=actTypes,filelist=filelist)
 
     if request.method == 'POST':
         # 从表单取数据
@@ -177,7 +188,6 @@ def EditActivity(activity_id):
         # 检查新actTitle是否已存在
         if actTitle != actOrigin.activity_name:
             existing_actname = Activity.query.filter_by(activity_name = actTitle).first()
-            print(existing_actname)
             if existing_actname is not None:
                 flash('Activity title already taken.')
                 return render_template('EditActivity.html', username=username, actOrigin=actOrigin,
@@ -225,26 +235,52 @@ def EditActivity(activity_id):
         # 上传图片
         # 定义允许的图片格式
         ALLOWED_EXTENSIONS = {'jpg', 'jpeg', 'png', 'gif'}
-
         def allowed_file(filename):
-            # 获取文件的扩展名
             return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-        file = request.files['photo']
-        if file:
-            if allowed_file(file.filename):
-                activity_id = db.session.query(Activity.activity_id).filter_by(activity_name=actTitle).first()
-                if activity_id:
+
+        # 现在已有的旧图片
+        origin_files=[]
+        origin_upload_dir = os.path.join(os.getcwd(), 'static', 'img', 'uploads', str(activity_id))
+        if os.path.exists(origin_upload_dir):
+            origin_files = os.listdir(origin_upload_dir)
+
+        # 经过编辑后还存在的旧图片
+        origin_photo = request.form.getlist('photoPath[]')
+        origin_photo_name = [os.path.basename(path) for path in origin_photo]
+        print('origin_photo',origin_photo)
+
+        files = request.files.getlist('photo[]')
+        if files and files[0].filename:
+            print('249files:',files)
+            if len(files) > 8:
+                flash("You can only upload up to 8 images.")
+                return render_template('EditActivity.html', username=username, actOrigin=actOrigin,
+                                       current_clubName=current_clubName,myClubNameLST=myClubNameLST, actTypes=actTypes,filelist=filelist)
+            for file in files:
+                if file and allowed_file(file.filename):
                     # 配置上传文件目录
-                    # 提取新activity的id，保存图片的路径为os.getcwd()+static/img/uploads/activity/ + activity_id + filename
-                    upload_dir = os.path.join(os.getcwd(), 'static', 'img', 'uploads', str(activity_id[0]))
+                    # 保存图片的路径为os.getcwd()+static/img/uploads/activity/ + activity_id + filename
+                    upload_dir = os.path.join(os.getcwd(), 'static', 'img', 'uploads', str(activity_id))
                     if not os.path.exists(upload_dir):
                         os.makedirs(upload_dir)
-                    file.save(os.path.join(upload_dir, file.filename))
+                    file_path = os.path.join(upload_dir, file.filename)
+                    if file.filename not in origin_files:
+                        file.save(file_path)
                     flash("Image uploaded successfully.")
-                    return redirect('/ActivityContent/' + str(activity_id[0]))
-            else:
-                flash("Illegal image format: Please upload images in JPG, JPEG, PNG or GIF format!")
+                else:
+                    flash("Illegal image format: Please upload images in JPG, JPEG, PNG or GIF format!")
+                    return render_template('EditActivity.html', username=username, actOrigin=actOrigin,
+                                           current_clubName=current_clubName, myClubNameLST=myClubNameLST,
+                                           actTypes=actTypes,filelist=filelist)
+
+        if origin_files:
+            for origin_file in origin_files:
+                if origin_file not in origin_photo_name:
+                    origin_dir = os.path.join(os.getcwd(), 'static', 'img', 'uploads', str(activity_id),origin_file)
+                    print(origin_dir)
+                    if os.path.exists(origin_dir):
+                        os.remove(origin_dir)
 
         return redirect('/ActivityContent/'+str(activity_id))
 
@@ -254,7 +290,7 @@ def delete_activity(activity_id):
     current_activity = Activity.query.get(activity_id)
     # 删除所有图片
     upload_dir = os.path.join(os.getcwd(),'static','img','uploads',str(activity_id))
-    if  os.path.exists(upload_dir):
+    if os.path.exists(upload_dir):
         shutil.rmtree(upload_dir)
 
     # 删除数据库内容

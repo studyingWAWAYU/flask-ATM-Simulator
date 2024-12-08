@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>EditActivity</title>
     <link rel="stylesheet" href="../static/css/AddActivity.css">
-    <script src="../static/js/AddActivity.js"></script>
+    <script src="../static/js/EditActivity.js"></script>
 </head>
 <body>
 <div id="nav">
@@ -28,7 +28,7 @@
 
 <div id="FormContainer">
     <div id="FormOutline">
-        <form method="post" enctype="multipart/form-data">
+        <form method="post" enctype="multipart/form-data" id="form">
         <div style="margin-left:210px;margin-top:50px;"><img src="../static/img/activities/EditAct.png" width="580px" height="56px;"></div>
 
         <p class="inputTitle" style="margin-top:40px;"><span>Activity Title </span><span style="color:#fa8383;">*</span></p>
@@ -88,10 +88,11 @@
         <input type="text" id="description" name="description" class="inputText" value="{{actOrigin.description}}"/>
 
         <div id="custom_upload">Upload Photos</div>
-        <input type="file" id="uploadImg" name="photo" multiple="multiple"/>
-
+        <input type="file" id="uploadImg" name="photo[]" accept="image/*" multiple="multiple" data-filelist="{{filelist}}" data-activity-id="{{actOrigin.activity_id}}"/>
+        <p class="inputTitle" style="font-size:16px;margin-top:5px;">Note: You can only upload up to 8 images.</p>
+        <div id="image-preview-container"></div>
         <p align="center" style="color:#CC0000;font-size:20px;margin-top:30px;">{{ get_flashed_messages()[0] }}</p>
-        <a href="MyActivity"><input type="submit" value="Submit" id="submit" align="center"></a>
+        <input type="submit" value="Submit" name="submit-btn" id="submit" align="center" />
 
     </form>
 
