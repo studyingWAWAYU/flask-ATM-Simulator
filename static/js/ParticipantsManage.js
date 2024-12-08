@@ -10,13 +10,17 @@ function confirmLogout(event) {
 //增加参与者
 document.getElementById('add-participant-btn').addEventListener('click', function() {
         const userId = prompt('Enter User ID:');
+        const activityId = this.dataset.activityId;
 
         fetch('/addParticipant', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ user_id: userId})
+            body: JSON.stringify({
+            user_id: userId,
+            activityId: activityId
+            })
         })
         .then(response => response.json())
         .then(data => {
@@ -88,12 +92,16 @@ const deleteButtonsNew = document.querySelectorAll('.delete-btn');
             }
 
             const userId = this.dataset.userId;
+            const activityId = this.dataset.activityId;
             fetch('/deleteParticipant', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ user_id: userId })
+                body: JSON.stringify({
+                user_id: userId,
+                activityId: activityId
+                 })
             })
             .then(response => response.json())
             .then(data => {

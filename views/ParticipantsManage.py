@@ -6,7 +6,6 @@ from ATMflask.sql import User, Participant, Activity
 
 parManage = Blueprint('parManage', __name__)
 
-# 管理活动的路由
 @parManage.route('/ParticipantsManage/<int:activity_id>', methods=['GET', 'POST'])
 def manage_act(activity_id):
     # 获取当前用户信息
@@ -31,12 +30,12 @@ def manage_act(activity_id):
                 'user_phone_number': user_phone_number})
         return render_template('ParticipantsManage.html',username=username,participants=participant_details,activity_id=activity_id)
 
-#删除参与者
+# 删除参与者
 @parManage.route('/deleteParticipant', methods=['POST'])
 def delete_participant():
         data = request.get_json()
         user_id = data.get('user_id')
-        activity_id = session.get('activity_id')
+        activity_id = data.get('activityId')
 
         if request.method == 'POST':
             participant = db.session.query(Participant).filter_by(user_id=user_id,activity_id=activity_id).first()
@@ -65,7 +64,7 @@ def update_status():
 def add_participant():
     data = request.get_json()
     user_id = data.get('user_id')
-    activity_id = session.get('activity_id')
+    activity_id = data.get('activityId')
 
     # 检查用户是否存在
     user = db.session.query(User).filter_by(id=user_id).first()
