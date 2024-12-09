@@ -20,7 +20,7 @@ Activity Hub is a comprehensive platform designed to manage campus club activiti
 It offers robust user management features, including user registration and login, role-based access for different user types, and personal profile management. 
 The platform enables club managers to create and edit club information, complete with dedicated pages showcasing activities, member lists, and announcements.  
 Activity Hub also streamlines activity management, allowing managers to create, edit, or delete activities while providing users with a list of upcoming activities and a personalized section to track their participation.  
-Additionally, the system supports online registration for events and includes participant management features for club managers, along with a digital check-in process for efficient attendance tracking.  
+Additionally, the system supports online registration for events and includes participant management features for club managers, along with a digital sign-in process for efficient attendance tracking.  
 Overall, Activity Hub fosters engagement and collaboration within campus clubs, making it easier for users to connect and participate in various activities.  
 **You can view the project demo recording at https://www.bilibili.com/video/BV1LBqAYNEBe/**
 
