@@ -85,10 +85,13 @@ li{
     margin-left:250px;
     font-size:18px;
     font-family:Ariel;
+    padding-top:2px;
+    padding-bottom:2px;
 }
 
 #description{
     height: 250px;
+    padding-top:5px;
 }
 
 #submit,#back{
