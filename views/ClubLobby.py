@@ -92,14 +92,23 @@ def clublobby():
 def createClub():
     # 获取当前用户的ID
     user_id = session.get('id')
+
     if not user_id:
         flash('You must log in first to create a club.', 'error')
         return redirect('/ClubLobby')
 
+    user = User.query.get(user_id)
+    username = user.username
     if request.method == 'POST':
         # 获取用户提交的数据
         club_name = request.form.get('club_name')
         description = request.form.get('description')
+
+        #判断club name不能重复
+        clubName_exists = Club.query.filter_by(club_name=club_name).first()
+        if clubName_exists:
+            flash("This club name already exists.")
+            return render_template('CreateClub.html', username=username)
 
         if club_name and description:
             # 创建新的俱乐部对象
@@ -118,6 +127,6 @@ def createClub():
 
             # 提示用户社团创建成功
             flash('Club created successfully!', 'success')
-            return redirect(url_for('clubdt.clubDetail', club_id=club_id))
+            return redirect(url_for('clubct.clubContent', club_id=club_id))
 
-    return render_template('CreateClub.html')
+    return render_template('CreateClub.html',username=username)
