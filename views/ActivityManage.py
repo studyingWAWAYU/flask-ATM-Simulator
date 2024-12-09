@@ -88,7 +88,7 @@ def addActivity():
         db.session.add(newAct)
         db.session.commit()
 
-        activity_id = db.session.query(Activity.activity_id).filter_by(activity_name=actTitle).scalar()
+        activity_id = newAct.activity_id
 
         # 上传图片
         # 定义允许的图片格式
@@ -111,7 +111,6 @@ def addActivity():
                         if not os.path.exists(upload_dir):
                             os.makedirs(upload_dir)
                         file.save(os.path.join(upload_dir,file.filename))
-                        flash("Images uploaded successfully.")
 
                 else:
                     flash("Illegal image format: Please upload images in JPG, JPEG, PNG or GIF format!")
@@ -267,7 +266,6 @@ def EditActivity(activity_id):
                     file_path = os.path.join(upload_dir, file.filename)
                     if file.filename not in origin_files:
                         file.save(file_path)
-                    flash("Image uploaded successfully.")
                 else:
                     flash("Illegal image format: Please upload images in JPG, JPEG, PNG or GIF format!")
                     return render_template('EditActivity.html', username=username, actOrigin=actOrigin,
