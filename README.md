@@ -12,7 +12,7 @@ Activity Hub
 
 
 ### Background
-This project is an assignment for five university students in China. 
+This project is an assignment for five university students in China.  
 All pages are in English, but some code comments are in Chinese.
 
 ### Introduction
@@ -21,7 +21,7 @@ It offers robust user management features, including user registration and login
 The platform enables club managers to create and edit club information, complete with dedicated pages showcasing activities, member lists, and announcements. 
 Activity Hub also streamlines event management, allowing managers to create, edit, or cancel events while providing users with a list of upcoming activities and a personalized section to track their participation. 
 Additionally, the system supports online registration for events and includes participant management features for club managers, along with a digital check-in process for efficient attendance tracking. 
-Overall, Activity Hub fosters engagement and collaboration within campus clubs, making it easier for users to connect and participate in various activities.
+Overall, Activity Hub fosters engagement and collaboration within campus clubs, making it easier for users to connect and participate in various activities.  
 **You can view the project demo recording at https://www.bilibili.com/video/BV1LBqAYNEBe/**
 
 ### Directory
