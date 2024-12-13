@@ -32,7 +32,7 @@
 
     <hr style="width: 1700px; margin: 20px auto; border:1px solid #e5e5e6;">
     <div id="searchbox" style="padding-top:15px; margin-bottom:20px;">
-        <form action="{{ url_for('clublb.clublobby') }}" method="get">
+        <form action="{{ url_for('myclub.MyClub') }}" method="get">
             <input type="text" id="search-input" class="google-search-input" name="search" placeholder="Search clubs..." value="{{ search_query or '' }}">
             <button type="submit" id="search">Search</button>
         </form>
@@ -41,7 +41,9 @@
     <!-- 当前用户参与的社团 -->
     <div class="section">
         <h2>Your Clubs</h2>
-        {% if user_id %}
+        {% if search_message %}
+            <p align="center" style="color:#CC0000;font-size:20px;margin-top:30px;">{{ search_message }}</p>
+        {% else %}
             {% if user_clubs %}
             <table class="club-table">
                 <thead>
@@ -52,7 +54,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for club,manager,numMembers in user_clubs %}
+                    {% for club, manager, numMembers in user_clubs %}
                         <tr>
                             <td><a href="{{ url_for('clubdt.clubDetail', club_id=club.club_id) }}" class="tablehref">{{ club.club_name }}</a></td>
                             <td>{{ manager }}</td>
@@ -64,9 +66,10 @@
             {% else %}
             <p align="center" style="color:#CC0000;font-size:20px;margin-top:30px;">You are not a member of any club yet.</p>
             {% endif %}
-        {% else %}<p align="center" style="color:#CC0000;font-size:20px;margin-top:30px;">Please login in first to check your club.</p>
         {% endif %}
     </div>
+</div>
+
 
     <hr style="width: 1700px; margin: 20px auto; border:1px solid #e5e5e6;">
 
