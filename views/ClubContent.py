@@ -88,11 +88,11 @@ def editClub(club_id):
         try:
             # 提交更新
             db.session.commit()
-            flash('Club updated successfully!', 'success')
             return redirect(url_for('clubct.clubContent', club_id=club_id))
         except Exception as e:
             db.session.rollback()
             flash('Error updating club. Please try again.', 'danger')
+            return redirect('/ClubLobby')
 
     # 如果是GET请求，则渲染编辑表单
     return render_template('editClub.html', club=club,is_manager=is_manager,username=username)
