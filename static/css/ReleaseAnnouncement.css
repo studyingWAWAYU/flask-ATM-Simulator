@@ -50,113 +50,6 @@ li{
 #username:hover{background-color:#C4E2FF}
 /*end of navigation*/
 
-/*轮播图片*/
-#FunctionContainer{
-    width:1700px;
-    height:720px;
-    display: block;
-    margin:auto;
-}
-#alternatePlay{
-    position:absolute;
-    width:760px;
-    height:500px;
-    top:135px;
-    left:20px;
-}
-#leftbtn{
-    position:absolute;
-    width:40px;
-    height:40px;
-    top:360px;
-    left:30px;
-}
-#rightbtn{
-    position:absolute;
-    width:40px;
-    height:40px;
-    top:360px;
-    left:730px;
-}
-#box{
-    width:750px;
-    height:750px;
-    margin-left:70px;
-}
-#upbox{
-    width:650px;
-    height:190px;
-    margin-top:-470px;
-    margin-left:920px;
-}
-#lowbox{
-    width:650px;
-    height:190px;
-    margin-top:-75px;
-    margin-left:920px;
-}
-.allFunctions{
-    color:#415468;
-    float:left;
-    width:150px;
-    height:172px;
-    margin-top:-50px;
-    padding-top:18px;
-    background-color: rgba(255, 255, 255, 0.95);
-    border:1px solid #C4E2FF;
-    border-radius: 10px;
-    box-shadow: 1px 1px 5px 3px #DAEDFF;
-    font-size:20px;
-}
-.allFunctions:hover{
-    z-index: 9;
-}
-
-/*functions provided for managers and members*/
-.mandm{
-    width:1700px;
-    height:200px;
-    margin:20px auto;
-    margin-top:50px;
-}
-.left{
-    width:650px;
-    height:400px;
-    float:left;
-    margin-left:180px;
-    margin-top:50px;
-}
-.leftimg{
-    width:500px;
-    height:360px;
-    float:left;
-    margin-top:8px;
-    margin-left:-10px;
-    text-align: center;
-}
-.righttext{
-    width:220px;
-    height:200px;
-    float:right;
-    margin-top:70px;
-    margin-left:-130px;
-    background-color: rgba(255, 255, 255, 0.95);
-    font-size:20px;
-    color:#58708D;
-    box-shadow: 1px 1px 2px 2px #e6f8fa;
-    padding-left:10px;
-    padding-right:10px;
-    padding-top: 10px;
-}
-.right{
-    width:650px;
-    height:400px;
-    float:right;
-    margin-right:120px;
-    margin-top:50px;
-}
-
-
 
 /*底部*/
 #indexbottom{
@@ -198,6 +91,7 @@ li{
 }
 
 .inputText{
+    padding-top:5px;
     width:495px;
     height:35px;
     border:2px solid #99c2ed;
@@ -205,6 +99,7 @@ li{
     padding-left:5px;
     margin-left:250px;
     font-size:18px;
+    font-family:Ariel;
 }
 
 #description{

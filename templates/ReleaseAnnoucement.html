@@ -14,7 +14,7 @@
         <a href="../ActivityLobby"><li class="navli">Activity Lobby</li></a>
         <a href="../MyActivity"><li class="navli">My Activity</li></a>
         {% if username %}
-            <a href="../MyInformation"><li class="navli" id="username">{{ username }}</li></a>
+            <a href="../MyProfile"><li class="navli" id="username">{{ username }}</li></a>
             <form action="/Logout" method="post" id="logoutForm" style="display: none;">
                 <button type="submit" style="display: none;">Logout</button></form>
             <a href="../Logout" onclick="confirmLogout(event)"><li class="navli" id="logout">Logout</li></a>
@@ -29,7 +29,7 @@
     <div id="FormOutline">
         <div style="margin-left:190px;margin-top:50px;"><img src="../static/img/ReleaseAnnouncement.png" width="650px" height="45px;"></div>
 
-    <form action="{{ url_for('clubdt.releaseAnnouncement', club_id=club_id) }}" method="POST">
+    <form action="{{ url_for('clubct.releaseAnnouncement', club_id=club_id) }}" method="POST">
         <p class="inputTitle" style="margin-top:40px;"><span>Announcement Content: </span><span style="color:#fa8383;">*</span></p>
         <textarea name="announcement" id="announcement" rows="5" cols="50" class="inputText"></textarea><br><br>
 
@@ -38,7 +38,7 @@
     </form>
 
     <!-- 返回按钮 -->
-    <button id="back" onclick="window.location.href='{{ url_for('clubdt.clubDetail', club_id=club_id) }}'">Back to Club Detail</button>
+    <button id="back" onclick="window.location.href='{{ url_for('clubct.clubContent', club_id=club_id) }}'">Back to Club Content</button>
     </div>
 
 </div>

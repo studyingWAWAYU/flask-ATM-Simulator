@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>MyInformation</title>
-	<link rel="stylesheet" href="../static/css/myInformation.css">
-    <script src="../static/js/myInformation.js"></script>
+	<link rel="stylesheet" href="../static/css/MyProfile.css">
+    <script src="../static/js/MyProfile.js"></script>
 
 </head>
 <body>
@@ -17,7 +17,7 @@
         <a href="ActivityLobby"><li class="navli">Activity Lobby</li></a>
         <a href="MyActivity"><li class="navli">My Activity</li></a>
         {% if user.username %}
-            <a href="MyInformation"><li class="navli" id="username">{{ user.username }}</li></a>
+            <a href="MyProfile"><li class="navli" id="username">{{ user.username }}</li></a>
             <form action="/Logout" method="post" id="logoutForm" style="display: none;">
                 <button type="submit" style="display: none;">Logout</button></form>
             <a href="Logout" onclick="confirmLogout(event)"><li class="navli" id="logout">Logout</li></a>
@@ -60,14 +60,13 @@
 
         <div id="profileCard">
             <img id="largeAvatar" src={{user.avatar}}>
-            <p style="margin-top:25px;font-size:30px;color:#4C637D;">{{user.username}}</p>
-            <p style="margin-top:20px;font-size:22px;color:#4C637D;">Phone Number:{{user.phoneNumber}}</p>
-            <p style="margin-top:10px;;font-size:22px;color:#4C637D;">Gender:{{user.gender}}</p>
+            <p style="margin-top:20px;font-size:30px;color:#4C637D;">{{user.username}}</p>
+            <p style="margin-top:15px;font-size:22px;color:#4C637D;">User Id: {{user.id}}</p>
+            <p style="margin-top:7px;font-size:22px;color:#4C637D;">Phone Number: {{user.phoneNumber}}</p>
+            <p style="margin-top:7px;;font-size:22px;color:#4C637D;">Gender: {{user.gender}}</p>
         </div>
 
     </div>
-
-
 
 
 <div id="InformationTable">
@@ -76,11 +75,11 @@
     <table  align="center">
         <tr>
             <td width="190px;" height="50px"><p style="font-size:16px;padding-left:90px;">User Name: </p></td>
-            <td><input type="text" class="input" name="user" value="{{ user.username }}"/></td>
+            <td><input type="text" class="input" name="user" value="{{ user.username }}" required/></td>
         </tr>
         <tr>
             <td width="190px;" height="50px"><p style="font-size:16px;padding-left:35px;">Current Passwords:</p></td>
-            <td><input type="password" class="input" placeholder="Please enter your current password" name="curpwd"/></td>
+            <td><input type="password" class="input" placeholder="Please enter your current password" name="curpwd" required/></td>
         </tr>
         <tr>
             <td width="190px;" height="50px"><p style="font-size:16px;padding-left:57px;">New Passwords:</p></td>
@@ -106,7 +105,7 @@
         </tr>
         <tr>
             <td width="190px;" height="50px"><p style="font-size:16px;padding-left:60px;">Phone Number:</p></td>
-            <td><input type="text" class="input" name="phoneNum" value="{{ user.phoneNumber }}"/></td>
+            <td><input type="text" class="input" name="phoneNum" value="{{ user.phoneNumber }}" required/></td>
         </tr>
         <tr>
             <td colspan="2" height="30px"><h4 align="center" style="color:#CC0000;margin-top:15px;">{{ get_flashed_messages()[0] }}</h4></td>

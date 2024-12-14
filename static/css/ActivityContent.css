@@ -48,30 +48,28 @@ li{
 #register:hover{background-color: #C4E2FF; font-weight: bold;}
 #logout:hover{background-color: #C4E2FF; font-weight: bold;}
 #username:hover{background-color:#C4E2FF}
-
 /*end of navigation*/
 
 
 /* Information */
 #InformationContainer{
     width:1700px;
-    height:1000px;
+    min-height:1100px;
     display: block;
     margin:auto;
 	padding-top: 140px;
-	padding-left: 80px;
 	/* border: 1px solid; */
 }
 
 /* Left Information */
 #page-left{
 	width: 400px;
-	height: 1045px;
+	min-height: 1045px;
 	padding: 20px 40px;
 	float: left;
 	border: 1px solid #C4E2FF;
 	box-shadow: -4px -4px 0px 0px #DAEDFF;
-
+    margin-left:50px;
 }
 
 #act-imgs{
@@ -131,7 +129,7 @@ li{
 	font-weight: bold;
 }
 
-#sup-btn, #signin-btn{
+#status-btn, #sup-btn, #sup-btn-role, #signin-btn{
 	background-color: #fa8383;
     width:250px;
     height:70px;
@@ -144,7 +142,7 @@ li{
 	cursor: pointer;
     margin-bottom:20px;
 }
-#sup-btn:hover, #edit-btn:hover, #post-signin-code-btn:hover, #signin-btn:hover{
+#sup-btn:hover,#sup-btn-role:hover,#sup-confirm:hover, #edit-btn:hover, #post-signin-code-btn:hover, #signin-btn:hover{
 	background-color: #ff6e6e;
 }
 #edit-btn, #post-signin-code-btn{
@@ -173,10 +171,36 @@ li{
     color: #ff6e6e;
 }
 
+select{
+    width:250px;
+    height:45px;
+    font-size:22px;
+    padding:5px;
+    border-radius: 20px;
+    border: 3px solid #fa8383;
+    margin-left:67px;
+    margin-top:5px;
+}
+#sup-confirm{
+    background-color: #fa8383;
+    width:250px;
+    height:70px;
+    border:1px solid #fa8383;
+    border-radius: 50px;
+    margin:auto 65px;
+    font-size:23px;
+	font-weight: bold;
+	color: white;
+	cursor: pointer;
+    margin-bottom:20px;
+    margin-top:10px;
+}
+
+
 /* Right Information */
 #page-right{
-	width: 1000px;
-	height: 1000px;
+	width: 950px;
+	min-height: 1000px;
 	margin-left: 60px;
 	padding: 40px 50px;
 	float: left;

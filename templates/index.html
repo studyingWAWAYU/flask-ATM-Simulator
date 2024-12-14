@@ -15,7 +15,7 @@
         <a href="ActivityLobby"><li class="navli">Activity Lobby</li></a>
         <a href="MyActivity"><li class="navli">My Activity</li></a>
         {% if username %}
-            <a href="MyInformation"><li class="navli" id="username">{{ username }}</li></a>
+            <a href="MyProfile"><li class="navli" id="username">{{ username }}</li></a>
             <form action="/Logout" method="post" id="logoutForm" style="display: none;">
                 <button type="submit" style="display: none;">Logout</button></form>
             <a href="Logout" onclick="confirmLogout(event)"><li class="navli" id="logout">Logout</li></a>

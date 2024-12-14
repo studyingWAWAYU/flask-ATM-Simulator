@@ -67,27 +67,44 @@
 	</div>
 
 	{% if not isManager %}
-		<button id="sup-btn">{{par_status}}</button>
-        <input type="hidden" id="activity-id" value="{{ actContent.activity_id }}">
-        <input type="hidden" id="user-id" value="{{ session.get('id') }}">
-        <th>
-            <div class="signin-container">
-                <button id="signin-btn" class="signin-btn">Sign In</button>
-            </div>
-        </th>
+		{% if par_status!='Sign up now' %}  <!--如果已经报名了，就只显示状态-->
+			<button id="status-btn">{{par_status}}</button>
+		{% elif isSignup and remaining>0 %}  <!--用户没报名，且到了报名时间，且还有剩余名额-->
+			{% if roles_list and roles_list | length >1 %}  <!--如果需要选择role-->
+				<button id="sup-btn-role" data-activity-id="{{actContent.activity_id}}">{{par_status}}</button>
+				<div id="hidden-signup-confirmation" style="display:none;">
+					<p style="font-size:22px;margin-left:50px;">Choose one role to sign up:</p>
+						<form id="sup-form" action="/Signup_role/{{actContent.activity_id}}" method="POST">
+							<select name="roles-select">
+								{% for role in roles_list %}
+									<option>{{role}}</option>
+								{% endfor %}
+							</select>
+							<button id="sup-confirm" type="submit">Confirm to register with this role</button>
+						</form>
+				</div>
+			{% else %}  <!--不需要选择role-->
+				<button id="sup-btn" data-activity-id="{{actContent.activity_id}}">{{par_status}}</button>
+			{% endif %}
+		{% endif %}
 
+		{% if actContent.status == 'Ongoing' and actContent.signin_code and par_status == 'Confirmed' %}
+			<th><button id="signin-btn" data-activity-id="{{actContent.activity_id}}">Sign In</button></th>
+		{% endif %}
+	<!-- if user is the manager -->
 	{% else %}
 		<a href="/EditActivity/{{actContent.activity_id}}"><button id="edit-btn" >Edit this Activity</button></a>
-        <th>
-            <div class="post-signin-code-container">
-            <button id="post-signin-code-btn" class="post-signin-code-btn">Post Sign In Code</button>
-            </div>
-        </th>
+        {% if not actContent.signin_code and actContent.status=='Ongoing' %}
+			<th>
+				<button id="post-signin-code-btn" data-activity-id="{{ actContent.activity_id }}">Post Sign-in Code</button>
+			</th>
+        {% endif %}
         <form id="deleteForm" action="/delete_activity/{{actContent.activity_id}}" method="POST" style="display:none;">
 			<button type="submit" style="display:none;"></button>
 		</form>
 		<a href="/delete_activity/{{actContent.activity_id}}" id="delete-btn" onclick="confirmDelete(event)" style="margin-top:20px;">Delete this Activity</a>
 	{% endif %}
+
 </div>
 	
 	
@@ -120,7 +137,7 @@
 				</tr>
 			</table>
 		</div>
-		
+
 		<div class="info-signup">
 			<div class="info-title">| Activity&nbsp;&nbsp;SignUp</div>
 			<table align="left" width=1000>
@@ -177,14 +194,23 @@
 			</table>
 		</div>
 		{% endif %}
+
+		{% if isManager and actContent.signin_code %}
+		<div class="info-item">
+			<div class="info-title">| Sign In Code</div>
+			<table align="left" width=1000>
+				<tr><td><p>{{actContent.signin_code}}</p></td></tr>
+			</table>
+		</div>
+		{% endif %}
+
 	</div>
 </div>
 </div>
 
 
-
 <!--Bottom-->
-<div id="indexbottom" style="margin-top:400px">
+<div id="indexbottom" style="margin-top:100px">
     <div style="margin-left:80px;padding-top:60px;">
         <ul style="float:left;list-style-type: none;">
             <li><p><img src="../static/img/logo.png" width="40px" height="40px;" align="center"> Activity Hub</p></li>

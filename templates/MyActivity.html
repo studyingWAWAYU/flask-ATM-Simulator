@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Activity Lobby</title>
-	<link rel="stylesheet" href="../static/css/myActivity.css">
+	<link rel="stylesheet" href="../static/css/MyActivity.css">
 	<script src="../static/js/MyActivity.js"></script>
 </head>
 <body>
@@ -16,7 +16,7 @@
         <a href="ActivityLobby"><li class="navli">Activity Lobby</li></a>
         <a href="MyActivity"><li class="navli">My Activity</li></a>
         {% if username %}
-            <a href="MyInformation"><li class="navli" id="username">{{ username }}</li></a>
+            <a href="MyProfile"><li class="navli" id="username">{{ username }}</li></a>
             <form action="/Logout" method="post" id="logoutForm" style="display: none;">
                 <button type="submit" style="display: none;">Logout</button></form>
             <a href="Logout" onclick="confirmLogout(event)"><li class="navli" id="logout">Logout</li></a>
@@ -92,7 +92,7 @@
 
 
 <!--Bottom-->
-<div id="indexbottom" style="margin-top:400px">
+<div id="indexbottom" style="margin-top:100px">
     <div style="margin-left:80px;padding-top:60px;">
         <ul style="float:left;list-style-type: none;">
             <li><p><img src="../static/img/logo.png" width="40px" height="40px;" align="center"> Activity Hub</p></li>

@@ -7,6 +7,7 @@ function confirmLogout(event) {
     }
 }
 
+/*删除活动*/
 function confirmDelete(event){
     event.preventDefault();
     console.log("Delete button clicked");
@@ -16,11 +17,17 @@ function confirmDelete(event){
     }
 }
 
+/*报名*/
 document.addEventListener("DOMContentLoaded", function() {
     const signupBtn = document.getElementById("sup-btn");
     if (signupBtn) {
         signupBtn.addEventListener("click", function(event) {
+            const activityId = signupBtn.dataset.activityId;
             event.preventDefault();
+            const parStatus = signupBtn.textContent.trim();
+            if (parStatus === "Registered" || parStatus === "Confirmed" || parStatus === "Present" || parStatus === "Absent") {
+                return;
+            }
 
             // 弹出确认框
             const confirmation = confirm("Are you sure you want to sign up for this activity?");
@@ -28,34 +35,14 @@ document.addEventListener("DOMContentLoaded", function() {
                 return;  // 如果用户取消报名，直接返回
             }
 
-            // 获取活动 ID 和用户 ID 从页面中的 hidden input 或其他元素
-            const activityId = document.getElementById('activity-id').value;  // 获取活动 ID
-            const userId = document.getElementById('user-id').value;  // 获取用户 ID
-
-            if (!userId) {
-                // 如果用户未登录，提示并跳转到登录页面
-                alert("Please log in first to sign up for the activity.");
-                window.location.href = "/Login";  // 跳转到登录页面
-                return;
-            }
-
-            // 获取当前的报名状态
-            const parStatus = signupBtn.textContent.trim();
-            if (parStatus === "Confirmed" || parStatus === "Registered") {
-                // 如果用户已经确认报名，则不能再次报名
-                alert("You have already confirmed your participation.");
-                return;
-            }
-
             // 向后端发送报名请求
-            fetch('/applyAct', {
+            fetch('/Signup', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    userId: userId,
-                    activityId: activityId
+                    activity_id: activityId
                 })
             })
             .then(response => response.json())
@@ -78,10 +65,26 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
+document.addEventListener("DOMContentLoaded", function() {
+    const supBtnRole = document.getElementById("sup-btn-role");
+    const hiddenSignupConfirmation = document.getElementById("hidden-signup-confirmation");
+    const supForm = document.getElementById("sup-form");
+    if (supBtnRole){
+        supBtnRole.addEventListener("click", function() {
+        // 隐藏按钮
+        supBtnRole.style.display = "none";
+        // 显示表单
+        hiddenSignupConfirmation.style.display = "block";
+        });
+    }
+});
+
+/*发布签到码*/
 document.addEventListener('DOMContentLoaded', function () {
     const postSigninCodeBtn = document.getElementById('post-signin-code-btn');
     if (postSigninCodeBtn) {
         postSigninCodeBtn.addEventListener('click', function(event) {
+            const activity_id = postSigninCodeBtn.dataset.activityId;
             event.preventDefault();
 
             const signinCode = prompt('Enter a 6-digit sign-in code:');
@@ -91,8 +94,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 alert('Sign-in code invalid.');
                 return;
             }
-
-            fetch('/postSigninCode', {
+            fetch('/postSigninCode/'+activity_id, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -110,13 +112,13 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
+/*签到*/
 document.addEventListener('DOMContentLoaded', function () {
     const SigninBtn = document.getElementById('signin-btn');
-
     if (SigninBtn) {
         SigninBtn.addEventListener('click', function(event) {
+            const activity_id = SigninBtn.dataset.activityId;
             event.preventDefault();
-
             // 弹出提示框让用户输入签到码
             const signinCode = prompt('Enter a 6-digit sign-in code:');
 
@@ -127,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function () {
             }
 
             // 发送请求到后端
-            fetch('/signin', {
+            fetch('/signin/'+activity_id, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -141,12 +143,15 @@ document.addEventListener('DOMContentLoaded', function () {
                     location.reload();  // 刷新页面
                 } else if (data.error) {
                     alert(data.error);  // 显示错误消息
+                    location.reload();  // 刷新页面
                 }
             });
         });
     }
 });
 
+
+/*活动轮播图*/
 var idx = 0;
 var t = null;
 var totalImgs = 0;
@@ -154,11 +159,11 @@ var imgPaths = [];
 
 window.onload=function(){
     imgs = document.querySelectorAll(".act-imgs");
-    totalImgs = imgs.length;
-    imgs.forEach( function(img) {imgPaths.push(img.src);} );
-    t = setInterval(carousel,2000);
-    //console.log("Total images: " + totalImgs);
-   // console.log(imgPaths)
+    if(imgs.length != 0){
+        totalImgs = imgs.length;
+        imgs.forEach( function(img) {imgPaths.push(img.src);} );
+        t = setInterval(carousel,2000);
+    }
 }
 
 function carousel(){

@@ -1,13 +1,26 @@
+function confirmLogout(event) {
+    event.preventDefault();  // 阻止默认行为，即阻止直接跳转
+    const isConfirmed = confirm("Are you sure you want to log out?");
+    if (isConfirmed) {
+        window.location.href = event.target.href;  // 如果确认，执行登出操作
+        document.getElementById("logoutForm").submit();
+    }
+}
+
 //增加参与者
 document.getElementById('add-participant-btn').addEventListener('click', function() {
         const userId = prompt('Enter User ID:');
+        const activityId = this.dataset.activityId;
 
         fetch('/addParticipant', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ user_id: userId})
+            body: JSON.stringify({
+            user_id: userId,
+            activityId: activityId
+            })
         })
         .then(response => response.json())
         .then(data => {
@@ -29,15 +42,15 @@ document.addEventListener("DOMContentLoaded", function() {
     statusDropdowns.forEach(dropdown => {
         const status = dropdown.value;  // 获取当前状态
         const userId = dropdown.dataset.userId;  // 获取用户ID
+        const activityId = dropdown.dataset.activityId;
 
         // 根据当前状态在选择框中设定默认值
-        for (let i = 0; i < dropdown.options.length; i++) {
+        for (let i = 0; i < 4; i++) {
             if (dropdown.options[i].value === status) {
                 dropdown.options[i].selected = true;
                 break;
             }
         }
-
         // 监听状态变化
         dropdown.addEventListener('change', function() {
             const status = this.value;  // 获取选择的新状态
@@ -51,6 +64,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 body: JSON.stringify({
                     user_id: userId,
                     status: status,
+                    activity_id: activityId,
                 })
             })
             .then(response => response.json())
@@ -78,12 +92,16 @@ const deleteButtonsNew = document.querySelectorAll('.delete-btn');
             }
 
             const userId = this.dataset.userId;
+            const activityId = this.dataset.activityId;
             fetch('/deleteParticipant', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ user_id: userId })
+                body: JSON.stringify({
+                user_id: userId,
+                activityId: activityId
+                 })
             })
             .then(response => response.json())
             .then(data => {

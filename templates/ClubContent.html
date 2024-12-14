@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ club.club_name }}</title>
-    <link rel="stylesheet" href="../static/css/ClubDetail.css">
-    <script src="../static/js/ClubDetail.js"></script>
+    <link rel="stylesheet" href="../static/css/ClubContent.css">
+    <script src="../static/js/ClubContent.js"></script>
 </head>
 <body>
 <div id="nav">
@@ -15,37 +15,37 @@
         <a href="{{ url_for('actlb.activityLobby') }}"><li class="navli">Activity Lobby</li></a>
         <a href="{{ url_for('myAct.MyActivity') }}"><li class="navli">My Activity</li></a>
         {% if username %}
-            <a href="{{ url_for('myInfo.myInformation') }}"><li class="navli" id="username">{{ username }}</li></a>
+            <a href="{{ url_for('myProf.myProfile') }}"><li class="navli" id="username">{{ username }}</li></a>
             <form action="/Logout" method="post" id="logoutForm" style="display: none;">
                 <button type="submit" style="display: none;">Logout</button></form>
-            <a href="{{ url_for('lr.logout') }}" onclick="confirmLogout(event)"><li class="navli" id="logout">Logout</li></a>
+            <a href="{{ url_for('auth.logout') }}" onclick="confirmLogout(event)"><li class="navli" id="logout">Logout</li></a>
         {% else %}
-            <a href="{{ url_for('lr.login') }}"><li class="navli" id="login">Login</li></a>
-            <a href="{{ url_for('lr.register') }}"><li class="navli" id="register">Register</li></a>
+            <a href="{{ url_for('auth.login') }}"><li class="navli" id="login">Login</li></a>
+            <a href="{{ url_for('auth.register') }}"><li class="navli" id="register">Register</li></a>
         {% endif %}
     </ul>
 </div>
 
-<div id="ClubDetail">
-
+<div id="ClubContent">
     <!-- 如果当前用户是社团的经理，则显示“Edit Club”和“Delete Club”按钮 -->
     {% if is_manager %}
     <div id="button-area">
-        <button class="clubmg" style="width:250px;" value=""><a href="{{ url_for('clubdt.releaseAnnouncement', club_id=club.club_id) }}">Release Announcement</a></button>
-
-
-        <button class="clubmg" style="width:250px;"><a href="{{ url_for('clubdt.manageMemberList', club_id=club.club_id) }}">Manage Member List</a></button>
-
-
-        <button class="clubmg"><a href="{{ url_for('clubdt.editClub', club_id=club.club_id) }}">Edit Club</a></button>
-
-
-        <button class="clubmg" onclick="confirmDelete(event, {{ club.club_id }})"><a href="{{ url_for('clubdt.deleteClub', club_id=club.club_id) }}">Delete Club<a href="{{ url_for('clubdt.deleteClub', club_id=club.club_id) }}"></a></button>
-
+        <button class="clubmg" style="width:250px;" value=""><a href="{{ url_for('clubct.releaseAnnouncement', club_id=club.club_id) }}">Release Announcement</a></button>
+        <button class="clubmg" style="width:250px;"><a href="{{ url_for('clubct.manageMemberList', club_id=club.club_id) }}">Manage Member List</a></button>
+        <button class="clubmg"><a href="{{ url_for('clubct.editClub', club_id=club.club_id) }}">Edit Club</a></button>
+        <button class="clubmg" onclick="confirmDelete(event, {{ club.club_id }})">
+            <a href="{{ url_for('clubct.deleteClub', club_id=club.club_id) }}"></a>Delete Club
+        </button>
     </div>
+    {% else %}
+        {% if ifjoined %}
+            <button class="clubmg" id="quit-club-btn" style="width:170px;" data-club-id="{{ club.club_id }}"><a href="/quitClub/{{club.club_id}}">Quit this Club</a></button>
+        {% else %}
+            <button class="clubmg" id="join-club-btn" style="width:170px;" data-club-id="{{ club.club_id }}"><a href="/joinClub/{{club.club_id}}">Join Now</a></button>
+        {% endif %}
     {% endif %}
 
-    <hr style="width: 1700px; margin: 5px auto; border:1px solid #e5e5e6;">
+    <hr style="width: 1500px;border:1px solid #e5e5e6;">
 
     <div class="ClubInfo">
         <h1 style="text-align: center;margin-top: 20px">{{ club.club_name }}</h1>  <!-- 显示社团名称 -->
@@ -54,8 +54,8 @@
 
     <div class="ClubInfo"  id="container">
         <div id="left">
-            <div id="post">
-                <h2 class="special_title">Post</h2>
+            <div id="announcement">
+                <h2 class="special_title">Announcement</h2>
                 <p>{{ club.announcement }}</p>
             </div>
             <div id="description">
@@ -69,7 +69,7 @@
                 <div class="manager-container">
                     <div class="member-list">
                         <div class="member">
-                            <p style="text-align: center;font-family: 'Baskerville Old Face';font-size: large">{{ manager.username }}</p>
+                            <p style="text-align: center;font-size: large">{{ manager.username }}</p>
                         </div>
                     </div>
                 </div>
@@ -82,7 +82,7 @@
                     <div class="member-list">
                         {% if members %}
                         {% for member in members %}
-                            <div class="member"><p style="text-align: center;font-family: 'Baskerville Old Face';font-size: large">{{ member.username }}</p></div>
+                            <div class="member"><p style="text-align:center;font-size:large">{{ member.username }}</p></div>
                         {% endfor %}
                     </div>
                 {% endif %}

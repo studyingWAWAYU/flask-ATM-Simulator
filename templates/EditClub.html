@@ -15,23 +15,23 @@
         <a href="{{ url_for('actlb.activityLobby') }}"><li class="navli">Activity Lobby</li></a>
         <a href="{{ url_for('myAct.MyActivity') }}"><li class="navli">My Activity</li></a>
         {% if username %}
-            <a href="{{ url_for('myInfo.myInformation') }}"><li class="navli" id="username">{{ username }}</li></a>
+            <a href="{{ url_for('myProf.myProfile') }}"><li class="navli" id="username">{{ username }}</li></a>
             <form action="/Logout" method="post" id="logoutForm" style="display: none;">
                 <button type="submit" style="display: none;">Logout</button></form>
-            <a href="{{ url_for('lr.logout') }}" onclick="confirmLogout(event)"><li class="navli" id="logout">Logout</li></a>
+            <a href="{{ url_for('auth.logout') }}" onclick="confirmLogout(event)"><li class="navli" id="logout">Logout</li></a>
         {% else %}
-            <a href="{{ url_for('lr.login') }}"><li class="navli" id="login">Login</li></a>
-            <a href="{{ url_for('lr.register') }}"><li class="navli" id="register">Register</li></a>
+            <a href="{{ url_for('auth.login') }}"><li class="navli" id="login">Login</li></a>
+            <a href="{{ url_for('auth.register') }}"><li class="navli" id="register">Register</li></a>
         {% endif %}
     </ul>
 </div>
 
 <div id="EditClub">
     <div id="FormOutline">
-
         <!-- 表单提交时调用confirmSave()函数 -->
-        <form id="editClubForm" method="POST" onsubmit="{{ url_for('clubdt.editClub', club_id=club.club_id) }}">
-            <div style="margin-left:210px;margin-top:50px;"><img src="../static/img/EditClub.png" width="580px" height="52px;"></div>
+        <form id="editClubForm" method="POST">
+            <div style="margin-left:235px;margin-top:50px;"><img src="../static/img/EditClub.png" width="530px" height="58px;"></div>
+
             <p class="inputTitle" style="margin-top:40px;"><span>Club Name: </span><span style="color:#fa8383;">*</span></p>
             <input class="inputText" type="text" id="club_name" name="club_name" value="{{ club.club_name }}" required><br><br>
 
@@ -39,11 +39,11 @@
             <textarea class="inputText" id="description" name="description" rows="4" cols="50" required>{{ club.description }}</textarea><br><br>
 
             <!-- 提交按钮 -->
-            <button type="submit" id="submit">Save Changes</button>
+            <button type="submit" id="submit-btn">Save Changes</button>
         </form>
 
         <!-- 返回按钮 -->
-        <a href="{{ url_for('clubdt.clubDetail', club_id=club.club_id) }}">
+        <a href="{{ url_for('clubct.clubContent', club_id=club.club_id) }}">
             <button id="back">Back</button>
         </a>
     </div>
