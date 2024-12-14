@@ -79,8 +79,8 @@
                         // 设置柱子的颜色
                         color: function(params) {
                             // 可以根据某些条件自定义颜色，或者使用一个颜色数组
-                            var colors = "#c4e2ff";
-                            return colors;  // 循环使用颜色数组中的颜色
+                            var colors = ['#A3D2CA', '#99c2ed', '#ffcccb', '#ffa07a', '#f0e68c', '#D8BFD8', '#FFC857', '#009999', '#b0e0e6', '#ff6347'];
+                            return colors[params.dataIndex % colors.length];  // 循环使用颜色数组中的颜色
                         }
                     }
                 }
