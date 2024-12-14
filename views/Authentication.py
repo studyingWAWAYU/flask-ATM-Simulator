@@ -45,6 +45,7 @@ def register():
 
     if len(user)>20:
         flash('The length of username cannot exceed 20 characters.')
+        return render_template('register.html')
     elif len(pwd) >15:
         flash('The length of password cannot exceed 15 characters.')
         return render_template('register.html')
