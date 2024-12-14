@@ -51,14 +51,12 @@ li{
 /*end of navigation*/
 
 
-/*Classification*/
 #EditClub{
     width:1700px;
     height:500px;
     display: block;
     margin: auto;
     padding-top: 140px;
-	padding-left: 80px;
     /* border:1px solid; */
 }
 
@@ -85,69 +83,6 @@ table{
     display:block;
     margin:auto;
     padding-top:80px;
-}
-#FormOutline{
-    width:1000px;
-    height:1000px;
-    margin-left:350px;
-    margin-top:50px;
-    border:2px solid #99c2ed;
-    border-radius: 5px;
-    box-shadow: 2px 2px 1px 2px #99c2ed;
-    background-color:#fafcff;
-}
-.inputTitle{
-    font-size:20px;
-    margin-left:250px;
-    margin-top:35px;
-    margin-bottom:5px;
-}
-.inputText{
-    width:495px;
-    height:35px;
-    border:2px solid #99c2ed;
-    border-radius: 5px;
-    padding-left:5px;
-    margin-left:250px;
-    font-size:18px;
-}
-select{
-    width:500px;
-    height:45px;
-    font-size:18px;
-    padding:5px;
-    border-radius: 5px;
-    border: 2px solid #99c2ed;
-    margin-left:250px;
-}
-.date-picker {
-	padding: 8px;
-	font-size: 18px;
-	border: 1px solid #99c2ed;
-	border-radius: 5px;
-    box-shadow:3px 3px 0px 0px #99c2ed;
-	width: 220px;
-	margin-left:5px;
-	margin-right:5px;
-}
-#uploadImg{
-    display:none;
-}
-#custom_upload{
-    width:170px;
-    height:35px;
-    font-size:18px;
-    text-align:center;
-    padding-top:10px;
-    cursor:pointer;
-    border: 1px solid #99c2ed;
-	border-radius: 5px;
-    box-shadow:3px 3px 0px 0px #99c2ed;
-    margin-left:250px;
-    margin-top:35px;
-}
-#custom_upload:hover{
-    background-color: #daedff;
 }
 
 /* 定义输入框的基本样式 */
@@ -200,11 +135,6 @@ textarea:hover {
     font-size:18px;
     font-family:Ariel;
 }
-
-#description{
-    height: 250px;
-}
-
 #submit-btn,#back{
     background-color: #C4E2FF;
     width:500px;
