@@ -49,8 +49,12 @@ const deleteButtonsNew = document.querySelectorAll('.delete-btn');
             })
             .then(response => response.json())
             .then(data => {
-            alert(data.message);
-            location.reload();
+                if(data.message){
+                    alert(data.message);
+                location.reload();
+                }else if(data.error){
+                    alert(data.error);
+                }
             });
         });
     })
