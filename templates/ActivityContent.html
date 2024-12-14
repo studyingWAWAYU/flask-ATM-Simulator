@@ -67,10 +67,10 @@
 	</div>
 
 	{% if not isManager %}
-		{% if par_status!='Sign up now' %}  <!--如果已经报名了，就只显示状态-->
+		{% if par_status!='Sign up now' %}  <!--If already signed up, show participant' status-->
 			<button id="status-btn">{{par_status}}</button>
-		{% elif isSignup and remaining>0 %}  <!--用户没报名，且到了报名时间，且还有剩余名额-->
-			{% if roles_list and roles_list | length >1 %}  <!--如果需要选择role-->
+		{% elif isSignup and remaining>0 %}  <!--If user haven't signed up, and it's signup time, and still available.-->
+			{% if roles_list and roles_list | length >1 %}  <!--If it has multiple roles to choose from-->
 				<button id="sup-btn-role" data-activity-id="{{actContent.activity_id}}">{{par_status}}</button>
 				<div id="hidden-signup-confirmation" style="display:none;">
 					<p style="font-size:22px;margin-left:50px;">Choose one role to sign up:</p>
@@ -83,7 +83,7 @@
 							<button id="sup-confirm" type="submit">Confirm to register with this role</button>
 						</form>
 				</div>
-			{% else %}  <!--不需要选择role-->
+			{% else %}  <!--If it doesn't have multiple roles-->
 				<button id="sup-btn" data-activity-id="{{actContent.activity_id}}">{{par_status}}</button>
 			{% endif %}
 		{% endif %}
